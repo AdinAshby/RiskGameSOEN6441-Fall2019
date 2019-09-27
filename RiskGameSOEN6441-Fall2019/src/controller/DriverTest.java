@@ -16,12 +16,12 @@ import model.MapBuilder;
 
 public class DriverTest {
 //editcontinent -add continentname continentvalue -remove continentname
+//editcountry -add countryname continentname -remove countryname
+//editneighbor -add countryname neighborcountryname -remove countryname neighborcountryname
 	
 	public static void main(String[] args) throws Exception {
 
 		// List<Continent> continets = new LinkedList<Continent>();
-//Switch case;
-		
 		Scanner in = new Scanner(System.in);
 		MapBuilder mapBuild = new MapBuilder();
 		
@@ -33,16 +33,37 @@ public class DriverTest {
 		
 		case "editcontinent":
 			if(arr[1].equals("-add")) {
-				Continent c1 = new Continent(arr[2], Integer.parseInt(arr[3]));
-				mapBuild.addContinent(c1);
+				Continent continent = new Continent(arr[2], Integer.parseInt(arr[3]));
+				mapBuild.addContinent(continent);
 			}
-			
+			else if (arr[4].equals("-remove")) {
+				
+				mapBuild.removeContinent(arr[4]);
+				
+				}
 			break;
 			
+		}
+		switch(arr[1]) {
+		
+		
+		case "editcountry":
 			
+			if(arr[1].equals("-add")) {
+				Country country = new Country(arr[2]);
+				mapBuild.addCountry(country);
+			}
+		
+			
+			if(arr[4].equals("-remove")) {
+				
+				mapBuild.removeCountry(arr[4]);
+			}
+			
+		
 		}
 		mapBuild.printContinentList();
-		System.exit(0);
+//		System.exit(0);
 		
 		// List<Country> countries = new ArrayList<>();
 		// Set<String> adjacentCountries = new HashSet<>();

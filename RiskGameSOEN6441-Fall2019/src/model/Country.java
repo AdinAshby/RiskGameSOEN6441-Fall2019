@@ -46,15 +46,15 @@ public class Country {
 	    this.armies = armies;
 	  }
 
-	  public String getName() {
+	  public String getCountryName() {
 	    return name;
 	  }
 
-	  public void setName(String name) {
+	  public void setCountryName(String name) {
 	    this.name = name;
 	  }
 
-	  public void addLink(String countryName) {
+	  public void addCountryLink(String countryName) {
 		  adjacentCountries.add(countryName);
 	  }
 
