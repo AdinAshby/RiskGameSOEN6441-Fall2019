@@ -46,7 +46,9 @@ public class MapBuilder {
 	public void setContinentList(List<Continent> continentList) {
 		this.continentList = continentList;
 	}
-
+        /**
+	 * This method reads country name
+	 */
 	public String getCountryName(int countryId) {
 		String countryName = "";
 		ListIterator list_Iter = countryList.listIterator();
@@ -60,7 +62,9 @@ public class MapBuilder {
 		}
 		return countryName;
 	}
-
+        /**
+	 * This method reads country Id
+	 */
 	public int getCountryId(String countryName) {
 		int countryId = 0;
 
@@ -72,7 +76,9 @@ public class MapBuilder {
 		}
 		return countryId;
 	}
-
+        /**
+	 * This method reads continent name
+	 */
 	public String getContinentName(int continentId) {
 
 		ListIterator list_Iter = continentList.listIterator();
@@ -86,7 +92,9 @@ public class MapBuilder {
 		return continentName;
 
 	}
-
+         /**
+	 * This method reads continent Id
+	 */
 	public int getContinentId(String continentName) {
 
 		ListIterator list_Iter = continentList.listIterator();
@@ -100,11 +108,15 @@ public class MapBuilder {
 		return continentId;
 
 	}
-
+        /**
+	 * This method adds a new continent
+	 */
 	public void addContinent(Continent c) {
 		continentList.add(c);
 	}
-
+        /**
+	 * This method removes a continent 
+	 */
 	public void removeContinent(String continentName) {
 
 		ListIterator list_Iter = continentList.listIterator();
@@ -116,11 +128,15 @@ public class MapBuilder {
 				continentList.remove(continent);
 		}
 	}
-
+         /**
+	 * This method adds a new country 
+	 */
 	public void addCountry(Country c) {
 		countryList.add(c);
 		}
-	
+	 /**
+	 * This method removes a country 
+	 */
 	public void removeCountry(String countryName) {
 		if (countryList.contains(countryName)) {
 			countryList.remove(countryName);
@@ -146,7 +162,9 @@ public class MapBuilder {
 		System.out.println("------------------------");
 
 	}
-
+         /**
+	 * This method will print list of maps
+	 */
 	public void getListOfMaps() {
 
 		for (final File fileEntry : mapFolder.listFiles()) {
