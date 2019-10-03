@@ -10,15 +10,15 @@ public class Country {
 	private int countryId;
 	private int armies = 0;
 	private static int countriesCounter = 0;
-	private Set<String> adjacentCountries = new HashSet<>();
+	private AdjacencyList countryAdjacency = new AdjacencyList();
 	
-	public Set<String> getAdjacentCountries() {
-		return adjacentCountries;
-	}
-
-	public void setAdjacentCountries(Set<String> adjacentCountries) {
-		this.adjacentCountries = adjacentCountries;
-	}
+//	public Set<String> getAdjacentCountries() {
+//		return countryAdjacency;
+//	}
+//
+//	public void setAdjacentCountries(Set<String> adjacentCountries) {
+//		this.countryAdjacency = adjacentCountries;
+//	}
 
 	public Country(String name) {
 	    this.countryId = ++countriesCounter;
@@ -54,21 +54,19 @@ public class Country {
 	    this.name = name;
 	  }
 
-	  public void addCountryLink(String countryName) {
-		  adjacentCountries.add(countryName);
-	  }
-
-	  public List<String> getLinkedCountries() {
-	    List<String> linkedCountriesList = new ArrayList<>(adjacentCountries);
-
-	    return linkedCountriesList;
-	  }
+//	  public void addCountryLink(String countryName) {
+//		  countryAdjacency.add(countryName);
+//	  }
+//
+//	  public List<String> getLinkedCountries() {
+//	    List<String> linkedCountriesList = new ArrayList<>(countryAdjacency);
+//
+//	    return linkedCountriesList;
+//	  }
 
 	  
-
-		
-		public void showLinkedCountries() {
+		public void showCountryAdjacency() {
+			countryAdjacency.showListEdges();
 			
-			linkedCountriesList.showListEdges();
 		}
 }

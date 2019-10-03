@@ -29,21 +29,28 @@ public class DriverTest {
 
 		
 
-		Continent c1 = new Continent("NorthAmerica", 55);
-		Continent c2 = new Continent("SouthAmerica", 222);
-		Continent c3 = new Continent("ASIA", 233);
-		Continent c4 = new Continent("Europ", 898989);
+		Continent continent1 = new Continent("NorthAmerica", 55);
+		Continent continent2 = new Continent("SouthAmerica", 222);
+		Continent continent3 = new Continent("ASIA", 233);
+		Continent continent4 = new Continent("Europ", 898989);
+		
+		Country country1 = new Country("Iran");
+		Country country2 = new Country("China");
 		
 
-		mapBuild.addContinent(c1);
-		mapBuild.addContinent(c2);
-		mapBuild.addContinent(c3);
-		mapBuild.addContinent(c4);
+		mapBuild.addContinent(continent1);
+		mapBuild.addContinent(continent2);
+		mapBuild.addContinent(continent3);
+		mapBuild.addContinent(continent4);
 		mapBuild.printContinentList();
-		c1.addContinentAdjacency(233);
-		c1.addContinentAdjacency(222);
+		continent1.addContinentAdjacency(233);
+		continent1.addContinentAdjacency(222);
 		mapBuild.printContinentList();
 		
+		
+		mapBuild.addCountry(country1);
+		mapBuild.addCountry(country2);
+		mapBuild.printCountryList();
 
 //		System.out.println("-------" + "\n" + "which  continent do u wanna remove? ");
 //		String name = in.nextLine();

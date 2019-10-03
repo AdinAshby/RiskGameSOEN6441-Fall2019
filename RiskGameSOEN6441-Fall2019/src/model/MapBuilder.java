@@ -139,9 +139,26 @@ public class MapBuilder {
 
 			Continent continent = (Continent) list_Iter.next();
 
-			System.out.println("continent name is" + continent.getContinentName() + ", continent value is: "
+			System.out.println("continent name is " + continent.getContinentName() + ", continent Id is: "
 					+ continent.getContinentId());
 			continent.showContinentAdjacency();
+		}
+		
+		System.out.println("------------------------");
+
+	}
+	
+	
+	public void printCountryList() {
+
+		ListIterator list_Iter = countryList.listIterator();
+		while (list_Iter.hasNext()) {
+
+			Country country = (Country) list_Iter.next(); //////
+
+			System.out.println("country name is " + country.getCountryName() + ", country Id is: "
+					+ country.getCountryId());
+			country.showCountryAdjacency();
 		}
 		
 		System.out.println("------------------------");
