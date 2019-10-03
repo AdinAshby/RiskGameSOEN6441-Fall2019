@@ -63,5 +63,12 @@ public class Country {
 
 	    return linkedCountriesList;
 	  }
-	 
+
+	  
+
+		
+		public void showLinkedCountries() {
+			
+			linkedCountriesList.showListEdges();
+		}
 }

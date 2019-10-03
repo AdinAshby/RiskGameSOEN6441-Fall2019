@@ -141,8 +141,9 @@ public class MapBuilder {
 
 			System.out.println("continent name is" + continent.getContinentName() + ", continent value is: "
 					+ continent.getContinentId());
+			continent.showContinentAdjacency();
 		}
-
+		
 		System.out.println("------------------------");
 
 	}

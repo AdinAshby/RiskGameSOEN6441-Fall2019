@@ -10,131 +10,131 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+import model.AdjacencyList;
 import model.Continent;
 import model.Country;
 import model.MapBuilder;
 
 public class DriverTest {
-//editcontinent -add continentname continentvalue -remove continentname
-//editcountry -add countryname continentname -remove countryname
-//editneighbor -add countryname neighborcountryname -remove countryname neighborcountryname
-	
+	// editcontinent -add continentname continentvalue -remove continentname
+	// editcountry -add countryname continentname -remove countryname
+	// editneighbor -add countryname neighborcountryname -remove countryname
+	// neighborcountryname
+
 	public static void main(String[] args) throws Exception {
 
 		// List<Continent> continets = new LinkedList<Continent>();
 		Scanner in = new Scanner(System.in);
 		MapBuilder mapBuild = new MapBuilder();
+
 		
+
+		Continent c1 = new Continent("NorthAmerica", 55);
+		Continent c2 = new Continent("SouthAmerica", 222);
+		Continent c3 = new Continent("ASIA", 233);
+		Continent c4 = new Continent("Europ", 898989);
+		
+
+		mapBuild.addContinent(c1);
+		mapBuild.addContinent(c2);
+		mapBuild.addContinent(c3);
+		mapBuild.addContinent(c4);
+		mapBuild.printContinentList();
+		c1.addContinentAdjacency(233);
+		c1.addContinentAdjacency(222);
+		mapBuild.printContinentList();
+		
+
+//		System.out.println("-------" + "\n" + "which  continent do u wanna remove? ");
+//		String name = in.nextLine();
+
+//		mapBuild.removeContinent("NorthAmerica");
+
+//		mapBuild.removeContinent(name);
+
+//		mapBuild.printContinentList();
+
+		System.exit(0);
+
 		String input = in.nextLine();
 		String[] arr = input.split(" ");
-//		System.out.println(arr[1]);
-		
-		switch(arr[0]) {
-		
+		// System.out.println(arr[1]);
+
+		switch (arr[0]) {
+
 		case "editcontinent":
-			if(arr[1].equals("-add")) {
+			if (arr[1].equals("-add")) {
 				Continent continent = new Continent(arr[2], Integer.parseInt(arr[3]));
 				mapBuild.addContinent(continent);
-			}
-			else if (arr[4].equals("-remove")) {
-				
+			} else if (arr[4].equals("-remove")) {
+
 				mapBuild.removeContinent(arr[4]);
-				
-				}
+
+			}
 			break;
-			
+
 		}
-		switch(arr[1]) {
-		
-		
+		switch (arr[1]) {
+
 		case "editcountry":
-			
-			if(arr[1].equals("-add")) {
+
+			if (arr[1].equals("-add")) {
 				Country country = new Country(arr[2]);
 				mapBuild.addCountry(country);
 			}
-		
-			
-			if(arr[4].equals("-remove")) {
-				
+
+			if (arr[4].equals("-remove")) {
+
 				mapBuild.removeCountry(arr[4]);
 			}
-			
-		
+			break;
+
 		}
 		mapBuild.printContinentList();
-//		System.exit(0);
-		
+		// System.exit(0);
+
 		// List<Country> countries = new ArrayList<>();
 		// Set<String> adjacentCountries = new HashSet<>();
 		mapBuild.getListOfMaps();
-		
-//		mapBuild.readMap("risk");
-		String mapContent= "name "+ "mapname" + "Map\n";
-//				"name test Map\r\n" + 
-//				"\r\n" + 
-//				"[files]\r\n" + 
-//				"pic risk_pic.png\r\n" + 
-//				"map risk_map.gif\r\n" + 
-//				"crd risk.cards\r\n" + 
-//				"prv risk.jpg\r\n" + 
-//				"\r\n" + 
-//				"[continents]\r\n" + 
-//				"North-America 5 yellow\r\n" + 
-//				"South-America 2 green\r\n" + 
-//				"Europe 5 blue\r\n" + 
-//				"Africa 3 orange\r\n" + 
-//				"Asia 7 pink\r\n" + 
-//				"Oceania 2 red";
+
+		// mapBuild.readMap("risk");
+		String mapContent = "name " + "mapname" + "Map\n";
+		// "name test Map\r\n" +
+		// "\r\n" +
+		// "[files]\r\n" +
+		// "pic risk_pic.png\r\n" +
+		// "map risk_map.gif\r\n" +
+		// "crd risk.cards\r\n" +
+		// "prv risk.jpg\r\n" +
+		// "\r\n" +
+		// "[continents]\r\n" +
+		// "North-America 5 yellow\r\n" +
+		// "South-America 2 green\r\n" +
+		// "Europe 5 blue\r\n" +
+		// "Africa 3 orange\r\n" +
+		// "Asia 7 pink\r\n" +
+		// "Oceania 2 red";
 		mapBuild.writeMap("test", mapContent);
-		
-		
-		
+
 		System.out.println("How many Continents you wanna add?");
 
 		int numberOfContinents = in.nextInt();
 
 		List<Continent> continentList = new LinkedList<Continent>();
 
-		
 		System.out.println("Add the name of the continents");
 		for (int i = 0; i < numberOfContinents; i++) {
-			String a= in.nextLine();
-			
+			String a = in.nextLine();
+
 			String pattern = "[a-zA-Z\\s]*";
-			String continentName= in.next(pattern);
+			String continentName = in.next(pattern);
 			int continentId = in.nextInt();
-			
+
 			Continent cont = new Continent(continentName, continentId);
 			continentList.add(cont);
-			}
+		}
 		in.nextLine();
-		
-		
-		mapBuild.setContinentList(continentList);
-		
-		Continent c1 = new Continent("NorthAmerica", 55);
-		Continent c2 = new Continent("SouthAmerica", 222);
-		
-		
-		
-		
-		mapBuild.addContinent(c1);
-		mapBuild.addContinent(c2);
-		mapBuild.printContinentList();
 
-		
-
-		System.out.println("-------"+"\n"+"which  continent do u wanna remove? ");
-		String name = in.nextLine();
-		
-			
-		mapBuild.removeContinent("NorthAmerica");
-		
-		mapBuild.removeContinent(name);
-		
-		mapBuild.printContinentList();
-		
 		// continetsList.addAll(nameOfTheContinents[i]);
 
 		// System.out.println(c1.setContinents(nameOfTheContinents));

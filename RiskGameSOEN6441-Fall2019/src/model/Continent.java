@@ -9,6 +9,8 @@ public class Continent {
 	private int continentId;
 	private static int continentsCounter = 0;
 	private List<Country> countryList = new LinkedList<Country>();
+	private AdjacencyList continentAdjacency = new AdjacencyList();
+	
 	private enum color {
 		RED, BLUE, YELLOW, GREEN
 	};
@@ -17,6 +19,7 @@ public class Continent {
 		super();
 		this.name = name;
 		this.continentId = continentId;
+		continentAdjacency.addVertex(continentId);
 	}
 
 	public List<Country> getCountriesList() {
@@ -43,7 +46,16 @@ public class Continent {
 		this.continentId = continentId;
 	}
 
+	
+	public void addContinentAdjacency( int end) {
+		continentAdjacency.addEdge(continentId, end);
+	}
 
+	
+	public void showContinentAdjacency() {
+		
+		continentAdjacency.showListEdges();
+	}
 }
 
 
