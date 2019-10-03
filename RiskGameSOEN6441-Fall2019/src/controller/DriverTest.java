@@ -67,36 +67,36 @@ public class DriverTest {
 		String[] arr = input.split(" ");
 		// System.out.println(arr[1]);
 
-		switch (arr[0]) {
-
-		case "editcontinent":
-			if (arr[1].equals("-add")) {
-				Continent continent = new Continent(arr[2], Integer.parseInt(arr[3]));
-				mapBuild.addContinent(continent);
-			} else if (arr[4].equals("-remove")) {
-
-				mapBuild.removeContinent(arr[4]);
-
-			}
-			break;
-
-		}
-		switch (arr[1]) {
-
-		case "editcountry":
-
-			if (arr[1].equals("-add")) {
-				Country country = new Country(arr[2]);
-				mapBuild.addCountry(country);
-			}
-
-			if (arr[4].equals("-remove")) {
-
-				mapBuild.removeCountry(arr[4]);
-			}
-			break;
-
-		}
+//		switch (arr[0]) {
+//
+//		case "editcontinent":
+//			if (arr[1].equals("-add")) {
+//				Continent continent = new Continent(arr[2], Integer.parseInt(arr[3]));
+//				mapBuild.addContinent(continent);
+//			} else if (arr[4].equals("-remove")) {
+//
+//				mapBuild.removeContinent(arr[4]);
+//
+//			}
+//			break;
+//
+//		}
+//		switch (arr[1]) {
+//
+//		case "editcountry":
+//
+//			if (arr[1].equals("-add")) {
+//				Country country = new Country(arr[2]);
+//				mapBuild.addCountry(country);
+//			}
+//
+//			if (arr[4].equals("-remove")) {
+//
+//				mapBuild.removeCountry(arr[4]);
+//			}
+//			break;
+//
+//		}
 		mapBuild.printContinentList();
 		// System.exit(0);
 
