@@ -6,9 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * MapBuilder Class to Edit Map
@@ -117,17 +120,6 @@ public class MapBuilder {
 		}
 	}
 
-	public void addCountry(Country c) {
-		countryList.add(c);
-		}
-	
-	public void removeCountry(String countryName) {
-		if (countryList.contains(countryName)) {
-			countryList.remove(countryName);
-		}
-	}
-	
-	
 	/**
 	 * Print List of Continents
 	 */
@@ -142,26 +134,10 @@ public class MapBuilder {
 			System.out.println("continent name is " + continent.getContinentName() + ", continent Id is: "
 					+ continent.getContinentId());
 			continent.showContinentAdjacency();
+			continent.printCountryList();
 		}
-		
-		System.out.println("------------------------");
 
-	}
-	
-	
-	public void printCountryList() {
-
-		ListIterator list_Iter = countryList.listIterator();
-		while (list_Iter.hasNext()) {
-
-			Country country = (Country) list_Iter.next(); //////
-
-			System.out.println("country name is " + country.getCountryName() + ", country Id is: "
-					+ country.getCountryId());
-			country.showCountryAdjacency();
-		}
-		
-		System.out.println("------------------------");
+		System.out.println("------------------------\n");
 
 	}
 
@@ -182,20 +158,105 @@ public class MapBuilder {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
 		String line;
+		String fileContent = "";
+		boolean isValidMap = false;
+		boolean isValidContinent = false;
+
 		while ((line = br.readLine()) != null) {
-			// process the line
-			System.out.println(line);
+			fileContent += line;
 		}
-		br.close();
+		//System.out.println(fileContent);
+		String mapFileNamePattern2 = "name (\\w*) Map([\\[\\]\\w]*)[continents](\\w*)[countries](\\w*)";
+		Pattern r2 = Pattern.compile(mapFileNamePattern2);
+		Matcher m2 = r2.matcher(fileContent);
+		if (m2.find()) {
+			String mapFileName = m2.group(1);
+			System.out.println(m2.group(2));
+			System.out.println(m2.group(3));
+			System.out.println(m2.group(4));
+		}
+		System.exit(0);
+		
+		
+		BufferedReader buf = new BufferedReader(new StringReader(fileContent));
+
+		while ((line = buf.readLine()) != null) {
+
+			String mapFileNamePattern = "name (\\w*) Map";
+			Pattern r = Pattern.compile(mapFileNamePattern);
+			Matcher m = r.matcher(line);
+			if (m.find()) {
+				String mapFileName = m.group(1);
+
+				buf.mark(10000);
+				
+				System.out.println("File Name: " + mapFileName);
+
+				isValidMap = true;
+				continue;
+
+			} else {
+				// System.out.println(line);
+				continue;
+
+			}
+		}
+
+		buf.reset();
+
+//		while ((line = buf.readLine()) != null) {
+//			System.out.println("zzzzzzzzzzzzzzzzzz  " + line);
+//			if (isValidContinent == true) {
+//				System.out.println("Continent Found  " + line);
+//			}
+//			if (line.equals("[continents]")) {
+//
+//				System.out.println("Continent Start ");
+//				isValidMap = true;
+//				isValidContinent = true;
+//				continue;
+//
+//			} else {
+//				System.out.println(line);
+//				continue;
+//
+//			}
+
+			// }else {
+			// System.out.println("NO MATCH");
+			// isValid= false;
+			// }
+
+			// process the line
+
+		}
+
+//		br.close();
+	
+
+	public String mapFormat(String fileName) {
+		String mapCountries = "";
+		String mapContent = "name " + fileName + " Map\r\n" + "\r\n" + "[files]\r\n" + "\r\n" + "[continents]\r\n";
+
+		for (Continent c : continentList) {
+			mapContent += c.getContinentName() + " " + c.getContinentControlValue() + "\r\n";
+			List<Country> countryList = c.getCountriesList();
+			for (Country co : countryList) {
+				mapCountries += co.getCountryId() + " " + co.getCountryName() + "\r\n";
+			}
+		}
+		mapContent += "\r\n[countries]\r\n" + mapCountries;
+
+		return mapContent;
 	}
 
-	public void writeMap(String fileName, String mapContent) throws Exception {
+	public void writeMap(String fileName) throws Exception {
 
 		File file = new File(mapFolder + "/" + fileName + ".map");
 
 		BufferedWriter br = new BufferedWriter(new FileWriter(file));
 
-		br.write(mapContent);
+		br.write(mapFormat(fileName));
 
 		br.close();
 	}

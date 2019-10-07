@@ -28,7 +28,9 @@ public class DriverTest {
 		MapBuilder mapBuild = new MapBuilder();
 
 		
-
+		mapBuild.readMap("test");
+		
+		System.exit(0);
 		Continent continent1 = new Continent("NorthAmerica", 55);
 		Continent continent2 = new Continent("SouthAmerica", 222);
 		Continent continent3 = new Continent("ASIA", 233);
@@ -43,14 +45,18 @@ public class DriverTest {
 		mapBuild.addContinent(continent3);
 		mapBuild.addContinent(continent4);
 		mapBuild.printContinentList();
-		continent1.addContinentAdjacency(233);
-		continent1.addContinentAdjacency(222);
-		mapBuild.printContinentList();
 		
 		
-		mapBuild.addCountry(country1);
-		mapBuild.addCountry(country2);
-		mapBuild.printCountryList();
+//		continent1.addContinentAdjacency(233);
+//		continent1.addContinentAdjacency(222);
+		
+		
+		
+		continent1.addCountry(country1);
+		continent2.addCountry(country2);
+	mapBuild.printContinentList();
+	
+	mapBuild.writeMap("test");
 
 //		System.out.println("-------" + "\n" + "which  continent do u wanna remove? ");
 //		String name = in.nextLine();
@@ -64,9 +70,19 @@ public class DriverTest {
 		System.exit(0);
 
 		String input = in.nextLine();
-		String[] arr = input.split(" ");
+//		String[] arr = input.split(" ");
 		// System.out.println(arr[1]);
 
+		
+//		switch (input) {
+//		case "-add continentname" :
+//		{
+//			
+//		}
+//		case "
+			
+			
+		
 //		switch (arr[0]) {
 //
 //		case "editcontinent":
@@ -121,7 +137,7 @@ public class DriverTest {
 		// "Africa 3 orange\r\n" +
 		// "Asia 7 pink\r\n" +
 		// "Oceania 2 red";
-		mapBuild.writeMap("test", mapContent);
+		
 
 		System.out.println("How many Continents you wanna add?");
 
