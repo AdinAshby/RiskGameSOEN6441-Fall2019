@@ -193,7 +193,7 @@ public class MapBuilder {
 		String line;
 		//test
 		
-		
+		//
 		String fileContent = "";
 		boolean isValidMap = false;
 		boolean isValidContinent = false;
