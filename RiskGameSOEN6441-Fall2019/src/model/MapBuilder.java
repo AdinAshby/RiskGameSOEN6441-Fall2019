@@ -131,26 +131,10 @@ public class MapBuilder {
 				continentList.remove(continent);
 		}
 	}
-<<<<<<< HEAD
 
-=======
-         /**
-	 * This method adds a new country 
-	 */
-	public void addCountry(Country c) {
-		countryList.add(c);
-		}
-	 /**
-	 * This method removes a country 
-	 */
-	public void removeCountry(String countryName) {
-		if (countryList.contains(countryName)) {
-			countryList.remove(countryName);
-		}
-	}
+  
 	
 	
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 	/**
 	 * This method will print List of Continents
 	 */
@@ -188,57 +172,48 @@ public class MapBuilder {
 
 		File file = new File(mapFolder + "/" + fileName + ".map");
 
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
-		String line;
-		//test
-		
-		//
-		String fileContent = "";
-		boolean isValidMap = false;
-		boolean isValidContinent = false;
 
-		while ((line = br.readLine()) != null) {
-			fileContent += line;
-		}
-		//System.out.println(fileContent);
-		String mapFileNamePattern2 = "name (\\w*) Map([\\[\\]\\w]*)[continents](\\w*)[countries](\\w*)";
-		Pattern r2 = Pattern.compile(mapFileNamePattern2);
-		Matcher m2 = r2.matcher(fileContent);
-		if (m2.find()) {
-			String mapFileName = m2.group(1);
-			System.out.println(m2.group(2));
-			System.out.println(m2.group(3));
-			System.out.println(m2.group(4));
-		}
-		System.exit(0);
-		
-		
-		BufferedReader buf = new BufferedReader(new StringReader(fileContent));
+		 StringBuffer stringBuffer = new StringBuffer();
+		 String fileContent="";
+		 String line = null;
 
-		while ((line = buf.readLine()) != null) {
+		 while((line =bufferedReader.readLine())!=null){
+		  stringBuffer.append(line).append("\n");
+		  fileContent+=line+"\n";
+		 }
+		 String patternString = "(?<=\\[continents\\]\\s)([\\w\\_\\-]*\\s(\\d)*\\s(\\#\\w{6}|\\w*)\\s)*";
+		 Pattern pattern = Pattern.compile(patternString);
+		       Matcher matcher = pattern.matcher(fileContent);
+		       String continentLines="";
+		       if(matcher.find()) {
+		           continentLines=matcher.group(0);
+		       }
+		       System.out.println(continentLines);
+		       
+		       patternString = "((([\\w\\_\\-]*)\\s(\\d)*\\s((\\#\\w{6}|\\w*)))*\\s)";
+		       pattern = Pattern.compile(patternString);
+		       matcher = pattern.matcher(continentLines);
+		       int count = 0;
+		       String continentDetail="";
+		       String continentName="";
+		       String continentColor="";
+		       String continentValue="";
+		       //System.out.println("Found "+matcher.groupCount()+" Continents\n-------------\n");
+		       while(matcher.find()) {
+		       	count++;
+		          continentDetail=matcher.group();
+		          continentName=matcher.group(3);
+		          continentValue=matcher.group(4);
+		          continentColor=matcher.group(5);
+		          System.out.println("Found Continent "+count+" "+continentName+"  Value="+continentValue+" Color:"+continentColor+" --\n");
+		       }
+		       
 
-			String mapFileNamePattern = "name (\\w*) Map";
-			Pattern r = Pattern.compile(mapFileNamePattern);
-			Matcher m = r.matcher(line);
-			if (m.find()) {
-				String mapFileName = m.group(1);
-
-				buf.mark(10000);
-				
-				System.out.println("File Name: " + mapFileName);
-
-				isValidMap = true;
-				continue;
-
-			} else {
-				// System.out.println(line);
-				continue;
-
-			}
 		}
 
-		buf.reset();
+		
 
 //		while ((line = buf.readLine()) != null) {
 //			System.out.println("zzzzzzzzzzzzzzzzzz  " + line);
@@ -265,7 +240,7 @@ public class MapBuilder {
 
 			// process the line
 
-		}
+		
 
 //		br.close();
 	
