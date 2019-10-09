@@ -28,8 +28,8 @@ public class DriverTest {
 		MapBuilder mapBuild = new MapBuilder();
 
 		
-		mapBuild.readMap("test");
-		
+		mapBuild.readMap("ameroki");
+		System.out.println("test");
 		System.exit(0);
 		Continent continent1 = new Continent("NorthAmerica", 55);
 		Continent continent2 = new Continent("SouthAmerica", 222);
