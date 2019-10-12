@@ -126,15 +126,23 @@ public class MapBuilder {
 		}
 		return null;
 	}
-	
+	/**
+	 * This method will add a new country in adjacency list of country
+	 *@param countryId
+	 *@param targetCountryId
+	 */
 	public void addCountryAdjacency(int countryId, int targetCountryId) {
 		  countryAdjacency.addEdge(countryId, targetCountryId);
 	  }
-	
+	/**
+	 * This method shows country adjacency list
+	 */
 	public void showCountryAdjacency() {
 		countryAdjacency.showListEdges();		
 	}
-	
+	/**
+	 * This method reads the map files
+	 */
 	public void readMap(String fileName) throws Exception {
 
 		File file = new File(mapFolder + "/" + fileName + ".map");
