@@ -7,18 +7,20 @@ import java.util.ListIterator;
 
 public class Continent {
 	private String name;
-	private static int continentId=1;
+	private int continentId=1;
 	private int continentControlValue;
 	private static int continentsCounter = 0;
 	private List<Country> countryList = new LinkedList<Country>();
-	private AdjacencyList continentAdjacency = new AdjacencyList();
+
 	
 		public Continent(String name, int continentControlValue) {
 		super();
 		this.name = name;
 		this.continentControlValue= continentControlValue;
-		this.continentId ++;
-		continentAdjacency.addVertex(continentId);
+		continentsCounter++;
+		this.continentId =continentsCounter;
+		
+//		continentAdjacency.addVertex(continentId);
 	}
 
 	public int getContinentControlValue() {
@@ -46,14 +48,25 @@ public class Continent {
 	}
 
 	public int getContinentId() {
-		return continentId;
+		return this.continentId;
 	}
 
 	public void setContinentId(int continentId) {
 		this.continentId = continentId;
 	}
 
+	public Country getCountry(int countryId) {
+		for (Country country : countryList) {
+	        if (country.getCountryId()==countryId) {
+	            return country;
+	        }
+	    }
+	    return null;
+	}
 	
+	
+	
+/*	
 	public void addContinentAdjacency( int end) {
 		continentAdjacency.addEdge(continentId, end);
 	}
@@ -63,6 +76,7 @@ public class Continent {
 		
 		continentAdjacency.showListEdges();
 	}
+*/	
 	/**
 	 * 
 	 * @param c as Country
@@ -94,9 +108,9 @@ public class Continent {
 
 			Country country = (Country) list_Iter.next();
 
-			System.out.println("Country name is " + country.getCountryName() + ", Country Id is: "
+			System.out.println("   Country name is " + country.getCountryName() + ", Country Id is: "
 					+ country.getCountryId());
-			country.showCountryAdjacency();
+			
 		}
 
 		System.out.println("------------------------");

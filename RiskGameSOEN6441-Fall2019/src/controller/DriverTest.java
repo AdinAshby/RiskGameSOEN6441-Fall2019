@@ -29,8 +29,21 @@ public class DriverTest {
 
 		
 		mapBuild.readMap("ameroki");
-		System.out.println("test");
+		
+		mapBuild.printContinentList();
 		System.exit(0);
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		Continent continent1 = new Continent("NorthAmerica", 55);
 		Continent continent2 = new Continent("SouthAmerica", 222);
 		Continent continent3 = new Continent("ASIA", 233);
@@ -44,7 +57,8 @@ public class DriverTest {
 		mapBuild.addContinent(continent2);
 		mapBuild.addContinent(continent3);
 		mapBuild.addContinent(continent4);
-		mapBuild.printContinentList();
+
+	//	mapBuild.printContinentList();
 		
 		
 //		continent1.addContinentAdjacency(233);
@@ -52,8 +66,8 @@ public class DriverTest {
 		
 		
 		
-		continent1.addCountry(country1);
-		continent2.addCountry(country2);
+//		continent1.addCountry(country1);
+//		continent2.addCountry(country2);
 	mapBuild.printContinentList();
 	
 	mapBuild.writeMap("test");

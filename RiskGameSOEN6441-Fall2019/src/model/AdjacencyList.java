@@ -10,7 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class AdjacencyList {
 
-	private Map<Integer, List<Integer>> adjacencyList = new HashMap<Integer, List<Integer>>();
+	private Map<Integer, ArrayList<Integer>> adjacencyList = new HashMap<Integer, ArrayList<Integer>>();
 
 	/**
 	 * add vertex
@@ -23,6 +23,14 @@ public class AdjacencyList {
 
 	}
 
+	public Map<Integer, ArrayList<Integer>> getAdjacencyList() {
+		return adjacencyList;
+	}
+
+	public void setAdjacencyList(Map<Integer, ArrayList<Integer>> adjacencyList) {
+		this.adjacencyList = adjacencyList;
+	}
+
 	public void removeVertex(int id) {
 
 		adjacencyList.remove(id);
@@ -31,20 +39,19 @@ public class AdjacencyList {
 	////
 
 	public void addEdge(int start, int end) {
+		System.out.println("Add Edge between "+start+" to "+end);
+		
 		List<Integer> list;
+		list = adjacencyList.get(start);
+		
+		if (!list.contains(end)) {
+			list.add(end);
+		}
 
-//		list = adjacencyList.get(start);
-//
-//		if (!list.contains(end)) {
-//			list.add(end);
-//
-//		}
-
-//		list = adjacencyList.get(end);
-
-//		if (!list.contains(start)) {
-//			list.add(start);
-//		}
+		list = adjacencyList.get(end);
+		if (!list.contains(start)) {
+			list.add(start);
+		}
 		
 	}
 
@@ -95,8 +102,9 @@ public class AdjacencyList {
 	}
 
 	public void showListEdges() {
-		for (Entry<Integer, List<Integer>> entry : adjacencyList.entrySet())
-			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet())
+			//System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			System.out.println("Key="+ entry.getKey() +" Adj = " + entry.getValue());
 
 	}
 

@@ -7,9 +7,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,22 +28,16 @@ public class MapBuilder {
 
 	final File mapFolder = new File("./MapFiles");
 
-	private List<Continent> continentList = new LinkedList<Continent>();
-	private List<Country> countryList = new LinkedList<Country>();
-
-	public List<Country> getCountryList() {
-		return countryList;
-	}
-
-	public void setCountryList(List<Country> countryList) {
-		this.countryList = countryList;
-	}
-
+	private Map<Integer, Continent> continentList = new HashMap<Integer, Continent>(); // continentId=> continentName,
+																						// continentValue,
+																						// continentColor
+	private AdjacencyList countryAdjacency = new AdjacencyList();
+	
 	/**
 	 * 
 	 * @return continentList
 	 */
-	public List<Continent> getContinentList() {
+	public Map<Integer, Continent> getContinentList() {
 		return continentList;
 	}
 
@@ -46,210 +45,226 @@ public class MapBuilder {
 	 * 
 	 * @param continentList
 	 */
-	public void setContinentList(List<Continent> continentList) {
+	public void setContinentList(Map<Integer, Continent> continentList) {
 		this.continentList = continentList;
 	}
-        /**
-	 * This method reads country name
-	 */
-	public String getCountryName(int countryId) {
-		String countryName = "";
-		ListIterator list_Iter = countryList.listIterator();
 
-		while (list_Iter.hasNext()) {
-
-			Country country = (Country) list_Iter.next();
-			if (countryId == country.getCountryId())
-				countryName = country.getCountryName();
-
-		}
-		return countryName;
-	}
-        /**
-	 * This method reads country Id
-	 */
-	public int getCountryId(String countryName) {
-		int countryId = 0;
-
-		ListIterator list_Iter = countryList.listIterator();
-		while (list_Iter.hasNext()) {
-			Country country = (Country) list_Iter.next();
-			if (countryName == country.getCountryName())
-				countryId = country.getCountryId();
-		}
-		return countryId;
-	}
-        /**
-	 * This method reads continent name
+	/**
+	 * This method reads continent Id
 	 */
 	public String getContinentName(int continentId) {
 
-		ListIterator list_Iter = continentList.listIterator();
-		String continentName = "";
-		while (list_Iter.hasNext()) {
-
-			Continent continent = (Continent) list_Iter.next();
-			if (continentId == continent.getContinentId())
-				continentName = continent.getContinentName();
-		}
+		Continent continent = continentList.get(continentId);
+		String continentName = continent.getContinentName();
 		return continentName;
-
 	}
-         /**
-	 * This method reads continent Id
-	 */
-	public int getContinentId(String continentName) {
 
-		ListIterator list_Iter = continentList.listIterator();
-		int continentId = 0;
-		while (list_Iter.hasNext()) {
+	public Continent getContinent(int continentId) {
 
-			Continent continent = (Continent) list_Iter.next();
-			if (continentName == continent.getContinentName())
-				continentId = continent.getContinentId();
-		}
-		return continentId;
-
+		Continent continent = continentList.get(continentId);
+		return continent;
 	}
-        /**
+
+	/**
 	 * This method adds a new continent
 	 */
-	public void addContinent(Continent c) {
-		continentList.add(c);
+
+	public void addContinent(Continent continent) {
+		continentList.put(continent.getContinentId(), continent);
 	}
-        /**
-	 * This method removes a continent 
+
+	/**
+	 * This method removes a continent
 	 */
-	public void removeContinent(String continentName) {
-
-		ListIterator list_Iter = continentList.listIterator();
-		int continentId = 0;
-		while (list_Iter.hasNext()) {
-
-			Continent continent = (Continent) list_Iter.next();
-			if (continentName == continent.getContinentName())
-				continentList.remove(continent);
-		}
+	public void removeContinent(int continentId) {
+		continentList.remove(continentId);
 	}
 
-  
-	
-	
 	/**
 	 * This method will print List of Continents
 	 */
 
 	public void printContinentList() {
-
-		ListIterator list_Iter = continentList.listIterator();
-		while (list_Iter.hasNext()) {
-
-			Continent continent = (Continent) list_Iter.next();
-
+		System.out.println("\nPrint Continent:\n------------------------");
+		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+			int continentId = (int) continentMap.getKey();
+			Continent continent = continentList.get(continentId);
 			System.out.println("continent name is " + continent.getContinentName() + ", continent Id is: "
-					+ continent.getContinentId());
-			continent.showContinentAdjacency();
+					+ continent.getContinentId() + " , continent value is " + continent.getContinentControlValue());
+			// continent.showContinentAdjacency();
 			continent.printCountryList();
 		}
-
+		showCountryAdjacency();
 		System.out.println("------------------------\n");
 
 	}
-         /**
+
+	/**
 	 * This method will print list of maps
 	 */
 	public void getListOfMaps() {
 
 		for (final File fileEntry : mapFolder.listFiles()) {
-			// if (fileEntry.isDirectory()) {
-			// getListOfMaps(fileEntry);
-			// } else {
 			System.out.println(fileEntry.getName());
 		}
 	}
 
+	public Country getCountry(int countryId) {
+		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+			int continentId = (int) continentMap.getKey();
+			Continent c = continentList.get(continentId);
+			Country country=c.getCountry(countryId);
+			if(country!=null) {
+			return country;
+			}
+		}
+		return null;
+	}
+	
+	public void addCountryAdjacency(int countryId, int targetCountryId) {
+		  countryAdjacency.addEdge(countryId, targetCountryId);
+	  }
+	
+	public void showCountryAdjacency() {
+		countryAdjacency.showListEdges();		
+	}
+	
 	public void readMap(String fileName) throws Exception {
 
 		File file = new File(mapFolder + "/" + fileName + ".map");
 
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
+		StringBuffer stringBuffer = new StringBuffer();
+		String fileContent = "";
+		String line = null;
 
-		 StringBuffer stringBuffer = new StringBuffer();
-		 String fileContent="";
-		 String line = null;
-
-		 while((line =bufferedReader.readLine())!=null){
-		  stringBuffer.append(line).append("\n");
-		  fileContent+=line+"\n";
-		 }
-		 String patternString = "(?<=\\[continents\\]\\s)([\\w\\_\\-]*\\s(\\d)*\\s(\\#\\w{6}|\\w*)\\s)*";
-		 Pattern pattern = Pattern.compile(patternString);
-		       Matcher matcher = pattern.matcher(fileContent);
-		       String continentLines="";
-		       if(matcher.find()) {
-		           continentLines=matcher.group(0);
-		       }
-		       System.out.println(continentLines);
-		       
-		       patternString = "((([\\w\\_\\-]*)\\s(\\d)*\\s((\\#\\w{6}|\\w*)))*\\s)";
-		       pattern = Pattern.compile(patternString);
-		       matcher = pattern.matcher(continentLines);
-		       int count = 0;
-		       String continentDetail="";
-		       String continentName="";
-		       String continentColor="";
-		       String continentValue="";
-		       //System.out.println("Found "+matcher.groupCount()+" Continents\n-------------\n");
-		       while(matcher.find()) {
-		       	count++;
-		          continentDetail=matcher.group();
-		          continentName=matcher.group(3);
-		          continentValue=matcher.group(4);
-		          continentColor=matcher.group(5);
-		          System.out.println("Found Continent "+count+" "+continentName+"  Value="+continentValue+" Color:"+continentColor+" --\n");
-		       }
-		       
-
+		while ((line = bufferedReader.readLine()) != null) {
+			stringBuffer.append(line).append("\n");
+			fileContent += line + "\n";
+		}
+		bufferedReader.close();
+		String patternString = "(?<=\\[continents\\]\\s)([\\w\\_\\-]*\\s(\\d)*\\s(\\#\\w{6}|\\w*)\\s)*";
+		Pattern pattern = Pattern.compile(patternString);
+		Matcher matcher = pattern.matcher(fileContent);
+		String continentLines = "";
+		if (matcher.find()) {
+			continentLines = matcher.group(0);
 		}
 
+		// Start getting continents
+		System.out.println("---------Loading Continent-------------");
+		patternString = "((([\\w\\_\\-]*)\\s(\\d{1,2})\\s((\\#\\w{6}|\\w*)))*\\s)";
+		pattern = Pattern.compile(patternString);
+		matcher = pattern.matcher(continentLines);
+		int count = 0;
+		String continentDetail = "";
+		String continentName = "";
+		String continentColor = "";
+		String continentValue = "";
+
+		while (matcher.find()) {
+			count++;
+			continentDetail = matcher.group();
+			continentName = matcher.group(3);
+			continentValue = matcher.group(4);
+			continentColor = matcher.group(5);
+
+			Continent continent = new Continent(continentName, Integer.parseInt(continentValue));
+			addContinent(continent);
+			System.out.println("Found Continent " + continent.getContinentId() + " " + continentName + "  Value="
+					+ continentValue + " Color:" + continentColor);
+		}
+
+		// Start getting countries
+		System.out.println("\n---------Loading Country-------------");
+		patternString = "(?<=\\[countries\\]\\s)((\\d)*\\s([\\w\\_\\-])*\\s(\\d)*\\s(\\d)*\\s(\\d)*\\s)*";
+		pattern = Pattern.compile(patternString);
+		matcher = pattern.matcher(fileContent);
+		String countryLines = "";
+		if (matcher.find()) {
+			countryLines = matcher.group(0);
+		}
+//		       System.out.println(countryLines);
+		patternString = "(((\\d)*)\\s(([\\w\\_\\-])*)\\s((\\d)*)\\s((\\d)*)\\s((\\d)*)\\s)";
+		pattern = Pattern.compile(patternString);
+		matcher = pattern.matcher(countryLines);
+		count = 0;
+		String countryDetail = "";
+		int countryId = 0;
+		String countryName = "";
+		int continentId = 0;
+		int countryL1 = 0;
+		int countryL2 = 0;
+//		 System.out.println("Found "+matcher.groupCount()+" group for countries\n-------------\n");
+		while (matcher.find()) {
+			count++;
+			countryDetail = matcher.group();
+			countryId = Integer.parseInt(matcher.group(2));
+			countryName = matcher.group(4);
+			continentId = Integer.parseInt(matcher.group(6));
+			countryL1 = Integer.parseInt(matcher.group(8));
+			countryL2 = Integer.parseInt(matcher.group(10));
+			System.out.println("Found country countryId=" + countryId + " Name=" + countryName + "  in continentId="
+					+ continentId + " L1=" + countryL1 + ", L2=" + countryL2);
+			Country country = new Country(countryName, countryId);
+			getContinent(continentId).addCountry(country);
+			countryAdjacency.addVertex(countryId);
+		}
+		System.out.println("-------------------------------");
+
+		// Start getting borders
+		System.out.println("\n---------Loading Borders-------------");
+		patternString = "(?<=\\[borders\\]\\s)(.*)[\\s\\S]*";
+		pattern = Pattern.compile(patternString);
+		matcher = pattern.matcher(fileContent);
+		String borders = "";
+		if (matcher.find()) {
+			borders = matcher.group(0);
+		}
+	//	System.out.println("\n--"+borders+"--\n");
+		patternString = "((\\d+) (([\\d ])+))";
+		pattern = Pattern.compile(patternString);
+		matcher = pattern.matcher(borders);
+		count = 0;
+		countryId = 0;
+		String adjCountries="";
+//						 System.out.println("Found "+matcher.groupCount()+" group for countries\n-------------\n");
+		while (matcher.find()) {
+			count++;
+			countryDetail = matcher.group();
+			countryId = Integer.parseInt(matcher.group(2));
+			String adjCountriesContent = matcher.group(3);
+			System.out.println("\nFound countryId=" + countryId+" Adj="+adjCountriesContent);
+			Country c= getCountry(countryId);
+			System.out.println("Add Adj for "+c.getCountryName());
+			String[] arrOfAdj = adjCountriesContent.split(" "); 	  
+	        for (String adj : arrOfAdj) 
+	        	addCountryAdjacency(countryId, Integer.parseInt(adj));
+		}
 		
-
-//		while ((line = buf.readLine()) != null) {
-//			System.out.println("zzzzzzzzzzzzzzzzzz  " + line);
-//			if (isValidContinent == true) {
-//				System.out.println("Continent Found  " + line);
-//			}
-//			if (line.equals("[continents]")) {
-//
-//				System.out.println("Continent Start ");
-//				isValidMap = true;
-//				isValidContinent = true;
-//				continue;
-//
-//			} else {
-//				System.out.println(line);
-//				continue;
-//
-//			}
-
-			// }else {
-			// System.out.println("NO MATCH");
-			// isValid= false;
-			// }
-
-			// process the line
-
 		
+		
+		System.out.println("-------------------------------");
 
-//		br.close();
+	}
+
 	
-
+	
+	
+	
 	public String mapFormat(String fileName) {
 		String mapCountries = "";
 		String mapContent = "name " + fileName + " Map\r\n" + "\r\n" + "[files]\r\n" + "\r\n" + "[continents]\r\n";
-
-		for (Continent c : continentList) {
+		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+			int continentId = (int) continentMap.getKey();
+			Continent c = continentList.get(continentId);
 			mapContent += c.getContinentName() + " " + c.getContinentControlValue() + "\r\n";
 			List<Country> countryList = c.getCountriesList();
 			for (Country co : countryList) {

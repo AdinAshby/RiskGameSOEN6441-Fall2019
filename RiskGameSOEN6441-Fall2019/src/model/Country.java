@@ -10,7 +10,7 @@ public class Country {
 	private int countryId;
 	private int armies = 0;
 	private static int countriesCounter = 0;
-	private AdjacencyList countryAdjacency = new AdjacencyList();
+
 	
 //	public Set<String> getAdjacentCountries() {
 //		return countryAdjacency;
@@ -24,7 +24,10 @@ public class Country {
 	    this.countryId = ++countriesCounter;
 	    this.name = name;
 	  }
-	
+	public Country(String name, int countryId) {
+	    this.countryId = countryId;
+	    this.name = name;
+	  }
 
 	public static void resetCountryCounter() {
 	    countriesCounter = 0;
@@ -54,6 +57,10 @@ public class Country {
 	    this.name = name;
 	  }
 
+	  
+	  
+	  
+	  
 //	  public void addCountryLink(String countryName) {
 //		  countryAdjacency.add(countryName);
 //	  }
@@ -66,8 +73,5 @@ public class Country {
 
 	  
 	  
-		public void showCountryAdjacency() {
-			countryAdjacency.showListEdges();
-			
-		}
+		
 }
