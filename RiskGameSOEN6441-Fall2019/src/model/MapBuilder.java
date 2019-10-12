@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * MapBuilder Class to Edit Map
+ * This is MapBuilder Class to Edit Map
  * 
  * @author f_yazdan
  *
@@ -34,7 +34,7 @@ public class MapBuilder {
 	private AdjacencyList countryAdjacency = new AdjacencyList();
 	
 	/**
-	 * 
+	 * This method will return list of continents
 	 * @return continentList
 	 */
 	public Map<Integer, Continent> getContinentList() {
@@ -67,6 +67,7 @@ public class MapBuilder {
 
 	/**
 	 * This method adds a new continent
+	 *@param continent object of Conintent class
 	 */
 
 	public void addContinent(Continent continent) {
@@ -75,6 +76,7 @@ public class MapBuilder {
 
 	/**
 	 * This method removes a continent
+	 *@param continentid
 	 */
 	public void removeContinent(int continentId) {
 		continentList.remove(continentId);
