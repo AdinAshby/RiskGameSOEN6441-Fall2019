@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/**
+* This class defines countries in the map
+*/
 public class Country {
 	private String name;
 	private int countryId;
@@ -40,7 +42,10 @@ public class Country {
 	  public void setCountryId(int countryId) {
 	    this.countryId = countryId;
 	  }
-
+/**
+* This method will return number of armies a country have
+*@Type integer
+*/
 	  public int getArmies() {
 	    return armies;
 	  }
