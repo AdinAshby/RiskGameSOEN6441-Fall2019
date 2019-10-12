@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-
+         /**
+	 * This class is made for defining continents
+	 */
 public class Continent {
 	private String name;
 	private int continentId=1;
@@ -78,14 +80,18 @@ public class Continent {
 	}
 */	
 	/**
-	 * 
+	 * This methods adds a new country in the exisiting countery list
 	 * @param c as Country
 	 */
 	public void addCountry(Country c) {
 		countryList.add(c);
 	}
 
-
+       /**
+	 * This method removes an existing country
+	 * @param countryName name of country
+	 * @Type String
+	 */
 	public void removeCountry(String countryName) {
 		
 		ListIterator list_Iter = countryList.listIterator();
@@ -100,7 +106,9 @@ public class Continent {
 		
 	}
 	}
-		
+	/**
+	 * This method displays the list of countries
+	 */	
 	public void printCountryList() {
 
 		ListIterator list_Iter = countryList.listIterator();
