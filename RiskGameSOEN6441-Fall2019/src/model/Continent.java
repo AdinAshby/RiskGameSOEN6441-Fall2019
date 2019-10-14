@@ -8,7 +8,13 @@ import java.util.ListIterator;
 	 * This class is made for defining continents
 	 */
 public class Continent {
+	/**
+	 * private name attribute
+	 */
 	private String name;
+	/**
+	 * private continentId 
+	 */
 	private int continentId=1;
 	private int continentControlValue;
 	private static int continentsCounter = 0;
