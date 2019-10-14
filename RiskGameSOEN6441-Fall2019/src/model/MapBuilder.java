@@ -3,6 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class MapBuilder {
 																						// continentValue,
 																						// continentColor
 	/**
-	 * 		countryAdjacency																		
+	 * countryAdjacency
 	 */
 	private AdjacencyList countryAdjacency = new AdjacencyList();
 
@@ -74,8 +75,7 @@ public class MapBuilder {
 	/**
 	 * This method adds a new continent
 	 * 
-	 * @param continent
-	 *            object of Conintent class
+	 * @param continent object of Conintent class
 	 */
 
 	public void addContinent(Continent continent) {
@@ -161,11 +161,14 @@ public class MapBuilder {
 	/**
 	 * This method reads the map files
 	 */
-	public void readMap(String fileName) throws Exception {
+	public void loadMap(String fileName) throws Exception {
 
 		File file = new File(mapFolder + "/" + fileName + ".map");
+		BufferedReader bufferedReader=null;
+		try {
 
-		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+			 bufferedReader = new BufferedReader(new FileReader(file));
+		
 
 		StringBuffer stringBuffer = new StringBuffer();
 		String fileContent = "";
@@ -279,8 +282,12 @@ public class MapBuilder {
 
 		System.out.println("-------------------------------");
 
-	}
+	
 
+	}catch (FileNotFoundException e) {
+			System.out.println("File Not Found");
+		}
+	}
 	public String mapFormat(String fileName) {
 		String mapCountries = "";
 		String mapContent = "name " + fileName + " Map\r\n" + "\r\n" + "[files]\r\n" + "\r\n" + "[continents]\r\n";
