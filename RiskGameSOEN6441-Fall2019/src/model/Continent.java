@@ -8,13 +8,27 @@ import java.util.ListIterator;
 	 * This class is made for defining continents
 	 */
 public class Continent {
+	/**
+	 * private name attribute
+	 */
 	private String name;
+	/**
+	 * private continentId 
+	 */
 	private int continentId=1;
 	private int continentControlValue;
 	private static int continentsCounter = 0;
 	private List<Country> countryList = new LinkedList<Country>();
 
 	
+		public static int getContinentsCounter() {
+		return continentsCounter;
+	}
+
+	public static void setContinentsCounter(int continentsCounter) {
+		Continent.continentsCounter = continentsCounter;
+	}
+
 		public Continent(String name, int continentControlValue) {
 		super();
 		this.name = name;
@@ -44,7 +58,10 @@ public class Continent {
 	public String getContinentName() {
 		return name;
 	}
-
+/**
+ * 
+ * @param name
+ */
 	public void setContinentName(String name) {
 		this.name = name;
 	}
@@ -66,19 +83,16 @@ public class Continent {
 	    return null;
 	}
 	
-	
-	
-/*	
-	public void addContinentAdjacency( int end) {
-		continentAdjacency.addEdge(continentId, end);
+	public Country getCountry(String countryName) {
+		for (Country country : countryList) {
+	        if (country.getCountryName().equals(countryName)) {
+	            return country;
+	        }
+	    }
+	    return null;
 	}
-
 	
-	public void showContinentAdjacency() {
-		
-		continentAdjacency.showListEdges();
-	}
-*/	
+	
 	/**
 	 * This methods adds a new country in the exisiting countery list
 	 * @param c as Country
