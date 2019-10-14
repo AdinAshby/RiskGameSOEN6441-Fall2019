@@ -54,8 +54,12 @@ public class AdjacencyList {
 	 * 
 	 * @param id 
 	 */
-	public void removeVertex(int id) {
+	public void removeVertex(Integer id) {
 
+		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {
+			ArrayList<Integer> values=entry.getValue();
+			values.remove(id);
+		}
 		adjacencyList.remove(id);
 
 	}
@@ -66,7 +70,7 @@ public class AdjacencyList {
 	 * @param id 
 	 */
 	public void addEdge(int start, int end) {
-		System.out.println("Add Edge between " + start + " to " + end);
+//		System.out.println("Add Edge between " + start + " to " + end);
 
 		List<Integer> list;
 		list = adjacencyList.get(start);
@@ -134,12 +138,18 @@ public class AdjacencyList {
      /**
 	 * This method shows list of edges
 	 */
-	public void showListEdges() {
-		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet())
-			// System.out.println("Key = " + entry.getKey() + ", Value = " +
-			// entry.getValue());
-			System.out.println("Key=" + entry.getKey() + " Adj = " + entry.getValue());
-
+	public String showListEdges() {
+		String listEdges = "";
+		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {
+			listEdges += entry.getKey() + " ";
+			ArrayList<Integer> values=entry.getValue();
+			for (int value: values) {
+				listEdges += value + " ";
+			};
+			listEdges +="\n";
+		}
+		return listEdges;
+		
 	}
 
 	/**
@@ -158,9 +168,11 @@ public class AdjacencyList {
 		test.addEdge(555, 8686);
 		test.addEdge(622, 8686);
 		test.addEdge(45, 555);
-		test.showListEdges();
+		System.out.println(test.showListEdges());
 		test.removeEdge(45, 555);
-		test.showListEdges();
+		System.out.println(test.showListEdges());
+		test.removeVertex(555);
+		System.out.println(test.showListEdges());
 	}
 	
 

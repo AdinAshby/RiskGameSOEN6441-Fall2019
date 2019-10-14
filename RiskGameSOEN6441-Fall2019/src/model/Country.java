@@ -27,6 +27,7 @@ public class Country {
 	    this.name = name;
 	  }
 	public Country(String name, int countryId) {
+		++countriesCounter;
 	    this.countryId = countryId;
 	    this.name = name;
 	  }

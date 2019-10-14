@@ -15,6 +15,14 @@ public class Continent {
 	private List<Country> countryList = new LinkedList<Country>();
 
 	
+		public static int getContinentsCounter() {
+		return continentsCounter;
+	}
+
+	public static void setContinentsCounter(int continentsCounter) {
+		Continent.continentsCounter = continentsCounter;
+	}
+
 		public Continent(String name, int continentControlValue) {
 		super();
 		this.name = name;

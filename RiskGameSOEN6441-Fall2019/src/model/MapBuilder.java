@@ -95,12 +95,26 @@ public class MapBuilder {
 	 * @param continentid
 	 */
 	public void removeContinent(int continentId) {
+		Continent continent=getContinent(continentId);
+		List<Country> countries=continent.getCountriesList();
+		for(Country c: countries) {
+			System.out.println("Country "+c.getCountryName()+"  removed");
+		countryAdjacency.removeVertex(c.getCountryId());
+		}
+		System.out.println("CONTINENT "+continent.getContinentName().toUpperCase()+ " removed ");
 		continentList.remove(continentId);
+		
 	}
 	
 	public void removeContinent(String continentName) {
 		Continent continent=getContinent(continentName);
+		List<Country> countries=continent.getCountriesList();
+		for(Country c: countries) {
+			System.out.println("Country "+c.getCountryName()+"  removed");
+		countryAdjacency.removeVertex(c.getCountryId());
+		}
 		continentList.remove(continent.getContinentId());
+		System.out.println("CONTINENT "+continentName.toUpperCase()+ " removed ");
 	}
 	
 	
@@ -136,7 +150,8 @@ public class MapBuilder {
 			// continent.showContinentAdjacency();
 			continent.printCountryList();
 		}
-		showCountryAdjacency();
+		System.out.println("[borders]");
+		System.out.println(showCountryAdjacency());
 		System.out.println("------------------------\n");
 
 	}
@@ -209,26 +224,29 @@ public class MapBuilder {
 	 */
 	public void addCountryAdjacency(int countryId, int neighborCountryId) {
 		countryAdjacency.addEdge(countryId, neighborCountryId);
+		
 	}
 	
 	public void addCountryAdjacency(String countryName, String neighborCountryName) {
 		Country country = getCountryByName(countryName);
 		Country neighborCountry = getCountryByName(neighborCountryName);
 		countryAdjacency.addEdge(country.getCountryId(), neighborCountry.getCountryId());
+		System.out.println(neighborCountryName.toLowerCase()+ " added to the " + countryName );
 	}
 
 	public void removeCountryAdjacency(String countryName, String neighborCountryName) {
 		Country country = getCountryByName(countryName);
 		Country neighborCountry = getCountryByName(neighborCountryName);
 		countryAdjacency.removeEdge(country.getCountryId(), neighborCountry.getCountryId());
+		System.out.println(neighborCountryName.toLowerCase()+ " removed from the " + countryName );
 	}
 	
 	
 	/**
 	 * This method shows country adjacency list
 	 */
-	public void showCountryAdjacency() {
-		countryAdjacency.showListEdges();
+	public String showCountryAdjacency() {
+		return countryAdjacency.showListEdges();
 	}
 
 	/**
@@ -242,6 +260,11 @@ public class MapBuilder {
 			return false;
 		}
 
+		continentList = new HashMap<Integer, Continent>();
+		countryAdjacency = new AdjacencyList();
+		Continent.setContinentsCounter(0);
+
+		
 		BufferedReader bufferedReader = null;
 		try {
 
@@ -377,18 +400,21 @@ public class MapBuilder {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
 			int continentId = (int) continentMap.getKey();
 			Continent c = continentList.get(continentId);
-			mapContent += c.getContinentName() + " " + c.getContinentControlValue() + "\r\n";
+			mapContent += c.getContinentName() + " " + c.getContinentControlValue() + " #FFFFFF\r\n";
 			List<Country> countryList = c.getCountriesList();
 			for (Country co : countryList) {
-				mapCountries += co.getCountryId() + " " + co.getCountryName() + "\r\n";
+				mapCountries += co.getCountryId() + " " + co.getCountryName() +" " + continentId + " 0 0\r\n";
 			}
 		}
 		mapContent += "\r\n[countries]\r\n" + mapCountries;
 
+		
+		
+		mapContent += "\r\n[borders]\r\n" + showCountryAdjacency();
 		return mapContent;
 	}
 
-	public void writeMap(String fileName) throws Exception {
+	public void saveMap(String fileName) throws Exception {
 
 		File file = new File(mapFolder + "/" + fileName + ".map");
 
@@ -403,6 +429,7 @@ public class MapBuilder {
 		Continent continent=getContinent(continentName);
 		Country country=new Country(countryName); // Search if already exist , show error
 		continent.addCountry(country);
+		System.out.println(countryName.toLowerCase()+ " by Id="+country.getCountryId()+" added to  " + continentName.toUpperCase() );
 		
 	}
 

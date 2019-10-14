@@ -139,9 +139,21 @@ public class DriverTest {
 				isValidCommand = true;
 			}
 
-			if (!isValidCommand) {
-				System.out.println("Correct command not found");
-			}
+			
+			
+			// save map
+						regex = "savemap ([\\w*\\_\\-]*)";
+						pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+						matcher = pattern.matcher(input);
+						if (matcher.find()) {
+							mapFileName = matcher.group(1);
+							isValidCommand = true;
+							mapBuild.saveMap(mapFileName);
+						}
+
+						if (!isValidCommand) {
+							System.out.println("Correct command not found");
+						}
 
 		} // while
 
