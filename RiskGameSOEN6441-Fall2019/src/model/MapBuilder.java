@@ -85,6 +85,8 @@ public class MapBuilder {
 	public void addContinent(String continentName, int continentValue) {
 		Continent continent = new Continent(continentName, continentValue);
 		continentList.put(continent.getContinentId(), continent);
+		
+		System.out.println(continentName.toUpperCase()+ " added ");
 	}
 
 	/**

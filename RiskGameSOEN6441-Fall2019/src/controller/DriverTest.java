@@ -32,7 +32,7 @@ public class DriverTest {
 		System.out.println("		SOEN 6441_Project" + "\n" + "		    Domination");
 		System.out.println("__.__.__.__.__.__.__.__.__.__.__.__.__.__.__" + "\n");
 
-		System.out.println("	Stage 0" + "\n");
+//		System.out.println("	Stage 0" + "\n");
 
 		MapBuilder mapBuild = new MapBuilder();
 		String regex;
@@ -118,18 +118,17 @@ public class DriverTest {
 				mapBuild.addCountryAdjacency(countryName, neighborCountryName);
 				isValidCommand = true;
 			}
-			
-			
+
 			// remove neighbor
-						regex = "editneighbor -remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*)";
-						pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-						matcher = pattern.matcher(input);
-						if (matcher.find()) {
-							String countryName = matcher.group(1);
-							String neighborCountryName = matcher.group(2);
-							mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
-							isValidCommand = true;
-						}
+			regex = "editneighbor -remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*)";
+			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+			matcher = pattern.matcher(input);
+			if (matcher.find()) {
+				String countryName = matcher.group(1);
+				String neighborCountryName = matcher.group(2);
+				mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
+				isValidCommand = true;
+			}
 
 			// show map
 			regex = "showmap";
