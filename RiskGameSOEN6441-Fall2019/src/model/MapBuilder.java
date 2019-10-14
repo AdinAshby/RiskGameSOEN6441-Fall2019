@@ -27,14 +27,20 @@ import java.util.regex.Pattern;
 public class MapBuilder {
 
 	final File mapFolder = new File("./MapFiles");
-
+	/**
+	 * continentList
+	 */
 	private Map<Integer, Continent> continentList = new HashMap<Integer, Continent>(); // continentId=> continentName,
 																						// continentValue,
 																						// continentColor
+	/**
+	 * 		countryAdjacency																		
+	 */
 	private AdjacencyList countryAdjacency = new AdjacencyList();
-	
+
 	/**
 	 * This method will return list of continents
+	 * 
 	 * @return continentList
 	 */
 	public Map<Integer, Continent> getContinentList() {
@@ -67,7 +73,9 @@ public class MapBuilder {
 
 	/**
 	 * This method adds a new continent
-	 *@param continent object of Conintent class
+	 * 
+	 * @param continent
+	 *            object of Conintent class
 	 */
 
 	public void addContinent(Continent continent) {
@@ -76,7 +84,8 @@ public class MapBuilder {
 
 	/**
 	 * This method removes a continent
-	 *@param continentid
+	 * 
+	 * @param continentid
 	 */
 	public void removeContinent(int continentId) {
 		continentList.remove(continentId);
@@ -113,33 +122,42 @@ public class MapBuilder {
 		}
 	}
 
+	/**
+	 * 
+	 * @param countryId
+	 * @return
+	 */
 	public Country getCountry(int countryId) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
 			int continentId = (int) continentMap.getKey();
 			Continent c = continentList.get(continentId);
-			Country country=c.getCountry(countryId);
-			if(country!=null) {
-			return country;
+			Country country = c.getCountry(countryId);
+			if (country != null) {
+				return country;
 			}
 		}
 		return null;
 	}
+
 	/**
 	 * This method will add a new country in adjacency list of country
-	 *@param countryId
-	 *@param targetCountryId
+	 * 
+	 * @param countryId
+	 * @param targetCountryId
 	 */
 	public void addCountryAdjacency(int countryId, int targetCountryId) {
-		  countryAdjacency.addEdge(countryId, targetCountryId);
-	  }
+		countryAdjacency.addEdge(countryId, targetCountryId);
+	}
+
 	/**
 	 * This method shows country adjacency list
 	 */
 	public void showCountryAdjacency() {
-		countryAdjacency.showListEdges();		
+		countryAdjacency.showListEdges();
 	}
+
 	/**
 	 * This method reads the map files
 	 */
@@ -199,7 +217,7 @@ public class MapBuilder {
 		if (matcher.find()) {
 			countryLines = matcher.group(0);
 		}
-//		       System.out.println(countryLines);
+		// System.out.println(countryLines);
 		patternString = "(((\\d)*)\\s(([\\w\\_\\-])*)\\s((\\d)*)\\s((\\d)*)\\s((\\d)*)\\s)";
 		pattern = Pattern.compile(patternString);
 		matcher = pattern.matcher(countryLines);
@@ -210,7 +228,8 @@ public class MapBuilder {
 		int continentId = 0;
 		int countryL1 = 0;
 		int countryL2 = 0;
-//		 System.out.println("Found "+matcher.groupCount()+" group for countries\n-------------\n");
+		// System.out.println("Found "+matcher.groupCount()+" group for
+		// countries\n-------------\n");
 		while (matcher.find()) {
 			count++;
 			countryDetail = matcher.group();
@@ -236,37 +255,32 @@ public class MapBuilder {
 		if (matcher.find()) {
 			borders = matcher.group(0);
 		}
-	//	System.out.println("\n--"+borders+"--\n");
+		// System.out.println("\n--"+borders+"--\n");
 		patternString = "((\\d+) (([\\d ])+))";
 		pattern = Pattern.compile(patternString);
 		matcher = pattern.matcher(borders);
 		count = 0;
 		countryId = 0;
-		String adjCountries="";
-//						 System.out.println("Found "+matcher.groupCount()+" group for countries\n-------------\n");
+		String adjCountries = "";
+		// System.out.println("Found "+matcher.groupCount()+" group for
+		// countries\n-------------\n");
 		while (matcher.find()) {
 			count++;
 			countryDetail = matcher.group();
 			countryId = Integer.parseInt(matcher.group(2));
 			String adjCountriesContent = matcher.group(3);
-			System.out.println("\nFound countryId=" + countryId+" Adj="+adjCountriesContent);
-			Country c= getCountry(countryId);
-			System.out.println("Add Adj for "+c.getCountryName());
-			String[] arrOfAdj = adjCountriesContent.split(" "); 	  
-	        for (String adj : arrOfAdj) 
-	        	addCountryAdjacency(countryId, Integer.parseInt(adj));
+			System.out.println("\nFound countryId=" + countryId + " Adj=" + adjCountriesContent);
+			Country c = getCountry(countryId);
+			System.out.println("Add Adj for " + c.getCountryName());
+			String[] arrOfAdj = adjCountriesContent.split(" ");
+			for (String adj : arrOfAdj)
+				addCountryAdjacency(countryId, Integer.parseInt(adj));
 		}
-		
-		
-		
+
 		System.out.println("-------------------------------");
 
 	}
 
-	
-	
-	
-	
 	public String mapFormat(String fileName) {
 		String mapCountries = "";
 		String mapContent = "name " + fileName + " Map\r\n" + "\r\n" + "[files]\r\n" + "\r\n" + "[continents]\r\n";
