@@ -11,6 +11,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 * This class is made to implement neighbours of countries
 */
 public class AdjacencyList {
+	/**
+	 * This is private adjacencyList object of HashMap
+	 */
 
 	private Map<Integer, ArrayList<Integer>> adjacencyList = new HashMap<Integer, ArrayList<Integer>>();
 
@@ -25,13 +28,27 @@ public class AdjacencyList {
 
 	}
 
+	/**
+	 * 
+	 * @return adjacencyList
+	 */
+
 	public Map<Integer, ArrayList<Integer>> getAdjacencyList() {
 		return adjacencyList;
 	}
+
+	/**
+	 * 
+	 * @param adjacencyList
+	 */
+
         
+
 	public void setAdjacencyList(Map<Integer, ArrayList<Integer>> adjacencyList) {
 		this.adjacencyList = adjacencyList;
 	}
+
+	
         /**
 	 * This method removes a vertex
 	 * 
@@ -42,18 +59,18 @@ public class AdjacencyList {
 		adjacencyList.remove(id);
 
 	}
-	////
+
         /**
 	 * This method adds an edge.
 	 * 
 	 * @param id 
 	 */
 	public void addEdge(int start, int end) {
-		System.out.println("Add Edge between "+start+" to "+end);
-		
+		System.out.println("Add Edge between " + start + " to " + end);
+
 		List<Integer> list;
 		list = adjacencyList.get(start);
-		
+
 		if (!list.contains(end)) {
 			list.add(end);
 		}
@@ -62,7 +79,7 @@ public class AdjacencyList {
 		if (!list.contains(start)) {
 			list.add(start);
 		}
-		
+
 	}
         /**
 	 * This method removes an edge.
@@ -115,16 +132,23 @@ public class AdjacencyList {
 		} else
 			System.out.println("there is no key");
 	}
-         /**
+
+     /**
 	 * This method shows list of edges
 	 */
 	public void showListEdges() {
 		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet())
-			//System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-			System.out.println("Key="+ entry.getKey() +" Adj = " + entry.getValue());
+			// System.out.println("Key = " + entry.getKey() + ", Value = " +
+			// entry.getValue());
+			System.out.println("Key=" + entry.getKey() + " Adj = " + entry.getValue());
 
 	}
 
+	/**
+	 * test the methods here
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		AdjacencyList test = new AdjacencyList();
@@ -140,6 +164,6 @@ public class AdjacencyList {
 		test.removeEdge(45, 555);
 		test.showListEdges();
 	}
-	//
+	
 
 }
