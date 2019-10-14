@@ -106,7 +106,6 @@ public class AdjacencyList {
 
 				}
 				counter++;
-				System.out.println(a);
 			}
 
 		} else
@@ -126,7 +125,6 @@ public class AdjacencyList {
 					break;
 				}
 				counter++;
-				System.out.println(a);
 			}
 
 		} else

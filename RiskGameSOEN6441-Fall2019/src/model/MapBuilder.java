@@ -205,10 +205,23 @@ public class MapBuilder {
 	 * @param countryId
 	 * @param targetCountryId
 	 */
-	public void addCountryAdjacency(int countryId, int targetCountryId) {
-		countryAdjacency.addEdge(countryId, targetCountryId);
+	public void addCountryAdjacency(int countryId, int neighborCountryId) {
+		countryAdjacency.addEdge(countryId, neighborCountryId);
+	}
+	
+	public void addCountryAdjacency(String countryName, String neighborCountryName) {
+		Country country = getCountryByName(countryName);
+		Country neighborCountry = getCountryByName(neighborCountryName);
+		countryAdjacency.addEdge(country.getCountryId(), neighborCountry.getCountryId());
 	}
 
+	public void removeCountryAdjacency(String countryName, String neighborCountryName) {
+		Country country = getCountryByName(countryName);
+		Country neighborCountry = getCountryByName(neighborCountryName);
+		countryAdjacency.removeEdge(country.getCountryId(), neighborCountry.getCountryId());
+	}
+	
+	
 	/**
 	 * This method shows country adjacency list
 	 */

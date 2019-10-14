@@ -108,6 +108,29 @@ public class DriverTest {
 				isValidCommand = true;
 			}
 
+			// add neighbor
+			regex = "editneighbor -add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*)";
+			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+			matcher = pattern.matcher(input);
+			if (matcher.find()) {
+				String countryName = matcher.group(1);
+				String neighborCountryName = matcher.group(2);
+				mapBuild.addCountryAdjacency(countryName, neighborCountryName);
+				isValidCommand = true;
+			}
+			
+			
+			// remove neighbor
+						regex = "editneighbor -remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*)";
+						pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+						matcher = pattern.matcher(input);
+						if (matcher.find()) {
+							String countryName = matcher.group(1);
+							String neighborCountryName = matcher.group(2);
+							mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
+							isValidCommand = true;
+						}
+
 			// show map
 			regex = "showmap";
 			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
@@ -310,6 +333,6 @@ public class DriverTest {
  * 
  * }
  * 
-
+ * 
  * 
  */
