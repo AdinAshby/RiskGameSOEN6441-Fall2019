@@ -66,19 +66,16 @@ public class Continent {
 	    return null;
 	}
 	
-	
-	
-/*	
-	public void addContinentAdjacency( int end) {
-		continentAdjacency.addEdge(continentId, end);
+	public Country getCountry(String countryName) {
+		for (Country country : countryList) {
+	        if (country.getCountryName().equals(countryName)) {
+	            return country;
+	        }
+	    }
+	    return null;
 	}
-
 	
-	public void showContinentAdjacency() {
-		
-		continentAdjacency.showListEdges();
-	}
-*/	
+	
 	/**
 	 * This methods adds a new country in the exisiting countery list
 	 * @param c as Country
