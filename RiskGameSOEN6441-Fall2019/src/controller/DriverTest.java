@@ -310,20 +310,6 @@ public class DriverTest {
  * 
  * }
  * 
- * /*
- * 
- * System.out.println("SOEN 6441_Project"+"\n" + "Domination");
- * System.out.println("__.__.__.__.__.__.__.__.__.__.__.__.__.__.__"+"\n");
- * System.out.println("Please choose an Item : "+"\n");
- * System.out.println("1- Edit Continent"+"\n");
- * System.out.println("2- Edit Country"+"\n");
- * System.out.println("3- Edit Neighbor"+"\n");
- * System.out.println("4- Show Map");
- * 
- * System.out.println("__.__.__.__.__.__.__.__.__.__.__.__.__.__.__"+"\n");
- * System.out.println("i- Load Map"); System.out.println("ii- Save Map");
- * System.out.println("iii- Edit Map"); System.out.println("iv- Validate Map");
- * System.out.println("v- gameplayer"+"\n");
- * System.out.println("__.__.__.__.__.__.__.__.__.__.__.__.__.__.__"+"\n");
+
  * 
  */

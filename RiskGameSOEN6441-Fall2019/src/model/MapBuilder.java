@@ -349,7 +349,11 @@ public class MapBuilder {
 		}
 		return true;
 	}
-
+/**
+ * 
+ * @param fileName
+ * @return
+ */
 	public String mapFormat(String fileName) {
 		String mapCountries = "";
 		String mapContent = "name " + fileName + " Map\r\n" + "\r\n" + "[files]\r\n" + "\r\n" + "[continents]\r\n";

@@ -44,7 +44,10 @@ public class Continent {
 	public String getContinentName() {
 		return name;
 	}
-
+/**
+ * 
+ * @param name
+ */
 	public void setContinentName(String name) {
 		this.name = name;
 	}
