@@ -23,6 +23,38 @@ public class DriverTest {
 
 	public static void main(String[] args) throws Exception {
 
+		
+		
+		
+//		System.out.println("SOEN 6441_Project" + "\n" + "Domination");
+//		System.out.println("__.__.__.__.__.__.__.__.__.__.__.__.__.__.__" + "\n");
+//		System.out.println("Please choose an Item below : " + "\n");
+//		System.out.println("1- Load a Map" + "\n");
+//		System.out.println("2- Create a new Map" + "\n");
+//		System.out.println("3- Exit" + "\n");
+////
+//		int input = in.nextInt();
+//		for (int i = 1; i <= input; i++) {
+//			if (input == 1) {
+////
+//				System.out.println("Do you want to edit the Map" + "\n");
+//				String replyToeditMap = in.next();
+//				replyToeditMap.toUpperCase();
+//
+//				try {
+////
+//					if ((replyToeditMap.equals("yes")) || (replyToeditMap.equals("y"))) {
+////
+//						System.out.println("	Please choose an Item below " + "\n");
+//						System.out.println("	1- Edit Continent" + "\n");
+//						System.out.println("	2- Edit Country" + "\n");
+//						System.out.println("	3- Edit Neighbor" + "\n");
+//						System.out.println("	4- Show Map");
+//					}
+//
+//					BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//
+//					String inputEditString = br.readLine();
 		// List<Continent> continets = new LinkedList<Continent>();
 		Scanner in = new Scanner(System.in);
 		MapBuilder mapBuild = new MapBuilder();
@@ -32,16 +64,6 @@ public class DriverTest {
 		
 		mapBuild.printContinentList();
 		System.exit(0);
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		Continent continent1 = new Continent("NorthAmerica", 55);
