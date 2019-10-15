@@ -33,6 +33,18 @@ public class AdjacencyList {
 		return adjacencyList.size();
 	}
 	
+	public ArrayList<Integer> getKeys() {
+		ArrayList<Integer> keys= new ArrayList<Integer>();
+		for ( Integer key : adjacencyList.keySet() ) {
+			keys.add(key);
+		}
+		return keys;
+	}
+	
+	public ArrayList<Integer> getValues(int key) {
+		return adjacencyList.get(key);
+	}
+	
 	/**
 	 * 
 	 * @return adjacencyList

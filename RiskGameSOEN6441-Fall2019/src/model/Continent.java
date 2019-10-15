@@ -138,6 +138,23 @@ public class Continent {
 		System.out.println("------------------------");
 
 	}
+	
+	public ArrayList<String> getCountryListNames() {
+
+		ArrayList<String> countries=new ArrayList<String>();
+		
+		ListIterator list_Iter = countryList.listIterator();
+		while (list_Iter.hasNext()) {
+
+			Country country = (Country) list_Iter.next();
+			countries.add(country.getCountryName());
+			
+			
+		}
+
+		return countries;
+
+	}
 
 
 }

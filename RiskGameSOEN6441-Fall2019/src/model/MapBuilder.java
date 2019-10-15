@@ -56,21 +56,13 @@ public class MapBuilder {
 		this.continentList = continentList;
 	}
 
-	/**
-	 * 
-	 * @return size of the continent List
-	 */
 	public int getContinentListSize() {
 		return continentList.size();
 
 	}
 
-	/**
-	 * 
-	 * @return size of the Country Adjacency
-	 */
 	public int getCountryListSize() {
-		// System.out.println("Size:" + countryAdjacency.getSize());
+	//	System.out.println("Size:" + countryAdjacency.getSize());
 		return countryAdjacency.getSize();
 
 	}
@@ -85,12 +77,6 @@ public class MapBuilder {
 		return continentName;
 	}
 
-	/**
-	 * 
-	 * @param continentId,
-	 *            create an object of continent and return it
-	 * @return continent
-	 */
 	public Continent getContinent(int continentId) {
 
 		Continent continent = continentList.get(continentId);
@@ -100,20 +86,13 @@ public class MapBuilder {
 	/**
 	 * This method adds a new continent
 	 * 
-	 * @param continent
-	 *            object of Conintent class
+	 * @param continent object of Conintent class
 	 */
 
 	public void addContinent(Continent continent) {
 		continentList.put(continent.getContinentId(), continent);
 	}
 
-	/**
-	 * 
-	 * @param continentName
-	 * @param continentValue
-	 *            add continent show the name of the continent added
-	 */
 	public void addContinent(String continentName, int continentValue) {
 		Continent continent = new Continent(continentName, continentValue);
 		continentList.put(continent.getContinentId(), continent);
@@ -122,7 +101,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method removes continent by id show the name of the continent removed
+	 * This method removes a continent
 	 * 
 	 * @param continentid
 	 */
@@ -138,12 +117,6 @@ public class MapBuilder {
 
 	}
 
-	/**
-	 * This method removes continent by name show the name of the continent removed
-	 * 
-	 * @param continentName
-	 */
-
 	public void removeContinent(String continentName) {
 		Continent continent = getContinent(continentName);
 		List<Country> countries = continent.getCountriesList();
@@ -155,10 +128,6 @@ public class MapBuilder {
 		System.out.println("CONTINENT " + continentName.toUpperCase() + " removed ");
 	}
 
-	/**
-	 * @param continentName
-	 * @return
-	 */
 	public Continent getContinent(String continentName) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
@@ -190,6 +159,7 @@ public class MapBuilder {
 					+ continent.getContinentId() + " , continent value is " + continent.getContinentControlValue());
 			// continent.showContinentAdjacency();
 			continent.printCountryList();
+		//	System.out.println(continent.getCountryListNames());
 		}
 		System.out.println("[borders]");
 		System.out.println(showCountryAdjacency());
@@ -210,7 +180,7 @@ public class MapBuilder {
 	/**
 	 * 
 	 * @param countryId
-	 * @return country if it can find
+	 * @return
 	 */
 	public Country getCountryById(int countryId) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
@@ -225,12 +195,22 @@ public class MapBuilder {
 		}
 		return null;
 	}
+	
+	public String getCountryNameById(int countryId) {
+		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+			int continentId = (int) continentMap.getKey();
+			Continent c = continentList.get(continentId);
+			Country country = c.getCountry(countryId);
+			if (country != null) {
+				return country.getCountryName();
+			}
+		}
+		System.out.println("Country Not Found "+countryId);
+		return null;
+	}
 
-	/**
-	 * 
-	 * @param countryName
-	 * @return country if it can find
-	 */
 	public Country getCountryByName(String countryName) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
@@ -245,18 +225,13 @@ public class MapBuilder {
 		return null;
 	}
 
-	/**
-	 * 
-	 * @param countryName
-	 * @return continent if it can find country
-	 */
 	public Continent getContinentByCountryName(String countryName) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
 			int continentId = (int) continentMap.getKey();
 			Continent continent = continentList.get(continentId);
-			System.out.println("Searching in " + continent.getContinentName());
+			//System.out.println("Searching in " + continent.getContinentName());
 			Country country = continent.getCountry(countryName);
 
 			if (country != null) {
@@ -277,14 +252,6 @@ public class MapBuilder {
 
 	}
 
-	/**
-	 * It add Country Adjacency and print the name of the neighbor Country who added
-	 * to the country
-	 * 
-	 * @param countryName
-	 * @param neighborCountryName
-	 */
-
 	public void addCountryAdjacency(String countryName, String neighborCountryName) {
 		Country country = getCountryByName(countryName);
 		Country neighborCountry = getCountryByName(neighborCountryName);
@@ -292,13 +259,6 @@ public class MapBuilder {
 		System.out.println(neighborCountryName.toLowerCase() + " added to the " + countryName);
 	}
 
-	/**
-	 * It remove Country Adjacency and print the name of the neighbor Country who added
-	 * to the country
-	 * 
-	 * @param countryName
-	 * @param neighborCountryName
-	 */
 	public void removeCountryAdjacency(String countryName, String neighborCountryName) {
 		Country country = getCountryByName(countryName);
 		Country neighborCountry = getCountryByName(neighborCountryName);
@@ -447,7 +407,7 @@ public class MapBuilder {
 
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found");
-		} catch (Exception e) {
+		}catch(Exception e) {
 			System.out.println("Map is invalid");
 		}
 		validateMap();
@@ -517,23 +477,54 @@ public class MapBuilder {
 		boolean isValid = true;
 		if (getContinentListSize() < 2) {
 			isValid = false;
-			System.out.println("	Continents are less than 2");
+			System.out.println("Continents are less than 2");
 		}
 		if (getCountryListSize() < 2) {
 			isValid = false;
-			System.out.println("	Countries are less than 2");
+			System.out.println("Countries are less than 2");
 		}
 		if (!countryAdjacency.isConnected()) {
 			isValid = false;
-			System.out.println("	Is not a connected graph");
+			System.out.println("Is not a connected graph");
 		}
 
-		if (isValid) {
-			System.out.println("Map is valid");
-		} else {
-			System.out.println("Map is invalid");
-		}
+		
+		
+		if(isValid) {System.out.println("Map is valid");}else {System.out.println("Map is invalid");}
 		return isValid;
 	}
 
+	public ArrayList<String> getCountryListNames(String continentName) {
+		Continent continent= getContinent(continentName);
+		ArrayList<String> countries=new ArrayList<String>();
+		countries=continent.getCountryListNames();
+		return countries;
+	}
+	
+	public String getContinentOfCountry(String countryName) {
+		Continent continent=getContinentByCountryName(countryName);
+		return continent.getContinentName();
+	}
+	
+	public HashMap<String,ArrayList<String>> getListOfBorders(){
+//		 Map<String, ArrayList<String>> borders= new HashMap<String, ArrayList<String>>();
+//		Iterator hmIterator = ((Map) countryAdjacency).entrySet().iterator(); 
+//		while (hmIterator.hasNext()) { 
+//            Map.Entry mapElement = (Map.Entry)hmIterator.next();
+//            ArrayList<String> countries=(ArrayList<String>) mapElement.getValue();
+//            borders.put(getCountryById(Integer.parseInt((String) mapElement.getKey())).getCountryName(), countries);
+//        }
+		HashMap<String, ArrayList<String>> borders = new HashMap<String, ArrayList<String>>() ;
+		ArrayList<Integer> keys=countryAdjacency.getKeys();
+		for(int key: keys) {
+			String countryName=getCountryNameById(key);
+			ArrayList<Integer> countries=countryAdjacency.getValues(key);
+			ArrayList<String> borderNames=new ArrayList<String>();
+			for(int countryId: countries) {
+				borderNames.add(getCountryNameById(countryId));
+			}
+			borders.put(countryName, borderNames );
+		}
+		return borders; 
+	}
 }
