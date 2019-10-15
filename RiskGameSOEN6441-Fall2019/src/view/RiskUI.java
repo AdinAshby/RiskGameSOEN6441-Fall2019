@@ -37,7 +37,19 @@ public class RiskUI {
 		String countryNamePlaceArmyCommand;
 		int numberPlaceArmyCommand;
 		boolean startupWhileStatus = true;
-		
+
+		String reinforceCommand;
+		String countryNameReinforce;
+		int numberReinforce;
+		boolean reinforceWhileStatus = true;
+
+		String fortifyCommands;
+		String fromCountryFortify;
+		String toCountryFortify;
+		String noneFortify;
+		int numberFortify;
+		boolean fortifyWhileStatus = true;
+
 
 		while(editMapWhileStatus) {
 
@@ -144,7 +156,7 @@ public class RiskUI {
 						while (scanner.hasNext()) {
 							countryNamePlaceArmyCommand = scanner.next();
 							numberPlaceArmyCommand = scanner.nextInt();
-							
+
 						}
 					else 
 						System.out.println("Your command is not valid! Try again...\\n");
@@ -164,11 +176,51 @@ public class RiskUI {
 				}	
 			}
 		}
-		
+
 		System.out.println(reinforceRequestingMessage);
-		
-		
+
+		for(int i = 0; i < ...; i++) {
+
+			System.out.println("Player" + ...);
+			reinforceWhileStatus = true;
+
+			while(reinforceWhileStatus) {
+				System.out.println("You have -" + ... + "- army(ies) to place!");
+				reinforceCommand = scanner.next();
+
+				if(reinforceCommand.equalsIgnoreCase("reinforce")) {
+					if (scanner.hasNext()) 
+						while (scanner.hasNext()) {
+							countryNameReinforce = scanner.next();
+							numberReinforce= scanner.nextInt();
+
+						}
+				} else 
+					System.out.println("Your command is not valid! Try again...\\n");
+			}	
+		}
+
 		System.out.println(fortifyRequestingMessage);
-		
+
+		for(int i = 0; i < ...; i++) {
+
+			System.out.println("Player" + ...);
+			fortifyWhileStatus = true;
+
+			while(fortifyWhileStatus) {
+				fortifyCommands = scanner.next();
+
+				if (fortifyCommands.equalsIgnoreCase("fortify")) {
+					noneFortify = scanner.next();
+					if (noneFortify.equalsIgnoreCase("none")) {
+						fortifyWhileStatus = false;
+					} else {
+						fromCountryFortify = noneFortify;
+						toCountryFortify = scanner.next();
+						numberFortify = scanner.nextInt();	
+					}
+				}
+			}
+		}
 	}
 }
