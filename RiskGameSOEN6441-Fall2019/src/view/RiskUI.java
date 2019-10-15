@@ -22,6 +22,12 @@ public class RiskUI {
 	private String fortifyRequestingMessage = "Let's fortify! or type in \"fortify none\" if you don't want to.\n";
 
 	private Scanner scanner;
+	private String input;
+	
+	private String regex;
+	private Pattern pattern;
+	private Matcher matcher;
+	
 
 	public RiskUI() {
 		scanner = new Scanner(System.in);
@@ -31,53 +37,45 @@ public class RiskUI {
 
 
 		MapBuilder mapBuild = new MapBuilder();
-		String regex;
-		Pattern pattern;
-		Matcher matcher;
+		
 		boolean isValidCommand = false;
 		String mapFileName = null;
 
 		String editMapAnswer;
-		boolean finishEditing = false;
 
-		boolean finishLoading = false;
-
-		boolean finishAddOrRemovePlayer = false;
-
-		boolean finishStartup = false;
-
-		boolean finishReinforce = false;
-
-		boolean finishFortify = false;
+		boolean finished = false;
 
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
 		editMapAnswer = scanner.next();
+
 		while (true) {
 			if(editMapAnswer.equalsIgnoreCase("Y")) {
-				while(!finishEditing) {
+				while(!finished) {
 					System.out.println(editMapRequestingMessage);
 
 
 					isValidCommand = false;
-					String input = scanner.nextLine();
+					readInput();
 
 					// editmap filename
 					regex = "editmap ([\\w*\\_\\-]*)";
-					pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-					matcher = pattern.matcher(input);
-					if (matcher.find()) {
-						mapFileName = matcher.group(1);
+					setPattern(regex);
+					setMatcher(input);
+	
+					if (getMatcher().find()) {
+						mapFileName = getMatcher().group(1);
 						mapBuild.loadMap(mapFileName);
 						isValidCommand = true;
 					}
 
 					// continent -add
 					regex = "editcontinent -add ([\\w*\\_\\-]*) (\\d*)";
-					pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-					matcher = pattern.matcher(input);
-					if (matcher.find()) {
+					setPattern(regex);
+					setMatcher(input);
+					
+					if (getMatcher().find()) {
 						String continentName = matcher.group(1);
 						int continentValue = Integer.parseInt(matcher.group(2));
 						mapBuild.addContinent(continentName, continentValue);
@@ -137,7 +135,7 @@ public class RiskUI {
 						isValidCommand = true;
 					}
 
-					// Showmap
+					// showmap
 					regex = "showmap";
 					pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 					matcher = pattern.matcher(input);
@@ -181,7 +179,7 @@ public class RiskUI {
 					// finishediting
 					regex = "finishediting";
 					if (input.equalsIgnoreCase(regex)) {
-						finishEditing = true;
+						finished = true;
 						isValidCommand = true;
 					}
 
@@ -191,10 +189,11 @@ public class RiskUI {
 				}
 			} else if (editMapAnswer.equalsIgnoreCase("N")) {
 				System.out.println(loadMapRequestingMessage);
+				finished = false;
 
-				while (!finishLoading) {
+				while (!finished) {
 					isValidCommand = false;
-					String input = scanner.nextLine();
+					readInput();
 
 					// loadmap filename
 					regex = "loadmap ([\\w*\\_\\-]*)";
@@ -204,7 +203,7 @@ public class RiskUI {
 					if (matcher.find()) {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
-						finishLoading = true;
+						finished = true;
 						mapBuild.loadMap(mapFileName);
 					}
 
@@ -214,11 +213,12 @@ public class RiskUI {
 				}
 
 				System.out.println(addOrRemovePlayersRequestingMessage);
+				finished = false;
 
-				while(!finishAddOrRemovePlayer) {
+				while(!finished) {
 
 					isValidCommand = false;
-					String input = scanner.nextLine();
+					readInput();
 
 					// gameplayer -add
 					regex = "gameplayer -add ([\\w*\\_\\-]*)";
@@ -246,7 +246,7 @@ public class RiskUI {
 					matcher = pattern.matcher(input);
 					if (matcher.find()) {
 						isValidCommand = true;
-						finishAddOrRemovePlayer = true;
+						finished = true;
 						mapBuild.validateMap();
 
 					}
@@ -258,10 +258,10 @@ public class RiskUI {
 
 				System.out.println(startupRequestingMessage);
 
-				while(!finishStartup) {
+				while(!finished) {
 
 					isValidCommand = false;
-					String input = scanner.nextLine();
+					readInput();
 
 					// placearmy
 					regex = "placearmy ([\\w*\\_\\-]*) (\\d*)";
@@ -280,7 +280,7 @@ public class RiskUI {
 					matcher = pattern.matcher(input);
 					if (matcher.find()) {
 						isValidCommand = true;
-						finishStartup = true;
+						finished = true;
 						mapBuild.validateMap();
 					}
 
@@ -290,11 +290,12 @@ public class RiskUI {
 				}
 
 				System.out.println(reinforceRequestingMessage);
+				finished = false;
 
-				while(!finishReinforce) {
+				while(!finished) {
 
 					isValidCommand = false;
-					String input = scanner.nextLine();
+					readInput();
 
 					// reinforce countryname num
 					regex = "reinforce ([\\w*\\_\\-]*) (\\d*)";
@@ -313,11 +314,12 @@ public class RiskUI {
 				}
 
 				System.out.println(fortifyRequestingMessage);
-
-				while(!finishFortify) {
+				finished = false;
+				
+				while(!finished) {
 
 					isValidCommand = false;
-					String input = scanner.nextLine();
+					readInput();
 
 					// fortify fromcountry tocountry num
 					regex = "fortify ([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d*)";
@@ -335,7 +337,7 @@ public class RiskUI {
 
 					if (input.equalsIgnoreCase(regex)) {
 						isValidCommand = true;
-						finishFortify = true;
+						finished = true;
 					}
 
 					if (!isValidCommand) {
@@ -346,8 +348,22 @@ public class RiskUI {
 		}
 	}
 
-
-
+	public void readInput() {
+		this.input = scanner.nextLine();
+	}
+	
+	public void setPattern(String regex) {
+		this.pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+	}
+	
+	public void setMatcher(String input) {
+		this.matcher = pattern.matcher(input);
+	}
+	
+	public Matcher getMatcher() {
+		return this.matcher;
+	}
+	
 
 	/*String editMapYesOrNoAnswer;
 		boolean editMapWhileStatus = true;
