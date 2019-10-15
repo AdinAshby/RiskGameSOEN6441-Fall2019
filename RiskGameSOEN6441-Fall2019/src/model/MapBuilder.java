@@ -56,13 +56,21 @@ public class MapBuilder {
 		this.continentList = continentList;
 	}
 
+	/**
+	 * 
+	 * @return size of the continent List
+	 */
 	public int getContinentListSize() {
 		return continentList.size();
 
 	}
 
+	/**
+	 * 
+	 * @return size of the Country Adjacency
+	 */
 	public int getCountryListSize() {
-	//	System.out.println("Size:" + countryAdjacency.getSize());
+		// System.out.println("Size:" + countryAdjacency.getSize());
 		return countryAdjacency.getSize();
 
 	}
@@ -77,6 +85,12 @@ public class MapBuilder {
 		return continentName;
 	}
 
+	/**
+	 * 
+	 * @param continentId,
+	 *            create an object of continent and return it
+	 * @return continent
+	 */
 	public Continent getContinent(int continentId) {
 
 		Continent continent = continentList.get(continentId);
@@ -86,13 +100,20 @@ public class MapBuilder {
 	/**
 	 * This method adds a new continent
 	 * 
-	 * @param continent object of Conintent class
+	 * @param continent
+	 *            object of Conintent class
 	 */
 
 	public void addContinent(Continent continent) {
 		continentList.put(continent.getContinentId(), continent);
 	}
 
+	/**
+	 * 
+	 * @param continentName
+	 * @param continentValue
+	 *            add continent show the name of the continent added
+	 */
 	public void addContinent(String continentName, int continentValue) {
 		Continent continent = new Continent(continentName, continentValue);
 		continentList.put(continent.getContinentId(), continent);
@@ -101,7 +122,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method removes a continent
+	 * This method removes continent by id show the name of the continent removed
 	 * 
 	 * @param continentid
 	 */
@@ -117,6 +138,12 @@ public class MapBuilder {
 
 	}
 
+	/**
+	 * This method removes continent by name show the name of the continent removed
+	 * 
+	 * @param continentName
+	 */
+
 	public void removeContinent(String continentName) {
 		Continent continent = getContinent(continentName);
 		List<Country> countries = continent.getCountriesList();
@@ -128,6 +155,10 @@ public class MapBuilder {
 		System.out.println("CONTINENT " + continentName.toUpperCase() + " removed ");
 	}
 
+	/**
+	 * @param continentName
+	 * @return
+	 */
 	public Continent getContinent(String continentName) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
@@ -179,7 +210,7 @@ public class MapBuilder {
 	/**
 	 * 
 	 * @param countryId
-	 * @return
+	 * @return country if it can find
 	 */
 	public Country getCountryById(int countryId) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
@@ -195,6 +226,11 @@ public class MapBuilder {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param countryName
+	 * @return country if it can find
+	 */
 	public Country getCountryByName(String countryName) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
@@ -209,6 +245,11 @@ public class MapBuilder {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param countryName
+	 * @return continent if it can find country
+	 */
 	public Continent getContinentByCountryName(String countryName) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
@@ -236,6 +277,14 @@ public class MapBuilder {
 
 	}
 
+	/**
+	 * It add Country Adjacency and print the name of the neighbor Country who added
+	 * to the country
+	 * 
+	 * @param countryName
+	 * @param neighborCountryName
+	 */
+
 	public void addCountryAdjacency(String countryName, String neighborCountryName) {
 		Country country = getCountryByName(countryName);
 		Country neighborCountry = getCountryByName(neighborCountryName);
@@ -243,6 +292,13 @@ public class MapBuilder {
 		System.out.println(neighborCountryName.toLowerCase() + " added to the " + countryName);
 	}
 
+	/**
+	 * It remove Country Adjacency and print the name of the neighbor Country who added
+	 * to the country
+	 * 
+	 * @param countryName
+	 * @param neighborCountryName
+	 */
 	public void removeCountryAdjacency(String countryName, String neighborCountryName) {
 		Country country = getCountryByName(countryName);
 		Country neighborCountry = getCountryByName(neighborCountryName);
@@ -391,7 +447,7 @@ public class MapBuilder {
 
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Map is invalid");
 		}
 		validateMap();
@@ -461,20 +517,22 @@ public class MapBuilder {
 		boolean isValid = true;
 		if (getContinentListSize() < 2) {
 			isValid = false;
-			System.out.println("Continents are less than 2");
+			System.out.println("	Continents are less than 2");
 		}
 		if (getCountryListSize() < 2) {
 			isValid = false;
-			System.out.println("Countries are less than 2");
+			System.out.println("	Countries are less than 2");
 		}
 		if (!countryAdjacency.isConnected()) {
 			isValid = false;
-			System.out.println("Is not a connected graph");
+			System.out.println("	Is not a connected graph");
 		}
 
-		
-		
-		if(isValid) {System.out.println("Map is valid");}else {System.out.println("Map is invalid");}
+		if (isValid) {
+			System.out.println("Map is valid");
+		} else {
+			System.out.println("Map is invalid");
+		}
 		return isValid;
 	}
 
