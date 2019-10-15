@@ -34,6 +34,15 @@ public class DriverTest {
 //		System.out.println("	Stage 0" + "\n");
 
 		MapBuilder mapBuild = new MapBuilder();
+		/* Test of new Functions */
+		mapBuild.loadMap("test");
+		System.out.println("\n-----------------------------\nNew Getter Functions\n-----------------------------");
+		System.out.println(mapBuild.getCountryListNames("asia")); //Get CountryListNames
+		System.out.println(mapBuild.getContinentOfCountry("iran"));
+		System.out.println(mapBuild.getListOfBorders());
+		/* End of Test of new Functions */
+		
+		
 		String regex;
 		Pattern pattern;
 		Matcher matcher;
