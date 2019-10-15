@@ -13,7 +13,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import model.AdjacencyList;
 import model.Continent;
 import model.Country;
@@ -139,21 +138,31 @@ public class DriverTest {
 				isValidCommand = true;
 			}
 
-			
-			
 			// save map
-						regex = "savemap ([\\w*\\_\\-]*)";
-						pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-						matcher = pattern.matcher(input);
-						if (matcher.find()) {
-							mapFileName = matcher.group(1);
-							isValidCommand = true;
-							mapBuild.saveMap(mapFileName);
-						}
+			regex = "savemap ([\\w*\\_\\-]*)";
+			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+			matcher = pattern.matcher(input);
+			if (matcher.find()) {
+				mapFileName = matcher.group(1);
+				isValidCommand = true;
 
-						if (!isValidCommand) {
-							System.out.println("Correct command not found");
-						}
+				mapBuild.saveMap(mapFileName);
+
+			}
+			
+			// validate map
+			regex = "validatemap";
+			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+			matcher = pattern.matcher(input);
+			if (matcher.find()) {
+				isValidCommand = true;
+				mapBuild.validateMap();
+
+			}
+
+			if (!isValidCommand) {
+				System.out.println("Correct command not found");
+			}
 
 		} // while
 

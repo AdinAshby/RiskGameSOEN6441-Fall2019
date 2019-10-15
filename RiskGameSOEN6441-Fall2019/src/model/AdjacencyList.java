@@ -28,6 +28,11 @@ public class AdjacencyList {
 
 	}
 
+	
+	public int getSize() {
+		return adjacencyList.size();
+	}
+	
 	/**
 	 * 
 	 * @return adjacencyList
@@ -150,6 +155,16 @@ public class AdjacencyList {
 		}
 		return listEdges;
 		
+	}
+	
+	public boolean isConnected() {
+		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {
+			ArrayList<Integer> values=entry.getValue();
+			if(values.size()==0) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
