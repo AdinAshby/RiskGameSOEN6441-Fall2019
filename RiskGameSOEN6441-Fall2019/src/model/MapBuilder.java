@@ -58,15 +58,15 @@ public class MapBuilder {
 
 	public int getContinentListSize() {
 		return continentList.size();
-		
+
 	}
-	
+
 	public int getCountryListSize() {
-		System.out.println("Size:"+countryAdjacency.getSize());
+	//	System.out.println("Size:" + countryAdjacency.getSize());
 		return countryAdjacency.getSize();
-		
+
 	}
-	
+
 	/**
 	 * This method reads continent Id
 	 */
@@ -391,7 +391,10 @@ public class MapBuilder {
 
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found");
+		}catch(Exception e) {
+			System.out.println("Map is invalid");
 		}
+		validateMap();
 		return true;
 	}
 
@@ -423,14 +426,14 @@ public class MapBuilder {
 	public void saveMap(String fileName) throws Exception {
 
 		if (validateMap()) {
-		File file = new File(mapFolder + "/" + fileName + ".map");
+			File file = new File(mapFolder + "/" + fileName + ".map");
 
-		BufferedWriter br = new BufferedWriter(new FileWriter(file));
+			BufferedWriter br = new BufferedWriter(new FileWriter(file));
 
-		br.write(mapFormat(fileName));
+			br.write(mapFormat(fileName));
 
-		br.close();
-	}
+			br.close();
+		}
 	}
 
 	public void addCountry(String countryName, String continentName) {
@@ -454,21 +457,25 @@ public class MapBuilder {
 
 	}
 
-public boolean validateMap(){
-boolean isValid=true;
-	if(getContinentListSize()<2) {
-		isValid=false;
-		System.out.println("Continents are less than 2");
+	public boolean validateMap() {
+		boolean isValid = true;
+		if (getContinentListSize() < 2) {
+			isValid = false;
+			System.out.println("Continents are less than 2");
+		}
+		if (getCountryListSize() < 2) {
+			isValid = false;
+			System.out.println("Countries are less than 2");
+		}
+		if (!countryAdjacency.isConnected()) {
+			isValid = false;
+			System.out.println("Is not a connected graph");
+		}
+
+		
+		
+		if(isValid) {System.out.println("Map is valid");}else {System.out.println("Map is invalid");}
+		return isValid;
 	}
-	if(getCountryListSize()<2) {
-		isValid=false;
-		System.out.println("Countries are less than 2");
-	}
-	if(!countryAdjacency.isConnected()) {
-		System.out.println("Is not a connected graph");
-	}
-	
-	return isValid;
-}
 
 }

@@ -177,17 +177,21 @@ public class AdjacencyList {
 		AdjacencyList test = new AdjacencyList();
 
 		test.addVertex(555);
+		System.out.println(test.isConnected());
 		test.addVertex(622);
 		test.addVertex(8686);
 		test.addVertex(45);
 		test.addEdge(555, 8686);
 		test.addEdge(622, 8686);
+		System.out.println(test.isConnected());
 		test.addEdge(45, 555);
+		System.out.println(test.isConnected());
 		System.out.println(test.showListEdges());
 		test.removeEdge(45, 555);
 		System.out.println(test.showListEdges());
 		test.removeVertex(555);
 		System.out.println(test.showListEdges());
+		
 	}
 	
 
