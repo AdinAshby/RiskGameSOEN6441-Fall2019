@@ -9,7 +9,7 @@ import model.Player;
  */
 public class TestPlayer {
 	int CountryId[] = {1,2,3,4};
-	int Country_Id[] = {1,2,3,4,35};
+	int CountryId_incorrect[] = {1,2,3,4,35};
     Player player1 = new Player(1, "shehnaz", CountryId);
 	@Test
 	public void testgetPlayerId() {
@@ -26,7 +26,7 @@ public class TestPlayer {
 	public void testgetCountryId()
 	{
 		Assert.assertArrayEquals("country Ids", CountryId, player1.getCountryID());
-		Assert.assertNotSame("Country Ids not same",Country_Id , player1.getCountryID());
+		Assert.assertNotSame("Country Ids not same",CountryId_incorrect , player1.getCountryID());
 	}
 
 }
