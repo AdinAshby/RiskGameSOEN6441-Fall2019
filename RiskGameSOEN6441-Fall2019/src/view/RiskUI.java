@@ -28,6 +28,7 @@ public class RiskUI {
 	private Pattern pattern;
 	private Matcher matcher;
 	
+	private ArrayList<String> playerNames = new ArrayList<String>();
 
 	public RiskUI() {
 		scanner = new Scanner(System.in);
@@ -44,7 +45,8 @@ public class RiskUI {
 		String editMapAnswer;
 
 		boolean finished = false;
-
+		
+		
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
@@ -222,32 +224,32 @@ public class RiskUI {
 
 					// gameplayer -add
 					regex = "gameplayer -add ([\\w*\\_\\-]*)";
-					pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-					matcher = pattern.matcher(input);
-					if (matcher.find()) {
-						String continentName = matcher.group(1);
-						mapBuild.removeContinent(continentName);
+					setPattern(regex);
+					setMatcher(input);
+					if (getMatcher().find()) {
+						String playerName = getMatcher().group(1);
+						playerNames.add(playerName);
 						isValidCommand = true;
 					}
 
 					// gameplayer -remove
 					regex = "gameplayer -remove ([\\w*\\_\\-]*)";
-					pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-					matcher = pattern.matcher(input);
-					if (matcher.find()) {
-						String continentName = matcher.group(1);
-						mapBuild.removeContinent(continentName);
+					setPattern(regex);
+					setMatcher(input);
+					if (getMatcher().find()) {
+						String playerName = getMatcher().group(1);
+						playerNames.remove(playerName);
 						isValidCommand = true;
 					}
 
 					// populatecountries
 					regex = "populatecountries";
-					pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-					matcher = pattern.matcher(input);
-					if (matcher.find()) {
+					setPattern(regex);
+					setMatcher(input);
+					if (getMatcher().find()) {
 						isValidCommand = true;
 						finished = true;
-						mapBuild.validateMap();
+						mapBuild.assigningPlayersToCountries(playerNames);;
 
 					}
 
