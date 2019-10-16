@@ -1,18 +1,28 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import Model.Map;
 import controller.RiskController;
+import model.Continent;
 import model.Country;
+import model.MapBuilder;
 import model.Player;
 
 public class MapView {
 
-	public void showMap(List<Country> countriesList) {
+	private MapBuilder theMapBuilder = new MapBuilder();
+
+	public void showMap() {
+
+		Iterator<Entry<Integer, Continent>> iteratorForContinent = theMapBuilder.getContinentList().entrySet().iterator();
+
+
 		String table = "|%-14d|%-16s|%-18d|%-28d|%-15s|%-15s|%n";
 
 		System.out.format(
@@ -22,10 +32,21 @@ public class MapView {
 		System.out.format(
 				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
 
-		for (int i = 0; i < countriesList.size(); i++)
-			System.out.format(table, returnCountryID(countriesList, i), returnCountryName(countriesList, i),
-					returnArmy(countriesList, i), returnContinentName(countriesList, i),
-					Arrays.toString(returnAdjacentCountriesID(countriesList, i)), returnPlayerName(countriesList, i));
+		while (iteratorForContinent.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) iteratorForContinent.next();
+			int continentId = (int) continentMap.getKey();
+			Continent continent = theMapBuilder.getContinentList().get(continentId);
+			ListIterator<Country> listIterator = continent.getCountriesList().listIterator();
+
+			while (listIterator.hasNext()) {
+
+				Country country = (Country) listIterator.next();
+
+				System.out.format(table, country.getCountryId(), country.getCountryName(), continent.getContinentName(), 
+						Arrays.toString(country.getAdjacentCountriesID()), country.getArmies(), country.getPlayerName());
+
+			}
+		}
 
 		System.out.format(
 				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
@@ -112,7 +133,7 @@ public class MapView {
 		return listOfCountries.get(counter).getArmies();
 	}
 
-	public int returnContinentName(List<Country> listOfCountries, int counter) {
+	public String returnContinentName(List<Country> listOfCountries, int counter) {
 		return listOfCountries.get(counter).getContinentName();
 	}
 
@@ -147,7 +168,7 @@ public class MapView {
 
 	public LinkedList<Country> getSpecificCountryAdjacentsForFortification(String playerName,
 			int specificCountryID, List<Country> countriesList){
-		
+
 		Player[] allPlayers = RiskController.getInstance().getPlayers();
 		int[] playerCountries = null;
 
@@ -165,7 +186,7 @@ public class MapView {
 			for (int j = 0; j < returnAdjacentCountriesID(countriesList, i).length; j++)
 				if (returnAdjacentCountriesID(countriesList, i)[j] == specificCountryID)
 					specificCountryAdjacentsForFortification.add(countriesList.get(i));
-		
+
 		for (int i = 0; i < specificCountryAdjacentsForFortification.size(); i++)
 			for (int j = 0; j < playerCountries.length; j++)
 				if (returnCountryID(specificCountryAdjacentsForFortification, i) == playerCountries[j])

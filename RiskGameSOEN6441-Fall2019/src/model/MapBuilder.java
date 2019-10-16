@@ -6,18 +6,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import view.MapView;
 
 /**
  * This is MapBuilder Class to Edit Map
@@ -32,8 +31,8 @@ public class MapBuilder {
 	 * continentList
 	 */
 	private Map<Integer, Continent> continentList = new HashMap<Integer, Continent>(); // continentId=> continentName,
-																						// continentValue,
-																						// continentColor
+	// continentValue,
+	private MapView theMapView;																					// continentColor
 	/**
 	 * countryAdjacency
 	 */
@@ -62,7 +61,7 @@ public class MapBuilder {
 	}
 
 	public int getCountryListSize() {
-	//	System.out.println("Size:" + countryAdjacency.getSize());
+		//	System.out.println("Size:" + countryAdjacency.getSize());
 		return countryAdjacency.getSize();
 
 	}
@@ -149,7 +148,26 @@ public class MapBuilder {
 	 */
 
 	public void showMap() {
-		System.out.println("\nPrint Continent:\n------------------------");
+
+		/*LinkedList<Country> allCountries = new LinkedList<Country>();
+		Iterator<Entry<Integer, Continent>> iteratorForContinent = continentList.entrySet().iterator();
+
+		while (iteratorForContinent.hasNext()) {
+		
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) iteratorForContinent.next();
+			int continentID = (int) continentMap.getKey();
+			Iterator<Country> iteratorForCountry = continentList.get(continentID).getCountriesList().iterator();
+			
+			
+			while(iteratorForCountry.hasNext()) {
+				allCountries.add(iteratorForCountry.next());
+			}
+			
+		} */
+
+		theMapView.showMap();
+
+		/*System.out.println("\nPrint Continent:\n------------------------");
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
@@ -163,7 +181,7 @@ public class MapBuilder {
 		}
 		System.out.println("[borders]");
 		System.out.println(showCountryAdjacency());
-		System.out.println("------------------------\n");
+		System.out.println("------------------------\n"); */
 
 	}
 
@@ -195,7 +213,7 @@ public class MapBuilder {
 		}
 		return null;
 	}
-	
+
 	public String getCountryNameById(int countryId) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
@@ -488,8 +506,8 @@ public class MapBuilder {
 			System.out.println("Is not a connected graph");
 		}
 
-		
-		
+
+
 		if(isValid) {System.out.println("Map is valid");}else {System.out.println("Map is invalid");}
 		return isValid;
 	}
@@ -500,20 +518,20 @@ public class MapBuilder {
 		countries=continent.getCountryListNames();
 		return countries;
 	}
-	
+
 	public String getContinentOfCountry(String countryName) {
-		Continent continent=getContinentByCountryName(countryName);
+		Continent continent = getContinentByCountryName(countryName);
 		return continent.getContinentName();
 	}
-	
+
 	public HashMap<String,ArrayList<String>> getListOfBorders(){
-//		 Map<String, ArrayList<String>> borders= new HashMap<String, ArrayList<String>>();
-//		Iterator hmIterator = ((Map) countryAdjacency).entrySet().iterator(); 
-//		while (hmIterator.hasNext()) { 
-//            Map.Entry mapElement = (Map.Entry)hmIterator.next();
-//            ArrayList<String> countries=(ArrayList<String>) mapElement.getValue();
-//            borders.put(getCountryById(Integer.parseInt((String) mapElement.getKey())).getCountryName(), countries);
-//        }
+		//		 Map<String, ArrayList<String>> borders= new HashMap<String, ArrayList<String>>();
+		//		Iterator hmIterator = ((Map) countryAdjacency).entrySet().iterator(); 
+		//		while (hmIterator.hasNext()) { 
+		//            Map.Entry mapElement = (Map.Entry)hmIterator.next();
+		//            ArrayList<String> countries=(ArrayList<String>) mapElement.getValue();
+		//            borders.put(getCountryById(Integer.parseInt((String) mapElement.getKey())).getCountryName(), countries);
+		//        }
 		HashMap<String, ArrayList<String>> borders = new HashMap<String, ArrayList<String>>() ;
 		ArrayList<Integer> keys=countryAdjacency.getKeys();
 		for(int key: keys) {
