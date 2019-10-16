@@ -114,9 +114,13 @@ public class MapBuilder {
 	 */
 	public void addContinent(String continentName, int continentValue) {
 		Continent continent = new Continent(continentName, continentValue);
-		continentList.put(continent.getContinentId(), continent);
+		if (continent == null) {
+			System.out.println("continent is not found");
+		} else {
+			continentList.put(continent.getContinentId(), continent);
 
-		System.out.println(continentName.toUpperCase() + " added ");
+			System.out.println(continentName.toUpperCase() + " added ");
+		}
 	}
 
 	/**
@@ -144,18 +148,18 @@ public class MapBuilder {
 
 	public void removeContinent(String continentName) {
 		Continent continent = getContinent(continentName);
-		if(continent==null) {
+		if (continent == null) {
 			System.out.println("Continent not found");
-		}else {
-		
-		List<Country> countries = continent.getCountriesList();
-		for (Country c : countries) {
-			System.out.println("Country " + c.getCountryName() + "  removed");
-			countryAdjacency.removeVertex(c.getCountryId());
+		} else {
+
+			List<Country> countries = continent.getCountriesList();
+			for (Country c : countries) {
+				System.out.println("Country " + c.getCountryName() + "  removed");
+				countryAdjacency.removeVertex(c.getCountryId());
+			}
+			continentList.remove(continent.getContinentId());
+			System.out.println("CONTINENT " + continentName.toUpperCase() + " removed ");
 		}
-		continentList.remove(continent.getContinentId());
-		System.out.println("CONTINENT " + continentName.toUpperCase() + " removed ");
-	}
 	}
 
 	/**
@@ -563,23 +567,24 @@ public class MapBuilder {
 			System.out.println("Map is not valid, we can not save it");
 		}
 	}
-/**
- * 
- * @param countryName
- * @param continentName
- */
+
+	/**
+	 * 
+	 * @param countryName
+	 * @param continentName
+	 */
 	public void addCountry(String countryName, String continentName) {
 		Continent continent = getContinent(continentName);
 		Country country = new Country(countryName); // Search if already exist , show error
-		if(continent==null) {
+		if (continent == null) {
 			System.out.println("continent not found");
-		}else if(country==null) {
+		} else if (country == null) {
 			System.out.println("country not found");
-		}else {
-		continent.addCountry(country);
-		
-		System.out.println(countryName.toLowerCase() + " by Id=" + country.getCountryId() + " added to  "
-				+ continentName.toUpperCase());
+		} else {
+			continent.addCountry(country);
+
+			System.out.println(countryName.toLowerCase() + " by Id=" + country.getCountryId() + " added to  "
+					+ continentName.toUpperCase());
 		}
 	}
 
