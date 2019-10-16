@@ -18,6 +18,11 @@ import model.Continent;
 import model.Country;
 import model.MapBuilder;
 
+
+/**
+* this is driver to check the functionality of the code
+*
+*/
 public class DriverTest {
 	// editcontinent -add continentname continentvalue -remove continentname
 	// editcountry -add countryname continentname -remove countryname
