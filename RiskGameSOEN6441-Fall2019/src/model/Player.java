@@ -4,10 +4,9 @@ package model;
  * 
  * This is Player class, in which we define our attributes of a Player.
  *  
- *
  */
 public class Player {
-	 
+	
 	/**
 	 * PlayerName is name of the player corresponding to the ID.
 	 */
@@ -16,7 +15,9 @@ public class Player {
 	/**
 	 * List of all countryIDs that the player owns.
 	 */
-	private int[] countryID;
+	private int[] countryIDs;
+	
+	private int reinforcePlayerArmies;
 	
 	/**
 	 * Player constructor method.
@@ -27,9 +28,9 @@ public class Player {
 	 */
 	public Player(String playerName, int[] countryID) {
 		this.playerName = playerName;
-		this.countryID = countryID;
+		this.countryIDs = countryID;
 	}
-	
+
 	/**
 	 * Getter for PlayerName.
 	 * 
@@ -44,8 +45,8 @@ public class Player {
 	 * 
 	 * @return getCountryID Returns CountryIDs as an array of integers.
 	 */
-	public int[] getCountryID() {
-		return countryID;
+	public int[] getCountryIDs() {
+		return countryIDs;
 	}
 
 	/**
@@ -53,8 +54,15 @@ public class Player {
 	 * 
 	 * @param countriesIDs Sets a list of countriesIDs to the corresponding field.
 	 */
-	public void setCountryID(int[] countriesIDs) {
-		this.countryID = countriesIDs;
+	public void setCountryIDs(int[] countriesIDs) {
+		this.countryIDs = countriesIDs;
+	}
+	
+	public int getReinforcementPlayerArmies() {
+		return this.reinforcePlayerArmies;
 	}
 
+	public void setReinforcementPlayerArmies(int reinforceArmiesNumber) {
+		this.reinforcePlayerArmies = reinforceArmiesNumber;
+	}
 }

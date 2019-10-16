@@ -695,17 +695,17 @@ public class MapBuilder {
 		if (leftOverCountries > 0) {
 			for (Player giveMoreCountriesToPlayer : players) {
 				int randomCountryID = random.nextInt(temporaryCountries.size());
-				int playerCountryCount = giveMoreCountriesToPlayer.getCountryID().length + 1;
-				int[] currentPlayerCountries = giveMoreCountriesToPlayer.getCountryID();
+				int playerCountryCount = giveMoreCountriesToPlayer.getCountryIDs().length + 1;
+				int[] currentPlayerCountries = giveMoreCountriesToPlayer.getCountryIDs();
 				int[] receivedMoreCountriesPlayerCountriesList = new int[playerCountryCount];
 				
-				for (int i = 0; i < giveMoreCountriesToPlayer.getCountryID().length; i++) {
+				for (int i = 0; i < giveMoreCountriesToPlayer.getCountryIDs().length; i++) {
 					receivedMoreCountriesPlayerCountriesList[i] = currentPlayerCountries[i];
 				}
 				
 				int newCountryIDForPlayer = temporaryCountries.get(randomCountryID).getCountryId();
 				receivedMoreCountriesPlayerCountriesList[playerCountryCount - 1] = newCountryIDForPlayer;
-				giveMoreCountriesToPlayer.setCountryID(receivedMoreCountriesPlayerCountriesList);
+				giveMoreCountriesToPlayer.setCountryIDs(receivedMoreCountriesPlayerCountriesList);
 				
 				updateCountryIDs(giveMoreCountriesToPlayer.getPlayerName(), newCountryIDForPlayer);
 				
