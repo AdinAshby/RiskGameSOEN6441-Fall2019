@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.GraphicsConfiguration;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,15 +8,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Model.Country;
+import Model.Player;
 import view.MapView;
 
 /**
@@ -37,7 +43,9 @@ public class MapBuilder {
 	 * countryAdjacency
 	 */
 	private AdjacencyList countryAdjacency = new AdjacencyList();
-
+	
+	private Player[] players;
+	
 	/**
 	 * This method will return list of continents
 	 * 
@@ -596,5 +604,99 @@ public class MapBuilder {
 			borders.put(countryName, borderNames );
 		}
 		return borders; 
+	}
+	
+	public LinkedList<Country> getAllCountries(){
+		
+		LinkedList<Country> allCountries = new LinkedList<Country>();
+		Iterator<Entry<Integer, Continent>> iteratorForContinent = continentList.entrySet().iterator();
+		
+		while (iteratorForContinent.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) iteratorForContinent.next();
+			int continentId = (int) continentMap.getKey();
+			Continent continent = continentList.get(continentId);
+			ListIterator<Country> listIterator = continent.getCountriesList().listIterator();
+
+			while (listIterator.hasNext()) {
+
+				Country country = (Country) listIterator.next();
+				
+				allCountries.add(country);
+			}
+		}
+		
+		return allCountries;
+	}
+	
+	public void assigningPlayersToCountries(ArrayList<String> playerNames) {
+		
+		players = new Player[playerNames.size()];
+		
+		Random random = new Random();
+		
+		ArrayList<Country> temporaryCountries = new ArrayList<Country>();
+		
+		for (Country country : getAllCountries()) {
+			temporaryCountries.add(country);
+		}
+		
+		int numberOfCountriesEachPlayerGet = temporaryCountries.size() / players.length;
+		int leftOverCountries = temporaryCountries.size() % players.length;
+		
+		for(int i = 0; i < players.length; i++) {
+			int[] countriesIDs = new int[numberOfCountriesEachPlayerGet];
+			
+			for (int j = 0; j < countriesIDs.length; j++) {
+				int randomCountryID = random.nextInt(temporaryCountries.size());
+				countriesIDs[j] = temporaryCountries.get(randomCountryID).getCountryId();
+				temporaryCountries.remove(randomCountryID);
+				// updateCountryById(i, countriesIds[j]);
+			}
+			
+			players[i] = new Player(playerNames.get(i), countriesIDs);
+			
+			for (int m = 0; m < countriesIDs.length; m++) {
+				updateCountryIDs(playerNames.get(i), countriesIDs[m]);
+			}
+			
+		}
+		
+		if (leftOverCountries > 0) {
+			for (Player giveMoreCountriesToPlayer : players) {
+				int randomCountryID = random.nextInt(temporaryCountries.size());
+				int playerCountryCount = giveMoreCountriesToPlayer.getCountryID().length + 1;
+				int[] currentPlayerCountries = giveMoreCountriesToPlayer.getCountryID();
+				int[] receivedMoreCountriesPlayerCountriesList = new int[playerCountryCount];
+				
+				for (int i = 0; i < giveMoreCountriesToPlayer.getCountryID().length; i++) {
+					receivedMoreCountriesPlayerCountriesList[i] = currentPlayerCountries[i];
+				}
+				
+				int newCountryIDForPlayer = temporaryCountries.get(randomCountryID).getCountryId();
+				receivedMoreCountriesPlayerCountriesList[playerCountryCount - 1] = newCountryIDForPlayer;
+				giveMoreCountriesToPlayer.setCountryID(receivedMoreCountriesPlayerCountriesList);
+				
+				updateCountryIDs(giveMoreCountriesToPlayer.getPlayerName(), newCountryIDForPlayer);
+				
+				temporaryCountries.remove(randomCountryID);
+				
+				if (temporaryCountries.size() == 0) {
+					break;
+				}
+			}
+		}
+	}
+	
+	private void updateCountryIDs(String playerName, int countryID) {
+		
+		for (Country eachCountry : getAllCountries()) {
+			int eachCountryID = eachCountry.getCountryId();
+			if (eachCountryID == countryID)
+				eachCountry.setPlayer(playerName);
+		}
+	}
+	
+	public Player[] getPlayers() {
+		return (this.players);
 	}
 }
