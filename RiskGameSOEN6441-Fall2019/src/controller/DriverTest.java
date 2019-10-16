@@ -100,36 +100,95 @@ public class DriverTest {
 		      
 		      }
 
-			// remove continent
-			regex = "editcontinent -remove ([\\w*\\_\\-]*)";
-			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-			matcher = pattern.matcher(input);
-			if (matcher.find()) {
-				String continentName = matcher.group(1);
-				mapBuild.removeContinent(continentName);
-				isValidCommand = true;
-			}
+				// remove continent
+		      regex = "(?<=editcontinent)(.*)";
+		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		      matcher = pattern.matcher(input);
+		       addText="";
+		      if (matcher.find()) {
+		        addText = matcher.group(1);
+		      }
+		      regex = "(-remove ([\\w*\\_\\-]*))+";
+		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		      matcher = pattern.matcher(addText);
+		      while (matcher.find()) {
+		        String continentName = matcher.group(2);
+		        mapBuild.removeContinent(continentName);
+		        isValidCommand = true;
+		      
+		      }
+		      
+		      
+//			// remove continent
+//			regex = "editcontinent -remove ([\\w*\\_\\-]*)";
+//			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+//			matcher = pattern.matcher(input);
+//			if (matcher.find()) {
+//				String continentName = matcher.group(1);
+//				mapBuild.removeContinent(continentName);
+//				isValidCommand = true;
+//			}
 
-			// add country
-			regex = "editcountry -add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*)";
-			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-			matcher = pattern.matcher(input);
-			if (matcher.find()) {
-				String countryName = matcher.group(1);
-				String continentName = matcher.group(2);
-				mapBuild.addCountry(countryName, continentName);
-				isValidCommand = true;
-			}
+//			// add country
+//			regex = "editcountry -add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*)";
+//			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+//			matcher = pattern.matcher(input);
+//			if (matcher.find()) {
+//				String countryName = matcher.group(1);
+//				String continentName = matcher.group(2);
+//				mapBuild.addCountry(countryName, continentName);
+//				isValidCommand = true;
+//			}
 
-			// remove country
-			regex = "editcountry -remove ([\\w*\\_\\-]*)";
-			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-			matcher = pattern.matcher(input);
-			if (matcher.find()) {
-				String countryName = matcher.group(1);
+		      //add country
+		      regex = "(?<=editcountry)(.*)";
+		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		      matcher = pattern.matcher(input);
+		       addText="";
+		      if (matcher.find()) {
+		        addText = matcher.group(1);
+		      }
+		      regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		      matcher = pattern.matcher(addText);
+		      while (matcher.find()) {
+		    	  String countryName = matcher.group(2);
+			  String continentName = matcher.group(3);
+		        mapBuild.addCountry(continentName, continentName);
+		        isValidCommand = true;
+		      
+		      }
+//			// remove country
+//			regex = "editcountry -remove ([\\w*\\_\\-]*)";
+//			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+//			matcher = pattern.matcher(input);
+//			if (matcher.find()) {
+//				String countryName = matcher.group(1);
+//				mapBuild.removeCountry(countryName);
+//				isValidCommand = true;
+//			}
+			
+			//remove country 
+		    regex = "(?<=editcountry)(.*)";
+		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		      matcher = pattern.matcher(input);
+		      addText="";
+		      if (matcher.find()) {
+		        addText = matcher.group(1);
+		      }
+		      regex = "(-remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		      matcher = pattern.matcher(addText);
+		      while (matcher.find()) {
+		        String countryName = matcher.group(2);
+		        String neighborCountryName = matcher.group(3);
+///////
 				mapBuild.removeCountry(countryName);
-				isValidCommand = true;
-			}
+		        isValidCommand = true;
+		      
+		      }
+			
+			
 
 			// add neighbor
 			regex = "editneighbor -add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*)";
