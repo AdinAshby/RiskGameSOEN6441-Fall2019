@@ -341,11 +341,18 @@ public class MapBuilder {
 	}
 
 	public void addCountryAdjacency(String countryName, String neighborCountryName) {
-		Country country = getCountryByName(countryName);
-		Country neighborCountry = getCountryByName(neighborCountryName);
-		countryAdjacency.addEdge(country.getCountryId(), neighborCountry.getCountryId());
-		System.out.println(neighborCountryName.toLowerCase() + " added to the " + countryName);
-	}
+	    Country country = getCountryByName(countryName);
+	    Country neighborCountry = getCountryByName(neighborCountryName);
+	    if(country==null) {
+	      System.out.println("country is not defined already");
+	    }
+	    else if(neighborCountry==null) {
+	      System.out.println("neighborCountry is not defined already");
+	    }else {
+	    countryAdjacency.addEdge(country.getCountryId(), neighborCountry.getCountryId());
+	    System.out.println(neighborCountryName.toLowerCase() + " added to the " + countryName);
+	    }
+	  }
 
 	public void removeCountryAdjacency(String countryName, String neighborCountryName) {
 		Country country = getCountryByName(countryName);

@@ -80,17 +80,25 @@ public class DriverTest {
 			}
 
 			
-			///test multiple input 
-			// add continent
-			regex = "editcontinent -add ([\\w*\\_\\-]*) (\\d*)";
-			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-			matcher = pattern.matcher(input);
-			if (matcher.find()) {
-				String continentName = matcher.group(1);
-				int continentValue = Integer.parseInt(matcher.group(2));
-				mapBuild.addContinent(continentName, continentValue);
-				isValidCommand = true;
-			}
+			//test added multiple time editcontinent -add aa 1 -add bb 2
+		      // add continent
+		      regex = "(?<=editcontinent)(.*)";
+		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		      matcher = pattern.matcher(input);
+		      String addText="";
+		      if (matcher.find()) {
+		        addText = matcher.group(1);
+		      }
+		      regex = "(-add ([\\w*\\_\\-]*) (\\d*))+";
+		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		      matcher = pattern.matcher(addText);
+		      while (matcher.find()) {
+		        String continentName = matcher.group(2);
+		        int continentValue = Integer.parseInt(matcher.group(3));
+		        mapBuild.addContinent(continentName, continentValue);
+		        isValidCommand = true;
+		      
+		      }
 
 			// remove continent
 			regex = "editcontinent -remove ([\\w*\\_\\-]*)";
