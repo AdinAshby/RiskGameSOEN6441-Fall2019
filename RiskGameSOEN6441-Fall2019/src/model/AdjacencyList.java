@@ -72,6 +72,16 @@ public class AdjacencyList {
 		return adjacencyList.get(vertexId);
 	}
 	
+	public String getVertexAdjacencyString(int vertexId){
+		ArrayList<Integer> Adjlist= adjacencyList.get(vertexId);
+		String list = "";
+		for (int adj : Adjlist) {
+			list += adj+" ";
+		}
+		return list;
+		
+	}
+	
      /**
 	 * This method removes a vertex
 	 * 
