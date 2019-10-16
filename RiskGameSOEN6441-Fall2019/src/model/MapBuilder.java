@@ -515,7 +515,10 @@ public class MapBuilder {
 		}
 
 	}
-	
+	/**
+	 * is validate 
+	 * @return
+	 */
 
 	public boolean validateMap() {
 		boolean isValid = true;

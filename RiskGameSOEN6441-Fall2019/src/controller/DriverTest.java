@@ -74,7 +74,7 @@ public class DriverTest {
 				mapBuild.loadMap(mapFileName);
 				isValidCommand = true;
 			}
-
+//test added multiple time
 			// add continent
 			regex = "editcontinent (-add ([\\w*\\_\\-]*) (\\d*))";
 			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
