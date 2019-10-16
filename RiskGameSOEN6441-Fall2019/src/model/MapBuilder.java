@@ -553,18 +553,12 @@ public class MapBuilder {
 			System.out.println("Is not a connected graph");
 		}
 
-		<<<<<<< HEAD
-
-
-		=======
 		if(isMapSubGraph()==false) {
 			isValid = false;
 			System.out.println("Is not a connected sub graph");
 		}
 
-
-		>>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
-			if(isValid) {System.out.println("Map is valid");}else {System.out.println("Map is invalid");}
+		if(isValid) {System.out.println("Map is valid");}else {System.out.println("Map is invalid");}
 		return isValid;
 	}
 
@@ -581,7 +575,7 @@ public class MapBuilder {
 	}
 
 	public HashMap<String,ArrayList<String>> getListOfBorders(){
-		<<<<<<< HEAD
+
 		//		 Map<String, ArrayList<String>> borders= new HashMap<String, ArrayList<String>>();
 		//		Iterator hmIterator = ((Map) countryAdjacency).entrySet().iterator(); 
 		//		while (hmIterator.hasNext()) { 
@@ -589,9 +583,8 @@ public class MapBuilder {
 		//            ArrayList<String> countries=(ArrayList<String>) mapElement.getValue();
 		//            borders.put(getCountryById(Integer.parseInt((String) mapElement.getKey())).getCountryName(), countries);
 		//        }
-		=======
-		>>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
-			HashMap<String, ArrayList<String>> borders = new HashMap<String, ArrayList<String>>() ;
+
+		HashMap<String, ArrayList<String>> borders = new HashMap<String, ArrayList<String>>() ;
 		ArrayList<Integer> keys=countryAdjacency.getKeys();
 		for(int key: keys) {
 			String countryName=getCountryNameById(key);
