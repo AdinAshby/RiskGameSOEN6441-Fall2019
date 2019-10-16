@@ -45,6 +45,8 @@ public class MapBuilder {
 	private AdjacencyList countryAdjacency = new AdjacencyList();
 
 	private Player[] players;
+	
+	private Random random = new Random();
 
 	/**
 	 * This method will return list of continents
@@ -698,8 +700,6 @@ public class MapBuilder {
 
 		players = new Player[playerNames.size()];
 
-		Random random = new Random();
-
 		ArrayList<Country> temporaryCountries = new ArrayList<Country>();
 
 		for (Country country : getAllCountries()) {
@@ -759,6 +759,25 @@ public class MapBuilder {
 			int eachCountryID = eachCountry.getCountryId();
 			if (eachCountryID == countryID)
 				eachCountry.setPlayer(playerName);
+		}
+	}
+	
+	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
+
+		int oldArmies = getCountryByName(countryName).getArmies();
+		getCountryByName(countryName).setArmies(armiesAdded + oldArmies);
+	}
+
+	public void placeAllArmies(int armiesEachPlayerGets) {
+
+		for(Player player : players) {
+			int armiesForEach = armiesEachPlayerGets;
+			while(armiesForEach != 0) {
+				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().length);
+				int randomArmy = random.nextInt(armiesForEach);
+				armiesForEach -= randomArmy;
+				getCountryById(randomPlayerCountryID).setArmies(randomArmy);
+			}
 		}
 	}
 
