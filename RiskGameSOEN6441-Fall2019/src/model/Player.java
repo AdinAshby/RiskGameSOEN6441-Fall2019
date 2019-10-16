@@ -9,11 +9,6 @@ package model;
 public class Player {
 	 
 	/**
-	 * PlayerID is a unique ID for each player.
-	 */
-	private int playerID;
-	
-	/**
 	 * PlayerName is name of the player corresponding to the ID.
 	 */
 	private String playerName;
@@ -30,21 +25,11 @@ public class Player {
 	 * @param playerName Corresponding player name.
 	 * @param countryID List of all countries (IDs) that the player owns.
 	 */
-	public Player(int playerID, String playerName, int[] countryID) {
-		this.playerID = playerID;
+	public Player(String playerName, int[] countryID) {
 		this.playerName = playerName;
 		this.countryID = countryID;
 	}
 	
-	/**
-	 * Getter for PlayerID.
-	 * 
-	 * @return playerID Returns playerID as an integer.
-	 */
-	public int getPlayerID() {
-		return playerID;
-	}
-
 	/**
 	 * Getter for PlayerName.
 	 * 
