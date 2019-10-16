@@ -5,6 +5,14 @@ import  org.junit.Assert;
 import org.junit.Test;
 import model.AdjacencyList;
 import model.MapBuilder;
+/**
+ *  This class include testcases to test maps 
+ *  to be valid with given constraints
+ *  to be a connected graph
+ *  continent to be connected subgraph
+ * @author s_shehna
+ *
+ */
 public class TestMap {
 MapBuilder mb = new MapBuilder();
 AdjacencyList ad = new AdjacencyList();
