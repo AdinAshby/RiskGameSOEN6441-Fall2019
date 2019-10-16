@@ -1,7 +1,5 @@
 package test;
-
 import  org.junit.Assert;
-
 import org.junit.Test;
 import model.AdjacencyList;
 import model.MapBuilder;
@@ -28,18 +26,18 @@ String invalid_map = "test7";
 	}
 	@Test
 	public void testConnectedGraph() throws Exception
-	{
+	{ 
 		Assert.assertEquals(true, mb.loadMap(valid_map));
 		Assert.assertEquals(true, ad.isConnected() );
 		Assert.assertEquals(false, mb.loadMap(invalid_map));
-		Assert.assertEquals(false, ad.isConnected() );
+		Assert.assertEquals(false, ad.isConnected() ); // should return false
 	}
-@Test
-public void testisMapSubGraph() throws Exception
-{
+    @Test
+    public void testisMapSubGraph() throws Exception
+    {
 	Assert.assertEquals(true, mb.loadMap(valid_map));
 	Assert.assertEquals(true, mb.isMapSubGraph());
 	Assert.assertEquals(false, mb.loadMap(invalid_map));
 	Assert.assertEquals(false, mb.isMapSubGraph());
-}
+    }
 }
