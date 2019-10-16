@@ -20,8 +20,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import Model.Country;
-import Model.Player;
+import model.Country;
+import model.Player;
 import view.MapView;
 
 /**
@@ -193,9 +193,9 @@ public class MapBuilder {
 
 		} */
 
-		theMapView.showMap();
+		//theMapView.showMap();
 
-		/*System.out.println("\nPrint Continent:\n------------------------");
+		System.out.println("\nPrint Continent:\n------------------------");
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
@@ -209,7 +209,7 @@ public class MapBuilder {
 		}
 		System.out.println("[borders]");
 		System.out.println(showCountryAdjacency());
-		System.out.println("------------------------\n"); */
+		System.out.println("------------------------\n"); 
 
 	}
 

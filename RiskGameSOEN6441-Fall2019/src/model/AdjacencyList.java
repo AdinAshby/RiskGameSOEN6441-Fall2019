@@ -64,14 +64,15 @@ public class AdjacencyList {
 	 * @param adjacencyList
 	 */
 
-        
-
 	public void setAdjacencyList(Map<Integer, ArrayList<Integer>> adjacencyList) {
 		this.adjacencyList = adjacencyList;
 	}
-
 	
-        /**
+	public ArrayList<Integer> getVertexAdjacency(int vertexId){
+		return adjacencyList.get(vertexId);
+	}
+	
+     /**
 	 * This method removes a vertex
 	 * 
 	 * @param id 
