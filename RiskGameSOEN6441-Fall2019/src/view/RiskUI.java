@@ -11,6 +11,8 @@ import javax.swing.text.StyledEditorKit.BoldAction;
 import model.MapBuilder;
 
 public class RiskUI {
+	private MapBuilder mapBuild = new MapBuilder();
+	
 	private String welcomeMessage = "\t\t*****Risk Game*****";
 	private String editMapYesOrNoMessage = "Do you want to create/edit map? (Y/N)\n";
 	private String editMapRequestingMessage = "Enter corresponding commands for creating/editing a map.\n"
@@ -29,15 +31,14 @@ public class RiskUI {
 	private Matcher matcher;
 	
 	private ArrayList<String> playerNames = new ArrayList<String>();
+	
+	private int numberOfArmiesEachPlayerGets = (mapBuild.getAllCountries().size() / 3 > 3) ? mapBuild.getAllCountries().size() / 3 : 3;
 
 	public RiskUI() {
 		scanner = new Scanner(System.in);
 	}
 
 	public void RiskUIStartTheGame() {
-
-
-		MapBuilder mapBuild = new MapBuilder();
 		
 		boolean isValidCommand = false;
 		String mapFileName = null;
