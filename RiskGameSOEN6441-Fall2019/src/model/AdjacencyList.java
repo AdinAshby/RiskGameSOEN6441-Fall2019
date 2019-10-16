@@ -168,6 +168,15 @@ public class AdjacencyList {
 		return listEdges;
 		
 	}
+	/**
+	 * list adjacency of a vertex
+	 * @param vertexId
+	 * @return
+	 */
+	public ArrayList<Integer> getVertexAdjacency(int vertexId) {
+		return adjacencyList.get(vertexId);
+	
+	}
 	
 	public boolean isConnected() {
 		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {

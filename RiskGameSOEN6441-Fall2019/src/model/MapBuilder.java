@@ -241,6 +241,48 @@ public class MapBuilder {
 		return null;
 	}
 
+	
+	public boolean isMapSubGraph() {
+		boolean isSubGraph=true;
+		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+			int continentId = (int) continentMap.getKey();
+			Continent continent = continentList.get(continentId);
+			boolean isThisContinentConnected=false;
+			List<Country> countriesList=continent.getCountriesList();
+			ArrayList<Integer> countriesIdList=new ArrayList<Integer>();
+			for(Country c:countriesList) {
+				countriesIdList.add(c.getCountryId());
+			}
+			
+			
+			if(countriesList.size()==0) {
+				return false;
+			}
+			
+			for(Country c:countriesList) {
+				int countryId=c.getCountryId();
+//				System.out.println("Check Country "+countryId+" from countries List");
+				ArrayList<Integer> listAdj=countryAdjacency.getVertexAdjacency(countryId);
+				for(int neighbor: listAdj) {
+//					System.out.println("Check Neighber="+neighbor);
+					if(!countriesIdList.contains(neighbor)) {
+						isThisContinentConnected=true;
+//						System.out.println("Connected "+continentId);
+					}
+				}
+//				System.out.println("------------");
+				
+			}
+			if(!isThisContinentConnected) {isSubGraph=false;System.out.println("Not Sub Graph for Continent Id="+continentId);}
+		// End of Loop of Continent
+		}
+			
+			return isSubGraph;
+	}
+	
+	
 	/**
 	 * This method will add a new country in adjacency list of country
 	 * 
@@ -410,8 +452,7 @@ public class MapBuilder {
 		}catch(Exception e) {
 			System.out.println("Map is invalid");
 		}
-		validateMap();
-		return true;
+		return validateMap();
 	}
 
 	/**
@@ -449,6 +490,8 @@ public class MapBuilder {
 			br.write(mapFormat(fileName));
 
 			br.close();
+		}else {
+			System.out.println("Map is not valid, we can not save it");
 		}
 	}
 
@@ -472,6 +515,7 @@ public class MapBuilder {
 		}
 
 	}
+	
 
 	public boolean validateMap() {
 		boolean isValid = true;
@@ -488,6 +532,10 @@ public class MapBuilder {
 			System.out.println("Is not a connected graph");
 		}
 
+		if(isMapSubGraph()==false) {
+			isValid = false;
+			System.out.println("Is not a connected sub graph");
+		}
 		
 		
 		if(isValid) {System.out.println("Map is valid");}else {System.out.println("Map is invalid");}
@@ -507,13 +555,6 @@ public class MapBuilder {
 	}
 	
 	public HashMap<String,ArrayList<String>> getListOfBorders(){
-//		 Map<String, ArrayList<String>> borders= new HashMap<String, ArrayList<String>>();
-//		Iterator hmIterator = ((Map) countryAdjacency).entrySet().iterator(); 
-//		while (hmIterator.hasNext()) { 
-//            Map.Entry mapElement = (Map.Entry)hmIterator.next();
-//            ArrayList<String> countries=(ArrayList<String>) mapElement.getValue();
-//            borders.put(getCountryById(Integer.parseInt((String) mapElement.getKey())).getCountryName(), countries);
-//        }
 		HashMap<String, ArrayList<String>> borders = new HashMap<String, ArrayList<String>>() ;
 		ArrayList<Integer> keys=countryAdjacency.getKeys();
 		for(int key: keys) {

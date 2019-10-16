@@ -35,11 +35,12 @@ public class DriverTest {
 
 		MapBuilder mapBuild = new MapBuilder();
 		/* Test of new Functions */
-		mapBuild.loadMap("test");
-		System.out.println("\n-----------------------------\nNew Getter Functions\n-----------------------------");
-		System.out.println(mapBuild.getCountryListNames("asia")); //Get CountryListNames
-		System.out.println(mapBuild.getContinentOfCountry("iran"));
-		System.out.println(mapBuild.getListOfBorders());
+		mapBuild.loadMap("test6");
+		mapBuild.saveMap("test7");
+//		System.out.println("\n-----------------------------\nNew Getter Functions\n-----------------------------");
+//		System.out.println(mapBuild.getCountryListNames("asia")); //Get CountryListNames
+//		System.out.println(mapBuild.getContinentOfCountry("iran"));
+//		System.out.println(mapBuild.getListOfBorders());
 		/* End of Test of new Functions */
 		
 		
@@ -75,10 +76,16 @@ public class DriverTest {
 			}
 
 			// add continent
-			regex = "editcontinent -add ([\\w*\\_\\-]*) (\\d*)";
+			regex = "editcontinent (-add ([\\w*\\_\\-]*) (\\d*))";
 			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 			matcher = pattern.matcher(input);
 			if (matcher.find()) {
+				String addText = matcher.group(1);
+			}
+			regex = "(-add ([\\w*\\_\\-]*) (\\d*))";
+			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+			matcher = pattern.matcher(input);
+			while (matcher.find()) {
 				String continentName = matcher.group(1);
 				int continentValue = Integer.parseInt(matcher.group(2));
 				mapBuild.addContinent(continentName, continentValue);
