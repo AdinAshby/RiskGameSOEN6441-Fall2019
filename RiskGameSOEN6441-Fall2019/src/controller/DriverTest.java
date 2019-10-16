@@ -80,7 +80,7 @@ public class DriverTest {
 			}
 
 			
-			//test added multiple time editcontinent -add aa 1 -add bb 2
+			// added multiple time editcontinent -add aa 1 -add bb 2
 		      // add continent
 		      regex = "(?<=editcontinent)(.*)";
 		      pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);

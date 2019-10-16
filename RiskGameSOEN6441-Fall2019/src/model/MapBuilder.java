@@ -339,7 +339,11 @@ public class MapBuilder {
 		countryAdjacency.addEdge(countryId, neighborCountryId);
 
 	}
-
+/**
+ * addCountryAdjacency
+ * @param countryName
+ * @param neighborCountryName
+ */
 	public void addCountryAdjacency(String countryName, String neighborCountryName) {
 	    Country country = getCountryByName(countryName);
 	    Country neighborCountry = getCountryByName(neighborCountryName);
