@@ -10,12 +10,8 @@ import model.Player;
 public class TestPlayer {
 	int CountryId[] = {1,2,3,4};
 	int CountryId_incorrect[] = {1,2,3,4,35};
-    Player player1 = new Player(1, "shehnaz", CountryId);
-	@Test
-	public void testgetPlayerId() {
-		Assert.assertEquals(1, player1.getPlayerID());
-		Assert.assertNotEquals(2, player1.getPlayerID());
-	}
+    Player player1 = new Player("shehnaz", CountryId);
+
 	@Test
 	public void testgetPlayerName()
 	{

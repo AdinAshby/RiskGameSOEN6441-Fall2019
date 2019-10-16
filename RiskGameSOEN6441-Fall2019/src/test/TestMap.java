@@ -17,7 +17,7 @@ public class TestMap {
 MapBuilder mb = new MapBuilder();
 AdjacencyList ad = new AdjacencyList();
 String valid_map = "test";
-String invalid_map = "test6";
+String invalid_map = "test7";
 	@Test
 	public void testvalidateMap() throws Exception
 	{
