@@ -571,11 +571,16 @@ public class MapBuilder {
 	public void addCountry(String countryName, String continentName) {
 		Continent continent = getContinent(continentName);
 		Country country = new Country(countryName); // Search if already exist , show error
+		if(continent==null) {
+			System.out.println("continent not found");
+		}else if(country==null) {
+			System.out.println("country not found");
+		}else {
 		continent.addCountry(country);
 		
 		System.out.println(countryName.toLowerCase() + " by Id=" + country.getCountryId() + " added to  "
 				+ continentName.toUpperCase());
-
+		}
 	}
 
 	public void removeCountry(String countryName) {
