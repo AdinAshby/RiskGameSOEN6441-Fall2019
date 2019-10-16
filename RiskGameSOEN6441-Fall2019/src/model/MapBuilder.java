@@ -84,6 +84,10 @@ public class MapBuilder {
 		return continentName;
 	}
 
+	/**
+	 * This method get the continent by passing the continent Id 
+	 * @return continnet 
+	 */
 	public Continent getContinent(int continentId) {
 
 		Continent continent = continentList.get(continentId);
@@ -100,6 +104,12 @@ public class MapBuilder {
 		continentList.put(continent.getContinentId(), continent);
 	}
 
+	/**
+	 * This method adds a new continent and show is added
+	 * 
+	 *@param continentName
+	 *@param continentValue
+	 */
 	public void addContinent(String continentName, int continentValue) {
 		Continent continent = new Continent(continentName, continentValue);
 		continentList.put(continent.getContinentId(), continent);
@@ -123,6 +133,11 @@ public class MapBuilder {
 		continentList.remove(continentId);
 
 	}
+	/**
+	 * This method remove a continent and show is removed
+	 * 
+	 *@param continentName
+	 */
 
 	public void removeContinent(String continentName) {
 		Continent continent = getContinent(continentName);
@@ -135,6 +150,11 @@ public class MapBuilder {
 		System.out.println("CONTINENT " + continentName.toUpperCase() + " removed ");
 	}
 
+	/**
+	 * This method get a continent
+	 * 
+	 *@return continent if there is any otherwise null
+	 */
 	public Continent getContinent(String continentName) {
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
