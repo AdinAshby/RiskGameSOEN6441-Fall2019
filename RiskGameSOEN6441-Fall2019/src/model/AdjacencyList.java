@@ -28,10 +28,15 @@ public class AdjacencyList {
 
 	}
 
-	
+	/**
+	 * This method get the size
+	 * 
+	 * @return size of the adjacency list 
+	 */
 	public int getSize() {
 		return adjacencyList.size();
 	}
+	
 	
 	public ArrayList<Integer> getKeys() {
 		ArrayList<Integer> keys= new ArrayList<Integer>();
@@ -152,7 +157,7 @@ public class AdjacencyList {
 			System.out.println("there is no key");
 	}
 
-     /**
+     	/**
 	 * This method shows list of edges
 	 */
 	public String showListEdges() {
@@ -168,7 +173,10 @@ public class AdjacencyList {
 		return listEdges;
 		
 	}
-	
+	/**
+	 * This method check whether the map is commented graph
+	 * @return true 
+	 */
 	public boolean isConnected() {
 		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {
 			ArrayList<Integer> values=entry.getValue();
