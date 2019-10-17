@@ -32,7 +32,7 @@ public class RiskUI {
 	
 	private ArrayList<String> playerNames = new ArrayList<String>();
 	
-	private int numberOfArmiesEachPlayerGets = (mapBuild.getAllCountries().size() / 3 > 3) ? mapBuild.getAllCountries().size() / 3 : 3;
+	private int numberOfArmiesEachPlayerGets;
 
 	public RiskUI() {
 		scanner = new Scanner(System.in);
@@ -367,7 +367,14 @@ public class RiskUI {
 		return this.matcher;
 	}
 	
-
+	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
+		numberOfArmiesEachPlayerGets = (mapBuild.getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? mapBuild.getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
+	}
+	
+	public int getNumberOfArmiesEachPlayerGets() {
+		return numberOfArmiesEachPlayerGets;
+	}
+	
 	/*String editMapYesOrNoAnswer;
 		boolean editMapWhileStatus = true;
 

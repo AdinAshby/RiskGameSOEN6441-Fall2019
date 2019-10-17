@@ -791,7 +791,7 @@ public class MapBuilder {
 	public void fortify(String fromCountry, String toCountry, int armiesToMove) {
 		int oldArmiesFromCountry = getCountryByName(fromCountry).getArmies();
 		getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
-		
+
 		int oldArmiesToCountry = getCountryByName(toCountry).getArmies();
 		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
 	}
@@ -825,5 +825,13 @@ public class MapBuilder {
 
 	public Player[] getPlayers() {
 		return (this.players);
+	}
+
+	public Player getPlayerByName(String playerName) {
+		for(Player player : players) {
+			if(player.getPlayerName().equalsIgnoreCase(playerName))
+				return player;
+		}
+		return null;
 	}
 }
