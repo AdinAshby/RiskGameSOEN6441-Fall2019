@@ -256,7 +256,7 @@ public class RiskUI {
 			} else if (editMapAnswer.equalsIgnoreCase("N")) {
 				System.out.println(loadMapRequestingMessage);
 				finished = false;
-
+				readInput();
 				while (!finished) {
 					isValidCommand = false;
 					readInput();
@@ -388,23 +388,15 @@ public class RiskUI {
 						}
 						
 						// placearmy countryname
-						regex = "(?<=placearmy)(.*)";
+						regex = "(?<=placearmy )(.*)";
 						setPattern(regex);
 						setMatcher(input);
 						addText = "";
 						if (getMatcher().find()) {
-							addText = matcher.group(1);
-							
-							regex = "([\\w*\\_\\-]*)+";
-							setPattern(regex);
-							setMatcher(addText);
-							
-							while (getMatcher().find()) {
-								String countryName = matcher.group(1);
+							String countryName = matcher.group(1);
 								mapBuild.assignInitialsArmiesToSpecificCountry(countryName, mapBuild.getNumberOfArmiesEachPlayerGets());
 								isValidCommand = true;
 							}
-						}
 
 						if (!isValidCommand) {
 							System.out.println("Correct command not found");
@@ -433,6 +425,7 @@ public class RiskUI {
 						while (matcher.find()) {
 							String countryName = matcher.group(2);
 							int num = Integer.parseInt(matcher.group(3));
+//							System.out.println("countryName="+countryName+" num="+num);
 							///fun ....(countryName, num);
 							isValidCommand = true;
 
