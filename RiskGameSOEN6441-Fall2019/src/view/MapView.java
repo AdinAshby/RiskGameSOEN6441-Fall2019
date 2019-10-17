@@ -20,7 +20,38 @@ public class MapView {
 
 	public void showMap(MapBuilder theMapBuilder) {
 
+		Iterator<Entry<Integer, Continent>> iteratorForContinents = theMapBuilder.getContinentList().entrySet().iterator();
+
+
+		String table = "|%-16d|%-18s|%n";
+
+		System.out.format(
+				"+----------------+------------------+%n");
+		System.out.format(
+				"| Continent's ID | Continent's name |%n");
+		System.out.format(
+				"+----------------+------------------+%n");
+
+		while (iteratorForContinents.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) iteratorForContinents.next();
+			int continentId = (int) continentMap.getKey();
+			Continent continent = theMapBuilder.getContinentList().get(continentId);
+			
+			System.out.format(table, continent.getContinentId(), continent.getContinentName());
+		}
+		
+		System.out.format(
+				"+----------------+------------------+%n");
+		
+		
+		
+		
+		
+		
+		
+		
 		Iterator<Entry<Integer, Continent>> iteratorForContinent = theMapBuilder.getContinentList().entrySet().iterator();
+	
 
 
 		String table = "|%-14d|%-16s|%-18s|%-28s|%-15s|%-15s|%n";
