@@ -826,6 +826,19 @@ public class MapBuilder {
 	public Player[] getPlayers() {
 		return (this.players);
 	}
+	
+	public void setPlayer(Player newPlayer) {
+		
+		ArrayList<Player> newPlayerLists = new ArrayList<Player>();
+		
+		for(Player player: players) {
+			newPlayerLists.add(player);
+		}
+		
+		newPlayerLists.add(newPlayer);
+		
+		players = newPlayerLists.toArray(new Player[newPlayerLists.size()]);
+	}
 
 	public Player getPlayerByName(String playerName) {
 		for(Player player : players) {
