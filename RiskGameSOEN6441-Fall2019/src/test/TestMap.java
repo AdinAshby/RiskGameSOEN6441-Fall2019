@@ -36,6 +36,11 @@ public class TestMap {
 	 */
 	String invalid_map = "test7";
 
+	/**
+	 * check the validate map
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testvalidateMap() throws Exception {
 
@@ -45,6 +50,11 @@ public class TestMap {
 		Assert.assertEquals(false, mb.validateMap());
 	}
 
+	/**
+	 * check the ConnectedGraph
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testConnectedGraph() throws Exception {
 		ad.addVertex(555);
@@ -60,6 +70,11 @@ public class TestMap {
 		Assert.assertEquals(false, adEmpty.isConnected());
 	}
 
+	/**
+	 * check whether the map is SubGraph
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testisMapSubGraph() throws Exception {
 		Assert.assertEquals(true, mb.loadMap(valid_map));
