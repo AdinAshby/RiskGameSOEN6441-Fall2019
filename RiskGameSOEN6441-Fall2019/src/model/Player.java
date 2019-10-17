@@ -17,8 +17,6 @@ public class Player {
 	 */
 	private int[] countryIDs;
 	
-	private int reinforcePlayerArmies;
-	
 	/**
 	 * Player constructor method.
 	 * 
@@ -58,11 +56,4 @@ public class Player {
 		this.countryIDs = countriesIDs;
 	}
 	
-	public int getReinforcementPlayerArmies() {
-		return this.reinforcePlayerArmies;
-	}
-
-	public void setReinforcementPlayerArmies(int reinforceArmiesNumber) {
-		this.reinforcePlayerArmies = reinforceArmiesNumber;
-	}
 }
