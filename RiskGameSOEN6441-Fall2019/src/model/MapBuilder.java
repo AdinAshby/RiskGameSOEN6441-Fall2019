@@ -872,13 +872,13 @@ public class MapBuilder {
 			calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 			int armiesForEach = numberOfArmiesEachPlayerGets;
 			
-			while(armiesForEach != 0) {
+			while(armiesForEach > 0) {
 				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().length);
-				int randomArmy = random.nextInt(armiesForEach);
+				int randomArmy = random.nextInt(armiesForEach) + 1;
 				armiesForEach -= randomArmy;
 				int[] p = player.getCountryIDs();
 				int randomID = p[randomPlayerCountryID];
-				getCountryById(randomID).setArmies(randomArmy);
+				getCountryById(randomID).setArmies(armiesForEach);
 			}
 		}
 	}
