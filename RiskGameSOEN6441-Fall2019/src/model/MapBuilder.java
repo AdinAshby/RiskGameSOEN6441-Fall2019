@@ -830,7 +830,7 @@ public class MapBuilder {
 	public void setPlayer(Player newPlayer) {
 
 		ArrayList<Player> newPlayerLists = new ArrayList<Player>();
-		if (players.length != 0) 
+		if (players.equals(null)) 
 			for(Player player: players) {
 				newPlayerLists.add(player);
 			}
