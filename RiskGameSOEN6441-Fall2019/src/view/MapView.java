@@ -54,7 +54,7 @@ public class MapView {
 	
 
 
-		String table = "|%-14d|%-16s|%-18s|%-28s|%-15s|%-15s|%n";
+		 table = "|%-14d|%-16s|%-18s|%-28s|%-15s|%-15s|%n";
 
 		System.out.format(
 				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
@@ -212,7 +212,7 @@ public class MapView {
 
 		for (int i = 0; i < allPlayers.length; i++) {
 			if (allPlayers[i].getPlayerName().equalsIgnoreCase(playerName)) {
-				playerCountries = allPlayers[i].getCountryID();
+				playerCountries = allPlayers[i].getCountryIDs();
 				break;
 			}
 		}
