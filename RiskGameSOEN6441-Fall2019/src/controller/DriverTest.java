@@ -19,7 +19,7 @@ import model.Country;
 import model.MapBuilder;
 
 /**
- * this is driver to check the functionality of the code
+ * This is a driver test to check the functionality of the code
  *
  */
 public class DriverTest {
