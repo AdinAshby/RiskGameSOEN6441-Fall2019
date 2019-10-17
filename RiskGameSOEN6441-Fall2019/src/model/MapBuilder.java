@@ -28,6 +28,7 @@ import view.MapView;
  * This is MapBuilder Class to Edit Map
  * 
  * @author f_yazdan
+ * @author Babita kaur
  *
  */
 public class MapBuilder {
@@ -51,7 +52,7 @@ public class MapBuilder {
 	private int numberOfArmiesEachPlayerGets;
 
 	/**
-	 * It will return list of continents
+	 * This will return list of continents
 	 * 
 	 * @return continentList
 	 */
@@ -60,7 +61,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method sets the continentList
 	 * @param continentList
 	 */
 	public void setContinentList(Map<Integer, Continent> continentList) {
@@ -68,7 +69,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns size of continentList
 	 * @return size of the continentList
 	 */
 
@@ -78,7 +79,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method size of country adjacency
 	 * @return size of the Country Adjacency
 	 */
 	public int getCountryListSize() {
@@ -88,7 +89,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It reads continent Id
+	 * This method  reads continent Id
 	 */
 	public String getContinentName(int continentId) {
 
@@ -98,7 +99,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It get the continent by passing the continent Id
+	 * This method get the continent by passing the continent Id
 	 * 
 	 * @return continnet
 	 */
@@ -109,7 +110,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It adds a new continent
+	 * This method adds a new continent
 	 * 
 	 * @param continent
 	 *            object of Conintent class
@@ -120,7 +121,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It adds a new continent and show is added
+	 * This adds a new continent and show is added
 	 * 
 	 * @param continentName
 	 * @param continentValue
@@ -137,7 +138,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It removes a continent
+	 * This method removes a continent
 	 * 
 	 * @param continentid
 	 */
@@ -154,7 +155,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It remove a continent and show is removed
+	 * This method  remove a continent and show is removed
 	 * 
 	 * @param continentName
 	 */
@@ -176,7 +177,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It get a continent
+	 * This method get a continent
 	 * 
 	 * @return continent if there is any otherwise null
 	 */
@@ -197,7 +198,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It will print List of Continents
+	 * This method  will print List of Continents
 	 */
 
 	public void showMap() {
@@ -239,7 +240,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It will print list of maps
+	 * This method  will print list of maps
 	 */
 	public void getListOfMaps() {
 
@@ -249,7 +250,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns country by countryId
 	 * @param countryId
 	 * @return
 	 */
@@ -268,7 +269,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns countryName by countryId
 	 * @param countryId
 	 * @return Country Name if passed the country id
 	 */
@@ -288,7 +289,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns countryName by countryName
 	 * @param countryName
 	 * @return
 	 */
@@ -308,7 +309,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns continent by countryName
 	 * @param countryName
 	 * @return Continent if passed the CountryName
 	 */
@@ -329,7 +330,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method checks if map is connected subgraph
 	 * @return false if map is not a connected subgraph
 	 */
 	public boolean isMapSubGraph() {
@@ -375,7 +376,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It will add a new country in adjacency list of country
+	 * This method returns  will add a new country in adjacency list of country
 	 * 
 	 * @param countryId
 	 * @param targetCountryId
@@ -386,7 +387,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * addCountryAdjacency
+	 * This method  addCountryAdjacency
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
@@ -405,7 +406,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * it remove the Country Adjacency
+	 * This method  remove the Country Adjacency
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
@@ -424,14 +425,14 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It shows country adjacency list
+	 * This method  shows country adjacency list
 	 */
 	public String showCountryAdjacency() {
 		return getCountryAdjacency().showListEdges();
 	}
 
 	/**
-	 * It reads the map files
+	 * This method  reads the map files
 	 */
 	public boolean loadMap(String fileName) throws Exception {
 
@@ -571,7 +572,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method format the map
 	 * @param fileName
 	 * @return
 	 */
@@ -596,7 +597,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * write the map with a string file name
+	 * This method write the map with a string file name
 	 * 
 	 * @param fileName
 	 * @throws Exception
@@ -617,7 +618,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method add country to corresponding continent
 	 * @param countryName
 	 * @param continentName
 	 */
@@ -638,7 +639,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It remove the Country
+	 * This method  remove the Country
 	 * 
 	 * @param countryName
 	 */
@@ -655,7 +656,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * check the map whether is validate
+	 * This method check the map whether is validate
 	 * 
 	 * @return
 	 */

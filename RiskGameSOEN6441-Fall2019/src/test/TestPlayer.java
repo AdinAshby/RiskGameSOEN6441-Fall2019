@@ -8,6 +8,7 @@ import model.Player;
  * This test class tests the player class methods
  * 
  * @author s_shehna
+ * @author Babita kaur
  *
  */
 public class TestPlayer {
@@ -23,13 +24,21 @@ public class TestPlayer {
 	 * object of the player
 	 */
 	Player player1 = new Player("shehnaz", CountryId);
-
+	/**
+	 * This is the test method for checking the playerName
+	 * 
+	 * 
+	 */
 	@Test
 	public void testgetPlayerName() {
 		Assert.assertEquals("shehnaz", player1.getPlayerName());
 		Assert.assertNotEquals("golnoosh", player1.getPlayerName());
 	}
-
+	/**
+	 * This is the test method for checking the CountryId of Player
+	 * 
+	 * 
+	 */
 	@Test
 	public void testgetCountryId() {
 		Assert.assertArrayEquals("country Ids", CountryId, player1.getCountryIDs());

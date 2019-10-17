@@ -9,6 +9,7 @@ import model.MapBuilder;
  * 
  * @author s_shehna
  * @author f_yazdan
+ * @author Babita kaur
  *
  */
 public class TestMapFiles {
@@ -26,7 +27,7 @@ public class TestMapFiles {
 	String invalid_file = "test2";
 
 	/**
-	 * check whether the map file is valid
+	 * This is the test method for checking whether the map file is valid
 	 * 
 	 * @throws Exception
 	 */
@@ -36,7 +37,7 @@ public class TestMapFiles {
 	}
 
 	/**
-	 * check whether the map file is inValid
+	 * This is the test method for checking whether the map file is inValid
 	 * 
 	 * @throws Exception
 	 */
