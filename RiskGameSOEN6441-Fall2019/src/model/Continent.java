@@ -90,7 +90,7 @@ public class Continent {
 	}
 
 	/**
-	 * it return the list of the countries
+	 * This method return the list of the countries
 	 * 
 	 * @return countryList
 	 */
@@ -99,7 +99,7 @@ public class Continent {
 	}
 
 	/**
-	 * set country list
+	 * This method sets country list
 	 * 
 	 * @param countriesList
 	 */
@@ -109,7 +109,7 @@ public class Continent {
 	}
 
 	/**
-	 * it return name of the continent
+	 * This return name of the continent
 	 * 
 	 * @return name
 	 */
@@ -118,7 +118,7 @@ public class Continent {
 	}
 
 	/**
-	 * 
+	 * This method sets the ContinentName
 	 * @param name
 	 */
 	public void setContinentName(String name) {
@@ -126,7 +126,7 @@ public class Continent {
 	}
 
 	/**
-	 * 
+	 * This method returns the ContinentId
 	 * @return continentId
 	 */
 	public int getContinentId() {
@@ -134,7 +134,7 @@ public class Continent {
 	}
 
 	/**
-	 * 
+	 * this method sets the continentId
 	 * @param continentId
 	 */
 	public void setContinentId(int continentId) {
@@ -142,7 +142,7 @@ public class Continent {
 	}
 
 	/**
-	 * 
+	 * This method returns the country of specific CountryId
 	 * @param countryId
 	 * @return country if there is any otherwise return false
 	 */
@@ -156,7 +156,7 @@ public class Continent {
 	}
 
 	/**
-	 * 
+	 * This method returns the country
 	 * @param countryName
 	 * @return country if the name of the country we pass is the same as country
 	 *         name otherwise return null
@@ -171,7 +171,7 @@ public class Continent {
 	}
 
 	/**
-	 * This methods adds a new country in the exisiting countery list
+	 * This methods adds a new country in the existing country list
 	 * 
 	 * @param c
 	 *            as Country
@@ -222,7 +222,7 @@ public class Continent {
 	}
 
 	/**
-	 * it return list containing the Countries names
+	 * This method return list containing the Countries names
 	 * 
 	 * @return countries
 	 */
