@@ -870,7 +870,9 @@ public class MapBuilder {
 				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().length);
 				int randomArmy = random.nextInt(armiesForEach);
 				armiesForEach -= randomArmy;
-				getCountryById(randomPlayerCountryID).setArmies(randomArmy);
+				int[] p = player.getCountryIDs();
+				int randomID = p[randomPlayerCountryID];
+				getCountryById(randomID).setArmies(randomArmy);
 			}
 		}
 	}

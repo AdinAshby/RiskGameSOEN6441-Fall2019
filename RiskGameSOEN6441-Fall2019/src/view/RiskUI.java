@@ -392,12 +392,13 @@ public class RiskUI {
 						setPattern(regex);
 						setMatcher(input);
 						addText = "";
-						if (matcher.find()) {
+						if (getMatcher().find()) {
 							addText = matcher.group(1);
 							
 							regex = "([\\w*\\_\\-]*)+";
 							setPattern(regex);
 							setMatcher(addText);
+							
 							while (getMatcher().find()) {
 								String countryName = matcher.group(1);
 								mapBuild.assignInitialsArmiesToSpecificCountry(countryName, mapBuild.getNumberOfArmiesEachPlayerGets());
@@ -425,16 +426,17 @@ public class RiskUI {
 					setMatcher(input);
 					if (matcher.find()) {
 						addText = matcher.group(1);
-					}
-					regex = "(([\\w*\\_\\-]*) (\\d*))+";
-					setPattern(regex);
-					setMatcher(addText);
-					while (matcher.find()) {
-						String countryName = matcher.group(2);
-						int num = Integer.parseInt(matcher.group(3));
-						///fun ....(countryName, num);
-						isValidCommand = true;
+						
+						regex = "(([\\w*\\_\\-]*) (\\d*))+";
+						setPattern(regex);
+						setMatcher(addText);
+						while (matcher.find()) {
+							String countryName = matcher.group(2);
+							int num = Integer.parseInt(matcher.group(3));
+							///fun ....(countryName, num);
+							isValidCommand = true;
 
+						}
 					}
 
 					// showmap
