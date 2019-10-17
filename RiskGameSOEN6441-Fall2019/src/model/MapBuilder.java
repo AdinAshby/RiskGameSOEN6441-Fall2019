@@ -289,7 +289,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns countryName by countryName
 	 * @param countryName
 	 * @return
 	 */
@@ -309,7 +309,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns continent by countryName
 	 * @param countryName
 	 * @return Continent if passed the CountryName
 	 */
@@ -330,7 +330,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method checks if map is connected subgraph
 	 * @return false if map is not a connected subgraph
 	 */
 	public boolean isMapSubGraph() {
@@ -376,7 +376,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It will add a new country in adjacency list of country
+	 * This method returns  will add a new country in adjacency list of country
 	 * 
 	 * @param countryId
 	 * @param targetCountryId
@@ -387,7 +387,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * addCountryAdjacency
+	 * This method  addCountryAdjacency
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
@@ -406,7 +406,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * it remove the Country Adjacency
+	 * This method  remove the Country Adjacency
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
@@ -425,14 +425,14 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It shows country adjacency list
+	 * This method  shows country adjacency list
 	 */
 	public String showCountryAdjacency() {
 		return getCountryAdjacency().showListEdges();
 	}
 
 	/**
-	 * It reads the map files
+	 * This method  reads the map files
 	 */
 	public boolean loadMap(String fileName) throws Exception {
 
@@ -572,7 +572,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method format the map
 	 * @param fileName
 	 * @return
 	 */
@@ -597,7 +597,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * write the map with a string file name
+	 * This method write the map with a string file name
 	 * 
 	 * @param fileName
 	 * @throws Exception
@@ -618,7 +618,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method add country to corresponding continent
 	 * @param countryName
 	 * @param continentName
 	 */
@@ -639,7 +639,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It remove the Country
+	 * This method  remove the Country
 	 * 
 	 * @param countryName
 	 */
@@ -656,7 +656,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * check the map whether is validate
+	 * This method check the map whether is validate
 	 * 
 	 * @return
 	 */
@@ -690,7 +690,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method return countryList of the continent
 	 * @param continentName
 	 * @return country name list
 	 */
@@ -702,7 +702,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method return continent of country
 	 * @param countryName
 	 * @return name of the continent
 	 */
@@ -712,7 +712,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method return list of borders
 	 * @return list of borders
 	 */
 	public HashMap<String, ArrayList<String>> getListOfBorders() {
@@ -742,7 +742,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method list of all countries
 	 * @return allCountries
 	 */
 	public LinkedList<Country> getAllCountries() {
@@ -768,7 +768,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It assigning Players To the Countries
+	 * This method  assigns Players To the Countries
 	 * 
 	 * @param playerNames
 	 */
@@ -830,7 +830,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It update the Country IDs
+	 * This method  update the Country IDs
 	 * 
 	 * @param playerName
 	 * @param countryID
@@ -845,7 +845,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It assign Initials Armies To The Specific Country
+	 * This method  assign Initials Armies To The Specific Country
 	 * 
 	 * @param countryName
 	 * @param armiesAdded
@@ -857,7 +857,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It place All the Armies
+	 * This method place All the Armies
 	 * 
 	 * @param armiesEachPlayerGets
 	 */
@@ -879,7 +879,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * The reinforce
+	 * This method implements the reinforcement phase
 	 * 
 	 * @param playerName
 	 * @param countryName
@@ -895,7 +895,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * The fortify
+	 * This method implements the fortification phase
 	 * 
 	 * @param fromCountry
 	 * @param toCountry
@@ -910,7 +910,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * The player Continent Values Ownership
+	 * In This method  The player Continent Values Ownership
 	 * 
 	 * @param playerName
 	 * @return
@@ -952,7 +952,7 @@ public class MapBuilder {
 	
 	
 	/**
-	 * 
+	 * This method return all the players
 	 * @return players
 	 */
 	public Player[] getPlayers() {
@@ -960,7 +960,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method return all the country adjacency
 	 * @return country Adjacency
 	 */
 	public AdjacencyList getCountryAdjacency() {
@@ -968,7 +968,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It set Country Adjacency
+	 * This method  Country Adjacency
 	 * 
 	 * @param countryAdjacency
 	 */
@@ -977,7 +977,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method gets the player by playerName
 	 * @param playerName
 	 * @return name of the player if there is any otherwise it return numm
 	 */
