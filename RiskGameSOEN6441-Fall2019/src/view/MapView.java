@@ -58,7 +58,7 @@ public class MapView {
 		Iterator<Entry<Integer, Continent>> iteratorForContinent = theMapBuilder.getContinentList().entrySet()
 				.iterator();
 
-		table = "|%-14d|%-16s|%-18s|%-28s|%-15s|%-15s|%n";
+		table = "|%-14d|%-23s|%-18s|%-28s|%-15s|%-15s|%n";
 
 		System.out.format(
 				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");

@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
 import model.MapBuilder;
 import model.Player;
 /**
-* This is a Risk UI class
-* 
-* 
-*
-*/
+ * This is a Risk UI class
+ * 
+ * 
+ *
+ */
 
 public class RiskUI {
 	/**	
@@ -416,12 +416,10 @@ public class RiskUI {
 
 					isValidCommand = false;
 
-					int i = 1;
-
 					for(Player player : mapBuild.getPlayers()) {
 						mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
-						
-						System.out.println("Player " + i + ":");
+
+						System.out.println("Player " + player.getPlayerName() + ":");
 						System.out.println("You get -" + mapBuild.getNumberOfArmiesEachPlayerGets() + "- armies.");
 						readInput();
 
@@ -445,24 +443,20 @@ public class RiskUI {
 							isValidCommand = true;
 							mapView.showMap(mapBuild);
 						}
-						
+
 						// placearmy countryname
-						regex = "(?<=placearmy)(.*)";
+
+						regex = "(?<=placearmy )(.*)";
 						setPattern(regex);
 						setMatcher(input);
 						addText = "";
+
 						if (getMatcher().find()) {
-							addText = matcher.group(1);
-							
-							regex = "([\\w*\\_\\-]*)+";
-							setPattern(regex);
-							setMatcher(addText);
-							
-							if (getMatcher().find()) {
-								String countryName = matcher.group(1);
-								mapBuild.assignInitialsArmiesToSpecificCountry(countryName, mapBuild.getNumberOfArmiesEachPlayerGets());
-								isValidCommand = true;
-							}
+							String countryName = matcher.group(1);
+							mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
+									mapBuild.getNumberOfArmiesEachPlayerGets());
+							isValidCommand = true;
+							break;
 						}
 
 						if (!isValidCommand) {
@@ -485,7 +479,7 @@ public class RiskUI {
 					setMatcher(input);
 					if (matcher.find()) {
 						addText = matcher.group(1);
-						
+
 						regex = "(([\\w*\\_\\-]*) (\\d*))+";
 						setPattern(regex);
 						setMatcher(addText);
@@ -505,7 +499,7 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						isValidCommand = true;
 						mapView.showMap(mapBuild);
-						
+
 					}
 
 					if (!isValidCommand) {
