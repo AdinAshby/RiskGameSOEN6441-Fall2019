@@ -40,10 +40,11 @@ public class DriverTest {
 		MapBuilder mapBuild = new MapBuilder();
 		/* Test of new Functions */
 		mapBuild.loadMap("test");
-		System.out.println("\n-----------------------------\nNew Getter Functions\n-----------------------------");
-		System.out.println(mapBuild.getCountryListNames("asia")); // Get CountryListNames
-		System.out.println(mapBuild.getContinentOfCountry("iran"));
-		System.out.println(mapBuild.getListOfBorders());
+		mapBuild.showMap();
+//		System.out.println("\n-----------------------------\nNew Getter Functions\n-----------------------------");
+//		System.out.println(mapBuild.getCountryListNames("asia")); // Get CountryListNames
+//		System.out.println(mapBuild.getContinentOfCountry("iran"));
+//		System.out.println(mapBuild.getListOfBorders());
 		/* End of Test of new Functions */
 
 		String regex;
@@ -91,9 +92,13 @@ public class DriverTest {
 			matcher = pattern.matcher(addText);
 			while (matcher.find()) {
 				String continentName = matcher.group(2);
+				try {
 				int continentValue = Integer.parseInt(matcher.group(3));
 				mapBuild.addContinent(continentName, continentValue);
 				isValidCommand = true;
+				}catch(NumberFormatException e) {
+					System.out.println("Second parameter expected to be integer");
+				}
 
 			}
 
@@ -150,7 +155,7 @@ public class DriverTest {
 			while (matcher.find()) {
 				String countryName = matcher.group(2);
 				String continentName = matcher.group(3);
-				mapBuild.addCountry(continentName, continentName);
+				mapBuild.addCountry(countryName, continentName);
 				isValidCommand = true;
 
 			}
@@ -172,13 +177,11 @@ public class DriverTest {
 			if (matcher.find()) {
 				addText = matcher.group(1);
 			}
-			regex = "(-remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+			regex = "(-remove ([\\w*\\_\\-]*))+";
 			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 			matcher = pattern.matcher(addText);
 			while (matcher.find()) {
 				String countryName = matcher.group(2);
-				String neighborCountryName = matcher.group(3);
-				///////
 				mapBuild.removeCountry(countryName);
 				isValidCommand = true;
 
@@ -204,13 +207,13 @@ public class DriverTest {
 			 *regex = "(?<=gameplayer)(.*)";
 			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 			matcher = pattern.matcher(input);
-			String player = "";
+			String addText = "";
 			if (matcher.find()) {
 				addText = matcher.group(1);
 			}
 			regex = "(-add ([\\w*\\_\\-]*))+";
 			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-			matcher = pattern.matcher(player);
+			matcher = pattern.matcher(addText);
 			while (matcher.find()) {
 				String playerName = matcher.group(2);
 				
@@ -319,7 +322,7 @@ public class DriverTest {
 			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 			matcher = pattern.matcher(addText);
 			while (matcher.find()) {
-				String countryName = matcher.group(1);
+				String countryName = matcher.group(2);
 				String neighborCountryName = matcher.group(3);
 				mapBuild.addCountryAdjacency(countryName, neighborCountryName);
 				isValidCommand = true;
@@ -389,7 +392,7 @@ public class DriverTest {
 			}
 
 			if (!isValidCommand) {
-				System.out.println("Correct command not found");
+				System.out.println("Please use the correct format of the command");
 			}
 
 		} // while
