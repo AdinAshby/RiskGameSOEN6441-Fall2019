@@ -12,6 +12,7 @@ import model.MapBuilder;
 
 public class RiskUI {
 	private MapBuilder mapBuild = new MapBuilder();
+	private MapView mapView = new MapView();
 	
 	private String welcomeMessage = "\t\t*****Risk Game*****";
 	private String editMapYesOrNoMessage = "Do you want to create/edit map? (Y/N)\n";
@@ -337,6 +338,16 @@ public class RiskUI {
 						mapBuild.assigningPlayersToCountries(playerNames);;
 
 					}
+					
+					// showmap
+					regex = "showmap";
+					setPattern(regex);
+					setMatcher(input);
+					if (getMatcher().find()) {
+						isValidCommand = true;
+						mapView.showMap(mapBuild);
+
+					}
 
 					if (!isValidCommand) {
 						System.out.println("Correct command not found");
@@ -377,6 +388,16 @@ public class RiskUI {
 						finished = true;
 						mapBuild.validateMap(); // function to be added
 					}
+					
+					// showmap
+					regex = "showmap";
+					setPattern(regex);
+					setMatcher(input);
+					if (getMatcher().find()) {
+						isValidCommand = true;
+						mapView.showMap(mapBuild);
+
+					}
 
 					if (!isValidCommand) {
 						System.out.println("Correct command not found");
@@ -406,6 +427,16 @@ public class RiskUI {
 						int num = Integer.parseInt(matcher.group(3));
 						///fun ....(countryName, num);
 						isValidCommand = true;
+
+					}
+					
+					// showmap
+					regex = "showmap";
+					setPattern(regex);
+					setMatcher(input);
+					if (getMatcher().find()) {
+						isValidCommand = true;
+						mapView.showMap(mapBuild);
 
 					}
 
@@ -451,6 +482,16 @@ public class RiskUI {
 						finished = true;
 					}
 
+					// showmap
+					regex = "showmap";
+					setPattern(regex);
+					setMatcher(input);
+					if (getMatcher().find()) {
+						isValidCommand = true;
+						mapView.showMap(mapBuild);
+
+					}
+					
 					if (!isValidCommand) {
 						System.out.println("Correct command not found");
 					}
