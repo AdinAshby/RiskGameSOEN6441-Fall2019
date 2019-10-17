@@ -20,7 +20,7 @@ import model.MapBuilder;
 
 /**
  * This is a driver test to check the functionality of the code
- *
+ * @author f_yazdan
  */
 public class DriverTest {
 	// editcontinent -add continentname continentvalue -remove continentname
