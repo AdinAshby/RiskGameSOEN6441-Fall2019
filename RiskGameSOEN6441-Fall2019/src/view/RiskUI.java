@@ -1,6 +1,8 @@
 package view;
 
+
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -10,28 +12,84 @@ import javax.swing.text.StyledEditorKit.BoldAction;
 
 import model.MapBuilder;
 import model.Player;
+/**
+* This is a Risk UI class
+* 
+* 
+*
+*/
 
 public class RiskUI {
+	/**
+	 * private mapBuild
+	 */
+
 	private MapBuilder mapBuild = new MapBuilder();
+	/**
+	 * private mapView
+	 */
+
 	private MapView mapView = new MapView();
+	/**
+	 * private welcomeMessage
+	 */
 
 	private String welcomeMessage = "\t\t*****Risk Game*****";
+	/**
+	 *  private editMapYesOrNoMessage
+	 */
+
 	private String editMapYesOrNoMessage = "Do you want to create/edit map? (Y/N)\n";
+	/**
+	 * private editMapRequestingMessage
+	 */
+
 	private String editMapRequestingMessage = "Enter corresponding commands for creating/editing a map.\n"
 			+ "Whenever you are happy with the result, enter \"finishediting\".\n";
+	/**
+	 * private loadMapRequestingMessage
+	 */
+
 	private String loadMapRequestingMessage = "Load the map you with to play by using \"loadmap\" command:\n";
+	/**
+	 * private addOrRemovePlayersRequestingMessage
+	 */
 	private String addOrRemovePlayersRequestingMessage = "Add/remove players and at the end, enter \"populatecountries\":\n";
+	/**
+	 * private startupRequestingMessage
+	 */
 	private String startupRequestingMessage = "Place your armies on your selected country or use \"placeall\" command:\n";
+	/**
+	 * private reinforceRequestingMessage
+	 */
 	private String reinforceRequestingMessage = "Now, it's time to reinforce!\n";
+	/**
+	 * private fortifyRequestingMessage
+	 */
 	private String fortifyRequestingMessage = "Let's fortify! or type in \"fortify none\" if you don't want to.\n";
-
+	/**
+	 * private scanner
+	 */
 	private Scanner scanner;
+	/**
+	 * private input
+	 */
 	private String input;
-
+	/**
+	 * private regex
+	 */
 	private String regex;
+	/**
+	 * private pattern
+	 */
 	private Pattern pattern;
+	/**
+	 * private matcher
+	 */
 	private Matcher matcher;
-
+	/**
+	 * private  playerNames
+	 */
 	private ArrayList<String> playerNames = new ArrayList<String>();
 
 	public RiskUI() {
@@ -256,7 +314,7 @@ public class RiskUI {
 			} else if (editMapAnswer.equalsIgnoreCase("N")) {
 				System.out.println(loadMapRequestingMessage);
 				finished = false;
-				readInput(); // to avoid incorrect command
+
 				while (!finished) {
 					isValidCommand = false;
 					readInput();
@@ -387,17 +445,24 @@ public class RiskUI {
 							mapView.showMap(mapBuild);
 						}
 						
-						
-						// placearmy countryname done
-						regex = "(?<=placearmy )(.*)";
+						// placearmy countryname
+						regex = "(?<=placearmy)(.*)";
 						setPattern(regex);
 						setMatcher(input);
 						addText = "";
 						if (getMatcher().find()) {
-							String countryName = matcher.group(1);
+							addText = matcher.group(1);
+							
+							regex = "([\\w*\\_\\-]*)+";
+							setPattern(regex);
+							setMatcher(addText);
+							
+							while (getMatcher().find()) {
+								String countryName = matcher.group(1);
 								mapBuild.assignInitialsArmiesToSpecificCountry(countryName, mapBuild.getNumberOfArmiesEachPlayerGets());
 								isValidCommand = true;
 							}
+						}
 
 						if (!isValidCommand) {
 							System.out.println("Correct command not found");
@@ -426,7 +491,6 @@ public class RiskUI {
 						while (matcher.find()) {
 							String countryName = matcher.group(2);
 							int num = Integer.parseInt(matcher.group(3));
-//							System.out.println("countryName="+countryName+" num="+num);
 							///fun ....(countryName, num);
 							isValidCommand = true;
 
