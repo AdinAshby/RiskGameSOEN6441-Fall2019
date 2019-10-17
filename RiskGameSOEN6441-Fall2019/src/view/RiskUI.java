@@ -422,6 +422,7 @@ public class RiskUI {
 						mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 						
 						System.out.println("Player " + i + ":");
+						System.out.println("You get -" + mapBuild.getNumberOfArmiesEachPlayerGets() + "- armies.");
 						readInput();
 
 						// placeall
@@ -457,7 +458,7 @@ public class RiskUI {
 							setPattern(regex);
 							setMatcher(addText);
 							
-							while (getMatcher().find()) {
+							if (getMatcher().find()) {
 								String countryName = matcher.group(1);
 								mapBuild.assignInitialsArmiesToSpecificCountry(countryName, mapBuild.getNumberOfArmiesEachPlayerGets());
 								isValidCommand = true;
