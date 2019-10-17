@@ -110,7 +110,7 @@ public class RiskUI {
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
-		editMapAnswer = scanner.next();
+		editMapAnswer = scanner.nextLine();
 		String addText="";
 		while (true) {
 			if(editMapAnswer.equalsIgnoreCase("Y")) {
