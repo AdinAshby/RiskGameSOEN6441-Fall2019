@@ -7,6 +7,8 @@ import java.util.ListIterator;
 
 /**
  * This class is made for defining continents
+ * 
+ * @author f_yazdan
  */
 public class Continent {
 	/**

@@ -14,47 +14,51 @@ import model.Country;
 import model.MapBuilder;
 import model.Player;
 
+/**
+ * This a Map View Class containing all the styles of the showing map
+ * 
+ * @author
+ * 
+ *
+ */
+
 public class MapView {
 
+	/**
+	 * private theMapBuilder
+	 */
 	private MapBuilder theMapBuilder;
 
+	/**
+	 * show the map
+	 * 
+	 * @param theMapBuilder
+	 */
 	public void showMap(MapBuilder theMapBuilder) {
 
-		Iterator<Entry<Integer, Continent>> iteratorForContinents = theMapBuilder.getContinentList().entrySet().iterator();
-
+		Iterator<Entry<Integer, Continent>> iteratorForContinents = theMapBuilder.getContinentList().entrySet()
+				.iterator();
 
 		String table = "|%-16d|%-18s|%n";
 
-		System.out.format(
-				"+----------------+------------------+%n");
-		System.out.format(
-				"| Continent's ID | Continent's name |%n");
-		System.out.format(
-				"+----------------+------------------+%n");
+		System.out.format("+----------------+------------------+%n");
+		System.out.format("| Continent's ID | Continent's name |%n");
+		System.out.format("+----------------+------------------+%n");
 
 		while (iteratorForContinents.hasNext()) {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) iteratorForContinents.next();
 			int continentId = (int) continentMap.getKey();
 			Continent continent = theMapBuilder.getContinentList().get(continentId);
-			
+
 			System.out.format(table, continent.getContinentId(), continent.getContinentName());
 		}
-		
-		System.out.format(
-				"+----------------+------------------+%n");
-		
-		
-		
-		
-		
-		
-		
-		
-		Iterator<Entry<Integer, Continent>> iteratorForContinent = theMapBuilder.getContinentList().entrySet().iterator();
-	
 
+		System.out.format("+----------------+------------------+%n");
 
-		 table = "|%-14d|%-16s|%-18s|%-28s|%-15s|%-15s|%n";
+		Iterator<Entry<Integer, Continent>> iteratorForContinent = theMapBuilder.getContinentList().entrySet()
+				.iterator();
+
+		table = "|%-14d|%-16s|%-18s|%-28s|%-15s|%-15s|%n";
 
 		System.out.format(
 				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
@@ -73,8 +77,9 @@ public class MapView {
 
 				Country country = (Country) listIterator.next();
 
-				System.out.format(table, country.getCountryId(), country.getCountryName(), continent.getContinentName(), 
-						theMapBuilder.getCountryAdjacency().getVertexAdjacencyString(country.getCountryId()), country.getArmies(), country.getPlayerName());
+				System.out.format(table, country.getCountryId(), country.getCountryName(), continent.getContinentName(),
+						theMapBuilder.getCountryAdjacency().getVertexAdjacencyString(country.getCountryId()),
+						country.getArmies(), country.getPlayerName());
 
 			}
 		}
@@ -83,6 +88,12 @@ public class MapView {
 				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
 	}
 
+	/**
+	 * show Player Map
+	 * 
+	 * @param player
+	 * @param countriesList
+	 */
 	public void showPlayerMap(Player player, List<Country> countriesList) {
 
 		String table = "|%-14d|%-16s|%-28d|%-18d|%-15s|%-15s|%n";
@@ -99,34 +110,45 @@ public class MapView {
 		for (int i = 0; i < playerCountries.size(); i++)
 			System.out.format(table, returnCountryID(playerCountries, i), returnCountryName(playerCountries, i),
 					returnArmy(playerCountries, i), returnContinentName(playerCountries, i),
-					Arrays.toString(returnAdjacentCountriesID(playerCountries, i)), returnPlayerName(playerCountries, i));
+					Arrays.toString(returnAdjacentCountriesID(playerCountries, i)),
+					returnPlayerName(playerCountries, i));
 
 		System.out.format(
 				"+--------------+----------------+----------------------------+------------------+---------------+---------------+%n");
 	}
 
+	/**
+	 * show the Adjacency Map
+	 * 
+	 * @param myCountry
+	 * @param countriesList
+	 */
 	public void showAdjacencyMap(Country myCountry, List<Country> countriesList) {
 
 		String table = "|%-14d|%-16s|%-28d|%-18d|%-15s|%-15s|%n";
 
-		System.out.format(
-				"+--------------+----------------+------------------+---------------+---------------+%n");
-		System.out.format(
-				"| Country's ID | Country's name | Continent's Name | No. of armies | Player's name |%n");
-		System.out.format(
-				"+--------------+----------------+------------------+---------------+---------------+%n");
+		System.out.format("+--------------+----------------+------------------+---------------+---------------+%n");
+		System.out.format("| Country's ID | Country's name | Continent's Name | No. of armies | Player's name |%n");
+		System.out.format("+--------------+----------------+------------------+---------------+---------------+%n");
 
-		LinkedList<Country> adjacentCountries = getPlayerCorrespondingCountries(myCountry.getCountryName(), countriesList);
+		LinkedList<Country> adjacentCountries = getPlayerCorrespondingCountries(myCountry.getCountryName(),
+				countriesList);
 
 		for (int i = 0; i < adjacentCountries.size(); i++)
 			System.out.format(table, returnCountryID(adjacentCountries, i), returnCountryName(adjacentCountries, i),
 					returnContinentName(adjacentCountries, i), returnArmy(adjacentCountries, i),
 					returnPlayerName(adjacentCountries, i));
 
-		System.out.format(
-				"+--------------+----------------+------------------+---------------+---------------+%n");	
+		System.out.format("+--------------+----------------+------------------+---------------+---------------+%n");
 	}
 
+	/**
+	 * show the Fortify Map
+	 * 
+	 * @param player
+	 * @param country
+	 * @param countriesList
+	 */
 	public void showFortifyMap(Player player, Country country, List<Country> countriesList) {
 
 		String table = "|%-14d|%-16s|%-18d|%-28d|%-15s|%-15s|%n";
@@ -138,12 +160,13 @@ public class MapView {
 		System.out.format(
 				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
 
-		LinkedList<Country> specificCountryAdjacentsForFortification = getSpecificCountryAdjacentsForFortification(player.getPlayerName(),
-				country.getCountryId(), countriesList);
+		LinkedList<Country> specificCountryAdjacentsForFortification = getSpecificCountryAdjacentsForFortification(
+				player.getPlayerName(), country.getCountryId(), countriesList);
 
 		for (int i = 0; i < specificCountryAdjacentsForFortification.size(); i++)
 			System.out.format(table, returnCountryID(specificCountryAdjacentsForFortification, i),
-					returnCountryName(specificCountryAdjacentsForFortification, i), returnArmy(specificCountryAdjacentsForFortification, i),
+					returnCountryName(specificCountryAdjacentsForFortification, i),
+					returnArmy(specificCountryAdjacentsForFortification, i),
 					returnContinentName(specificCountryAdjacentsForFortification, i),
 					Arrays.toString(returnAdjacentCountriesID(specificCountryAdjacentsForFortification, i)),
 					returnPlayerName(specificCountryAdjacentsForFortification, i));
@@ -156,34 +179,71 @@ public class MapView {
 	 * 
 	 * @param listOfCountries
 	 * @param counter
-	 * @return
+	 * @return list Of the Countries by Id
 	 */
 	public int returnCountryID(List<Country> listOfCountries, int counter) {
 		return listOfCountries.get(counter).getCountryId();
 	}
 
+	/**
+	 * 
+	 * @param listOfCountries
+	 * @param counter
+	 * @return list Of the Countries by name
+	 */
+
 	public String returnCountryName(List<Country> listOfCountries, int counter) {
 		return listOfCountries.get(counter).getCountryName();
 	}
+
+	/**
+	 * 
+	 * @param listOfCountries
+	 * @param counter
+	 * @return Army
+	 */
 
 	public int returnArmy(List<Country> listOfCountries, int counter) {
 		return listOfCountries.get(counter).getArmies();
 	}
 
-	
+	/**
+	 * 
+	 * @param listOfCountries
+	 * @param counter
+	 * @return Continent Name
+	 */
 	public String returnContinentName(List<Country> listOfCountries, int counter) {
 		return listOfCountries.get(counter).getContinentName();
 	}
 
+	/**
+	 * 
+	 * @param listOfCountries
+	 * @param counter
+	 * @return Adjacent Countries ID
+	 */
 	public int[] returnAdjacentCountriesID(List<Country> listOfCountries, int counter) {
 		return listOfCountries.get(counter).getAdjacentCountriesID();
 	}
 
+	/**
+	 * 
+	 * @param listOfCountries
+	 * @param counter
+	 * @return Player Name
+	 */
 	public String returnPlayerName(List<Country> listOfCountries, int counter) {
 
 		return listOfCountries.get(counter).getPlayerName();
 	}
 
+	/**
+	 * 
+	 * @param playerName
+	 * @param countriesList
+	 * @return player Countries
+	 */
 	public LinkedList<Country> getPlayerCorrespondingCountries(String playerName, List<Country> countriesList) {
 		LinkedList<Country> playerCountries = new LinkedList<Country>();
 
@@ -194,7 +254,13 @@ public class MapView {
 		return playerCountries;
 	}
 
-	public LinkedList<Country> getCorrespondingAdjacentCountries(String countryName, List<Country> countriesList){
+	/**
+	 * 
+	 * @param countryName
+	 * @param countriesList
+	 * @return adjacent Countries
+	 */
+	public LinkedList<Country> getCorrespondingAdjacentCountries(String countryName, List<Country> countriesList) {
 		LinkedList<Country> adjacentCountries = new LinkedList<Country>();
 
 		for (int i = 0; i < countriesList.size(); i++)
@@ -204,8 +270,15 @@ public class MapView {
 		return adjacentCountries;
 	}
 
-	public LinkedList<Country> getSpecificCountryAdjacentsForFortification(String playerName,
-			int specificCountryID, List<Country> countriesList){
+	/**
+	 * 
+	 * @param playerName
+	 * @param specificCountryID
+	 * @param countriesList
+	 * @return Specific Country Adjacent For Fortification
+	 */
+	public LinkedList<Country> getSpecificCountryAdjacentsForFortification(String playerName, int specificCountryID,
+			List<Country> countriesList) {
 
 		Player[] allPlayers = RiskController.getInstance().getPlayers();
 		int[] playerCountries = null;
@@ -216,8 +289,13 @@ public class MapView {
 				break;
 			}
 		}
-
+		/**
+		 * specific CountryAdjacentsForFortification object of the Country
+		 */
 		LinkedList<Country> specificCountryAdjacentsForFortification = new LinkedList<Country>();
+		/**
+		 * myCountries object of the Country
+		 */
 		LinkedList<Country> myCountries = new LinkedList<Country>();
 
 		for (int i = 0; i < countriesList.size(); i++)

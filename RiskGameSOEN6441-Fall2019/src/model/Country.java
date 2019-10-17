@@ -2,6 +2,8 @@ package model;
 
 /**
  * This class defines countries in the map
+ * 
+ * @author f_yazdan
  */
 public class Country {
 	/**
@@ -56,6 +58,7 @@ public class Country {
 
 	/**
 	 * constructor Country
+	 * 
 	 * @param name
 	 * @param countryId
 	 */

@@ -7,9 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 /**
-* This class is made to implement neighbours of countries
-*/
+ * This class is made to implement neighbours of countries
+ * 
+ * @author f_yazdan
+ * 
+ */
 public class AdjacencyList {
 	/**
 	 * This is private adjacencyList object of HashMap
@@ -20,7 +24,7 @@ public class AdjacencyList {
 	/**
 	 * This method adds a vertex
 	 * 
-	 * @param id 
+	 * @param id
 	 */
 	public void addVertex(int id) {
 
@@ -31,32 +35,34 @@ public class AdjacencyList {
 	/**
 	 * This method get the size
 	 * 
-	 * @return size of the adjacency list 
+	 * @return size of the adjacency list
 	 */
 	public int getSize() {
 		return adjacencyList.size();
 	}
-	
+
 	/**
 	 * 
 	 * @return keys
 	 */
 	public ArrayList<Integer> getKeys() {
-		ArrayList<Integer> keys= new ArrayList<Integer>();
-		for ( Integer key : adjacencyList.keySet() ) {
+		ArrayList<Integer> keys = new ArrayList<Integer>();
+		for (Integer key : adjacencyList.keySet()) {
 			keys.add(key);
 		}
 		return keys;
 	}
+
 	/**
 	 * 
-	 * @param key of the adjacency List
+	 * @param key
+	 *            of the adjacency List
 	 * @return
 	 */
 	public ArrayList<Integer> getValues(int key) {
 		return adjacencyList.get(key);
 	}
-	
+
 	/**
 	 * 
 	 * @return adjacencyList
@@ -74,56 +80,58 @@ public class AdjacencyList {
 	public void setAdjacencyList(Map<Integer, ArrayList<Integer>> adjacencyList) {
 		this.adjacencyList = adjacencyList;
 	}
-	
+
 	/**
 	 * 
-	 * @param vertexId of the adjacency List
+	 * @param vertexId
+	 *            of the adjacency List
 	 * @return
 	 */
-	public ArrayList<Integer> getVertexAdjacency(int vertexId){
+	public ArrayList<Integer> getVertexAdjacency(int vertexId) {
 		return adjacencyList.get(vertexId);
 	}
-	
+
 	/**
-	 * it return String of the Vertex Adjacency 
+	 * it return String of the Vertex Adjacency
+	 * 
 	 * @param vertexId
 	 * @return
 	 */
-	public String getVertexAdjacencyString(int vertexId){
-		ArrayList<Integer> Adjlist= adjacencyList.get(vertexId);
+	public String getVertexAdjacencyString(int vertexId) {
+		ArrayList<Integer> Adjlist = adjacencyList.get(vertexId);
 		String list = "";
-		if(Adjlist!=null) {
-		
-		for (int adj : Adjlist) {
-			list += adj+" ";
-		}
+		if (Adjlist != null) {
+
+			for (int adj : Adjlist) {
+				list += adj + " ";
+			}
 		}
 		return list;
-		
+
 	}
-	
-     /**
+
+	/**
 	 * This method removes a vertex
 	 * 
-	 * @param id 
+	 * @param id
 	 */
 	public void removeVertex(Integer id) {
 
 		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {
-			ArrayList<Integer> values=entry.getValue();
+			ArrayList<Integer> values = entry.getValue();
 			values.remove(id);
 		}
 		adjacencyList.remove(id);
 
 	}
 
-        /**
+	/**
 	 * This method adds an edge.
 	 * 
-	 * @param id 
+	 * @param id
 	 */
 	public void addEdge(int start, int end) {
-//		System.out.println("Add Edge between " + start + " to " + end);
+		// System.out.println("Add Edge between " + start + " to " + end);
 
 		List<Integer> list;
 		list = adjacencyList.get(start);
@@ -138,11 +146,14 @@ public class AdjacencyList {
 		}
 
 	}
-        /**
+
+	/**
 	 * This method removes an edge.
 	 * 
-	 * @param start specifies start of edge
-	 * @param end   specifies end of edge
+	 * @param start
+	 *            specifies start of edge
+	 * @param end
+	 *            specifies end of edge
 	 */
 	public void removeEdge(int start, int end) {
 		List<Integer> list = null;
@@ -188,31 +199,36 @@ public class AdjacencyList {
 			System.out.println("there is no key");
 	}
 
-     	/**
+	/**
 	 * This method shows list of edges
 	 */
 	public String showListEdges() {
 		String listEdges = "";
 		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {
 			listEdges += entry.getKey() + " ";
-			ArrayList<Integer> values=entry.getValue();
-			for (int value: values) {
+			ArrayList<Integer> values = entry.getValue();
+			for (int value : values) {
 				listEdges += value + " ";
-			};
-			listEdges +="\n";
+			}
+			;
+			listEdges += "\n";
 		}
 		return listEdges;
-		
+
 	}
+
 	/**
 	 * This method check whether the map is commented graph
-	 * @return true 
+	 * 
+	 * @return true
 	 */
 	public boolean isConnected() {
-		if(adjacencyList.size()==0) {return false;}
+		if (adjacencyList.size() == 0) {
+			return false;
+		}
 		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {
-			ArrayList<Integer> values=entry.getValue();
-			if(values.size()==0) {
+			ArrayList<Integer> values = entry.getValue();
+			if (values.size() == 0) {
 				return false;
 			}
 		}
@@ -243,8 +259,7 @@ public class AdjacencyList {
 		System.out.println(test.showListEdges());
 		test.removeVertex(555);
 		System.out.println(test.showListEdges());
-		
+
 	}
-	
 
 }

@@ -3,6 +3,8 @@ package model;
 /**
  * 
  * This is Player class, in which we define our attributes of a Player.
+ * 
+ * @author 
  *  
  */
 public class Player {
