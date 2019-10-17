@@ -32,7 +32,7 @@ public class RiskController {
 	}
 
 	/**
-	 * 
+	 * This method gets the instance of RiskController class
 	 * @return instance
 	 */
 	public static RiskController getInstance() {
@@ -45,7 +45,7 @@ public class RiskController {
 	}
 
 	/**
-	 * 
+	 * This method gets all the players
 	 * @return players
 	 */
 	public Player[] getPlayers() {
