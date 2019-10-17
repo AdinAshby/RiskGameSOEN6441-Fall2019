@@ -289,7 +289,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns countryName by countryName
 	 * @param countryName
 	 * @return
 	 */
@@ -309,7 +309,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method returns continent by countryName
 	 * @param countryName
 	 * @return Continent if passed the CountryName
 	 */
@@ -330,7 +330,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method checks if map is connected subgraph
 	 * @return false if map is not a connected subgraph
 	 */
 	public boolean isMapSubGraph() {
@@ -376,7 +376,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It will add a new country in adjacency list of country
+	 * This method returns  will add a new country in adjacency list of country
 	 * 
 	 * @param countryId
 	 * @param targetCountryId
@@ -387,7 +387,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * addCountryAdjacency
+	 * This method  addCountryAdjacency
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
@@ -406,7 +406,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * it remove the Country Adjacency
+	 * This method  remove the Country Adjacency
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
@@ -425,14 +425,14 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It shows country adjacency list
+	 * This method  shows country adjacency list
 	 */
 	public String showCountryAdjacency() {
 		return getCountryAdjacency().showListEdges();
 	}
 
 	/**
-	 * It reads the map files
+	 * This method  reads the map files
 	 */
 	public boolean loadMap(String fileName) throws Exception {
 
@@ -572,7 +572,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method format the map
 	 * @param fileName
 	 * @return
 	 */
@@ -597,7 +597,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * write the map with a string file name
+	 * This method write the map with a string file name
 	 * 
 	 * @param fileName
 	 * @throws Exception
@@ -618,7 +618,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * 
+	 * This method add country to corresponding continent
 	 * @param countryName
 	 * @param continentName
 	 */
@@ -639,7 +639,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * It remove the Country
+	 * This method  remove the Country
 	 * 
 	 * @param countryName
 	 */
@@ -656,7 +656,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * check the map whether is validate
+	 * This method check the map whether is validate
 	 * 
 	 * @return
 	 */
