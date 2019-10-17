@@ -104,6 +104,7 @@ public class RiskUI {
 		String editMapAnswer;
 
 		boolean finished = false;
+		boolean placeAllFlag = false;
 
 
 		System.out.println(welcomeMessage);
@@ -412,12 +413,14 @@ public class RiskUI {
 				System.out.println(startupRequestingMessage);
 				finished = false;
 
-				while(!finished) {
+				for(Player player : mapBuild.getPlayers()) {
+					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+					
+					finished = false;
+					
+					while(!finished) {
 
-					isValidCommand = false;
-
-					for(Player player : mapBuild.getPlayers()) {
-						mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+						isValidCommand = false;
 
 						System.out.println("Player " + player.getPlayerName() + ":");
 						System.out.println("You get -" + mapBuild.getNumberOfArmiesEachPlayerGets() + "- armies.");
@@ -429,9 +432,9 @@ public class RiskUI {
 						setMatcher(input);
 						if (matcher.find()) {
 							isValidCommand = true;
-							finished = true;
 							mapBuild.placeAllArmies();
-							break;
+							finished = true;
+							placeAllFlag = true;
 
 						}
 
@@ -456,13 +459,18 @@ public class RiskUI {
 							mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
 									mapBuild.getNumberOfArmiesEachPlayerGets());
 							isValidCommand = true;
-							break;
+							finished = true;
 						}
 
 						if (!isValidCommand) {
 							System.out.println("Correct command not found");
 						}
 					}
+					
+					if (placeAllFlag == true) {
+						break;
+					}
+
 				}
 
 				System.out.println(reinforceRequestingMessage);
