@@ -830,7 +830,7 @@ public class MapBuilder {
 	public void setPlayer(Player newPlayer) {
 
 		ArrayList<Player> newPlayerLists = new ArrayList<Player>();
-		if (players.equals(null)) 
+		if (players != null) 
 			for(Player player: players) {
 				newPlayerLists.add(player);
 			}
@@ -841,10 +841,11 @@ public class MapBuilder {
 	}
 
 	public Player getPlayerByName(String playerName) {
-		for(Player player : players) {
-			if(player.getPlayerName().equalsIgnoreCase(playerName))
-				return player;
-		}
+		if (players != null)
+			for(Player player : players) {
+				if(player.getPlayerName().equalsIgnoreCase(playerName))
+					return player;
+			}
 		return null;
 	}
 	/// method getCountryAdjacency
