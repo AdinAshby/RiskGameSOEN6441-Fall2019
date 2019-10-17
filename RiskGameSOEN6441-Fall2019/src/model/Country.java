@@ -116,7 +116,7 @@ public class Country {
 	}
 
 	/**
-	 * This method return number of armies in a country
+	 * This method returns number of armies in a country
 	 * 
 	 * @return integer
 	 */
@@ -135,7 +135,7 @@ public class Country {
 	}
 
 	/**
-	 * This method return name of the country
+	 * This method returns name of the country
 	 * 
 	 * @return name
 	 */
@@ -162,7 +162,7 @@ public class Country {
 	}
 
 	/**
-	 * This method return the id of the adjacent Country
+	 * This method returns the id of the adjacent Country
 	 * 
 	 * @return adjacentCountriesID
 	 */
@@ -171,7 +171,7 @@ public class Country {
 	}
 
 	/**
-	 * This method set the id of the adjacent Country
+	 * This method sets the id of the adjacent Country
 	 * 
 	 * @param listOfAdjacencyLists
 	 */
