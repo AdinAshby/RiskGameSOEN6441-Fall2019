@@ -1,38 +1,52 @@
 package test;
-import  org.junit.Assert;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import model.AdjacencyList;
 import model.MapBuilder;
+
 /**
- *  This class include testcases to test maps 
- *  to be valid with given constraints
- *  to be a connected graph
- *  continent to be connected subgraph
+ * This class include testcases to test maps to be valid with given constraints
+ * to be a connected graph continent to be connected subgraph
+ * 
  * @author s_shehna
  * @author f_yazdan
  *
  */
 public class TestMap {
-
-MapBuilder mb = new MapBuilder();
-AdjacencyList adEmpty = new AdjacencyList();
-AdjacencyList ad = new AdjacencyList();
-String valid_map = "test";
-String invalid_map = "test7";
+	/**
+	 * Object of the MapBuilder
+	 */
+	MapBuilder mb = new MapBuilder();
+	/**
+	 * Object of the Empty AdjacencyList
+	 */
+	AdjacencyList adEmpty = new AdjacencyList();
+	/**
+	 * Object of the AdjacencyList
+	 */
+	AdjacencyList ad = new AdjacencyList();
+	/**
+	 * String valid map with initialization
+	 */
+	String valid_map = "test";
+	/**
+	 * String inValid map with initialization
+	 */
+	String invalid_map = "test7";
 
 	@Test
-	public void testvalidateMap() throws Exception
-	{
-		
+	public void testvalidateMap() throws Exception {
+
 		Assert.assertEquals(true, mb.loadMap(valid_map));
 		Assert.assertEquals(true, mb.validateMap());
 		Assert.assertEquals(false, mb.loadMap(invalid_map));
 		Assert.assertEquals(false, mb.validateMap());
 	}
+
 	@Test
-	public void testConnectedGraph() throws Exception
-	{ 
+	public void testConnectedGraph() throws Exception {
 		ad.addVertex(555);
 		ad.addVertex(622);
 		ad.addVertex(8686);
@@ -41,16 +55,16 @@ String invalid_map = "test7";
 		ad.addEdge(622, 8686);
 		ad.addEdge(45, 555);
 		Assert.assertEquals(true, mb.loadMap(valid_map));
-		Assert.assertEquals(true, ad.isConnected() );
+		Assert.assertEquals(true, ad.isConnected());
 		Assert.assertEquals(false, mb.loadMap(invalid_map));
-		Assert.assertEquals(false, adEmpty.isConnected() ); 
+		Assert.assertEquals(false, adEmpty.isConnected());
 	}
-    @Test
-    public void testisMapSubGraph() throws Exception
-    {
-	Assert.assertEquals(true, mb.loadMap(valid_map));
-	Assert.assertEquals(true, mb.isMapSubGraph());
-	Assert.assertEquals(false, mb.loadMap(invalid_map));
-	Assert.assertEquals(false, mb.isMapSubGraph());
-    }
+
+	@Test
+	public void testisMapSubGraph() throws Exception {
+		Assert.assertEquals(true, mb.loadMap(valid_map));
+		Assert.assertEquals(true, mb.isMapSubGraph());
+		Assert.assertEquals(false, mb.loadMap(invalid_map));
+		Assert.assertEquals(false, mb.isMapSubGraph());
+	}
 }
