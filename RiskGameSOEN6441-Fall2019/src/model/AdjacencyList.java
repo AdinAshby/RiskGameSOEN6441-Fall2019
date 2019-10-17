@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * This class is made to implement neighbours of countries
  * 
- * @author f_yazdan
+ * 
  * 
  */
 public class AdjacencyList {
@@ -42,7 +42,7 @@ public class AdjacencyList {
 	}
 
 	/**
-	 * 
+	 * This method returns keys of adjacency list
 	 * @return keys
 	 */
 	public ArrayList<Integer> getKeys() {
@@ -54,9 +54,14 @@ public class AdjacencyList {
 	}
 
 	/**
+<<<<<<< HEAD
+	 * This method return values of adjacency list
+	 * @param key of the adjacency List
+=======
 	 * 
 	 * @param key
 	 *            of the adjacency List
+>>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 	 * @return
 	 */
 	public ArrayList<Integer> getValues(int key) {
@@ -64,7 +69,7 @@ public class AdjacencyList {
 	}
 
 	/**
-	 * 
+	 * This method is for getting the adjacency list
 	 * @return adjacencyList
 	 */
 
@@ -73,7 +78,7 @@ public class AdjacencyList {
 	}
 
 	/**
-	 * 
+	 * This method is for setting the adjacency list
 	 * @param adjacencyList
 	 */
 
@@ -82,9 +87,14 @@ public class AdjacencyList {
 	}
 
 	/**
+<<<<<<< HEAD
+	 * This method returns the adjacency List of Vertex
+	 * @param vertexId of the adjacency List
+=======
 	 * 
 	 * @param vertexId
 	 *            of the adjacency List
+>>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 	 * @return
 	 */
 	public ArrayList<Integer> getVertexAdjacency(int vertexId) {
@@ -92,8 +102,12 @@ public class AdjacencyList {
 	}
 
 	/**
+<<<<<<< HEAD
+	 * This method return String of the Vertex Adjacency 
+=======
 	 * it return String of the Vertex Adjacency
 	 * 
+>>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 	 * @param vertexId
 	 * @return
 	 */
@@ -201,6 +215,7 @@ public class AdjacencyList {
 
 	/**
 	 * This method shows list of edges
+	 * @return listEdges list of Edges
 	 */
 	public String showListEdges() {
 		String listEdges = "";
@@ -236,7 +251,7 @@ public class AdjacencyList {
 	}
 
 	/**
-	 * test the methods here to check the methods of this class
+	 * This main method test the other methods here to check the methods of this class
 	 * 
 	 * @param args
 	 */
