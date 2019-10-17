@@ -63,40 +63,50 @@ public class Continent {
 
 		// continentAdjacency.addVertex(continentId);
 	}
-/**
- * it return the continent Control Value
- * @return continentControlValue
- */
+
+	/**
+	 * it return the continent Control Value
+	 * 
+	 * @return continentControlValue
+	 */
 	public int getContinentControlValue() {
 		return continentControlValue;
 	}
+
 	/**
 	 * it set the continent Control Value
+	 * 
 	 * @param continentControlValue
 	 */
 
 	public void setContinentControlValue(int continentControlValue) {
 		this.continentControlValue = continentControlValue;
 	}
-/**
- * it return the list of the countries
- * @return countryList
- */
+
+	/**
+	 * it return the list of the countries
+	 * 
+	 * @return countryList
+	 */
 	public List<Country> getCountriesList() {
 		return countryList;
 	}
+
 	/**
 	 * set country list
+	 * 
 	 * @param countriesList
 	 */
 
 	public void setCountriesList(LinkedList<Country> countriesList) {
 		this.countryList = countriesList;
 	}
-/**
- * it return name of the continent
- * @return name
- */
+
+	/**
+	 * it return name of the continent
+	 * 
+	 * @return name
+	 */
 	public String getContinentName() {
 		return name;
 	}
@@ -108,25 +118,28 @@ public class Continent {
 	public void setContinentName(String name) {
 		this.name = name;
 	}
-/**
- * 
- * @return continentId
- */
+
+	/**
+	 * 
+	 * @return continentId
+	 */
 	public int getContinentId() {
 		return this.continentId;
 	}
-/**
- * 
- * @param continentId
- */
+
+	/**
+	 * 
+	 * @param continentId
+	 */
 	public void setContinentId(int continentId) {
 		this.continentId = continentId;
 	}
-/**
- * 
- * @param countryId
- * @return country if there is any otherwise return false
- */
+
+	/**
+	 * 
+	 * @param countryId
+	 * @return country if there is any otherwise return false
+	 */
 	public Country getCountry(int countryId) {
 		for (Country country : countryList) {
 			if (country.getCountryId() == countryId) {
@@ -135,11 +148,13 @@ public class Continent {
 		}
 		return null;
 	}
-/**
- * 
- * @param countryName
- * @return country if the name of the country we pass is the same as country name otherwise return null
- */
+
+	/**
+	 * 
+	 * @param countryName
+	 * @return country if the name of the country we pass is the same as country
+	 *         name otherwise return null
+	 */
 	public Country getCountry(String countryName) {
 		for (Country country : countryList) {
 			if (country.getCountryName().equals(countryName)) {
@@ -199,10 +214,12 @@ public class Continent {
 		System.out.println("------------------------");
 
 	}
-/**
- * it return list containing the Countries names
- * @return countries
- */
+
+	/**
+	 * it return list containing the Countries names
+	 * 
+	 * @return countries
+	 */
 	public ArrayList<String> getCountryListNames() {
 
 		ArrayList<String> countries = new ArrayList<String>();
