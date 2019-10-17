@@ -45,7 +45,7 @@ public class MapBuilder {
 	private AdjacencyList countryAdjacency = new AdjacencyList();
 
 	private Player[] players;
-	
+
 	private Random random = new Random();
 
 	/**
@@ -761,7 +761,7 @@ public class MapBuilder {
 				eachCountry.setPlayer(playerName);
 		}
 	}
-	
+
 	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
 
 		int oldArmies = getCountryByName(countryName).getArmies();
@@ -779,6 +779,44 @@ public class MapBuilder {
 				getCountryById(randomPlayerCountryID).setArmies(randomArmy);
 			}
 		}
+	}
+
+	public void reinforce(String playerName, String countryName, int armiesAdded, int armiesEachPlayerGets) {
+
+		int oldArmies = getCountryByName(countryName).getArmies();
+
+		getCountryByName(countryName).setArmies(armiesEachPlayerGets + oldArmies + playerContinentValuesOwnership(playerName));
+	}
+
+	public void fortify(String fromCountry, String toCountry, int armiesToMove) {
+		
+	}
+
+	public int playerContinentValuesOwnership(String playerName) {
+
+		int continentValuesPlayerGets = 0;
+
+		Iterator<Entry<Integer, Continent>> iteratorForContinent = continentList.entrySet().iterator();
+
+		while (iteratorForContinent.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) iteratorForContinent.next();
+			int continentId = (int) continentMap.getKey();
+			Continent continent = continentList.get(continentId);
+			ListIterator<Country> listIterator = continent.getCountriesList().listIterator();
+
+			int counterForPlayerCountriesInContinent = 0;
+
+			while (listIterator.hasNext()) {
+
+				if(listIterator.next().getPlayerName().equalsIgnoreCase(playerName))
+					++counterForPlayerCountriesInContinent;
+			}
+
+			if(counterForPlayerCountriesInContinent == continent.getCountriesList().size())
+				continentValuesPlayerGets += continent.getContinentControlValue();
+		}
+
+		return continentValuesPlayerGets;
 	}
 
 	public Player[] getPlayers() {
