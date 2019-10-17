@@ -91,11 +91,15 @@ public class RiskUI {
 	 * private  playerNames
 	 */
 	private ArrayList<String> playerNames = new ArrayList<String>();
-
+	/**
+	 * This is RiskUI constructor
+	 */
 	public RiskUI() {
 		scanner = new Scanner(System.in);
 	}
-
+	/**
+	 * This method is to start the game
+	 */
 	public void RiskUIStartTheGame() {
 
 		boolean isValidCommand = false;
@@ -566,19 +570,31 @@ public class RiskUI {
 			}
 		}
 	}
-
+	/**
+	 * This method is for reading the input from console
+	 */
 	public void readInput() {
 		this.input = scanner.nextLine();
 	}
-
+	/**
+	 * This method is for setting the pattern
+	 * @param regex 
+	 */
 	public void setPattern(String regex) {
 		this.pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 	}
+	/**
+	 * This method is for setting the matcher
+	 * @param input
+	 */
 
 	public void setMatcher(String input) {
 		this.matcher = pattern.matcher(input);
 	}
-
+	/**
+	 * This method is for fetching the matcher
+	 * @return Matcher
+	 */
 	public Matcher getMatcher() {
 		return this.matcher;
 	}
