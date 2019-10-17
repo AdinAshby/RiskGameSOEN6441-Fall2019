@@ -22,7 +22,7 @@ public class Country {
 	/**
 	 * private number of armies
 	 */
-	private int armies = 0;
+	private int armies;
 	/**
 	 * private static countries Counter
 	 */
@@ -54,6 +54,7 @@ public class Country {
 		this.playerName = null;
 		this.adjacentCountriesID = null;
 		this.continentName = null;
+		this.armies = 0;
 	}
 
 	/**
@@ -70,6 +71,7 @@ public class Country {
 		this.playerName = null;
 		this.adjacentCountriesID = null;
 		this.continentName = null;
+		this.armies = 0;
 	}
 
 	/**
