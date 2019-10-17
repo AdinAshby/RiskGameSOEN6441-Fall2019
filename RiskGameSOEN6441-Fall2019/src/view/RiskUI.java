@@ -32,11 +32,7 @@ public class RiskUI {
 	
 	private ArrayList<String> playerNames = new ArrayList<String>();
 	
-<<<<<<< HEAD
-	private int numberOfArmiesEachPlayerGets = (mapBuild.getAllCountries().size() / 3 > 3) ? mapBuild.getAllCountries().size() / 3 : 3;
-=======
 	private int numberOfArmiesEachPlayerGets;
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 
 	public RiskUI() {
 		scanner = new Scanner(System.in);
