@@ -12,6 +12,7 @@ import model.MapBuilder;
  * 
  * @author s_shehna
  * @author f_yazdan
+ * @author Babita kaur
  *
  */
 public class TestMap {
@@ -37,7 +38,7 @@ public class TestMap {
 	String invalid_map = "test7";
 
 	/**
-	 * check the validate map
+	 *  This is the test method  for checking the validate map
 	 * 
 	 * @throws Exception
 	 */
@@ -51,7 +52,7 @@ public class TestMap {
 	}
 
 	/**
-	 * check the ConnectedGraph
+	 * This is the test method for  checking the ConnectedGraph
 	 * 
 	 * @throws Exception
 	 */
@@ -71,7 +72,7 @@ public class TestMap {
 	}
 
 	/**
-	 * check whether the map is SubGraph
+	 * This is the test method for checking whether the map is SubGraph
 	 * 
 	 * @throws Exception
 	 */

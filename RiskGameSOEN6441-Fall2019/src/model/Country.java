@@ -99,7 +99,7 @@ public class Country {
 	}
 
 	/**
-	 * 
+	 * This method gets the continent Name
 	 * @return continent Name
 	 */
 	public String getContinentName() {
@@ -107,7 +107,7 @@ public class Country {
 	}
 
 	/**
-	 * set the name of the Continent
+	 * This method set the name of the Continent
 	 * 
 	 * @param continentName
 	 */
@@ -116,7 +116,7 @@ public class Country {
 	}
 
 	/**
-	 * It return number of armies in a country
+	 * This method returns number of armies in a country
 	 * 
 	 * @return integer
 	 */
@@ -125,7 +125,7 @@ public class Country {
 	}
 
 	/**
-	 * it set the number of armies
+	 * This set the number of armies
 	 * 
 	 * @param armies
 	 */
@@ -135,7 +135,7 @@ public class Country {
 	}
 
 	/**
-	 * return name of the country
+	 * This method returns name of the country
 	 * 
 	 * @return name
 	 */
@@ -144,7 +144,7 @@ public class Country {
 	}
 
 	/**
-	 * return name of the player
+	 * This method return name of the player
 	 * 
 	 * @return playerName
 	 */
@@ -153,7 +153,7 @@ public class Country {
 	}
 
 	/**
-	 * set the name of the player
+	 * This method set the name of the player
 	 * 
 	 * @param playerName
 	 */
@@ -162,7 +162,7 @@ public class Country {
 	}
 
 	/**
-	 * return the id of the adjacent Country
+	 * This method returns the id of the adjacent Country
 	 * 
 	 * @return adjacentCountriesID
 	 */
@@ -171,7 +171,7 @@ public class Country {
 	}
 
 	/**
-	 * set the id of the adjacent Country
+	 * This method sets the id of the adjacent Country
 	 * 
 	 * @param listOfAdjacencyLists
 	 */

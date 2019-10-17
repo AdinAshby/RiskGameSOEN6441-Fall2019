@@ -20,7 +20,7 @@ public class Player {
 	private int[] countryIDs;
 	
 	/**
-	 * Player constructor method.
+	 * This is  Player constructor method for initializing PlayerName and countryId
 	 * 
 	 * @param playerID A unique ID for each player.
 	 * @param playerName Corresponding player name.
@@ -32,7 +32,7 @@ public class Player {
 	}
 
 	/**
-	 * Getter for PlayerName.
+	 * This is Getter method for PlayerName.
 	 * 
 	 * @return playerName Returns playerName as a String.
 	 */
@@ -41,7 +41,7 @@ public class Player {
 	}
 
 	/**
-	 * Getter for CountryIDs.
+	 * This is Getter Method for CountryIDs.
 	 * 
 	 * @return getCountryID Returns CountryIDs as an array of integers.
 	 */
@@ -50,7 +50,7 @@ public class Player {
 	}
 
 	/**
-	 * Setter for CountryIDs.
+	 * This is Setter Method for CountryIDs.
 	 * 
 	 * @param countriesIDs Sets a list of countriesIDs to the corresponding field.
 	 */
