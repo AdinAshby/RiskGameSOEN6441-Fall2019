@@ -3,7 +3,7 @@ package model;
 /**
  * This class defines countries in the map
  * 
- * @author f_yazdan
+ * 
  */
 public class Country {
 	/**
@@ -44,7 +44,7 @@ public class Country {
 	// this.countryAdjacency = adjacentCountries;
 	// }
 	/**
-	 * constructor Country
+	 *This is  constructor for initializing Country name
 	 * 
 	 * @param name
 	 */
@@ -58,7 +58,7 @@ public class Country {
 	}
 
 	/**
-	 * constructor Country
+	 * This is constructor for Country name and countryId
 	 * 
 	 * @param name
 	 * @param countryId
@@ -75,14 +75,14 @@ public class Country {
 	}
 
 	/**
-	 * static reset Counter Country
+	 *This static method  resets Counter Country
 	 */
 	public static void resetCountryCounter() {
 		countriesCounter = 0;
 	}
 
 	/**
-	 * 
+	 * This methods returns the contryId
 	 * @return countryId
 	 */
 	public int getCountryId() {
@@ -90,7 +90,7 @@ public class Country {
 	}
 
 	/**
-	 * set the country id
+	 *  This method  set the country id
 	 * 
 	 * @param countryId
 	 */
