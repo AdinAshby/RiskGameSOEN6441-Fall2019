@@ -851,9 +851,14 @@ public class MapBuilder {
 	 * @param armiesAdded
 	 */
 	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
-
-		int oldArmies = getCountryByName(countryName).getArmies();
+		Country country=getCountryByName(countryName);
+		if(country!=null) {
+		int oldArmies = country.getArmies();
 		getCountryByName(countryName).setArmies(armiesAdded + oldArmies);
+		}else {
+			System.out.println("Country not found");
+		}
+		
 	}
 
 	/**
