@@ -834,4 +834,12 @@ public class MapBuilder {
 		}
 		return null;
 	}
+	/// method getCountryAdjacency
+	public AdjacencyList getCountryAdjacency() {
+		return countryAdjacency;
+	}
+
+	public void setCountryAdjacency(AdjacencyList countryAdjacency) {
+		this.countryAdjacency = countryAdjacency;
+	}
 }
