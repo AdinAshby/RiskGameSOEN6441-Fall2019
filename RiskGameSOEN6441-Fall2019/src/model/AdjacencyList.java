@@ -37,7 +37,10 @@ public class AdjacencyList {
 		return adjacencyList.size();
 	}
 	
-	
+	/**
+	 * 
+	 * @return keys
+	 */
 	public ArrayList<Integer> getKeys() {
 		ArrayList<Integer> keys= new ArrayList<Integer>();
 		for ( Integer key : adjacencyList.keySet() ) {
@@ -45,7 +48,11 @@ public class AdjacencyList {
 		}
 		return keys;
 	}
-	
+	/**
+	 * 
+	 * @param key of the adjacency List
+	 * @return
+	 */
 	public ArrayList<Integer> getValues(int key) {
 		return adjacencyList.get(key);
 	}
@@ -68,10 +75,20 @@ public class AdjacencyList {
 		this.adjacencyList = adjacencyList;
 	}
 	
+	/**
+	 * 
+	 * @param vertexId of the adjacency List
+	 * @return
+	 */
 	public ArrayList<Integer> getVertexAdjacency(int vertexId){
 		return adjacencyList.get(vertexId);
 	}
 	
+	/**
+	 * it return String of the Vertex Adjacency 
+	 * @param vertexId
+	 * @return
+	 */
 	public String getVertexAdjacencyString(int vertexId){
 		ArrayList<Integer> Adjlist= adjacencyList.get(vertexId);
 		String list = "";
@@ -203,7 +220,7 @@ public class AdjacencyList {
 	}
 
 	/**
-	 * test the methods here
+	 * test the methods here to check the methods of this class
 	 * 
 	 * @param args
 	 */
