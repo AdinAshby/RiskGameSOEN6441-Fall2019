@@ -47,6 +47,8 @@ public class MapBuilder {
 	private Player[] players;
 
 	private Random random = new Random();
+	
+	private int numberOfArmiesEachPlayerGets;
 
 	/**
 	 * It will return list of continents
@@ -858,11 +860,13 @@ public class MapBuilder {
 	 * 
 	 * @param armiesEachPlayerGets
 	 */
-	public void placeAllArmies(int armiesEachPlayerGets) {
+	public void placeAllArmies() {
 
-		for (Player player : players) {
-			int armiesForEach = armiesEachPlayerGets;
-			while (armiesForEach != 0) {
+		for(Player player : players) {
+			calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+			int armiesForEach = numberOfArmiesEachPlayerGets;
+			
+			while(armiesForEach != 0) {
 				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().length);
 				int randomArmy = random.nextInt(armiesForEach);
 				armiesForEach -= randomArmy;
@@ -934,7 +938,16 @@ public class MapBuilder {
 
 		return continentValuesPlayerGets;
 	}
-
+	
+	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
+		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
+	}
+	
+	public int getNumberOfArmiesEachPlayerGets() {
+		return numberOfArmiesEachPlayerGets;
+	}
+	
+	
 	/**
 	 * 
 	 * @return players
