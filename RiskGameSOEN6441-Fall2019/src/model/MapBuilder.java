@@ -38,7 +38,7 @@ public class MapBuilder {
 	 */
 	private Map<Integer, Continent> continentList = new HashMap<Integer, Continent>(); // continentId=> continentName,
 	// continentValue,
-	private MapView theMapView; // continentColor
+	private MapView theMapView= new MapView(); // continentColor
 	/**
 	 * countryAdjacency
 	 */
@@ -72,7 +72,7 @@ public class MapBuilder {
 
 	public int getCountryListSize() {
 		// System.out.println("Size:" + countryAdjacency.getSize());
-		return countryAdjacency.getSize();
+		return getCountryAdjacency().getSize();
 
 	}
 
@@ -135,7 +135,7 @@ public class MapBuilder {
 		List<Country> countries = continent.getCountriesList();
 		for (Country c : countries) {
 			System.out.println("Country " + c.getCountryName() + "  removed");
-			countryAdjacency.removeVertex(c.getCountryId());
+			getCountryAdjacency().removeVertex(c.getCountryId());
 		}
 		System.out.println("CONTINENT " + continent.getContinentName().toUpperCase() + " removed ");
 		continentList.remove(continentId);
@@ -157,7 +157,7 @@ public class MapBuilder {
 			List<Country> countries = continent.getCountriesList();
 			for (Country c : countries) {
 				System.out.println("Country " + c.getCountryName() + "  removed");
-				countryAdjacency.removeVertex(c.getCountryId());
+				getCountryAdjacency().removeVertex(c.getCountryId());
 			}
 			continentList.remove(continent.getContinentId());
 			System.out.println("CONTINENT " + continentName.toUpperCase() + " removed ");
@@ -210,8 +210,8 @@ public class MapBuilder {
 		 * }
 		 */
 
-		// theMapView.showMap();
-
+		theMapView.showMap(this);
+/*
 		System.out.println("\nPrint Continent:\n------------------------");
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
@@ -227,7 +227,7 @@ public class MapBuilder {
 		System.out.println("[borders]");
 		System.out.println(showCountryAdjacency());
 		System.out.println("------------------------\n");
-
+*/
 	}
 
 	/**
@@ -325,7 +325,7 @@ public class MapBuilder {
 			for (Country c : countriesList) {
 				int countryId = c.getCountryId();
 				// System.out.println("Check Country "+countryId+" from countries List");
-				ArrayList<Integer> listAdj = countryAdjacency.getVertexAdjacency(countryId);
+				ArrayList<Integer> listAdj = getCountryAdjacency().getVertexAdjacency(countryId);
 				for (int neighbor : listAdj) {
 					// System.out.println("Check Neighber="+neighbor);
 					if (!countriesIdList.contains(neighbor)) {
@@ -353,7 +353,7 @@ public class MapBuilder {
 	 * @param targetCountryId
 	 */
 	public void addCountryAdjacency(int countryId, int neighborCountryId) {
-		countryAdjacency.addEdge(countryId, neighborCountryId);
+		getCountryAdjacency().addEdge(countryId, neighborCountryId);
 
 	}
 
@@ -367,11 +367,11 @@ public class MapBuilder {
 		Country country = getCountryByName(countryName);
 		Country neighborCountry = getCountryByName(neighborCountryName);
 		if (country == null) {
-			System.out.println("country is not defined already");
+			System.out.println("country is not defined");
 		} else if (neighborCountry == null) {
-			System.out.println("neighborCountry is not defined already");
+			System.out.println("neighborCountry is not defined");
 		} else {
-			countryAdjacency.addEdge(country.getCountryId(), neighborCountry.getCountryId());
+			getCountryAdjacency().addEdge(country.getCountryId(), neighborCountry.getCountryId());
 			System.out.println(neighborCountryName.toLowerCase() + " added to the " + countryName);
 		}
 	}
@@ -379,15 +379,21 @@ public class MapBuilder {
 	public void removeCountryAdjacency(String countryName, String neighborCountryName) {
 		Country country = getCountryByName(countryName);
 		Country neighborCountry = getCountryByName(neighborCountryName);
-		countryAdjacency.removeEdge(country.getCountryId(), neighborCountry.getCountryId());
+		if (country == null) {
+			System.out.println("country is not defined");
+		} else if (neighborCountry == null) {
+			System.out.println("neighborCountry is not defined");
+		} else {
+		getCountryAdjacency().removeEdge(country.getCountryId(), neighborCountry.getCountryId());
 		System.out.println(neighborCountryName.toLowerCase() + " removed from the " + countryName);
+		}
 	}
 
 	/**
 	 * This method shows country adjacency list
 	 */
 	public String showCountryAdjacency() {
-		return countryAdjacency.showListEdges();
+		return getCountryAdjacency().showListEdges();
 	}
 
 	/**
@@ -402,7 +408,7 @@ public class MapBuilder {
 		}
 
 		continentList = new HashMap<Integer, Continent>();
-		countryAdjacency = new AdjacencyList();
+		setCountryAdjacency(new AdjacencyList());
 		Continent.setContinentsCounter(0);
 
 		BufferedReader bufferedReader = null;
@@ -485,7 +491,7 @@ public class MapBuilder {
 						+ continentId + " L1=" + countryL1 + ", L2=" + countryL2);
 				Country country = new Country(countryName, countryId);
 				getContinent(continentId).addCountry(country);
-				countryAdjacency.addVertex(countryId);
+				getCountryAdjacency().addVertex(countryId);
 			}
 			System.out.println("-------------------------------");
 
@@ -576,8 +582,9 @@ public class MapBuilder {
 	 * @param continentName
 	 */
 	public void addCountry(String countryName, String continentName) {
+		System.out.println(countryName+" "+continentName);
 		Continent continent = getContinent(continentName);
-		Country country = new Country(countryName); // Search if already exist , show error
+		Country country = new Country(countryName); 
 		if (continent == null) {
 			System.out.println("continent not found");
 		} else if (country == null) {
@@ -585,7 +592,7 @@ public class MapBuilder {
 		} else {
 			continent.addCountry(country);
 
-			System.out.println(countryName.toLowerCase() + " by Id=" + country.getCountryId() + " added to  "
+			System.out.println(countryName.toLowerCase() + " with Id=" + country.getCountryId() + " added to  "
 					+ continentName.toUpperCase());
 		}
 	}
@@ -618,7 +625,7 @@ public class MapBuilder {
 			isValid = false;
 			System.out.println("Countries are less than 2");
 		}
-		if (!countryAdjacency.isConnected()) {
+		if (!getCountryAdjacency().isConnected()) {
 			isValid = false;
 			System.out.println("Is not a connected graph");
 		}
@@ -661,10 +668,10 @@ public class MapBuilder {
 		// }
 
 		HashMap<String, ArrayList<String>> borders = new HashMap<String, ArrayList<String>>();
-		ArrayList<Integer> keys = countryAdjacency.getKeys();
+		ArrayList<Integer> keys = getCountryAdjacency().getKeys();
 		for (int key : keys) {
 			String countryName = getCountryNameById(key);
-			ArrayList<Integer> countries = countryAdjacency.getValues(key);
+			ArrayList<Integer> countries = getCountryAdjacency().getValues(key);
 			ArrayList<String> borderNames = new ArrayList<String>();
 			for (int countryId : countries) {
 				borderNames.add(getCountryNameById(countryId));
@@ -827,33 +834,20 @@ public class MapBuilder {
 		return (this.players);
 	}
 
-	public void setPlayer(Player newPlayer) {
 
-		ArrayList<Player> newPlayerLists = new ArrayList<Player>();
-		if (players != null) 
-			for(Player player: players) {
-				newPlayerLists.add(player);
-			}
-
-		newPlayerLists.add(newPlayer);
-
-		players = newPlayerLists.toArray(new Player[newPlayerLists.size()]);
-	}
-
-	public Player getPlayerByName(String playerName) {
-		if (players != null)
-			for(Player player : players) {
-				if(player.getPlayerName().equalsIgnoreCase(playerName))
-					return player;
-			}
-		return null;
-	}
-	/// method getCountryAdjacency
 	public AdjacencyList getCountryAdjacency() {
 		return countryAdjacency;
 	}
 
 	public void setCountryAdjacency(AdjacencyList countryAdjacency) {
 		this.countryAdjacency = countryAdjacency;
+	}
+	public Player getPlayerByName(String playerName) {
+		for(Player player : players) {
+			if(player.getPlayerName().equalsIgnoreCase(playerName))
+				return player;
+		}
+		return null;
+
 	}
 }
