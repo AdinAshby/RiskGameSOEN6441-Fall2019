@@ -789,7 +789,11 @@ public class MapBuilder {
 	}
 
 	public void fortify(String fromCountry, String toCountry, int armiesToMove) {
+		int oldArmiesFromCountry = getCountryByName(fromCountry).getArmies();
+		getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
 		
+		int oldArmiesToCountry = getCountryByName(toCountry).getArmies();
+		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
 	}
 
 	public int playerContinentValuesOwnership(String playerName) {
