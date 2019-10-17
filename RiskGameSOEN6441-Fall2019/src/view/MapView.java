@@ -30,7 +30,7 @@ public class MapView {
 	private MapBuilder theMapBuilder;
 
 	/**
-	 * show the map
+	 * This method show the map
 	 * 
 	 * @param theMapBuilder
 	 */
@@ -89,7 +89,7 @@ public class MapView {
 	}
 
 	/**
-	 * show Player Map
+	 * This method  show Player Map
 	 * 
 	 * @param player
 	 * @param countriesList
@@ -118,7 +118,7 @@ public class MapView {
 	}
 
 	/**
-	 * show the Adjacency Map
+	 * This method show the Adjacency Map
 	 * 
 	 * @param myCountry
 	 * @param countriesList
@@ -143,7 +143,7 @@ public class MapView {
 	}
 
 	/**
-	 * show the Fortify Map
+	 *This method  show the Fortify Map
 	 * 
 	 * @param player
 	 * @param country
@@ -176,7 +176,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method returns the list of Countries by Id
 	 * @param listOfCountries
 	 * @param counter
 	 * @return list Of the Countries by Id
@@ -186,7 +186,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method returns the list of countries by name
 	 * @param listOfCountries
 	 * @param counter
 	 * @return list Of the Countries by name
@@ -197,7 +197,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method  return armies 
 	 * @param listOfCountries
 	 * @param counter
 	 * @return Army
@@ -208,7 +208,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method return continentName of the list of countries
 	 * @param listOfCountries
 	 * @param counter
 	 * @return Continent Name
@@ -218,7 +218,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method return countries Id of adjacent countries
 	 * @param listOfCountries
 	 * @param counter
 	 * @return Adjacent Countries ID
