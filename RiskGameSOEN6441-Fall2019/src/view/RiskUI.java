@@ -256,7 +256,7 @@ public class RiskUI {
 			} else if (editMapAnswer.equalsIgnoreCase("N")) {
 				System.out.println(loadMapRequestingMessage);
 				finished = false;
-				readInput();
+				readInput(); // to avoid incorrect command
 				while (!finished) {
 					isValidCommand = false;
 					readInput();
@@ -387,7 +387,8 @@ public class RiskUI {
 							mapView.showMap(mapBuild);
 						}
 						
-						// placearmy countryname
+						
+						// placearmy countryname done
 						regex = "(?<=placearmy )(.*)";
 						setPattern(regex);
 						setMatcher(input);
