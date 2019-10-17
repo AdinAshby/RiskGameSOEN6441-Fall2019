@@ -891,12 +891,12 @@ public class MapBuilder {
 	 * @param armiesAdded
 	 * @param armiesEachPlayerGets
 	 */
-	public void reinforce(String playerName, String countryName, int armiesAdded, int armiesEachPlayerGets) {
+	public void reinforce(String playerName, String countryName, int armiesAdded) {
 
 		int oldArmies = getCountryByName(countryName).getArmies();
 
 		getCountryByName(countryName)
-				.setArmies(armiesEachPlayerGets + oldArmies + playerContinentValuesOwnership(playerName));
+				.setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
 	}
 
 	/**

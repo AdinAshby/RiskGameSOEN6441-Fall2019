@@ -476,42 +476,59 @@ public class RiskUI {
 				System.out.println(reinforceRequestingMessage);
 				finished = false;
 
-				while(!finished) {
+				for(Player player : mapBuild.getPlayers()) {
+					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
-					isValidCommand = false;
-					readInput();
+					finished = false;
 
-					//reinforce
-					regex = "(?<=reinforce)(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					if (matcher.find()) {
-						addText = matcher.group(1);
+					int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
 
-						regex = "(([\\w*\\_\\-]*) (\\d*))+";
+					while(!finished) {
+
+						isValidCommand = false;
+
+						System.out.println("Player " + player.getPlayerName() + ":");
+						System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
+						readInput();
+
+						// showmap
+						regex = "showmap";
 						setPattern(regex);
-						setMatcher(addText);
-						while (matcher.find()) {
-							String countryName = matcher.group(2);
-							int num = Integer.parseInt(matcher.group(3));
-							///fun ....(countryName, num);
+						setMatcher(input);
+						if (getMatcher().find()) {
 							isValidCommand = true;
-
+							mapView.showMap(mapBuild);
 						}
-					}
 
-					// showmap
-					regex = "showmap";
-					setPattern(regex);
-					setMatcher(input);
-					if (getMatcher().find()) {
-						isValidCommand = true;
-						mapView.showMap(mapBuild);
+						//reinforce
+						regex = "(?<=reinforce)(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						if (matcher.find()) {
+							addText = matcher.group(1);
 
-					}
+							regex = "(([\\w*\\_\\-]*) (\\d*))+";
+							setPattern(regex);
+							setMatcher(addText);
+							if (matcher.find()) {
+								String countryName = matcher.group(2);
+								int num = Integer.parseInt(matcher.group(3));
+								
+								if(num < mapBuild.getNumberOfArmiesEachPlayerGets()) {
+									mapBuild.reinforce(player.getPlayerName(), countryName, num);
+									isValidCommand = true;
+									temporaryArmies -= num;
+									
+									if(temporaryArmies <= 0) {
+										finished = true;
+									}
+								}
+							}
+						}
 
-					if (!isValidCommand) {
-						System.out.println("Correct command not found");
+						if (!isValidCommand) {
+							System.out.println("Correct command not found");
+						}
 					}
 				}
 
