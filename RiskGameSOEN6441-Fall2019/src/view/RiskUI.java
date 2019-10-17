@@ -394,15 +394,15 @@ public class RiskUI {
 						addText = "";
 						if (matcher.find()) {
 							addText = matcher.group(1);
-						}
-
-						regex = "([\\w*\\_\\-]*)+";
-						setPattern(regex);
-						setMatcher(addText);
-						while (getMatcher().find()) {
-							String countryName = matcher.group(1);
-							mapBuild.assignInitialsArmiesToSpecificCountry(countryName, mapBuild.getNumberOfArmiesEachPlayerGets());
-							isValidCommand = true;
+							
+							regex = "([\\w*\\_\\-]*)+";
+							setPattern(regex);
+							setMatcher(addText);
+							while (getMatcher().find()) {
+								String countryName = matcher.group(1);
+								mapBuild.assignInitialsArmiesToSpecificCountry(countryName, mapBuild.getNumberOfArmiesEachPlayerGets());
+								isValidCommand = true;
+							}
 						}
 
 						if (!isValidCommand) {
