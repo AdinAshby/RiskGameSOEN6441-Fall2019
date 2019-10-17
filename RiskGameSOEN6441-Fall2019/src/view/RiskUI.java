@@ -135,7 +135,7 @@ public class RiskUI {
 					while (matcher.find()) {
 						String countryName = matcher.group(2);
 						String continentName = matcher.group(3);
-						mapBuild.addCountry(continentName, continentName);
+						mapBuild.addCountry(countryName, continentName);
 						isValidCommand = true;
 
 					}
@@ -148,17 +148,15 @@ public class RiskUI {
 					if (matcher.find()) {
 						addText = matcher.group(1);
 					}
-					regex = "(-remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-					setPattern(regex);
-					setMatcher(addText);
-					while (matcher.find()) {
-						String countryName = matcher.group(2);
-						String neighborCountryName = matcher.group(3);
-						///////
-						mapBuild.removeCountry(countryName);
-						isValidCommand = true;
+					regex = "(-remove ([\\w*\\_\\-]*))+";
+			pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+			matcher = pattern.matcher(addText);
+			while (matcher.find()) {
+				String countryName = matcher.group(2);
+				mapBuild.removeCountry(countryName);
+				isValidCommand = true;
 
-					}
+			}
 
 					// add neighbor done
 					regex = "(?<=editneighbor)(.*)";
@@ -172,8 +170,8 @@ public class RiskUI {
 					setPattern(regex);
 					setMatcher(addText);
 					while (matcher.find()) {
-						String countryName = matcher.group(1);
-						String neighborCountryName = matcher.group(3);
+					String countryName = matcher.group(2);
+				String neighborCountryName = matcher.group(3);
 						mapBuild.addCountryAdjacency(countryName, neighborCountryName);
 						isValidCommand = true;
 
