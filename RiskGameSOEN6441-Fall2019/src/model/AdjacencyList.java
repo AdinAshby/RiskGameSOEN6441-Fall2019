@@ -75,8 +75,11 @@ public class AdjacencyList {
 	public String getVertexAdjacencyString(int vertexId){
 		ArrayList<Integer> Adjlist= adjacencyList.get(vertexId);
 		String list = "";
+		if(Adjlist!=null) {
+		
 		for (int adj : Adjlist) {
 			list += adj+" ";
+		}
 		}
 		return list;
 		
@@ -189,6 +192,7 @@ public class AdjacencyList {
 	 * @return true 
 	 */
 	public boolean isConnected() {
+		if(adjacencyList.size()==0) {return false;}
 		for (Entry<Integer, ArrayList<Integer>> entry : adjacencyList.entrySet()) {
 			ArrayList<Integer> values=entry.getValue();
 			if(values.size()==0) {
