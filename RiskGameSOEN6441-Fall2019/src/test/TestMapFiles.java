@@ -9,7 +9,7 @@ import model.MapBuilder;
  * 
  * @author s_shehna
  * @author f_yazdan
- * @author Babita kaur
+
  *
  */
 public class TestMapFiles {

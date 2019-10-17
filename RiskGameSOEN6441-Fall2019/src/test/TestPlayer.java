@@ -6,10 +6,7 @@ import model.Player;
 
 /**
  * This test class tests the player class methods
- * 
  * @author s_shehna
- * @author Babita kaur
- *
  */
 public class TestPlayer {
 	/**
@@ -36,7 +33,6 @@ public class TestPlayer {
 	}
 	/**
 	 * This is the test method for checking the CountryId of Player
-	 * 
 	 * 
 	 */
 	@Test
