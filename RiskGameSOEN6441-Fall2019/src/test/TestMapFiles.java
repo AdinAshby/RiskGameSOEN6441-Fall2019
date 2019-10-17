@@ -5,9 +5,10 @@ import org.junit.Assert;
 import model.MapBuilder;
 
 /**
- * This class contain testcases to test map files
+ * This class contain test cases to test map files
  * 
  * @author s_shehna
+ * @author f_yazdan
  *
  */
 public class TestMapFiles {
@@ -24,11 +25,21 @@ public class TestMapFiles {
 	 */
 	String invalid_file = "test2";
 
+	/**
+	 * check whether the map file is valid
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testValidMapFiles() throws Exception {
 		Assert.assertEquals(true, mb.loadMap(valid_file));
 	}
 
+	/**
+	 * check whether the map file is inValid
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testInvalidMapFiles() throws Exception {
 		Assert.assertEquals(false, mb.loadMap(invalid_file));
