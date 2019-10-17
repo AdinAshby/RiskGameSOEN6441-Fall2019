@@ -228,7 +228,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method return playerName of country
 	 * @param listOfCountries
 	 * @param counter
 	 * @return Player Name
@@ -239,7 +239,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method returns list of player countries
 	 * @param playerName
 	 * @param countriesList
 	 * @return player Countries
@@ -255,7 +255,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method return adajcent countries of country
 	 * @param countryName
 	 * @param countriesList
 	 * @return adjacent Countries
@@ -271,7 +271,7 @@ public class MapView {
 	}
 
 	/**
-	 * 
+	 * This method return specific adjacent country for fortification for player
 	 * @param playerName
 	 * @param specificCountryID
 	 * @param countriesList
