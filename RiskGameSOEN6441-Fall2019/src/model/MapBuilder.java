@@ -944,6 +944,32 @@ public class MapBuilder {
 		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
 
 	}
+	
+	public boolean fortifyIsValid(Player player, String fromCountry, String toCountry, int num) {
+		boolean fromCountryCheck = false;
+		boolean toCountryCheck = false;
+		
+		
+		if(num < getCountryByName(fromCountry).getArmies() || num > getCountryByName(fromCountry).getArmies())
+			return false;
+		
+		for(int countryID : player.getCountryIDs()) {
+			if (getCountryByName(fromCountry) == getCountryById(countryID)) {
+				fromCountryCheck = true;
+			}
+		}
+		
+		for(int countryID : player.getCountryIDs()) {
+			if (getCountryByName(toCountry) == getCountryById(countryID)) {
+				toCountryCheck = true;
+			}
+		}
+		
+		if(fromCountryCheck && toCountryCheck)
+			return true;
+		
+		return false;
+	}
 
 	/**
 	 * In This method  The player Continent Values Ownership

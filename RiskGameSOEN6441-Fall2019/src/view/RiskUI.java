@@ -555,14 +555,12 @@ public class RiskUI {
 					finished = false;
 					isValidCommand = false;
 
-					//int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
 
 					while(!finished) {
 
 						isValidCommand = false;
 
 						System.out.println("Player " + player.getPlayerName() + ":");
-						//System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
 						readInput();
 
 						// showmap
@@ -592,11 +590,16 @@ public class RiskUI {
 							setPattern(regex);
 							setMatcher(addText);
 							if (matcher.find()) {
+
 								String fromCountry = matcher.group(2);
 								String toCountry = matcher.group(3);
 								int num = Integer.parseInt(matcher.group(4));
 
-								mapBuild.fortify(fromCountry, toCountry, num);
+								if(mapBuild.fortifyIsValid(player, fromCountry, toCountry, num) == true) {
+									mapBuild.fortify(fromCountry, toCountry, num);
+								} else {
+									System.out.println("Fortify is not valid");
+								}
 
 								isValidCommand = true;
 							}
