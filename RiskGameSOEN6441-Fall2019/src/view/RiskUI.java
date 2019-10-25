@@ -475,7 +475,7 @@ public class RiskUI {
 
 				System.out.println(reinforceRequestingMessage);
 				finished = false;
-		
+
 
 				for(Player player : mapBuild.getPlayers()) {
 					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
@@ -517,13 +517,19 @@ public class RiskUI {
 								int num = Integer.parseInt(matcher.group(3));
 
 								if(num <= mapBuild.getNumberOfArmiesEachPlayerGets()) {
-									mapBuild.reinforce(player.getPlayerName(), countryName, num);
-									isValidCommand = true;
-									temporaryArmies -= num;
+									if(mapBuild.reinforceIsValid(player.getPlayerName(), countryName, num) == true) {
+										mapBuild.reinforce(player.getPlayerName(), countryName, num);
+										temporaryArmies -= num;
 
-									if(temporaryArmies <= 0) {
-										finished = true;
+										if(temporaryArmies <= 0) {
+											finished = true;
+										}
+
+									} else {
+										System.out.println("Reinforce is not valid");
 									}
+
+									isValidCommand = true;
 								}
 							}
 						}
@@ -576,8 +582,7 @@ public class RiskUI {
 						setMatcher(input);
 						if (matcher.find()) {
 							addText = matcher.group(1);
-
-							regex = "(([\\w*\\_\\-]*) ([\\\\w*\\\\_\\\\-]*) (\\d*))+";
+							regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d*))+";
 							setPattern(regex);
 							setMatcher(addText);
 							if (matcher.find()) {

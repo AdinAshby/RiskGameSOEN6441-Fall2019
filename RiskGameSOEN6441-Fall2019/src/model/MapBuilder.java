@@ -48,7 +48,7 @@ public class MapBuilder {
 	private Player[] players;
 
 	private Random random = new Random();
-	
+
 	private int numberOfArmiesEachPlayerGets;
 
 	/**
@@ -853,12 +853,12 @@ public class MapBuilder {
 	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
 		Country country=getCountryByName(countryName);
 		if(country!=null) {
-		int oldArmies = country.getArmies();
-		getCountryByName(countryName).setArmies(armiesAdded + oldArmies);
-		}else {
+			int oldArmies = country.getArmies();
+			getCountryByName(countryName).setArmies(armiesAdded + oldArmies);
+		} else {
 			System.out.println("Country not found");
 		}
-		
+
 	}
 
 	/**
@@ -871,7 +871,7 @@ public class MapBuilder {
 		for(Player player : players) {
 			calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 			int armiesForEach = numberOfArmiesEachPlayerGets;
-			
+
 			while(armiesForEach > 0) {
 				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().length);
 				int randomArmy = random.nextInt(armiesForEach) + 1;
@@ -896,7 +896,24 @@ public class MapBuilder {
 		int oldArmies = getCountryByName(countryName).getArmies();
 
 		getCountryByName(countryName)
-				.setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
+		.setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
+	}
+
+	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
+
+		if (armiesAdded < 0) {
+			return false;
+		}
+		
+		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
+		
+		for(int countryID: playerCountries) {
+			if (getCountryByName(countryName) == getCountryById(countryID)) {
+				return true;
+			}
+		}
+			
+		return false;
 	}
 
 	/**
@@ -912,6 +929,7 @@ public class MapBuilder {
 
 		int oldArmiesToCountry = getCountryByName(toCountry).getArmies();
 		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
+
 	}
 
 	/**
@@ -946,16 +964,15 @@ public class MapBuilder {
 
 		return continentValuesPlayerGets;
 	}
-	
+
 	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
 		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
 	}
-	
+
 	public int getNumberOfArmiesEachPlayerGets() {
 		return numberOfArmiesEachPlayerGets;
 	}
-	
-	
+
 	/**
 	 * This method return all the players
 	 * @return players
@@ -992,6 +1009,5 @@ public class MapBuilder {
 				return player;
 		}
 		return null;
-
 	}
 }
