@@ -858,7 +858,20 @@ public class MapBuilder {
 		} else {
 			System.out.println("Country not found");
 		}
-
+	}
+	
+	public boolean placearmyIsValid(Player player, String countryName) {
+		
+		int[] playerCountries = player.getCountryIDs();
+		
+		for(int countryID: playerCountries) {
+			if (getCountryByName(countryName) == getCountryById(countryID)) {
+				return true;
+			}
+		}
+		
+		
+		return false;
 	}
 
 	/**

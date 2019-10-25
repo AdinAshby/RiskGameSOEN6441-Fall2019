@@ -456,10 +456,16 @@ public class RiskUI {
 
 						if (getMatcher().find()) {
 							String countryName = matcher.group(1);
-							mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
-									mapBuild.getNumberOfArmiesEachPlayerGets());
+
+							if(mapBuild.placearmyIsValid(player, countryName) == true) {
+								mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
+										mapBuild.getNumberOfArmiesEachPlayerGets());
+								finished = true;
+							} else {
+								System.out.println("placearmy is not valid");
+							}
+
 							isValidCommand = true;
-							finished = true;
 						}
 
 						if (!isValidCommand) {
