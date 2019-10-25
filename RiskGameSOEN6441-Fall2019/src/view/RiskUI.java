@@ -415,9 +415,9 @@ public class RiskUI {
 
 				for(Player player : mapBuild.getPlayers()) {
 					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
-					
+
 					finished = false;
-					
+
 					while(!finished) {
 
 						isValidCommand = false;
@@ -466,7 +466,7 @@ public class RiskUI {
 							System.out.println("Correct command not found");
 						}
 					}
-					
+
 					if (placeAllFlag == true) {
 						break;
 					}
@@ -513,12 +513,12 @@ public class RiskUI {
 							if (matcher.find()) {
 								String countryName = matcher.group(2);
 								int num = Integer.parseInt(matcher.group(3));
-								
+
 								if(num < mapBuild.getNumberOfArmiesEachPlayerGets()) {
 									mapBuild.reinforce(player.getPlayerName(), countryName, num);
 									isValidCommand = true;
 									temporaryArmies -= num;
-									
+
 									if(temporaryArmies <= 0) {
 										finished = true;
 									}
@@ -535,55 +535,66 @@ public class RiskUI {
 				System.out.println(fortifyRequestingMessage);
 				finished = false;
 
-				while(!finished) {
+				for(Player player : mapBuild.getPlayers()) {
+					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
-					isValidCommand = false;
-					readInput();
+					finished = false;
 
-					// fortify fromcountry tocountry num
-					regex = "(?<=fortify)(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					String fortify = "";
-					if (matcher.find()) {
-						addText = matcher.group(1);
-					}
-					regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d*))+";
-					setPattern(regex);
-					setMatcher(addText);
-					while (matcher.find()) {
-						String fromCountry = matcher.group(2);
-						String toCountry = matcher.group(3);
-						int num = Integer.parseInt(matcher.group(4));
+					//int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
 
-						///fun....
-						isValidCommand = true;
+					while(!finished) {
 
-					}
+						isValidCommand = false;
 
-					// fortify none
-					regex = "fortify none";
+						System.out.println("Player " + player.getPlayerName() + ":");
+						//System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
+						readInput();
 
-					if (input.equalsIgnoreCase(regex)) {
-						isValidCommand = true;
-						finished = true;
-					}
+						// showmap
+						regex = "showmap";
+						setPattern(regex);
+						setMatcher(input);
+						if (getMatcher().find()) {
+							isValidCommand = true;
+							mapView.showMap(mapBuild);
+						}
 
-					// showmap
-					regex = "showmap";
-					setPattern(regex);
-					setMatcher(input);
-					if (getMatcher().find()) {
-						isValidCommand = true;
-						mapView.showMap(mapBuild);
+						// fortify none
+						regex = "fortify none";
 
+						if (input.equalsIgnoreCase(regex)) {
+							isValidCommand = true;
+							finished = true;
+						}
+
+						//fortify
+						regex = "(?<=fortify)(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						if (matcher.find()) {
+							addText = matcher.group(1);
+
+							regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d*))+";
+							setPattern(regex);
+							setMatcher(addText);
+							if (matcher.find()) {
+								String fromCountry = matcher.group(2);
+								String toCountry = matcher.group(3);
+								int num = Integer.parseInt(matcher.group(4));
+
+								mapBuild.fortify(fromCountry, toCountry, num);
+
+								isValidCommand = true;
+							}
+						}
 					}
 
 					if (!isValidCommand) {
 						System.out.println("Correct command not found");
 					}
 				}
-			}
+			}				
+
 		}
 	}
 	/**
