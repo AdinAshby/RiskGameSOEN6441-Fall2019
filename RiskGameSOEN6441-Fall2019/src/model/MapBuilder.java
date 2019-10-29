@@ -950,7 +950,7 @@ public class MapBuilder {
 		boolean toCountryCheck = false;
 		
 		
-		if(num < getCountryByName(fromCountry).getArmies() || num > getCountryByName(fromCountry).getArmies())
+		if(num < 0 || num > getCountryByName(fromCountry).getArmies())
 			return false;
 		
 		for(int countryID : player.getCountryIDs()) {
