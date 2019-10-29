@@ -61,11 +61,11 @@ public class MapView {
 		table = "|%-14d|%-23s|%-18s|%-28s|%-15s|%-15s|%n";
 
 		System.out.format(
-				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
+				"+--------------+-----------------------+------------------+----------------------------+---------------+---------------+%n");
 		System.out.format(
-				"| Country's ID | Country's name | Continent's Name |   Adjacent countries' ID   | No. of armies | Player's name |%n");
+				"| Country's ID |     Country's name    | Continent's Name |   Adjacent countries' ID   | No. of armies | Player's name |%n");
 		System.out.format(
-				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
+				"+--------------+-----------------------+------------------+----------------------------+---------------+---------------+%n");
 
 		while (iteratorForContinent.hasNext()) {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) iteratorForContinent.next();
@@ -85,7 +85,7 @@ public class MapView {
 		}
 
 		System.out.format(
-				"+--------------+----------------+------------------+----------------------------+---------------+---------------+%n");
+				"+--------------+-----------------------+------------------+----------------------------+---------------+---------------+%n");
 	}
 
 	/**

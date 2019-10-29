@@ -9,6 +9,7 @@ import view.RiskUI;
  *
  */
 public class RiskMain {
+	
 	/**
 	 * Create an object of the UI risk to start the game
 	 * 
