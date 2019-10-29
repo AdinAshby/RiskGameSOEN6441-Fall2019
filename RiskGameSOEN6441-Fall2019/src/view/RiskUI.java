@@ -328,13 +328,17 @@ public class RiskUI {
 					if (matcher.find()) {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
-						finished = true;
+						boolean isLoaded = false;
 						try {
-							mapBuild.loadMap(mapFileName);
+							isLoaded=mapBuild.loadMap(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						if(isLoaded==true) {
+							finished = true;
+						}
+						
 					}
 
 					if (!isValidCommand) {
