@@ -349,7 +349,22 @@ public class RiskUI {
 
 					isValidCommand = false;
 					readInput();
+					// savemap filename done
+					regex = "savemap ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						mapFileName = matcher.group(1);
+						isValidCommand = true;
 
+						try {
+							mapBuild.saveMap(mapFileName);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
 					// gameplayer -add
 					regex = "(?<=gameplayer)(.*)";
 					setPattern(regex);
@@ -586,15 +601,16 @@ public class RiskUI {
 						setMatcher(input);
 						if (matcher.find()) {
 							addText = matcher.group(1);
-							regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d*))+";
+							regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+))+"; 
 							setPattern(regex);
 							setMatcher(addText);
 							if (matcher.find()) {
-
+								
 								String fromCountry = matcher.group(2);
 								String toCountry = matcher.group(3);
-								int num = Integer.parseInt(matcher.group(4));
-
+								int num = Integer.parseInt(matcher.group(4)); 
+								
+								
 								if(mapBuild.fortifyIsValid(player, fromCountry, toCountry, num) == true) {
 									mapBuild.fortify(fromCountry, toCountry, num);
 								} else {
