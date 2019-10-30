@@ -638,75 +638,76 @@ public class RiskUI {
 //Country attacker=;
 						Country attackerCountry=mapBuild.getCountryByName(attackerCountryName);
 						Country attackingCountry=mapBuild.getCountryByName(attackingCountryName);
-						System.out.println("Armies in Attacking "+attackingCountryName+attackingCountry.getArmies());
+						System.out.println("Armies in Attacking "+attackingCountryName+" is "+attackingCountry.getArmies());
 						if(numDice>attackingCountry.getArmies() || numDice>3) {
 							System.out.println("attacking dice should not be more than the number of armies contained in the attacking country or more than 3");
 							isValidCommand = false;
-						}
-						if(mapBuild.isAdjacentCountry(attackerCountry.getCountryId(), attackingCountry.getCountryId())) {
+						}else if(!mapBuild.isAdjacentCountry(attackerCountry.getCountryId(), attackingCountry.getCountryId())) {
 							System.out.println("Countries are not adjacent");
 							isValidCommand = false;
+							
+							/// Country shoule be owned and atacking country for opponent
+						}else {
+
+							finished = true;
+							isValidCommand = true;
+							// Show name of player of defend country and ask him/her to roll dice by DEFEND command
 						}
 						
 						/*
 						 * String allOut = matcher.group(5); String noAttack = matcher.group(6);
 						 */
 
-						finished = true;
-						isValidCommand = true;
 					} else {
-						System.out.println("Attack is not valid");
+						isValidCommand = false;
 					}
 
 				}
 
 				// defend numdice
 
-				regex = "defend ((\\d+)*)";
+				regex = "(?<=defend) (\\d+)";
 				setPattern(regex);
 				setMatcher(input);
 
 				if (matcher.find()) {
-					int numDice = Integer.parseInt(matcher.group(1));
-					isValidCommand = true;
 					try {
-						System.out.println("Defend by: " + numDice);
-
-						// numDice=0;
-
-					} catch (Exception e) {
+					int numDice = Integer.parseInt(matcher.group(1));
+//					if(numDice>attackingCountry.getArmies() || numDice>3) {
+//						System.out.println("defending dice should not be more than the number of armies contained in the attacking country or more than 3");
+//						isValidCommand = false;
+//					}else {
+//					isValidCommand = true;
+//						System.out.println("Defend by: " + numDice);
+//					}
+					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println("NumDice should be integer");
 					}
-					finished = true;
-					isValidCommand = true;
 				} else {
-					//System.out.println("Defend is not valid");
+					isValidCommand = false;
 				}
 
 				// attackmove num
 
-				regex = "attackmove ((\\d+)*)";
+				regex = "(?<=attackmove) (\\d+)";
 				setPattern(regex);
 				setMatcher(input);
 
 				if (matcher.find()) {
-					int numAttack = Integer.parseInt(matcher.group(1));
-					isValidCommand = true;
-					boolean isLoaded = false;
 					try {
-
+						int numAttack = Integer.parseInt(matcher.group(1));
+						isValidCommand = true;
 						System.out.println("attackmove : " + numAttack);
-
-					} catch (Exception e) {
+					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println("NumDice should be integer");
 					}
-					//finished = true;
 					isValidCommand = true;
 				} else {
-				//	System.out.println("Attack Move is not valid");
+					isValidCommand = false;
 				}
+
 
 				if (!isValidCommand) {
 					System.out.println("Correct command not found");

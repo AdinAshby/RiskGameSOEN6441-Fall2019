@@ -255,6 +255,7 @@ public class AdjacencyList {
 	}
 
 	public boolean isAdjacent(int vertex1, int vertex2) {
+		
 		ArrayList<Integer> adjacencyList = getVertexAdjacency(vertex1);
 		if (adjacencyList.contains(vertex2)) {
 			return true;
