@@ -1,13 +1,14 @@
 package view;
 
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import model.Dice;
 import model.MapBuilder;
 import model.Player;
+
 /**
  * This is a Risk UI class
  * 
@@ -16,7 +17,7 @@ import model.Player;
  */
 
 public class RiskUI {
-	/**	
+	/**
 	 * private mapBuild
 	 */
 
@@ -32,7 +33,7 @@ public class RiskUI {
 
 	private String welcomeMessage = "\t\t*****Risk Game*****";
 	/**
-	 *  private editMapYesOrNoMessage
+	 * private editMapYesOrNoMessage
 	 */
 
 	private String editMapYesOrNoMessage = "Do you want to create/edit map? (Y/N)\n";
@@ -63,6 +64,9 @@ public class RiskUI {
 	 * private fortifyRequestingMessage
 	 */
 	private String fortifyRequestingMessage = "Let's fortify! or type in \"fortify none\" if you don't want to.\n";
+
+	private String attackRequestingMessage = "Let's Attack\n";
+
 	/**
 	 * private scanner
 	 */
@@ -84,19 +88,23 @@ public class RiskUI {
 	 */
 	private Matcher matcher;
 	/**
-	 * private  playerNames
+	 * private playerNames
 	 */
 	private ArrayList<String> playerNames = new ArrayList<String>();
+
 	/**
 	 * This is RiskUI constructor
 	 */
 	public RiskUI() {
 		scanner = new Scanner(System.in);
 	}
+
 	/**
 	 * This method is to start the game
+	 * 
+	 * @throws Exception
 	 */
-	public void RiskUIStartTheGame() {
+	public void RiskUIStartTheGame() throws Exception {
 
 		boolean isValidCommand = false;
 		String mapFileName = null;
@@ -106,16 +114,28 @@ public class RiskUI {
 		boolean finished = false;
 		boolean placeAllFlag = false;
 
-
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
 		editMapAnswer = scanner.nextLine();
-		String addText="";
-		if(editMapAnswer.equalsIgnoreCase("Y")) {
-			while(!finished) {
-				System.out.println(editMapRequestingMessage);
+		String addText = "";
+		Dice dice = new Dice();
 
+		boolean debug = true;
+		if (debug == true) {
+			mapBuild.loadMap("ameroki");
+			playerNames.add("Aval");
+			playerNames.add("Dovom");
+
+			mapBuild.assigningPlayersToCountries(playerNames);
+			mapBuild.placeAllArmies();
+			mapBuild.showMap();
+			editMapAnswer = "N";
+		}
+
+		if (editMapAnswer.equalsIgnoreCase("Y")) {
+			while (!finished) {
+				System.out.println(editMapRequestingMessage);
 
 				isValidCommand = false;
 				readInput();
@@ -136,9 +156,6 @@ public class RiskUI {
 					isValidCommand = true;
 				}
 
-
-
-
 				// added multiple time editcontinent -add aa 1 -add bb 2
 				// add continent done
 				regex = "(?<=editcontinent)(.*)";
@@ -158,7 +175,6 @@ public class RiskUI {
 					isValidCommand = true;
 
 				}
-
 
 				// remove continent done
 				regex = "(?<=editcontinent)(.*)";
@@ -290,7 +306,7 @@ public class RiskUI {
 
 				}
 
-				// showadjacencymap countryname 
+				// showadjacencymap countryname
 				regex = "showadjacencymap ([\\w*\\_\\-]*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -315,7 +331,7 @@ public class RiskUI {
 			System.out.println(loadMapRequestingMessage);
 			finished = false;
 
-			while (!finished) {
+			while (!finished && debug == false) {
 				isValidCommand = false;
 				readInput();
 
@@ -329,12 +345,12 @@ public class RiskUI {
 					isValidCommand = true;
 					boolean isLoaded = false;
 					try {
-						isLoaded=mapBuild.loadMap(mapFileName);
+						isLoaded = mapBuild.loadMap(mapFileName);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					if(isLoaded==true) {
+					if (isLoaded == true) {
 						finished = true;
 					}
 
@@ -348,7 +364,7 @@ public class RiskUI {
 			System.out.println(addOrRemovePlayersRequestingMessage);
 			finished = false;
 
-			while(!finished) {
+			while (!finished && debug == false) {
 
 				isValidCommand = false;
 				readInput();
@@ -409,7 +425,7 @@ public class RiskUI {
 				if (getMatcher().find()) {
 					isValidCommand = true;
 					finished = true;
-					mapBuild.assigningPlayersToCountries(playerNames);;
+					mapBuild.assigningPlayersToCountries(playerNames);
 
 				}
 
@@ -431,12 +447,12 @@ public class RiskUI {
 			System.out.println(startupRequestingMessage);
 			finished = false;
 
-			for(Player player : mapBuild.getPlayers()) {
+			for (Player player : mapBuild.getPlayers()) {
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
 				finished = false;
 
-				while(!finished) {
+				while (!finished && debug == false) {
 
 					isValidCommand = false;
 
@@ -475,7 +491,7 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						String countryName = matcher.group(1);
 
-						if(mapBuild.placearmyIsValid(player, countryName) == true) {
+						if (mapBuild.placearmyIsValid(player, countryName) == true) {
 							mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
 									mapBuild.getNumberOfArmiesEachPlayerGets());
 							finished = true;
@@ -500,8 +516,7 @@ public class RiskUI {
 			System.out.println(reinforceRequestingMessage);
 			finished = false;
 
-
-			for(Player player : mapBuild.getPlayers()) {
+			for (Player player : mapBuild.getPlayers()) {
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
 				finished = false;
@@ -509,7 +524,7 @@ public class RiskUI {
 
 				int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
 
-				while(!finished) {
+				while (!finished) {// && debug == false
 
 					isValidCommand = false;
 
@@ -526,7 +541,7 @@ public class RiskUI {
 						mapView.showMap(mapBuild);
 					}
 
-					//reinforce
+					// reinforce
 					regex = "(?<=reinforce)(.*)";
 					setPattern(regex);
 					setMatcher(input);
@@ -538,43 +553,174 @@ public class RiskUI {
 						setMatcher(addText);
 						if (matcher.find()) {
 							String countryName = matcher.group(2);
-							int num = Integer.parseInt(matcher.group(3));
+							int num;
+							try {
+								num = Integer.parseInt(matcher.group(3));
+								if (num <= mapBuild.getNumberOfArmiesEachPlayerGets()) {
+									if (mapBuild.reinforceIsValid(player.getPlayerName(), countryName, num) == true) {
+										mapBuild.reinforce(player.getPlayerName(), countryName, num);
+										temporaryArmies -= num;
 
-							if(num <= mapBuild.getNumberOfArmiesEachPlayerGets()) {
-								if(mapBuild.reinforceIsValid(player.getPlayerName(), countryName, num) == true) {
-									mapBuild.reinforce(player.getPlayerName(), countryName, num);
-									temporaryArmies -= num;
+										if (temporaryArmies <= 0) {
+										//	finished = true;
+										}
 
-									if(temporaryArmies <= 0) {
-										finished = true;
+									} else {
+										System.out.println("Reinforce is not valid");
 									}
 
-								} else {
-									System.out.println("Reinforce is not valid");
+									isValidCommand = true;
 								}
-
-								isValidCommand = true;
+							} catch (NumberFormatException e) {
+								System.out.println("Enter number of armies");
 							}
+
 						}
+					} // Match Find Reinforce
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+
+			/*
+			 ************************************************
+			 ************************************************
+			 ************************************************
+			 ************* Attack **********************
+			 ************************************************
+			 ************************************************
+			 ************************************************
+			 *
+			 */
+			// attack
+			System.out.println(attackRequestingMessage);
+			/*
+			 * int maxDic=0; Player maxPlayer=null; for(Player player :
+			 * mapBuild.getPlayers()) { int diceNumber=dice.getNumDice();
+			 * System.out.println(player.getPlayerName()+" rolled: "+diceNumber);
+			 * if(diceNumber>maxDic) { maxDic=diceNumber; maxPlayer=player; }
+			 * 
+			 * } System.out.println("Player "+maxPlayer.getPlayerName()+" start to attack");
+			 */
+
+
+				regex = "(?<=attack)(.*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+					addText = matcher.group(1);
+					regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+) (-allout)(-noattack))+";
+					setPattern(regex);
+					setMatcher(addText);
+					if (matcher.find()) {
+
+						String countyNameFrom = matcher.group(2);
+						String countryNameTo = matcher.group(3);
+						int numDice = Integer.parseInt(matcher.group(4));
+
+						System.out.println("Attacck from country name: " + countyNameFrom + "\n"
+								+ "Attacck To country name: " + countryNameTo + "\n" + "number od dice" + numDice);
+
+						/*
+						 * String allOut = matcher.group(5); String noAttack = matcher.group(6);
+						 */
+
+						finished = true;
+						isValidCommand = true;
+					} else {
+						System.out.println("Attack is not valid");
 					}
 
-					if (!isValidCommand) {
-						System.out.println("Correct command not found");
-					}
 				}
+
+				// defend numdice
+
+				regex = "defend ((\\d+)*)";
+				setPattern(regex);
+				setMatcher(input);
+
+				if (matcher.find()) {
+					int numDice = Integer.parseInt(matcher.group(1));
+					isValidCommand = true;
+					try {
+						System.out.println("Defend by: " + numDice);
+
+						// numDice=0;
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					finished = true;
+					isValidCommand = true;
+				} else {
+					System.out.println("Defend is not valid");
+				}
+
+				// attackmove num
+
+				regex = "attackmove ((\\d+)*)";
+				setPattern(regex);
+				setMatcher(input);
+
+				if (matcher.find()) {
+					int numAttack = Integer.parseInt(matcher.group(1));
+					isValidCommand = true;
+					boolean isLoaded = false;
+					try {
+
+						System.out.println("attackmove : " + numAttack);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					//finished = true;
+					isValidCommand = true;
+				} else {
+					System.out.println("Attack Move is not valid");
+				}
+
+				if (!isValidCommand) {
+					System.out.println("Correct command not found");
+				}
+			
+
+			mapBuild.showMap();
+
+			//////////
+
+			///////
+
+			/// end of the attack phase
+			
+			if (!isValidCommand) {
+				System.out.println("Correct command not found");
 			}
+
+		} // End of While(!finished)
+	} // Endof For Player
 
 			System.out.println(fortifyRequestingMessage);
 			finished = false;
 
-			for(Player player : mapBuild.getPlayers()) {
+			for (Player player : mapBuild.getPlayers()) {
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
 				finished = false;
 				isValidCommand = false;
 
-
-				while(!finished) {
+				while (!finished) {
 
 					isValidCommand = false;
 
@@ -598,23 +744,22 @@ public class RiskUI {
 						finished = true;
 					}
 
-					//fortify
+					// fortify
 					regex = "(?<=fortify)(.*)";
 					setPattern(regex);
 					setMatcher(input);
 					if (matcher.find()) {
 						addText = matcher.group(1);
-						regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+))+"; 
+						regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+))+";
 						setPattern(regex);
 						setMatcher(addText);
 						if (matcher.find()) {
 
 							String fromCountry = matcher.group(2);
 							String toCountry = matcher.group(3);
-							int num = Integer.parseInt(matcher.group(4)); 
+							int num = Integer.parseInt(matcher.group(4));
 
-
-							if(mapBuild.fortifyIsValid(player, fromCountry, toCountry, num) == true) {
+							if (mapBuild.fortifyIsValid(player, fromCountry, toCountry, num) == true) {
 								mapBuild.fortify(fromCountry, toCountry, num);
 								finished = true;
 							} else {
@@ -631,31 +776,38 @@ public class RiskUI {
 				}
 			}
 			mapBuild.showMap();
-		}				
+		}
 	}
+
 	/**
 	 * This method is for reading the input from console
 	 */
 	public void readInput() {
 		this.input = scanner.nextLine();
 	}
+
 	/**
 	 * This method is for setting the pattern
-	 * @param regex 
+	 * 
+	 * @param regex
 	 */
 	public void setPattern(String regex) {
 		this.pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 	}
+
 	/**
 	 * This method is for setting the matcher
+	 * 
 	 * @param input
 	 */
 
 	public void setMatcher(String input) {
 		this.matcher = pattern.matcher(input);
 	}
+
 	/**
 	 * This method is for fetching the matcher
+	 * 
 	 * @return Matcher
 	 */
 	public Matcher getMatcher() {
