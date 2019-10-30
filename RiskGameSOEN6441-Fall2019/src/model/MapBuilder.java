@@ -1037,6 +1037,11 @@ public class MapBuilder {
 		this.countryAdjacency = countryAdjacency;
 	}
 
+	
+	public boolean isAdjacentCountry(int countryId1, int countryId2) {
+		return countryAdjacency.isAdjacent(countryId1,countryId2);
+	}
+	
 	/**
 	 * This method gets the player by playerName
 	 * @param playerName

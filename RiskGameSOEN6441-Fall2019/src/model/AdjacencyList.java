@@ -43,6 +43,7 @@ public class AdjacencyList {
 
 	/**
 	 * This method returns keys of adjacency list
+	 * 
 	 * @return keys
 	 */
 	public ArrayList<Integer> getKeys() {
@@ -54,14 +55,14 @@ public class AdjacencyList {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * This method return values of adjacency list
-	 * @param key of the adjacency List
-=======
+	 * <<<<<<< HEAD This method return values of adjacency list
 	 * 
 	 * @param key
-	 *            of the adjacency List
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
+	 *            of the adjacency List =======
+	 * 
+	 * @param key
+	 *            of the adjacency List >>>>>>> branch 'master' of
+	 *            https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 	 * @return
 	 */
 	public ArrayList<Integer> getValues(int key) {
@@ -70,6 +71,7 @@ public class AdjacencyList {
 
 	/**
 	 * This method is for getting the adjacency list
+	 * 
 	 * @return adjacencyList
 	 */
 
@@ -79,6 +81,7 @@ public class AdjacencyList {
 
 	/**
 	 * This method is for setting the adjacency list
+	 * 
 	 * @param adjacencyList
 	 */
 
@@ -87,14 +90,14 @@ public class AdjacencyList {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * This method returns the adjacency List of Vertex
-	 * @param vertexId of the adjacency List
-=======
+	 * <<<<<<< HEAD This method returns the adjacency List of Vertex
 	 * 
 	 * @param vertexId
-	 *            of the adjacency List
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
+	 *            of the adjacency List =======
+	 * 
+	 * @param vertexId
+	 *            of the adjacency List >>>>>>> branch 'master' of
+	 *            https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 	 * @return
 	 */
 	public ArrayList<Integer> getVertexAdjacency(int vertexId) {
@@ -102,12 +105,12 @@ public class AdjacencyList {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * This method return String of the Vertex Adjacency 
-=======
-	 * it return String of the Vertex Adjacency
+	 * <<<<<<< HEAD This method return String of the Vertex Adjacency ======= it
+	 * return String of the Vertex Adjacency
 	 * 
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
+	 * >>>>>>> branch 'master' of
+	 * https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
+	 * 
 	 * @param vertexId
 	 * @return
 	 */
@@ -215,6 +218,7 @@ public class AdjacencyList {
 
 	/**
 	 * This method shows list of edges
+	 * 
 	 * @return listEdges list of Edges
 	 */
 	public String showListEdges() {
@@ -250,8 +254,18 @@ public class AdjacencyList {
 		return true;
 	}
 
+	public boolean isAdjacent(int vertex1, int vertex2) {
+		ArrayList<Integer> adjacencyList = getVertexAdjacency(vertex1);
+		if (adjacencyList.contains(vertex2)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	/**
-	 * This main method test the other methods here to check the methods of this class
+	 * This main method test the other methods here to check the methods of this
+	 * class
 	 * 
 	 * @param args
 	 */

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import model.Country;
 import model.Dice;
 import model.MapBuilder;
 import model.Player;
@@ -123,7 +124,7 @@ public class RiskUI {
 
 		boolean debug = true;
 		if (debug == true) {
-			mapBuild.loadMap("ameroki");
+			mapBuild.loadMap("test");//ameroki
 			playerNames.add("Aval");
 			playerNames.add("Dovom");
 
@@ -520,7 +521,7 @@ public class RiskUI {
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
 				finished = false;
-				isValidCommand = false;
+			
 
 				int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
 
@@ -529,7 +530,7 @@ public class RiskUI {
 					isValidCommand = false;
 
 					System.out.println("Player " + player.getPlayerName() + ":");
-					System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
+					if (temporaryArmies!=0) {System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");}
 					readInput();
 
 					// showmap
@@ -562,7 +563,7 @@ public class RiskUI {
 										temporaryArmies -= num;
 
 										if (temporaryArmies <= 0) {
-										//	finished = true;
+											finished = true;
 										}
 
 									} else {
@@ -580,7 +581,7 @@ public class RiskUI {
 
 					
 					
-					
+				} // while reinforce
 					
 					
 					
@@ -612,25 +613,41 @@ public class RiskUI {
 			 * 
 			 * } System.out.println("Player "+maxPlayer.getPlayerName()+" start to attack");
 			 */
-
-
+				finished=false;
+				while (!finished) {// && debug == false
+					
+					isValidCommand = false;
+					readInput();
+					
+					
 				regex = "(?<=attack)(.*)";
 				setPattern(regex);
 				setMatcher(input);
 				if (matcher.find()) {
 					addText = matcher.group(1);
-					regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+) (-allout)(-noattack))+";
+					regex = "([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+)";//(-allout)(-noattack))+
 					setPattern(regex);
 					setMatcher(addText);
 					if (matcher.find()) {
+						String attackerCountryName = matcher.group(1);
+						String attackingCountryName = matcher.group(2);
+						int numDice = Integer.parseInt(matcher.group(3));
 
-						String countyNameFrom = matcher.group(2);
-						String countryNameTo = matcher.group(3);
-						int numDice = Integer.parseInt(matcher.group(4));
-
-						System.out.println("Attacck from country name: " + countyNameFrom + "\n"
-								+ "Attacck To country name: " + countryNameTo + "\n" + "number od dice" + numDice);
-
+						System.out.println("Attack from country name: " + attackerCountryName + "\n"
+								+ "Attack To country name: " + attackingCountryName + "\n" + "number of dice  " + numDice);
+//Country attacker=;
+						Country attackerCountry=mapBuild.getCountryByName(attackerCountryName);
+						Country attackingCountry=mapBuild.getCountryByName(attackingCountryName);
+						System.out.println("Armies in Attacking "+attackingCountryName+attackingCountry.getArmies());
+						if(numDice>attackingCountry.getArmies() || numDice>3) {
+							System.out.println("attacking dice should not be more than the number of armies contained in the attacking country or more than 3");
+							isValidCommand = false;
+						}
+						if(mapBuild.isAdjacentCountry(attackerCountry.getCountryId(), attackingCountry.getCountryId())) {
+							System.out.println("Countries are not adjacent");
+							isValidCommand = false;
+						}
+						
 						/*
 						 * String allOut = matcher.group(5); String noAttack = matcher.group(6);
 						 */
@@ -664,7 +681,7 @@ public class RiskUI {
 					finished = true;
 					isValidCommand = true;
 				} else {
-					System.out.println("Defend is not valid");
+					//System.out.println("Defend is not valid");
 				}
 
 				// attackmove num
@@ -688,7 +705,7 @@ public class RiskUI {
 					//finished = true;
 					isValidCommand = true;
 				} else {
-					System.out.println("Attack Move is not valid");
+				//	System.out.println("Attack Move is not valid");
 				}
 
 				if (!isValidCommand) {
@@ -696,7 +713,7 @@ public class RiskUI {
 				}
 			
 
-			mapBuild.showMap();
+	//		mapBuild.showMap();
 
 			//////////
 
