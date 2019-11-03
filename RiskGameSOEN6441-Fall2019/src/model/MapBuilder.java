@@ -854,7 +854,7 @@ public class MapBuilder {
 		Country country=getCountryByName(countryName);
 		if(country!=null) {
 			int oldArmies = country.getArmies();
-			getCountryByName(countryName).setArmies(armiesAdded + oldArmies);
+			getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
 		} else {
 			System.out.println("Country not found");
 		}
@@ -891,7 +891,7 @@ public class MapBuilder {
 				armiesForEach -= randomArmy;
 				int[] p = player.getCountryIDs();
 				int randomID = p[randomPlayerCountryID];
-				getCountryById(randomID).setArmies(armiesForEach);
+				getCountryById(randomID).setArmies(armiesForEach+25);// Check if atleast 25 army should be assigned
 			}
 		}
 	}

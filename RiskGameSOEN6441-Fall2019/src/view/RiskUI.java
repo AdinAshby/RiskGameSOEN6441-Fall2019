@@ -120,11 +120,10 @@ public class RiskUI {
 
 		editMapAnswer = scanner.nextLine();
 		String addText = "";
-		Dice dice = new Dice();
 
 		boolean debug = true;
 		if (debug == true) {
-			mapBuild.loadMap("test");//ameroki
+			mapBuild.loadMap("test");// ameroki
 			playerNames.add("Aval");
 			playerNames.add("Dovom");
 
@@ -514,23 +513,25 @@ public class RiskUI {
 
 			}
 
-			System.out.println(reinforceRequestingMessage);
-			finished = false;
+			/******** START GAME PHASE **********************/
+
+			// System.out.println(reinforceRequestingMessage);
 
 			for (Player player : mapBuild.getPlayers()) {
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
-
+				System.out.println(player.getPlayerName() + " is your turn to reinforce");
 				finished = false;
-			
 
 				int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
-
+				finished = false;
 				while (!finished) {// && debug == false
 
 					isValidCommand = false;
 
 					System.out.println("Player " + player.getPlayerName() + ":");
-					if (temporaryArmies!=0) {System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");}
+					if (temporaryArmies != 0) {
+						System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
+					}
 					readInput();
 
 					// showmap
@@ -579,161 +580,202 @@ public class RiskUI {
 						}
 					} // Match Find Reinforce
 
-					
-					
 				} // while reinforce
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 
-			/*
-			 ************************************************
-			 ************************************************
-			 ************************************************
-			 ************* Attack **********************
-			 ************************************************
-			 ************************************************
-			 ************************************************
-			 *
-			 */
-			// attack
-			System.out.println(attackRequestingMessage);
-			/*
-			 * int maxDic=0; Player maxPlayer=null; for(Player player :
-			 * mapBuild.getPlayers()) { int diceNumber=dice.getNumDice();
-			 * System.out.println(player.getPlayerName()+" rolled: "+diceNumber);
-			 * if(diceNumber>maxDic) { maxDic=diceNumber; maxPlayer=player; }
-			 * 
-			 * } System.out.println("Player "+maxPlayer.getPlayerName()+" start to attack");
-			 */
-				finished=false;
+				
+
+				/*
+				 ************************************************
+				 ************************************************
+				 ************************************************
+				 ************* Attack **********************
+				 ************************************************
+				 ************************************************
+				 ************************************************
+				 *
+				 */
+				// attack
+//			System.out.println(attackRequestingMessage);
+				/*
+				 * int maxDic=0; Player maxPlayer=null; for(Player player :
+				 * mapBuild.getPlayers()) { int diceNumber=dice.getNumDice();
+				 * System.out.println(player.getPlayerName()+" rolled: "+diceNumber);
+				 * if(diceNumber>maxDic) { maxDic=diceNumber; maxPlayer=player; }
+				 * 
+				 * } System.out.println("Player "+maxPlayer.getPlayerName()+" start to attack");
+				 */
+				finished = false;
 				while (!finished) {// && debug == false
-					
+					System.out.println(player.getPlayerName() + " you may attack or fortify or finish your turn");
 					isValidCommand = false;
 					readInput();
-					
-					
-				regex = "(?<=attack)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					addText = matcher.group(1);
-					regex = "([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+)";//(-allout)(-noattack))+
+
+					// showmap
+					regex = "showmap";
 					setPattern(regex);
-					setMatcher(addText);
+					setMatcher(input);
+					if (getMatcher().find()) {
+						isValidCommand = true;
+						mapView.showMap(mapBuild);
+					}
+
+					regex = "(?<=attack)(.*)";
+					setPattern(regex);
+					setMatcher(input);
 					if (matcher.find()) {
-						String attackerCountryName = matcher.group(1);
-						String attackingCountryName = matcher.group(2);
-						int numDice = Integer.parseInt(matcher.group(3));
+						addText = matcher.group(1);
+						regex = "([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+)";// (-allout)(-noattack))+
+						setPattern(regex);
+						setMatcher(addText);
+						if (matcher.find()) {
+							String attackerCountryName = matcher.group(1);
+							String attackingCountryName = matcher.group(2);
+							int attackerNumDice = Integer.parseInt(matcher.group(3));
 
-						System.out.println("Attack from country name: " + attackerCountryName + "\n"
-								+ "Attack To country name: " + attackingCountryName + "\n" + "number of dice  " + numDice);
+							System.out.println("Attack from country name: " + attackerCountryName + "\n"
+									+ "Attack To country name: " + attackingCountryName + "\n" + "number of dice  "
+									+ attackerNumDice);
 //Country attacker=;
-						Country attackerCountry=mapBuild.getCountryByName(attackerCountryName);
-						Country attackingCountry=mapBuild.getCountryByName(attackingCountryName);
-						System.out.println("Armies in Attacking "+attackingCountryName+" is "+attackingCountry.getArmies());
-						if(numDice>attackingCountry.getArmies() || numDice>3) {
-							System.out.println("attacking dice should not be more than the number of armies contained in the attacking country or more than 3");
-							isValidCommand = false;
-						}else if(!mapBuild.isAdjacentCountry(attackerCountry.getCountryId(), attackingCountry.getCountryId())) {
-							System.out.println("Countries are not adjacent");
-							isValidCommand = false;
-							
-							/// Country shoule be owned and atacking country for opponent
-						}else {
+							Country attackerCountry = mapBuild.getCountryByName(attackerCountryName);
+							Country attackingCountry = mapBuild.getCountryByName(attackingCountryName);
+							System.out.println("Armies in Attacking " + attackingCountryName + " is "
+									+ attackingCountry.getArmies());
+							if (attackerNumDice > attackingCountry.getArmies() || attackerNumDice > 3) {
+								System.out.println(
+										"attacking dice should not be more than the number of armies contained in the attacking country or more than 3");
+								isValidCommand = false;
+							} else if (!mapBuild.isAdjacentCountry(attackerCountry.getCountryId(),
+									attackingCountry.getCountryId())) {
+								System.out.println("Countries are not adjacent");
+								isValidCommand = false;
 
-							finished = true;
-							isValidCommand = true;
-							// Show name of player of defend country and ask him/her to roll dice by DEFEND command
+								/// Country shoule be owned and atacking country for opponent
+							} else {
+								Dice attackDice=new Dice(attackerNumDice);
+								int[] attackDiceArray = attackDice.getDiceArray();
+								attackDice.showDice();
+								
+								/**** Start Defend *******/
+								
+								finished = true;
+								isValidCommand = true;
+								// Show name of player of defend country and ask him/her to roll dice by DEFEND
+								// command
+								
+								boolean finishedDefend=false;
+								while(!finishedDefend) {
+								// defend numdice
+									readInput();
+								regex = "(?<=defend) (\\d+)";
+								setPattern(regex);
+								setMatcher(input);
+
+								if (matcher.find()) {
+									try {
+										int defendNumDice = Integer.parseInt(matcher.group(1));
+										Dice defendDice=new Dice(defendNumDice);
+										int[] defendDiceArray = defendDice.getDiceArray();
+										defendDice.showDice();
+										
+										
+									boolean[] winner=attackDice.isWinner(defendDice);
+									for(int i=0;i<winner.length;i++) {
+										if(winner[i]) {
+											System.out.println("Attacker win dice "+i);
+											attackingCountry.setArmies(attackingCountry.getArmies()-1);
+											if(attackingCountry.getArmies()==0) {
+												System.out.println(attackingCountry.getCountryName()+" is conquered");
+												attackingCountry.setPlayer(attackerCountry.getPlayerName());
+											}
+										
+									}else {
+										System.out.println("Defender win dice "+i);
+										attackerCountry.setArmies(attackerCountry.getArmies()-1);
+										if(attackerCountry.getArmies()==0) {
+											System.out.println(attackerCountry.getCountryName()+" is conquered");
+											attackerCountry.setPlayer(attackingCountry.getPlayerName());
+										}
+									}
+										
+										
+										
+										
+									}	
+										
+//								if(numDice>attackingCountry.getArmies() || numDice>3) {
+//									System.out.println("defending dice should not be more than the number of armies contained in the attacking country or more than 3");
+//									isValidCommand = false;
+//								}else {
+//								isValidCommand = true;
+//									System.out.println("Defend by: " + numDice);
+//								}
+									} catch (NumberFormatException e) {
+										// TODO Auto-generated catch block
+										System.out.println("NumDice should be integer");
+									}
+									finishedDefend=true;
+								} else {
+									isValidCommand = false;
+									System.out.println("Please enter the defence command");
+								}
+								} //while(!finishedDefend) {
+								
+								
+								
+								
+								
+								
+								
+							}
+
+							/*
+							 * String allOut = matcher.group(5); String noAttack = matcher.group(6);
+							 */
+
+						} else {
+							isValidCommand = false;
 						}
-						
-						/*
-						 * String allOut = matcher.group(5); String noAttack = matcher.group(6);
-						 */
 
+					}
+
+					
+
+					// attackmove num
+
+					regex = "(?<=attackmove) (\\d+)";
+					setPattern(regex);
+					setMatcher(input);
+
+					if (matcher.find()) {
+						try {
+							int numAttack = Integer.parseInt(matcher.group(1));
+							isValidCommand = true;
+							System.out.println("attackmove : " + numAttack);
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							System.out.println("NumDice should be integer");
+						}
+						isValidCommand = true;
 					} else {
 						isValidCommand = false;
 					}
 
-				}
-
-				// defend numdice
-
-				regex = "(?<=defend) (\\d+)";
-				setPattern(regex);
-				setMatcher(input);
-
-				if (matcher.find()) {
-					try {
-					int numDice = Integer.parseInt(matcher.group(1));
-//					if(numDice>attackingCountry.getArmies() || numDice>3) {
-//						System.out.println("defending dice should not be more than the number of armies contained in the attacking country or more than 3");
-//						isValidCommand = false;
-//					}else {
-//					isValidCommand = true;
-//						System.out.println("Defend by: " + numDice);
-//					}
-					} catch (NumberFormatException e) {
-						// TODO Auto-generated catch block
-						System.out.println("NumDice should be integer");
+					if (!isValidCommand) {
+						System.out.println("Correct command not found");
 					}
-				} else {
-					isValidCommand = false;
-				}
 
-				// attackmove num
+					// mapBuild.showMap();
 
-				regex = "(?<=attackmove) (\\d+)";
-				setPattern(regex);
-				setMatcher(input);
+					//////////
 
-				if (matcher.find()) {
-					try {
-						int numAttack = Integer.parseInt(matcher.group(1));
-						isValidCommand = true;
-						System.out.println("attackmove : " + numAttack);
-					} catch (NumberFormatException e) {
-						// TODO Auto-generated catch block
-						System.out.println("NumDice should be integer");
-					}
-					isValidCommand = true;
-				} else {
-					isValidCommand = false;
-				}
+					///////
 
+					/// end of the attack phase
 
-				if (!isValidCommand) {
-					System.out.println("Correct command not found");
-				}
-			
+					
+				} // End of While(!finished)
 
-	//		mapBuild.showMap();
-
-			//////////
-
-			///////
-
-			/// end of the attack phase
-			
-			if (!isValidCommand) {
-				System.out.println("Correct command not found");
-			}
-
-		} // End of While(!finished)
-	} // Endof For Player
-
-			System.out.println(fortifyRequestingMessage);
-			finished = false;
-
-			for (Player player : mapBuild.getPlayers()) {
-				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+				System.out.println(fortifyRequestingMessage);
 
 				finished = false;
 				isValidCommand = false;
@@ -792,7 +834,7 @@ public class RiskUI {
 				if (!isValidCommand) {
 					System.out.println("Correct command not found");
 				}
-			}
+			} // Endof For Player
 			mapBuild.showMap();
 		}
 	}
