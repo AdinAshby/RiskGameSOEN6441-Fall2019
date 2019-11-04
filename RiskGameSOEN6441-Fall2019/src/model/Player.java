@@ -19,6 +19,10 @@ public class Player {
 	 */
 	private int[] countryIDs;
 	
+	private double percentageControlled = 0.00;
+	private String[] continentsControlled;
+	private int totalNumberOfArmies = 0;
+	
 	/**
 	 * This is  Player constructor method for initializing PlayerName and countryId
 	 * 
@@ -58,4 +62,27 @@ public class Player {
 		this.countryIDs = countriesIDs;
 	}
 	
+	public double getPercentageControlled() {
+		return percentageControlled;
+	}
+	
+	public void setPercentageControlled(double percentageControlled) {
+		this.percentageControlled = percentageControlled;
+	}
+	
+	public String[] getContinentsControlled() {
+		return continentsControlled;
+	}
+	
+	public void setContinentsControlled(String[] continentsControlled) {
+		this.continentsControlled = continentsControlled;
+	}
+	
+	public int getTotalNumberOfArmies() {
+		return totalNumberOfArmies;
+	}
+	
+	public void setTotalNumberOfArmies(int totalNumberOfArmies) {
+		this.totalNumberOfArmies = totalNumberOfArmies;
+	}
 }

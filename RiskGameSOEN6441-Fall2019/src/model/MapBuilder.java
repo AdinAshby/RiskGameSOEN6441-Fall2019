@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.GraphicsConfiguration;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,20 +7,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import model.Country;
-import model.Player;
 import view.MapView;
 
 /**
@@ -1004,6 +1000,40 @@ public class MapBuilder {
 		return continentValuesPlayerGets;
 	}
 
+	public String[] continentsOwnedByPlayer(String playerName) {
+		
+		LinkedList<String> continentsOfPlayer = new LinkedList<String>();
+
+		Iterator<Entry<Integer, Continent>> iteratorForContinent = continentList.entrySet().iterator();
+
+		while (iteratorForContinent.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) iteratorForContinent.next();
+			int continentId = (int) continentMap.getKey();
+			Continent continent = continentList.get(continentId);
+			ListIterator<Country> listIterator = continent.getCountriesList().listIterator();
+
+			int counterForPlayerCountriesInContinent = 0;
+
+			while (listIterator.hasNext()) {
+
+				if (listIterator.next().getPlayerName().equalsIgnoreCase(playerName))
+					++counterForPlayerCountriesInContinent;
+			}
+
+			if (counterForPlayerCountriesInContinent == continent.getCountriesList().size())
+				continentsOfPlayer.add(continent.getContinentName());
+		}
+		
+		String[] continentsOfPlayerArray = new String[continentsOfPlayer.size()];
+				
+		for(int i = 0; i < continentsOfPlayerArray.length; i++) {
+			continentsOfPlayerArray[i] = continentsOfPlayer.get(i);
+		}
+		
+
+		return continentsOfPlayerArray;
+	}
+	
 	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
 		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
 	}
@@ -1053,5 +1083,27 @@ public class MapBuilder {
 				return player;
 		}
 		return null;
+	}
+	
+	public int totalArmiesAPlayerHas(String playerName) {
+		
+		int totalArmies = 0;
+		
+		for(Country country : getAllCountries()) {
+			if(country.getPlayerName().equalsIgnoreCase(playerName))
+				totalArmies += country.getArmies();
+		}
+		
+		return totalArmies;
+	}
+	
+	public void playerWorldDomination() {
+		for(Player player : players) {
+			player.setPercentageControlled(player.getCountryIDs().length * 100 / getAllCountries().size());
+			player.setContinentsControlled(continentsOwnedByPlayer(player.getPlayerName()));
+			player.setTotalNumberOfArmies(totalArmiesAPlayerHas(player.getPlayerName()));
+		}
+		
+		theMapView.showPlayersWorldDomination(players);
 	}
 }

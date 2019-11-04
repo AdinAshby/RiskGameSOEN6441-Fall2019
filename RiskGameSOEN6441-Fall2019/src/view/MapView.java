@@ -1,5 +1,6 @@
 package view;
 
+import java.lang.management.PlatformLoggingMXBean;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -23,11 +24,6 @@ import model.Player;
  */
 
 public class MapView {
-
-	/**
-	 * private theMapBuilder
-	 */
-	private MapBuilder theMapBuilder;
 
 	/**
 	 * This method show the map
@@ -86,6 +82,28 @@ public class MapView {
 
 		System.out.format(
 				"+--------------+-----------------------+------------------+----------------------------+---------------+---------------+%n");
+	}
+	
+	public void showPlayersWorldDomination(Player[] players) {
+		
+		String table = "|%-15s|%-23f|%-30s|%-21d|%n";
+
+		System.out.format(
+				"+---------------+-----------------------+------------------------------+---------------------+%n");
+		System.out.format(
+				"| Player's name | Percentage Controlled |    Continent's Controlled    | No. of Armies Owned |%n");
+		System.out.format(
+				"+---------------+-----------------------+------------------------------+---------------------+%n");
+		
+		for(Player player : players) {
+			
+			System.out.format(table, player.getPlayerName(), player.getPercentageControlled(), player.getContinentsControlled().toString(),
+					player.getTotalNumberOfArmies());
+		}
+		
+		System.out.format(
+				"+---------------+-----------------------+------------------------------+---------------------+%n");
+
 	}
 
 	/**

@@ -121,7 +121,7 @@ public class RiskUI {
 		editMapAnswer = scanner.nextLine();
 		String addText = "";
 
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
 			mapBuild.loadMap("test");// ameroki
 			playerNames.add("Aval");
@@ -516,6 +516,8 @@ public class RiskUI {
 			/******** START GAME PHASE **********************/
 
 			// System.out.println(reinforceRequestingMessage);
+			// test:
+			mapBuild.playerWorldDomination();
 
 			for (Player player : mapBuild.getPlayers()) {
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
