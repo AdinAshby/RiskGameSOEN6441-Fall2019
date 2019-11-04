@@ -1,9 +1,19 @@
 package model;
 
 public class Dice {
+	/**
+	 * number of Dice
+	 */
 	private int numDice;
+	/**
+	 * array of dice
+	 */
 	private int[] diceArray;
 
+	/**
+	 * constructor to create random number of dice
+	 * @param numOfDice
+	 */
 	public Dice(int numOfDice) {
 		diceArray = new int[numOfDice];
 		for (int i = 0; i < numOfDice; i++) {
@@ -11,31 +21,49 @@ public class Dice {
 			diceArray[i] = numDice;
 		}
 	}
-
+/**
+ * 
+ * @return diceArray
+ */
 	public int[] getDiceArray() {
 		return diceArray;
 	}
 
+	/**
+	 * 
+	 * @param diceArray
+	 */
 	public void setDiceArray(int[] diceArray) {
 		this.diceArray = diceArray;
 	}
-
+/**
+ * 
+ * @return numDice
+ */
 	public int getNumDice() {
 		numDice = (int) (Math.random() * 6 + 1);
 		return numDice;
 	}
-
+/**
+ * 
+ * @param numDice
+ */
 	public void setNumDice(int numDice) {
 		this.numDice = numDice;
 	}
-
+/**
+ * This method show dice number
+ */
 	public void showDice() {
 		for (int i = 0; i < diceArray.length; i++) {
 			System.out.print(diceArray[i] + "-");
 		}
 		System.out.println("");
 	}
-
+/**
+ * This method return first and second maximum number of dice
+ * @return max 
+ */
 	public int[] getMax() {
 		int i, first, second;
 		int[] maxArr = null;
@@ -77,7 +105,11 @@ public class Dice {
 		maxArr[1] = second;
 		return maxArr;
 	}
-
+/**
+ * This method compare the max array and return the winner
+ * @param otherDice
+ * @return
+ */
 	public boolean[] isWinner(Dice otherDice) {
 		int winnerCount = 0;
 		if (this.diceArray.length > otherDice.getDiceArray().length) {
