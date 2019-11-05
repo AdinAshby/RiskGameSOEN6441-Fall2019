@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 /**
  * 
  * This is Player class, in which we define our attributes of a Player.
@@ -22,6 +24,11 @@ public class Player {
 	private double percentageControlled = 0.00;
 	private String[] continentsControlled;
 	private int totalNumberOfArmies = 0;
+	private ArrayList<Card> cards;
+	private int playerCountForCard;
+
+	
+	private boolean allowToGetCard;
 	
 	/**
 	 * This is  Player constructor method for initializing PlayerName and countryId
@@ -33,6 +40,8 @@ public class Player {
 	public Player(String playerName, int[] countryID) {
 		this.playerName = playerName;
 		this.countryIDs = countryID;
+		cards = new ArrayList<Card>();
+		playerCountForCard=0;
 	}
 
 	/**
