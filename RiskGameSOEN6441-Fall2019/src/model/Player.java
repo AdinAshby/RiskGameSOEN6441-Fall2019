@@ -45,7 +45,7 @@ public class Player {
 	}
 	public void addOneToCardCounter()
 	{
-		playerCountForCard++;
+		 playerCountForCard++;
 	}
 	/**
 	 * This is Getter method for PlayerName.
