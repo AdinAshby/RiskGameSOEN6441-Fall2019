@@ -64,9 +64,9 @@ public class TestMap {
 		ad.addEdge(555, 8686);
 		ad.addEdge(622, 8686);
 		ad.addEdge(45, 555);
-		Assert.assertEquals(true, mb.loadMap(valid_map));
+		Assert.assertEquals(true, mapBuild.loadMap(valid_map));
 		Assert.assertEquals(true, ad.isConnected());
-		Assert.assertEquals(false, mb.loadMap(invalid_map));
+		Assert.assertEquals(false, mapBuild.loadMap(invalid_map));
 		Assert.assertEquals(false, adEmpty.isConnected());
 	}
 
