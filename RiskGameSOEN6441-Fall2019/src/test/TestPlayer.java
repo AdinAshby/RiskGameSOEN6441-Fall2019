@@ -12,11 +12,11 @@ public class TestPlayer {
 	/**
 	 * int CountryId
 	 */
-	int CountryId[] = { 1, 2, 3, 4 };
+	int COUNTRYID_CORRECT[] = { 1, 2, 3, 4 };
 	/**
 	 * int CountryId_incorrect with incorrect initialization
 	 */
-	int CountryId_incorrect[] = { 1, 2, 3, 4, 35 };
+	int COUNTRYID_INCORRECT[] = { 1, 2, 3, 4, 35 };
 	/**
 	 * object of the player
 	 */
