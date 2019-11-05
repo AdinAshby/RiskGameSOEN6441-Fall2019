@@ -43,7 +43,7 @@ public class TestMapFiles {
 	 */
 	@Test
 	public void testInvalidMapFiles() throws Exception {
-		Assert.assertEquals(false, mapBuild.loadMap(invalid_file));
+		Assert.assertEquals(false, mapBuild.loadMap(INVALID_FILE));
 	}
 
 }
