@@ -66,7 +66,7 @@ public class TestMap {
 		ad.addEdge(45, 555);
 		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
 		Assert.assertEquals(true, ad.isConnected());
-		Assert.assertEquals(false, mapBuild.loadMap(invalid_map));
+		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
 		Assert.assertEquals(false, adEmpty.isConnected());
 	}
 
@@ -79,7 +79,7 @@ public class TestMap {
 	public void testIsMapSubGraph() throws Exception {
 		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
 		Assert.assertEquals(true, mapBuild.isMapSubGraph());
-		Assert.assertEquals(false, mapBuild.loadMap(invalid_map));
+		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
 		Assert.assertEquals(false, mapBuild.isMapSubGraph());
 	}
 }
