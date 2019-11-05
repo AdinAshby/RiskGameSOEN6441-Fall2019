@@ -33,7 +33,7 @@ public class TestMapFiles {
 	 */
 	@Test
 	public void testValidMapFiles() throws Exception {
-		Assert.assertEquals(true, mb.loadMap(valid_file));
+		Assert.assertEquals(true, mapBuild.loadMap(valid_file));
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class TestMapFiles {
 	 */
 	@Test
 	public void testInvalidMapFiles() throws Exception {
-		Assert.assertEquals(false, mb.loadMap(invalid_file));
+		Assert.assertEquals(false, mapBuild.loadMap(invalid_file));
 	}
 
 }
