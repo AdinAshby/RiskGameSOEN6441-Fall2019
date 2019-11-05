@@ -534,6 +534,8 @@ public class RiskUI {
 					if (temporaryArmies != 0) {
 						System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
 					}
+					System.out.println("You have following cards: ");
+					System.out.println(player.getCards());
 					readInput();
 
 					// showmap
