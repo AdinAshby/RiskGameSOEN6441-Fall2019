@@ -46,6 +46,37 @@ public class MapBuilder {
 	private Random random = new Random();
 
 	private int numberOfArmiesEachPlayerGets;
+	public boolean exchangeCardsIsValid(Player player,int num1,int num2,int num3)
+	{
+		ArrayList<Card> cardsForPlayer=player.getCards();
+		
+		Card A = cardsForPlayer.get(num1);
+		Card B	=cardsForPlayer.get(num2);
+		Card C	=cardsForPlayer.get(num3);
+
+		if((A.equals(B))&& (B.equals(C))) 
+			return true;
+
+		if(!(A.equals(B)) && !(B.equals(C)))
+			return true;
+		
+		return false;
+	}
+	public int exchangeCards(Player player,int num1,int num2,int num3)
+	{
+		int cardarmies;
+	//	ArrayList<Card> cards= new ArrayList<Card>();
+		ArrayList<Card> cardsforplayerArrayList=player.getCards();
+		Card A	=cardsforplayerArrayList.get(num1);
+		Card B	=cardsforplayerArrayList.get(num2);
+		Card C	=cardsforplayerArrayList.get(num3);
+
+		player.addOneToCardCounter();
+		
+		return player.getplayerCountForCard()*5;
+	}
+
+
 
 	/**
 	 * This will return list of continents
