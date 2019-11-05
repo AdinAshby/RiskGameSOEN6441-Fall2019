@@ -37,8 +37,8 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetCountryId() {
-		Assert.assertArrayEquals("country Ids", CountryId, player1.getCountryIDs());
-		Assert.assertNotSame("Country Ids not same", CountryId_incorrect, player1.getCountryIDs());
+		Assert.assertArrayEquals("country Ids", COUNTRYID_CORRECT, player1.getCountryIDs());
+		Assert.assertNotSame("Country Ids not same", COUNTRYID_INCORRECT, player1.getCountryIDs());
 	}
 
 }
