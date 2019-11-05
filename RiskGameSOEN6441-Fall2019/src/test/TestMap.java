@@ -46,8 +46,8 @@ public class TestMap {
 
 		Assert.assertEquals(true, mapBuild.loadMap(valid_map));
 		Assert.assertEquals(true, mapBuild.validateMap());
-		Assert.assertEquals(false, mb.loadMap(invalid_map));
-		Assert.assertEquals(false, mb.validateMap());
+		Assert.assertEquals(false, mapBuild.loadMap(invalid_map));
+		Assert.assertEquals(false, mapBuild.validateMap());
 	}
 
 	/**
