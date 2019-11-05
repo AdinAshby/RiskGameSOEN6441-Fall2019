@@ -43,7 +43,10 @@ public class Player {
 		cards = new ArrayList<Card>();
 		playerCountForCard=0;
 	}
-
+	public void addOneToCardCounter()
+	{
+		playerCountForCard++;
+	}
 	/**
 	 * This is Getter method for PlayerName.
 	 * 
