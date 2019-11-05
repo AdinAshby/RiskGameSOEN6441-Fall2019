@@ -44,8 +44,8 @@ public class TestMap {
 	@Test
 	public void testvalidateMap() throws Exception {
 
-		Assert.assertEquals(true, mb.loadMap(valid_map));
-		Assert.assertEquals(true, mb.validateMap());
+		Assert.assertEquals(true, mapBuild.loadMap(valid_map));
+		Assert.assertEquals(true, mapBuild.validateMap());
 		Assert.assertEquals(false, mb.loadMap(invalid_map));
 		Assert.assertEquals(false, mb.validateMap());
 	}
