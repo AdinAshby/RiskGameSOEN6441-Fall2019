@@ -20,7 +20,7 @@ public class TestPlayer {
 	/**
 	 * object of the player
 	 */
-	Player player1 = new Player("shehnaz", CountryId);
+	Player player1 = new Player("shehnaz", COUNTRYID_CORRECT);
 	/**
 	 * This is the test method for checking the playerName
 	 * 
