@@ -18,7 +18,7 @@ public class TestMap {
 	/**
 	 * Object of the MapBuilder
 	 */
-	MapBuilder mb = new MapBuilder();
+	MapBuilder mapBuild = new MapBuilder();
 	/**
 	 * Object of the Empty AdjacencyList
 	 */
@@ -30,11 +30,11 @@ public class TestMap {
 	/**
 	 * String valid map with initialization
 	 */
-	String valid_map = "test";
+	String VALID_MAP = "test";
 	/**
 	 * String inValid map with initialization
 	 */
-	String invalid_map = "test7";
+	String INVALID_MAP = "test7";
 
 	/**
 	 *  This is the test method  for checking the validate map
@@ -76,7 +76,7 @@ public class TestMap {
 	 * @throws Exception
 	 */
 	@Test
-	public void testisMapSubGraph() throws Exception {
+	public void testIsMapSubGraph() throws Exception {
 		Assert.assertEquals(true, mb.loadMap(valid_map));
 		Assert.assertEquals(true, mb.isMapSubGraph());
 		Assert.assertEquals(false, mb.loadMap(invalid_map));
