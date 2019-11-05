@@ -77,8 +77,8 @@ public class TestMap {
 	 */
 	@Test
 	public void testIsMapSubGraph() throws Exception {
-		Assert.assertEquals(true, mb.loadMap(valid_map));
-		Assert.assertEquals(true, mb.isMapSubGraph());
+		Assert.assertEquals(true, mapBuild.loadMap(valid_map));
+		Assert.assertEquals(true, mapBuild.isMapSubGraph());
 		Assert.assertEquals(false, mb.loadMap(invalid_map));
 		Assert.assertEquals(false, mb.isMapSubGraph());
 	}
