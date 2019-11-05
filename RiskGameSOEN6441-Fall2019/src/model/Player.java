@@ -55,6 +55,72 @@ public class Player {
 	public String getPlayerName() {
 		return playerName;
 	}
+	public int getplayerCountForCard() {
+
+		return playerCountForCard;
+
+	}
+	
+	public ArrayList<Card> getCards() {
+
+		return cards;
+
+	}
+
+
+
+	public void setCards(ArrayList<Card> cardList) {
+
+		for (int i = 0; i < cardList.size(); i++) {
+
+			cardList.remove(i);
+
+		}
+
+		for (Card cardItem : cardList) {
+
+			this.cards.add(cardItem);
+
+		}
+
+	}
+
+
+
+	public void addCard(Card cardToAdd) {
+
+		this.cards.add(cardToAdd);
+
+	}
+
+
+
+	public boolean isMoreThanFive() {
+
+
+
+		if (cards.size() >= 5)
+
+			return true;
+
+		else
+
+			return false;
+
+	}
+	public boolean getAllowingCardStatus() {
+
+		return this.allowToGetCard;
+
+	}
+
+
+
+	public void setAllowingStatus(boolean status) {
+
+		this.allowToGetCard = status;
+
+	}
 
 	/**
 	 * This is Getter Method for CountryIDs.
