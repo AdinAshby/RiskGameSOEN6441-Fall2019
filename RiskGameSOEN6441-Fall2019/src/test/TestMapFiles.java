@@ -16,15 +16,15 @@ public class TestMapFiles {
 	/**
 	 * Object of the MapBuilder
 	 */
-	MapBuilder mb = new MapBuilder();
+	MapBuilder mapBuild = new MapBuilder();
 	/**
 	 * String valid_file
 	 */
-	String valid_file = "test";
+	String VALID_FILE = "test";
 	/**
 	 * String inValid_file
 	 */
-	String invalid_file = "test2";
+	String INVALID_FILE = "test2";
 
 	/**
 	 * This is the test method for checking whether the map file is valid
