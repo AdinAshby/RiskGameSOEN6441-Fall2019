@@ -1,6 +1,7 @@
 package test;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.junit.Assert;
 
@@ -23,7 +24,14 @@ public class TestReinforcement {
 		mapBuild.loadMap("ameroki");
 		players.add("Shehnaz");
 		mapBuild.assigningPlayersToCountries(players);
-		Assert.assertEquals(true, mapBuild.reinforceIsValid("shehnaz","india", 12));	 
+		Player[] myPlayers = mapBuild.getPlayers();
+		
+		Random random = new Random();
+		
+		int randomID = random.nextInt(myPlayers[0].getCountryIDs().length);
+		String countryName = mapBuild.getCountryNameById(myPlayers[0].getCountryIDs()[randomID]);
+		
+		Assert.assertEquals(true, mapBuild.reinforceIsValid("shehnaz", countryName, 12));	 
 	}
 	@Test
 	public void testReinforceArmiesInvalid() throws Exception {
@@ -31,6 +39,13 @@ public class TestReinforcement {
 		players.add("Shehnaz");
 		players.add("golnoosh");
 		mapBuild.assigningPlayersToCountries(players);
-		Assert.assertEquals(true, mapBuild.reinforceIsValid("shehnaz","india", 19));	 
+		Player[] myPlayers = mapBuild.getPlayers();
+		
+		Random random = new Random();
+		
+		int randomID = random.nextInt(myPlayers[0].getCountryIDs().length);
+		String countryName = mapBuild.getCountryNameById(myPlayers[0].getCountryIDs()[randomID]);
+		
+		Assert.assertEquals(true, mapBuild.reinforceIsValid("shehnaz", countryName, 40));	 
 	}
 }
