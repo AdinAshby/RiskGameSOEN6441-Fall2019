@@ -121,7 +121,7 @@ public class RiskUI {
 		editMapAnswer = scanner.nextLine();
 		String addText = "";
 
-		boolean debug = false;
+		boolean debug = true;
 		if (debug == true) {
 			mapBuild.loadMap("test");// ameroki
 			playerNames.add("Aval");
@@ -130,6 +130,7 @@ public class RiskUI {
 			mapBuild.assigningPlayersToCountries(playerNames);
 			mapBuild.placeAllArmies();
 			mapBuild.showMap();
+//			System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
 
@@ -610,6 +611,12 @@ public class RiskUI {
 				while (!finished) {// && debug == false
 					System.out.println(player.getPlayerName() + " you may attack or fortify or finish your turn");
 					isValidCommand = false;
+// Check there is any available attack
+					if (player.isAttackPossible(mapBuild) == false) {
+						System.out.println("Attack is not possible.");
+						isValidCommand = true;
+						finished = true;
+					}
 					readInput();
 
 					// showmap
@@ -626,28 +633,33 @@ public class RiskUI {
 					setMatcher(input);
 					if (matcher.find()) {
 						addText = matcher.group(1);
-						regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+))|(-allout)|(-noattack)";// )+
+						regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) ((\\d+)|(-allout)))|(-noattack)";// )+
 						setPattern(regex);
 						setMatcher(addText);
 						if (matcher.find()) {
-							/*
-							  for (int j = 0; j <= matcher.groupCount(); j++) {
-							  System.out.println("------------------------------------");
-							  System.out.println("Group " + j + ": ***" + matcher.group(j)+"***");
-							  
-							  }
-							 */
-							if (matcher.group(6)!=null && matcher.group(6).equals("-noattack")) {
-								System.out.println("No attack selected");
-								finished = true;
-							} else if (matcher.group(5)!=null && matcher.group(5).equals("-allout")) {
-								System.out.println("Allout selected");
-								finished = true;
-							} else {
 
+//							  for (int j = 0; j <= matcher.groupCount(); j++) {
+//							  System.out.println("------------------------------------");
+//							  System.out.println("Group " + j + ": ***" + matcher.group(j)+"***");
+//							  
+//							  }
+
+							if (matcher.group(7) != null && matcher.group(7).equals("-noattack")) {
+								System.out.println("No attack selected");
+								isValidCommand = true;
+								finished = true;
+
+							} else {
+								int attackerNumDice = 0;
 								String attackerCountryName = matcher.group(2);
 								String attackingCountryName = matcher.group(3);
-								int attackerNumDice = Integer.parseInt(matcher.group(4));
+
+								if (matcher.group(6) != null && matcher.group(6).equals("-allout")) {
+									System.out.println("Allout selected");
+									attackerNumDice = 3;
+								} else {
+									attackerNumDice = Integer.parseInt(matcher.group(4));
+								}
 
 								System.out.println("Attack from country name: " + attackerCountryName + "\n"
 										+ "Attack To country name: " + attackingCountryName + "\n" + "number of dice  "
@@ -657,17 +669,10 @@ public class RiskUI {
 								Country attackingCountry = mapBuild.getCountryByName(attackingCountryName);
 								System.out.println("Armies in Attacking " + attackingCountryName + " is "
 										+ attackingCountry.getArmies());
-								if (attackerNumDice > attackingCountry.getArmies() || attackerNumDice > 3) {
-									System.out.println(
-											"attacking dice should not be more than the number of armies contained in the attacking country or more than 3");
-									isValidCommand = false;
-								} else if (!mapBuild.isAdjacentCountry(attackerCountry.getCountryId(),
-										attackingCountry.getCountryId())) {
-									System.out.println("Countries are not adjacent");
-									isValidCommand = false;
 
-									/// Country should be owned and attacking country for opponent
-								} else {
+								if (player.isAttackValid(mapBuild, attackerNumDice, attackingCountry, attackingCountry,
+										true) == true) {
+
 									Dice attackDice = new Dice(attackerNumDice);
 									int[] attackDiceArray = attackDice.getDiceArray();
 									attackDice.showDice();
@@ -702,9 +707,15 @@ public class RiskUI {
 															System.out.println(attackingCountry.getCountryName()
 																	+ " is conquered");
 															attackingCountry.setPlayer(attackerCountry.getPlayerName());
-															
-															
-															
+															int NoOfContinentsControlled = player
+																	.getContinentsControlled().length;
+															if (NoOfContinentsControlled == mapBuild
+																	.getNoOfContinentsControlled()) {
+																System.out.println(attackerCountry.getPlayerName()
+																		+ " is winner. Game over!");
+																System.exit(0);
+															}
+
 															// attackmove num
 															System.out.println("Ready for attackmove");
 															readInput();
@@ -715,9 +726,20 @@ public class RiskUI {
 															if (matcher.find()) {
 																try {
 																	int numAttack = Integer.parseInt(matcher.group(1));
-																	isValidCommand = true;
-																	System.out.println("attackmove : " + numAttack);
-																	
+																	if (numAttack < attackerCountry.getArmies() - 1) {
+																		System.out.println(numAttack
+																				+ " can not move because you have only : "
+																				+ attackerCountry.getArmies()
+																				+ " armies and one should left there");
+																	} else {
+																		isValidCommand = true;
+																		System.out.println("attackmove : " + numAttack);
+																		attackerCountry
+																				.setArmies(attackerCountry.getArmies()
+																						- numAttack);
+																		attackingCountry.setArmies(numAttack);
+
+																	}
 																} catch (NumberFormatException e) {
 																	// TODO Auto-generated catch block
 																	System.out.println("NumDice should be integer");
@@ -727,22 +749,7 @@ public class RiskUI {
 															} else {
 																isValidCommand = false;
 															}
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
-															
+
 														}
 
 													} else {
@@ -764,6 +771,7 @@ public class RiskUI {
 //								isValidCommand = true;
 //									System.out.println("Defend by: " + numDice);
 //								}
+												isValidCommand = true;
 											} catch (NumberFormatException e) {
 												// TODO Auto-generated catch block
 												System.out.println("NumDice should be integer");
@@ -778,9 +786,6 @@ public class RiskUI {
 
 								}
 
-								
-								
-								
 								/*
 								 * String allOut = matcher.group(5); String noAttack = matcher.group(6);
 								 */
@@ -791,16 +796,10 @@ public class RiskUI {
 
 					}
 
-					
-
-					
-					
-					
 					if (!isValidCommand) {
 						System.out.println("Correct command not found");
 					}
 
-					
 					/// end of the attack phase
 
 				} // End of While(!finished)
