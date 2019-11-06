@@ -93,6 +93,8 @@ public class RiskUI {
 	 * private playerNames
 	 */
 	private ArrayList<String> playerNames = new ArrayList<String>();
+	
+	private int counterForPhases;
 
 	/**
 	 * This is RiskUI constructor
@@ -330,6 +332,9 @@ public class RiskUI {
 				}
 			}
 		} else if (editMapAnswer.equalsIgnoreCase("N")) {
+			counterForPhases = 0;
+			mapView.showPhaseView(counterForPhases, "");
+			
 			System.out.println(loadMapRequestingMessage);
 			finished = false;
 
@@ -522,6 +527,9 @@ public class RiskUI {
 			mapBuild.playerWorldDomination();
 
 			for (Player player : mapBuild.getPlayers()) {
+				counterForPhases = 1;
+				mapView.showPhaseView(counterForPhases, player.getPlayerName());
+				
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 				System.out.println(player.getPlayerName() + " is your turn to reinforce");
 				finished = false;
@@ -906,5 +914,9 @@ public class RiskUI {
 	 */
 	public Matcher getMatcher() {
 		return this.matcher;
+	}
+	
+	public int getCounterForPhases() {
+		return counterForPhases;
 	}
 }

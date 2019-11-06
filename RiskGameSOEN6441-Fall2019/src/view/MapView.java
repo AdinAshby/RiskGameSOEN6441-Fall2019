@@ -1,6 +1,5 @@
 package view;
 
-import java.lang.management.PlatformLoggingMXBean;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -24,6 +23,13 @@ import model.Player;
  */
 
 public class MapView {
+	
+	private final String[] phases = {"Startup", "Reinforcement", "Attack", "Fortification"};
+	private final String[] phasesDescription = {
+			"Loadmap, gameplayer -add playername -remove playername and populatecountries are valid in this phase",
+			"Reinforce countryname num and exchangecards num num num or -none are valid commands in this phase", 
+			"Attack countrynamefrom countrynameto numdice or -allout or -noattack, defend numedice and attackmove num are valid commands in this phase", 
+			"Fortify fromcountry tocountry num or -none are valid commands in this phase"};
 
 	/**
 	 * This method show the map
@@ -83,9 +89,9 @@ public class MapView {
 		System.out.format(
 				"+--------------+-----------------------+------------------+----------------------------+---------------+---------------+%n");
 	}
-	
+
 	public void showPlayersWorldDomination(Player[] players) {
-		
+
 		String table = "|%-15s|%-23f|%-30s|%-21d|%n";
 
 		System.out.format(
@@ -94,16 +100,34 @@ public class MapView {
 				"| Player's name | Percentage Controlled |    Continent's Controlled    | No. of Armies Owned |%n");
 		System.out.format(
 				"+---------------+-----------------------+------------------------------+---------------------+%n");
-		
+
 		for(Player player : players) {
-			
+
 			System.out.format(table, player.getPlayerName(), player.getPercentageControlled(), Arrays.toString(player.getContinentsControlled()),
 					player.getTotalNumberOfArmies());
 		}
-		
+
 		System.out.format(
 				"+---------------+-----------------------+------------------------------+---------------------+%n");
 
+	}
+
+	public void showPhaseView(int counterForPhase, String playerName) {
+
+		String table = "|%-13s|%-15s|%-137s|%n";
+		
+
+		System.out.format(
+				"+-------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------+%n");
+		System.out.format(
+				"|    Phase    | Player's name |                                                            Phase description                                                            |%n");
+		System.out.format(
+				"+-------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------+%n");
+
+		System.out.format(table, phases[counterForPhase], playerName,  phasesDescription[counterForPhase]);
+
+		System.out.format(
+				"+-------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------+%n");
 	}
 
 	/**
