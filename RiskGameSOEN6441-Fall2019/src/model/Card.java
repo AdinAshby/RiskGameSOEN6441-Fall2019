@@ -1,9 +1,18 @@
 package model;
 
-public class Card {
-	private CardType cardType; 
+import java.util.Random;
 
-	
+public class Card {
+	private String cardType; 
+
+	public enum CardType { INFANTRY , CAVALRY , ARTILLERY  ;
+		
+		public static String getRandomCard() {
+        Random random = new Random();
+        CardType c= values()[random.nextInt(values().length)];
+        return c.name();
+        
+    }};	
 
 	/**
 
@@ -11,10 +20,16 @@ public class Card {
 
  * 
 
- * @author Babita Kaur
+ * @author Babita Kaur, Golnoosh
 
  */
-
+	public Card() {
+		cardType=CardType.getRandomCard();
+//		System.out.println(cardType);
+	}
+	 
+	
+/*
 	public Card(CardType card) {
 
 		switch (card) {
@@ -40,10 +55,10 @@ public class Card {
 		}
 
 	}
-
+*/
 	
 
-	public CardType getCardType() {
+	public String getCardType() {
 
 		return cardType;
 

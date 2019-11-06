@@ -63,8 +63,17 @@ public class Player {
 
 	}
 
-	public ArrayList<Card> getCards() {
+	public String getCardNames() {
+		String cardsList="Cards: -";
+		for(Card c:cards) {
+			cardsList=c.getCardType();
+}
+		return cardsList;
 
+	}
+	
+	public ArrayList<Card> getCards() {
+		
 		return cards;
 
 	}

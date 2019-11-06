@@ -583,9 +583,9 @@ public int getNoOfContinentsControlled() {
 				countryDetail = matcher.group();
 				countryId = Integer.parseInt(matcher.group(2));
 				String adjCountriesContent = matcher.group(3);
-				System.out.println("\nFound countryId=" + countryId + " Adj=" + adjCountriesContent);
+//				System.out.println("\nFound countryId=" + countryId + " Adj=" + adjCountriesContent);
 				Country c = getCountryById(countryId);
-				System.out.println("Add Adj for " + c.getCountryName());
+				System.out.println("Add Adj for " + c.getCountryName()+ " Adj=" + adjCountriesContent);
 				String[] arrOfAdj = adjCountriesContent.split(" ");
 				for (String adj : arrOfAdj)
 					addCountryAdjacency(countryId, Integer.parseInt(adj));

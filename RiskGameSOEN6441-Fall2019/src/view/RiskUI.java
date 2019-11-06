@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import model.Card;
 import model.Country;
 import model.Dice;
 import model.MapBuilder;
@@ -535,8 +536,10 @@ public class RiskUI {
 					if (temporaryArmies != 0) {
 						System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
 					}
+					//Card card=new Card();
+					//player.addCard(card);
 					System.out.println("You have following cards: ");
-					System.out.println(player.getCards());
+					System.out.println(player.getCardNames());
 					readInput();
 
 					// showmap
@@ -661,14 +664,12 @@ public class RiskUI {
 									attackerNumDice = Integer.parseInt(matcher.group(4));
 								}
 
-								System.out.println("Attack from country name: " + attackerCountryName + "\n"
-										+ "Attack To country name: " + attackingCountryName + "\n" + "number of dice  "
-										+ attackerNumDice);
+								System.out.println("Attack from " + attackerCountryName + " To " + attackingCountryName + " by "
+										+ attackerNumDice+ " dice");
 //Country attacker=;
 								Country attackerCountry = mapBuild.getCountryByName(attackerCountryName);
 								Country attackingCountry = mapBuild.getCountryByName(attackingCountryName);
-								System.out.println("Armies in Attacking " + attackingCountryName + " is "
-										+ attackingCountry.getArmies());
+								//System.out.println("Armies in Attacking " + attackingCountryName + " is "+ attackingCountry.getArmies());
 
 								if (player.isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry,
 										true) == true) {
@@ -706,6 +707,10 @@ public class RiskUI {
 														if (attackingCountry.getArmies() == 0) {
 															System.out.println(attackingCountry.getCountryName()
 																	+ " is conquered");
+															Card card=new Card();
+															player.addCard(card);
+															System.out.println("You have the following cards now :");
+															System.out.println(player.getCardNames());
 															attackingCountry.setPlayer(attackerCountry.getPlayerName());
 															int NoOfContinentsControlled = player
 																	.getContinentsControlled().length;
