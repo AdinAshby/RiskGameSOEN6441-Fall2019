@@ -866,8 +866,10 @@ public class MapBuilder {
 
 		for (Country eachCountry : getAllCountries()) {
 			int eachCountryID = eachCountry.getCountryId();
-			if (eachCountryID == countryID)
+			if (eachCountryID == countryID) {
 				eachCountry.setPlayer(playerName);
+				eachCountry.setArmies(1);
+			}
 		}
 	}
 
