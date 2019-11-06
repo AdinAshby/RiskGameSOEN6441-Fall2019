@@ -87,7 +87,7 @@ public class MapBuilder {
 		return continentList;
 	}
 
-public int getNoOfContinentsControlled() {
+	public int getNoOfContinentsControlled() {
 		return continentList.size();
 	}
 	/**
@@ -583,7 +583,7 @@ public int getNoOfContinentsControlled() {
 				countryDetail = matcher.group();
 				countryId = Integer.parseInt(matcher.group(2));
 				String adjCountriesContent = matcher.group(3);
-//				System.out.println("\nFound countryId=" + countryId + " Adj=" + adjCountriesContent);
+				//				System.out.println("\nFound countryId=" + countryId + " Adj=" + adjCountriesContent);
 				Country c = getCountryById(countryId);
 				System.out.println("Add Adj for " + c.getCountryName()+ " Adj=" + adjCountriesContent);
 				String[] arrOfAdj = adjCountriesContent.split(" ");
@@ -884,10 +884,10 @@ public int getNoOfContinentsControlled() {
 	 */
 	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
 		Country country = getCountryByName(countryName);
-if(country!=null) {
-		int oldArmies = country.getArmies();
-		getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
-} else {
+		if(country!=null) {
+			int oldArmies = country.getArmies();
+			getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
+		} else {
 			System.out.println("Country not found");
 		}
 	}
@@ -896,7 +896,7 @@ if(country!=null) {
 
 		int[] playerCountries = player.getCountryIDs();
 
-for(int countryID: playerCountries) {
+		for(int countryID: playerCountries) {
 			if (getCountryByName(countryName) == getCountryById(countryID)) {
 				return true;
 			}
@@ -944,8 +944,9 @@ for(int countryID: playerCountries) {
 	}
 
 	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
+		calculateNumberOfArmiesEachPlayerGets(playerName);
 
-		if (armiesAdded < 0) {
+		if (armiesAdded < 0 || armiesAdded >= numberOfArmiesEachPlayerGets) {
 			return false;
 		}
 
@@ -1072,7 +1073,7 @@ for(int countryID: playerCountries) {
 	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
 		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
 	}
-	
+
 	public int calculateNumberOfInitialArmies() {
 		if(players.length <= 6)
 			return (50 - (5 * players.length));
