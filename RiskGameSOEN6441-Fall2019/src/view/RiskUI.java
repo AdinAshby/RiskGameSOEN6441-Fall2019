@@ -93,7 +93,7 @@ public class RiskUI {
 	 * private playerNames
 	 */
 	private ArrayList<String> playerNames = new ArrayList<String>();
-	
+
 	private int counterForPhases;
 
 	/**
@@ -124,7 +124,7 @@ public class RiskUI {
 		editMapAnswer = scanner.nextLine();
 		String addText = "";
 
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
 			mapBuild.loadMap("test");// ameroki
 			playerNames.add("Aval");
@@ -133,7 +133,7 @@ public class RiskUI {
 			mapBuild.assigningPlayersToCountries(playerNames);
 			mapBuild.placeAllArmies();
 			mapBuild.showMap();
-//			System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
+			//			System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
 
@@ -334,7 +334,7 @@ public class RiskUI {
 		} else if (editMapAnswer.equalsIgnoreCase("N")) {
 			counterForPhases = 0;
 			mapView.showPhaseView(counterForPhases, "");
-			
+
 			System.out.println(loadMapRequestingMessage);
 			finished = false;
 
@@ -529,7 +529,7 @@ public class RiskUI {
 			for (Player player : mapBuild.getPlayers()) {
 				counterForPhases = 1;
 				mapView.showPhaseView(counterForPhases, player.getPlayerName());
-				
+
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 				System.out.println(player.getPlayerName() + " is your turn to reinforce");
 				finished = false;
@@ -574,21 +574,21 @@ public class RiskUI {
 							int num;
 							try {
 								num = Integer.parseInt(matcher.group(3));
-								if (num <= mapBuild.getNumberOfArmiesEachPlayerGets()) {
-									if (mapBuild.reinforceIsValid(player.getPlayerName(), countryName, num) == true) {
-										mapBuild.reinforce(player.getPlayerName(), countryName, num);
-										temporaryArmies -= num;
+								
+								if (mapBuild.reinforceIsValid(player.getPlayerName(), countryName, num) == true) {
+									mapBuild.reinforce(player.getPlayerName(), countryName, num);
+									temporaryArmies -= num;
 
-										if (temporaryArmies <= 0) {
-											finished = true;
-										}
-
-									} else {
-										System.out.println("Reinforce is not valid");
+									if (temporaryArmies <= 0) {
+										finished = true;
 									}
 
-									isValidCommand = true;
+								} else {
+									System.out.println("Reinforce is not valid");
 								}
+
+								isValidCommand = true;
+
 							} catch (NumberFormatException e) {
 								System.out.println("Enter number of armies");
 							}
@@ -609,7 +609,7 @@ public class RiskUI {
 				 *
 				 */
 				// attack
-//			System.out.println(attackRequestingMessage);
+				//			System.out.println(attackRequestingMessage);
 				/*
 				 * int maxDic=0; Player maxPlayer=null; for(Player player :
 				 * mapBuild.getPlayers()) { int diceNumber=dice.getNumDice();
@@ -622,7 +622,7 @@ public class RiskUI {
 				while (!finished) {// && debug == false
 					System.out.println(player.getPlayerName() + " you may attack or fortify or finish your turn");
 					isValidCommand = false;
-// Check there is any available attack
+					// Check there is any available attack
 					if (player.isAttackPossible(mapBuild) == false) {
 						System.out.println("Attack is not possible.");
 						isValidCommand = true;
@@ -649,11 +649,11 @@ public class RiskUI {
 						setMatcher(addText);
 						if (matcher.find()) {
 
-//							  for (int j = 0; j <= matcher.groupCount(); j++) {
-//							  System.out.println("------------------------------------");
-//							  System.out.println("Group " + j + ": ***" + matcher.group(j)+"***");
-//							  
-//							  }
+							//							  for (int j = 0; j <= matcher.groupCount(); j++) {
+							//							  System.out.println("------------------------------------");
+							//							  System.out.println("Group " + j + ": ***" + matcher.group(j)+"***");
+							//							  
+							//							  }
 
 							if (matcher.group(7) != null && matcher.group(7).equals("-noattack")) {
 								System.out.println("No attack selected");
@@ -674,7 +674,7 @@ public class RiskUI {
 
 								System.out.println("Attack from " + attackerCountryName + " To " + attackingCountryName + " by "
 										+ attackerNumDice+ " dice");
-//Country attacker=;
+								//Country attacker=;
 								Country attackerCountry = mapBuild.getCountryByName(attackerCountryName);
 								Country attackingCountry = mapBuild.getCountryByName(attackingCountryName);
 								//System.out.println("Armies in Attacking " + attackingCountryName + " is "+ attackingCountry.getArmies());
@@ -748,8 +748,8 @@ public class RiskUI {
 																		isValidCommand = true;
 																		System.out.println("attackmove : " + numAttack);
 																		attackerCountry
-																				.setArmies(attackerCountry.getArmies()
-																						- numAttack);
+																		.setArmies(attackerCountry.getArmies()
+																				- numAttack);
 																		attackingCountry.setArmies(numAttack);
 
 																	}
@@ -777,13 +777,13 @@ public class RiskUI {
 
 												}
 
-//								if(numDice>attackingCountry.getArmies() || numDice>3) {
-//									System.out.println("defending dice should not be more than the number of armies contained in the attacking country or more than 3");
-//									isValidCommand = false;
-//								}else {
-//								isValidCommand = true;
-//									System.out.println("Defend by: " + numDice);
-//								}
+												//								if(numDice>attackingCountry.getArmies() || numDice>3) {
+												//									System.out.println("defending dice should not be more than the number of armies contained in the attacking country or more than 3");
+												//									isValidCommand = false;
+												//								}else {
+												//								isValidCommand = true;
+												//									System.out.println("Defend by: " + numDice);
+												//								}
 												isValidCommand = true;
 											} catch (NumberFormatException e) {
 												// TODO Auto-generated catch block
@@ -915,7 +915,7 @@ public class RiskUI {
 	public Matcher getMatcher() {
 		return this.matcher;
 	}
-	
+
 	public int getCounterForPhases() {
 		return counterForPhases;
 	}
