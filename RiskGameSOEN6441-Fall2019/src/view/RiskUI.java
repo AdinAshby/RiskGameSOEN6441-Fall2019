@@ -670,7 +670,7 @@ public class RiskUI {
 								System.out.println("Armies in Attacking " + attackingCountryName + " is "
 										+ attackingCountry.getArmies());
 
-								if (player.isAttackValid(mapBuild, attackerNumDice, attackingCountry, attackingCountry,
+								if (player.isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry,
 										true) == true) {
 
 									Dice attackDice = new Dice(attackerNumDice);
