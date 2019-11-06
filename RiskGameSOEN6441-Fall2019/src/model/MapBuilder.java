@@ -87,6 +87,9 @@ public class MapBuilder {
 		return continentList;
 	}
 
+public int getNoOfContinentsControlled() {
+		return continentList.size();
+	}
 	/**
 	 * This method sets the continentList
 	 * @param continentList
@@ -881,18 +884,23 @@ public class MapBuilder {
 	 */
 	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
 		Country country = getCountryByName(countryName);
-		
+if(country!=null) {
 		int oldArmies = country.getArmies();
 		getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
+} else {
+			System.out.println("Country not found");
+		}
 	}
 
 	public boolean placearmyIsValid(Player player, String countryName) {
 
 		int[] playerCountries = player.getCountryIDs();
 
-		for(int countryID: playerCountries) 
-			if (getCountryByName(countryName) == getCountryById(countryID)) 
+for(int countryID: playerCountries) {
+			if (getCountryByName(countryName) == getCountryById(countryID)) {
 				return true;
+			}
+		}
 
 		return false;
 	}
