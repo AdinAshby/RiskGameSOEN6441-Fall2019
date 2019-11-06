@@ -457,7 +457,7 @@ public class RiskUI {
 					isValidCommand = false;
 
 					System.out.println("Player " + player.getPlayerName() + ":");
-					System.out.println("You get -" + mapBuild.getNumberOfArmiesEachPlayerGets() + "- armies.");
+					System.out.println("You get -" + mapBuild.calculateNumberOfInitialArmies() + "- armies.");
 					readInput();
 
 					// placeall
@@ -493,7 +493,7 @@ public class RiskUI {
 
 						if (mapBuild.placearmyIsValid(player, countryName) == true) {
 							mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
-									mapBuild.getNumberOfArmiesEachPlayerGets());
+									mapBuild.calculateNumberOfInitialArmies());
 							finished = true;
 						} else {
 							System.out.println("placearmy is not valid");

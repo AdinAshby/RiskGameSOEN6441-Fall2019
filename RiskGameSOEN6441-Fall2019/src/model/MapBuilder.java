@@ -49,7 +49,7 @@ public class MapBuilder {
 	public boolean exchangeCardsIsValid(Player player,int num1,int num2,int num3)
 	{
 		ArrayList<Card> cardsForPlayer=player.getCards();
-		
+
 		Card A = cardsForPlayer.get(num1);
 		Card B	=cardsForPlayer.get(num2);
 		Card C	=cardsForPlayer.get(num3);
@@ -59,20 +59,20 @@ public class MapBuilder {
 
 		if(!(A.equals(B)) && !(B.equals(C)))
 			return true;
-		
+
 		return false;
 	}
 	public int exchangeCards(Player player,int num1,int num2,int num3)
 	{
 		int cardarmies;
-	//	ArrayList<Card> cards= new ArrayList<Card>();
+		//	ArrayList<Card> cards= new ArrayList<Card>();
 		ArrayList<Card> cardsforplayerArrayList=player.getCards();
 		Card A	=cardsforplayerArrayList.get(num1);
 		Card B	=cardsforplayerArrayList.get(num2);
 		Card C	=cardsforplayerArrayList.get(num3);
 
 		player.addOneToCardCounter();
-		
+
 		return player.getplayerCountForCard()*5;
 	}
 
@@ -880,26 +880,20 @@ public class MapBuilder {
 	 * @param armiesAdded
 	 */
 	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
-		Country country=getCountryByName(countryName);
-		if(country!=null) {
-			int oldArmies = country.getArmies();
-			getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
-		} else {
-			System.out.println("Country not found");
-		}
+		Country country = getCountryByName(countryName);
+		
+		int oldArmies = country.getArmies();
+		getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
 	}
-	
+
 	public boolean placearmyIsValid(Player player, String countryName) {
-		
+
 		int[] playerCountries = player.getCountryIDs();
-		
-		for(int countryID: playerCountries) {
-			if (getCountryByName(countryName) == getCountryById(countryID)) {
+
+		for(int countryID: playerCountries) 
+			if (getCountryByName(countryName) == getCountryById(countryID)) 
 				return true;
-			}
-		}
-		
-		
+
 		return false;
 	}
 
@@ -911,8 +905,7 @@ public class MapBuilder {
 	public void placeAllArmies() {
 
 		for(Player player : players) {
-			calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
-			int armiesForEach = numberOfArmiesEachPlayerGets;
+			int armiesForEach = calculateNumberOfInitialArmies();
 
 			while(armiesForEach > 0) {
 				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().length);
@@ -920,7 +913,8 @@ public class MapBuilder {
 				armiesForEach -= randomArmy;
 				int[] p = player.getCountryIDs();
 				int randomID = p[randomPlayerCountryID];
-				getCountryById(randomID).setArmies(armiesForEach+25);// Check if atleast 25 army should be assigned
+				int oldArmies = getCountryById(randomID).getArmies();
+				getCountryById(randomID).setArmies(oldArmies + armiesForEach + 25);// Check if atleast 25 army should be assigned
 			}
 		}
 	}
@@ -946,15 +940,15 @@ public class MapBuilder {
 		if (armiesAdded < 0) {
 			return false;
 		}
-		
+
 		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
-		
+
 		for(int countryID: playerCountries) {
 			if (getCountryByName(countryName) == getCountryById(countryID)) {
 				return true;
 			}
 		}
-			
+
 		return false;
 	}
 
@@ -973,30 +967,30 @@ public class MapBuilder {
 		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
 
 	}
-	
+
 	public boolean fortifyIsValid(Player player, String fromCountry, String toCountry, int num) {
 		boolean fromCountryCheck = false;
 		boolean toCountryCheck = false;
-		
-		
+
+
 		if(num < 0 || num > getCountryByName(fromCountry).getArmies())
 			return false;
-		
+
 		for(int countryID : player.getCountryIDs()) {
 			if (getCountryByName(fromCountry) == getCountryById(countryID)) {
 				fromCountryCheck = true;
 			}
 		}
-		
+
 		for(int countryID : player.getCountryIDs()) {
 			if (getCountryByName(toCountry) == getCountryById(countryID)) {
 				toCountryCheck = true;
 			}
 		}
-		
+
 		if(fromCountryCheck && toCountryCheck)
 			return true;
-		
+
 		return false;
 	}
 
@@ -1034,7 +1028,7 @@ public class MapBuilder {
 	}
 
 	public String[] continentsOwnedByPlayer(String playerName) {
-		
+
 		LinkedList<String> continentsOfPlayer = new LinkedList<String>();
 
 		Iterator<Entry<Integer, Continent>> iteratorForContinent = continentList.entrySet().iterator();
@@ -1056,19 +1050,26 @@ public class MapBuilder {
 			if (counterForPlayerCountriesInContinent == continent.getCountriesList().size())
 				continentsOfPlayer.add(continent.getContinentName());
 		}
-		
+
 		String[] continentsOfPlayerArray = new String[continentsOfPlayer.size()];
-				
+
 		for(int i = 0; i < continentsOfPlayerArray.length; i++) {
 			continentsOfPlayerArray[i] = continentsOfPlayer.get(i);
 		}
-		
+
 
 		return continentsOfPlayerArray;
 	}
-	
+
 	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
 		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
+	}
+	
+	public int calculateNumberOfInitialArmies() {
+		if(players.length <= 6)
+			return (50 - (5 * players.length));
+		else
+			return 20;
 	}
 
 	public int getNumberOfArmiesEachPlayerGets() {
@@ -1100,11 +1101,11 @@ public class MapBuilder {
 		this.countryAdjacency = countryAdjacency;
 	}
 
-	
+
 	public boolean isAdjacentCountry(int countryId1, int countryId2) {
 		return countryAdjacency.isAdjacent(countryId1,countryId2);
 	}
-	
+
 	/**
 	 * This method gets the player by playerName
 	 * @param playerName
@@ -1117,26 +1118,26 @@ public class MapBuilder {
 		}
 		return null;
 	}
-	
+
 	public int totalArmiesAPlayerHas(String playerName) {
-		
+
 		int totalArmies = 0;
-		
+
 		for(Country country : getAllCountries()) {
 			if(country.getPlayerName().equalsIgnoreCase(playerName))
 				totalArmies += country.getArmies();
 		}
-		
+
 		return totalArmies;
 	}
-	
+
 	public void playerWorldDomination() {
 		for(Player player : players) {
 			player.setPercentageControlled(player.getCountryIDs().length * 100 / getAllCountries().size());
 			player.setContinentsControlled(continentsOwnedByPlayer(player.getPlayerName()));
 			player.setTotalNumberOfArmies(totalArmiesAPlayerHas(player.getPlayerName()));
 		}
-		
+
 		theMapView.showPlayersWorldDomination(players);
 	}
 }
