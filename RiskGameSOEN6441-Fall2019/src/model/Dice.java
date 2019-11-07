@@ -1,22 +1,22 @@
 package model;
 
 /**
- * 
+ * This class is for managing Dice during the game
  * @author f_yazdan
  *
  */
 public class Dice {
 	/**
-	 * number of Dice
+	 *private number of Dice
 	 */
 	private int numDice;
 	/**
-	 * array of dice
+	 * private array of dice
 	 */
 	private int[] diceArray;
 
 	/**
-	 * constructor to create random number of dice
+	 * This is a constructor to create random number of dice
 	 * @param numOfDice
 	 */
 	public Dice(int numOfDice) {
@@ -27,7 +27,7 @@ public class Dice {
 		}
 	}
 /**
- * 
+ * This method return the array containing dice
  * @return diceArray
  */
 	public int[] getDiceArray() {
@@ -35,14 +35,14 @@ public class Dice {
 	}
 
 	/**
-	 * 
+	 * This method initializes the dice array object
 	 * @param diceArray
 	 */
 	public void setDiceArray(int[] diceArray) {
 		this.diceArray = diceArray;
 	}
 /**
- * 
+ * This method returns number of dice
  * @return numDice
  */
 	public int getNumDice() {
@@ -50,8 +50,8 @@ public class Dice {
 		return numDice;
 	}
 /**
- * 
- * @param numDice
+* This method sets the dice to a given number
+ * @param numDice integer
  */
 	public void setNumDice(int numDice) {
 		this.numDice = numDice;
