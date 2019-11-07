@@ -111,10 +111,11 @@ public class RiskUI {
 		/**
 		 * String editMapAnswer
 		 */
-		String editMapAnswer;
+		String editMapAnswer = null;
 		/**
 		 * boolean finished
 		 */
+
 		boolean finished = false;
 		/**
 		 * boolean placeAllFlag
@@ -124,15 +125,30 @@ public class RiskUI {
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
+		while (!finished) {
+			String editMapAnswerText = scanner.nextLine();
+			if (editMapAnswerText.equalsIgnoreCase("Y") || editMapAnswerText.equalsIgnoreCase("N")) {
+				editMapAnswer = editMapAnswerText;
+				finished = true;
+
+			} else {
+				System.out.println("Please answer by Y or N");
+			}
+		}
+		finished = false;
+
 		editMapAnswer = scanner.nextLine();
 		/**
 		 * String addText
 		 */
+
 		String addText = "";
+
 		/**
 		 * This part is hard code to test the project defined by the boolean debug
 		 * attribute
 		 */
+
 		boolean debug = true;
 		if (debug == true) {
 			mapBuild.loadMap("ameroki");// ameroki

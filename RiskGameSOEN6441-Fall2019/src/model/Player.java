@@ -505,7 +505,7 @@ public class Player implements Subject {
 							/**** Start Defend *******/
 
 							isValidCommand = true;
-							// Show name of player of defend country and ask him/her to roll dice by DEFEND
+							// Show name of player of defend country and ask him/her to roll dice by DEFEND 
 
 							boolean finishedDefend = false;
 							while (!finishedDefend) {
