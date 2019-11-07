@@ -12,6 +12,7 @@ import view.MapView;
  * This is Player class, in which we define our attributes of a Player.
  * 
  * @author f_yazdan
+ * @author s_shehna
  * 
  */
 public class Player implements Subject {
