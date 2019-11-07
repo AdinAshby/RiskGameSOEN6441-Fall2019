@@ -6,7 +6,7 @@ import view.RiskUI;
  * This is a Risk Main Driver
  * 
  * @author f_yazdan
- *
+ * @author s_shehna
  */
 public class RiskMain {
 	
