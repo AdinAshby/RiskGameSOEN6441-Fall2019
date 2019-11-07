@@ -951,7 +951,8 @@ public class MapBuilder {
 
 			}
 			
-			player.calculateTotalNumberOfArmies();
+			player.calculateWorldDominationView();
+			//player.calculateTotalNumberOfArmies();
 			//player.notifyObserverForWorldDomination();
 		}
 		

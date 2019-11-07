@@ -9,9 +9,9 @@ public class PlayerObserver implements Observer {
 	private Subject player;
 	
 	public PlayerObserver(Subject player) {
-		this.player = player;
-		this.player.registerPhaseObserver(this);
-		this.player.registerWorldDominationObserver(this);
+		//this.player = player;
+		//this.player.registerPhaseObserver(this);
+		//this.player.registerWorldDominationObserver(this);
 	}
 
 	@Override
