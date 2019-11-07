@@ -27,7 +27,8 @@ public class Player implements Subject {
 	private int[] countryIDs;
 
 	private double percentageControlled = 0.00;
-	private String[] continentsControlled;
+	
+	private String[] continentsControlled= new String[50];
 	private int totalNumberOfArmies = 0;
 	private ArrayList<Card> cards;
 	private int playerCountForCard;
