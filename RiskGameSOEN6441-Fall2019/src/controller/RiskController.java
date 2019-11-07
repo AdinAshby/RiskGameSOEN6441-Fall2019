@@ -7,7 +7,8 @@ import view.RiskUI;
  * This is a risk controller class
  * 
  * @author f_yazdan
-  * @author s_shehna
+ * @author s_shehna
+ * @author AdinAshby
  *
  */
 public class RiskController {

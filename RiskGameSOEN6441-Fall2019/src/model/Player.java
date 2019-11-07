@@ -13,7 +13,7 @@ import view.MapView;
  * 
  * @author f_yazdan
  * @author s_shehna
- * 
+ * @author AdinAshby
  */
 public class Player implements Subject {
 

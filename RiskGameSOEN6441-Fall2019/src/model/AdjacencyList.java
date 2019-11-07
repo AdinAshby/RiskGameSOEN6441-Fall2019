@@ -12,7 +12,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * This class is made to implement neighbours of countries
  * 
  * @author f_yazdan
-  * @author s_shehna
+ * @author s_shehna
+ * @author AdinAshby
  * 
  */
 public class AdjacencyList {
@@ -57,7 +58,7 @@ public class AdjacencyList {
 
 	/**
 	 * @param key
-	
+
 	 * @param key
 	 *            
 	 * @return
@@ -242,7 +243,7 @@ public class AdjacencyList {
 	}
 
 	public boolean isAdjacent(int vertex1, int vertex2) {
-		
+
 		ArrayList<Integer> adjacencyList = getVertexAdjacency(vertex1);
 		if (adjacencyList.contains(vertex2)) {
 			return true;

@@ -2,7 +2,7 @@ package model;
 /**
  * This is subject interface for implementing observer
  * @author s_shehna
- *
+ * @author AdinAshby
  */
 public interface Subject {
 	public void registerPhaseObserver(Observer addObserver);

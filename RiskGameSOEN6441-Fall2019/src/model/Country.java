@@ -3,7 +3,8 @@ package model;
 /**
  * This class defines countries in the map
  * @author f_yazdan
-  * @author s_shehna
+ * @author s_shehna
+ * @author AdinAshby
  */
 public class Country {
 	/**
