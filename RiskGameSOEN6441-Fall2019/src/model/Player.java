@@ -192,6 +192,10 @@ public class Player implements Subject {
 	public ArrayList<String> getContinentsControlled() {
 		return continentsControlled;
 	}
+	
+	public void setContinentsControlled(ArrayList<String> continentsControlled) {
+		this.continentsControlled = continentsControlled;
+	}
 
 	public int getTotalNumberOfArmies() {
 		return totalNumberOfArmies;
@@ -552,6 +556,7 @@ public class Player implements Subject {
 												if (attackingCountry.getArmies() == 0) {
 													System.out.println(attackingCountry.getCountryName()
 															+ " is conquered");
+													mapBuild.setContinentNamesOfPlayer(this);
 													Card card = new Card();
 													addCard(card);
 													System.out.println("You have the following cards now :");
