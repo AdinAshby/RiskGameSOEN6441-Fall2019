@@ -8,6 +8,7 @@ import java.util.ListIterator;
 /**
  *
  * @author f_yazdan
+ * @author s_shehna
  *
  */
 public class Continent {
