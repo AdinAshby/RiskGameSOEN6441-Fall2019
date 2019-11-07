@@ -186,8 +186,7 @@ public class RiskUI {
 					isValidCommand = true;
 				}
 
-				// added multiple time editcontinent -add aa 1 -add bb 2
-				// add continent done
+				// add continent
 				regex = "(?<=editcontinent)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -206,7 +205,7 @@ public class RiskUI {
 
 				}
 
-				// remove continent done
+				// remove continent 
 				regex = "(?<=editcontinent)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -224,7 +223,7 @@ public class RiskUI {
 
 				}
 
-				// add country done
+				// add country
 				regex = "(?<=editcountry)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -243,7 +242,7 @@ public class RiskUI {
 
 				}
 
-				// remove country done
+				// remove country 
 				regex = "(?<=editcountry)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -261,7 +260,7 @@ public class RiskUI {
 
 				}
 
-				// add neighbor done
+				// add neighbor 
 				regex = "(?<=editneighbor)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -280,7 +279,7 @@ public class RiskUI {
 
 				}
 
-				// remove neighbor done
+				// remove neighbor
 
 				regex = "(?<=editneighbor)(.*)";
 				setPattern(regex);
@@ -300,7 +299,7 @@ public class RiskUI {
 
 				}
 
-				// showmap done
+				// showmap
 				regex = "showmap";
 				setPattern(regex);
 				setMatcher(input);
@@ -309,7 +308,7 @@ public class RiskUI {
 					isValidCommand = true;
 				}
 
-				// savemap filename done
+				// savemap filename 
 				regex = "savemap ([\\w*\\_\\-]*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -326,7 +325,7 @@ public class RiskUI {
 
 				}
 
-				// validatemap done
+				// validatemap 
 				regex = "validatemap";
 				setPattern(regex);
 				setMatcher(input);
@@ -551,7 +550,7 @@ public class RiskUI {
 			/******** START GAME PHASE **********************/
 
 			// System.out.println(reinforceRequestingMessage);
-			// test:
+			
 			for (Player player : mapBuild.getPlayers()) {
 
 				player.setCounterForPhases(1);
@@ -575,7 +574,7 @@ public class RiskUI {
 				if (!isValidCommand) {
 					System.out.println("Please Follow the correct command rules");
 				}
-			} // Endof For Player
+			} // End of For Player
 			mapBuild.showMap();
 		}
 	}
@@ -616,6 +615,7 @@ public class RiskUI {
 	}
 
 	/**
+	 * This method is for getting the counter for phases
 	 * 
 	 * @return counterForPhases
 	 */
