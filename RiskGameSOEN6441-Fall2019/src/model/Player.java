@@ -333,6 +333,8 @@ public class Player implements Subject {
 	} */
 
 	public void calculateWorldDominationView() {
+		totalNumberOfArmies = 0;
+		
 		for(Integer each : countryIDs) {
 			totalNumberOfArmies += MapBuilder.getInstance().getCountryById(each).getArmies();
 		}
@@ -388,8 +390,9 @@ public class Player implements Subject {
 
 						if (mapBuild.reinforceIsValid(getPlayerName(), countryName, num) == true) {
 							mapBuild.reinforce(getPlayerName(), countryName, num);
+							calculateWorldDominationView();
 							temporaryArmies -= num;
-
+							
 							if (temporaryArmies <= 0) {
 								finished = true;
 							}
@@ -669,7 +672,7 @@ public class Player implements Subject {
 			}
 
 			// fortify none
-			regex = "fortify none";
+			regex = "fortify -none";
 
 			if (input.equalsIgnoreCase(regex)) {
 				isValidCommand = true;
@@ -693,6 +696,7 @@ public class Player implements Subject {
 
 					if (mapBuild.fortifyIsValid(this, fromCountry, toCountry, num) == true) {
 						mapBuild.fortify(fromCountry, toCountry, num);
+						calculateWorldDominationView();
 						finished = true;
 					} else {
 						System.out.println("Fortify is not valid");
@@ -728,13 +732,8 @@ public class Player implements Subject {
 
 				isValidCommand = true;
 			}
-
-
-
-
 		}
 		return isValidCommand;
-
 	}
 
 	/**
