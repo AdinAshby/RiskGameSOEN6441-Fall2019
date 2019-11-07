@@ -265,6 +265,25 @@ public class Player implements Subject {
 		return result;
 	}
 
+	
+	
+	/**
+	 * This method check whether is defend possible
+	 * @return isDefendPossible
+	 */
+	
+	public boolean isDefendPossible(MapBuilder mapBuild, int defendCountry, int numDice) {
+
+        boolean isDefendPossible = true;
+        if (!contains(this.getCountryIDs(),defendCountry)) {
+                isDefendPossible=false;
+        }
+        if(mapBuild.getCountryById(defendCountry).getArmies()<numDice) {
+                isDefendPossible=false;
+        }
+
+        return isDefendPossible;
+}
 	public int getCounterForPhases() {
 		return counterForPhases;
 	}
