@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import view.MapView;
 
 public class PlayerObserver implements Observer {
@@ -16,7 +18,7 @@ public class PlayerObserver implements Observer {
 
 	@Override
 	public void update(double percentageControlled, int totalNumberOfArmies,
-			String[] continentsControlled) {
+			ArrayList<String> continentsControlled) {
 		
 		theMapView.showPlayersWorldDomination(MapBuilder.getInstance().getPlayers());
 	}

@@ -27,8 +27,8 @@ public class Player implements Subject {
 	private int[] countryIDs;
 
 	private double percentageControlled = 0.00;
-	
-	private String[] continentsControlled= new String[50];
+
+	private ArrayList<String> continentsControlled = new ArrayList<String>();
 	private int totalNumberOfArmies = 0;
 	private ArrayList<Card> cards;
 	private int playerCountForCard;
@@ -188,7 +188,7 @@ public class Player implements Subject {
 		return percentageControlled;
 	}
 
-	public String[] getContinentsControlled() {
+	public ArrayList<String> getContinentsControlled() {
 		return continentsControlled;
 	}
 
@@ -335,7 +335,7 @@ public class Player implements Subject {
 
 	public void calculateWorldDominationView() {
 		totalNumberOfArmies = 0;
-		
+
 		for(Integer each : countryIDs) {
 			totalNumberOfArmies += MapBuilder.getInstance().getCountryById(each).getArmies();
 		}
@@ -393,7 +393,7 @@ public class Player implements Subject {
 							mapBuild.reinforce(getPlayerName(), countryName, num);
 							calculateWorldDominationView();
 							temporaryArmies -= num;
-							
+
 							if (temporaryArmies <= 0) {
 								finished = true;
 							}
@@ -411,7 +411,7 @@ public class Player implements Subject {
 				}
 			} // Match Find Reinforce
 
-			
+
 			if (!isValidCommand) {
 				System.out.println("Correct command not found");
 			}
@@ -428,10 +428,10 @@ public class Player implements Subject {
 		 ************* Attack **********************
 		 ************************************************
 		 ************************************************
-		  */
+		 */
 		// attack
 		//			System.out.println(attackRequestingMessage);
-		
+
 		finished = false;
 		while (!finished) {// && debug == false
 			System.out.println(getPlayerName() + " you may attack or fortify or finish your turn");
@@ -532,12 +532,12 @@ public class Player implements Subject {
 												if (attackingCountry.getArmies() == 0) {
 													System.out.println(attackingCountry.getCountryName()
 															+ " is conquered");
-													Card card=new Card();
+													Card card = new Card();
 													addCard(card);
 													System.out.println("You have the following cards now :");
 													System.out.println(getCardNames());
 													attackingCountry.setPlayer(attackerCountry.getPlayerName());
-													int NoOfContinentsControlled = getContinentsControlled().length;
+													int NoOfContinentsControlled = getContinentsControlled().size();
 													if (NoOfContinentsControlled == mapBuild
 															.getNoOfContinentsControlled()) {
 														System.out.println(attackerCountry.getPlayerName()

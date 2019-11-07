@@ -103,7 +103,7 @@ public class MapView {
 
 		for(Player player : players) {
 
-			System.out.format(table, player.getPlayerName(), player.getPercentageControlled(), Arrays.toString(player.getContinentsControlled()),
+			System.out.format(table, player.getPlayerName(), player.getPercentageControlled(), player.getContinentsControlled(),
 					player.getTotalNumberOfArmies());
 		}
 
