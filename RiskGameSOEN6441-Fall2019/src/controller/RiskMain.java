@@ -17,7 +17,7 @@ public class RiskMain {
 	 */
 	public static void main(String[] args) {
 		RiskUI rui = new RiskUI();
-		try {
+		try { 
 			rui.RiskUIStartTheGame();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

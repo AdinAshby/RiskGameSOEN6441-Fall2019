@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * 
@@ -10,7 +9,7 @@ import java.util.Arrays;
  * @author
  * 
  */
-public class Player {
+public class Player implements Subject {
 
 	/**
 	 * PlayerName is name of the player corresponding to the ID.
@@ -29,6 +28,11 @@ public class Player {
 	private int playerCountForCard;
 
 	private boolean allowToGetCard;
+
+	private int counterForPhases;
+
+	private ArrayList<Observer> observersForPhases = new ArrayList<Observer>();
+	private ArrayList<Observer> observersForWorldDomination = new ArrayList<Observer>();
 
 	/**
 	 * This is Player constructor method for initializing PlayerName and countryId
@@ -67,13 +71,13 @@ public class Player {
 		String cardsList="Cards: -";
 		for(Card c:cards) {
 			cardsList=c.getCardType();
-}
+		}
 		return cardsList;
 
 	}
-	
+
 	public ArrayList<Card> getCards() {
-		
+
 		return cards;
 
 	}
@@ -146,24 +150,12 @@ public class Player {
 		return percentageControlled;
 	}
 
-	public void setPercentageControlled(double percentageControlled) {
-		this.percentageControlled = percentageControlled;
-	}
-
 	public String[] getContinentsControlled() {
 		return continentsControlled;
 	}
 
-	public void setContinentsControlled(String[] continentsControlled) {
-		this.continentsControlled = continentsControlled;
-	}
-
 	public int getTotalNumberOfArmies() {
 		return totalNumberOfArmies;
-	}
-
-	public void setTotalNumberOfArmies(int totalNumberOfArmies) {
-		this.totalNumberOfArmies = totalNumberOfArmies;
 	}
 
 	public boolean isAttackValid(MapBuilder mapBuild, int attackerNumDice, Country attackerCountry,
@@ -172,13 +164,13 @@ public class Player {
 		if (attackerNumDice > attackingCountry.getArmies()) {
 			if(enablePrint)
 				System.out.println(
-					"attacking dice ("+attackerNumDice+") should not be more than the number of armies contained in the attacking country");
+						"attacking dice ("+attackerNumDice+") should not be more than the number of armies contained in the attacking country");
 			isValid = false;
 		}else if (attackerNumDice > 3) {
 			if(enablePrint)
 				System.out.println(
 						"attacking dice ("+attackerNumDice+") should not be more than 3");
-				isValid = false;
+			isValid = false;
 		} else if (!mapBuild.isAdjacentCountry(attackerCountry.getCountryId(), attackingCountry.getCountryId())) {
 			if(enablePrint)
 				System.out.println("Countries are not adjacent");
@@ -193,17 +185,17 @@ public class Player {
 		boolean isAttackPossible = false;
 		for (int countyId : countryIDs) {
 			// Country country=mapBuild.getCountryById(countyId);
-//			System.out.println("Checking " + countyId);
+			//			System.out.println("Checking " + countyId);
 			ArrayList<Integer> CountryAdjList = mapBuild.getCountryAdjacency().getVertexAdjacency(countyId);
-//	System.out.println(CountryAdjList); //Arrays.toString(
+			//	System.out.println(CountryAdjList); //Arrays.toString(
 
 			for (int adjCountry : CountryAdjList) {
 				if (!contains(countryIDs, adjCountry)) {
 					for(int i=1;i<4;i++) {
-					if (isAttackValid(mapBuild, i, mapBuild.getCountryById(countyId),
-							mapBuild.getCountryById(adjCountry), false)) {
-						isAttackPossible = true;
-					}
+						if (isAttackValid(mapBuild, i, mapBuild.getCountryById(countyId),
+								mapBuild.getCountryById(adjCountry), false)) {
+							isAttackPossible = true;
+						}
 					}
 				}
 			}
@@ -227,4 +219,73 @@ public class Player {
 		return result;
 	}
 
+	public int getCounterForPhases() {
+		return counterForPhases;
+	}
+
+	public void setCounterForPhases(int counterForPhases) {
+		this.counterForPhases = counterForPhases;
+		notifyObserverForPhases();
+	}
+
+	@Override
+	public void registerPhaseObserver(Observer addObserver) {
+		observersForPhases.add(addObserver);
+	}
+
+	@Override
+	public void registerWorldDominationObserver(Observer addObserver) {
+		observersForWorldDomination.add(addObserver);
+	}
+
+	@Override
+	public void unregisterPhaseObserver(Observer removeObserver) {
+		observersForPhases.remove(removeObserver);
+	}
+
+	@Override
+	public void unregisterWorldDomination(Observer removeObserver) {
+		observersForWorldDomination.remove(removeObserver);
+	}
+
+	@Override
+	public void notifyObserverForWorldDomination() {
+		for(Observer observer : observersForWorldDomination) {
+			observer.update(percentageControlled, totalNumberOfArmies, continentsControlled);
+		}
+	}
+
+	@Override
+	public void notifyObserverForPhases() {
+		for(Observer observer : observersForPhases) {
+			observer.update(counterForPhases, playerName);
+		}
+	}
+
+	public ArrayList<Observer> getObserversForPhases() {
+		return observersForPhases;
+	}
+
+	public ArrayList<Observer> getObserversForWorldDomination() {
+		return observersForWorldDomination;
+	}
+
+	public void calculateTotalNumberOfArmies() {
+	
+		for(Integer each : countryIDs) {
+			totalNumberOfArmies += MapBuilder.getInstance().getCountryById(each).getArmies();
+		}
+		
+		notifyObserverForWorldDomination();
+	}
+	
+	public void calculateContinentControlled() {
+		MapBuilder.getInstance().continentsOwnedByPlayer(playerName);
+		notifyObserverForWorldDomination();
+	}
+	
+	public void calculatePercentageControlled() {
+		percentageControlled = getCountryIDs().length * 100 / MapBuilder.getInstance().getAllCountries().size();
+		notifyObserverForWorldDomination();
+	}
 }
