@@ -18,6 +18,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import controller.RiskController;
 import view.MapView;
 
 /**
@@ -46,6 +47,22 @@ public class MapBuilder {
 	private Random random = new Random();
 
 	private int numberOfArmiesEachPlayerGets;
+	
+	private static MapBuilder instance;
+	
+	private MapBuilder() {
+		
+	}
+	
+	public static MapBuilder getInstance() {
+		if (instance == null) {
+			instance = new MapBuilder();
+			return instance;
+		} else {
+			return instance;
+		}
+	}
+
 	public boolean exchangeCardsIsValid(Player player,int num1,int num2,int num3)
 	{
 		ArrayList<Card> cardsForPlayer=player.getCards();
@@ -62,6 +79,7 @@ public class MapBuilder {
 
 		return false;
 	}
+	
 	public int exchangeCards(Player player,int num1,int num2,int num3)
 	{
 		int cardarmies;
@@ -76,8 +94,6 @@ public class MapBuilder {
 		return player.getplayerCountForCard()*5;
 	}
 
-
-
 	/**
 	 * This will return list of continents
 	 * 
@@ -87,7 +103,7 @@ public class MapBuilder {
 		return continentList;
 	}
 
-public int getNoOfContinentsControlled() {
+	public int getNoOfContinentsControlled() {
 		return continentList.size();
 	}
 	/**
@@ -583,7 +599,7 @@ public int getNoOfContinentsControlled() {
 				countryDetail = matcher.group();
 				countryId = Integer.parseInt(matcher.group(2));
 				String adjCountriesContent = matcher.group(3);
-//				System.out.println("\nFound countryId=" + countryId + " Adj=" + adjCountriesContent);
+				//				System.out.println("\nFound countryId=" + countryId + " Adj=" + adjCountriesContent);
 				Country c = getCountryById(countryId);
 				System.out.println("Add Adj for " + c.getCountryName()+ " Adj=" + adjCountriesContent);
 				String[] arrOfAdj = adjCountriesContent.split(" ");
@@ -857,6 +873,12 @@ public int getNoOfContinentsControlled() {
 				}
 			}
 		}
+		
+		for(Player player : players) {
+			player.registerPhaseObserver(new PlayerObserver(player));
+			player.registerWorldDominationObserver(new PlayerObserver(player));
+		}
+		
 	}
 
 	/**
@@ -884,10 +906,10 @@ public int getNoOfContinentsControlled() {
 	 */
 	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
 		Country country = getCountryByName(countryName);
-if(country!=null) {
-		int oldArmies = country.getArmies();
-		getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
-} else {
+		if(country!=null) {
+			int oldArmies = country.getArmies();
+			getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
+		} else {
 			System.out.println("Country not found");
 		}
 	}
@@ -896,7 +918,7 @@ if(country!=null) {
 
 		int[] playerCountries = player.getCountryIDs();
 
-for(int countryID: playerCountries) {
+		for(int countryID: playerCountries) {
 			if (getCountryByName(countryName) == getCountryById(countryID)) {
 				return true;
 			}
@@ -922,8 +944,11 @@ for(int countryID: playerCountries) {
 				int[] p = player.getCountryIDs();
 				int randomID = p[randomPlayerCountryID];
 				int oldArmies = getCountryById(randomID).getArmies();
-				getCountryById(randomID).setArmies(oldArmies + armiesForEach + 25);// Check if atleast 25 army should be assigned
+				getCountryById(randomID).setArmies(oldArmies + armiesForEach);// Check if atleast 25 army should be assigned
+
 			}
+			
+			player.calculateTotalNumberOfArmies();
 		}
 	}
 
@@ -1072,7 +1097,7 @@ for(int countryID: playerCountries) {
 	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
 		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
 	}
-	
+
 	public int calculateNumberOfInitialArmies() {
 		if(players.length <= 6)
 			return (50 - (5 * players.length));
@@ -1139,7 +1164,7 @@ for(int countryID: playerCountries) {
 		return totalArmies;
 	}
 
-	public void playerWorldDomination() {
+	/*public void playerWorldDomination() {
 		for(Player player : players) {
 			player.setPercentageControlled(player.getCountryIDs().length * 100 / getAllCountries().size());
 			player.setContinentsControlled(continentsOwnedByPlayer(player.getPlayerName()));
@@ -1147,5 +1172,5 @@ for(int countryID: playerCountries) {
 		}
 
 		theMapView.showPlayersWorldDomination(players);
-	}
+	}*/
 }
