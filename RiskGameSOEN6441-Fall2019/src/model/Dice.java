@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * 
+ * @author f_yazdan
+ *
+ */
 public class Dice {
 	/**
 	 * number of Dice
