@@ -37,15 +37,26 @@ public class TestMap {
 	String INVALID_MAP = "test7";
 
 	/**
-	 *  This is the test method  for checking the validate map
+	 *  This is the test method  for checking the map validation for valid map file
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testvalidateMapForValidMap() throws Exception {
+
+		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
+		Assert.assertEquals(true, mapBuild.validateMap());
+		
+	}
+	/**
+	 *  This is the test method  for checking the map validation for valid map file
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void testvalidateMap() throws Exception {
 
-		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
-		Assert.assertEquals(true, mapBuild.validateMap());
+
 		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
 		Assert.assertEquals(false, mapBuild.validateMap());
 	}
