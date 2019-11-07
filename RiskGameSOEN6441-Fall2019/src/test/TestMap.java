@@ -71,14 +71,24 @@ public class TestMap {
 	}
 
 	/**
-	 * This is the test method for checking whether the map is SubGraph
+	 * This is the test method for checking whether the map is SubGraph with valid map file
 	 * 
 	 * @throws Exception
 	 */
 	@Test
-	public void testIsMapSubGraph() throws Exception {
+	public void testIsMapSubGraphValid() throws Exception {
 		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
 		Assert.assertEquals(true, mapBuild.isMapSubGraph());
+		
+	}
+	/**
+	 * This is the test method for checking whether the map is SubGraph with invalid map file
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testIsMapSubGraphInValid() throws Exception {
+		
 		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
 		Assert.assertEquals(false, mapBuild.isMapSubGraph());
 	}
