@@ -5,6 +5,7 @@ import java.util.Random;
 * This function is is a constructor for initializing cardType.
 * 
 *@author f_yazdan
+*@author s_shehna
 *@author Babita Kaur
 *
 */
