@@ -86,19 +86,17 @@ public class AdjacencyList {
 	}
 
 	/**
-	  
+	 * This method returns the adjacency List of Vertex
 	 * @param vertexId
-	 * 
 	 * @param vertexId
-	
-	 * @return
+	 * @return adjacency List
 	 */
 	public ArrayList<Integer> getVertexAdjacency(int vertexId) {
 		return adjacencyList.get(vertexId);
 	}
 
 	/**
-	 * 
+	 * This method return String of the Vertex Adjacency
 	 * @param vertexId
 	 * @return
 	 */
