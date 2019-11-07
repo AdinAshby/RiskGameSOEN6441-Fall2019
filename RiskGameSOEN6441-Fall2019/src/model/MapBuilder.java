@@ -30,10 +30,10 @@ import view.MapView;
 public class MapBuilder {
 
 	/**
-	 *  file map
+	 * file map
 	 */
 	final File mapFolder = new File("./MapFiles");
-	
+
 	/**
 	 * private continentList
 	 */
@@ -50,13 +50,13 @@ public class MapBuilder {
 	private Random random = new Random();
 
 	private int numberOfArmiesEachPlayerGets;
-	
+
 	private static MapBuilder instance;
-	
+
 	private MapBuilder() {
-		
+
 	}
-	
+
 	public static MapBuilder getInstance() {
 		if (instance == null) {
 			instance = new MapBuilder();
@@ -66,38 +66,36 @@ public class MapBuilder {
 		}
 	}
 
-	public boolean exchangeCardsIsValid(Player player,int num1,int num2,int num3)
-	{
-		ArrayList<Card> cardsForPlayer=player.getCards();
+	public boolean exchangeCardsIsValid(Player player, int num1, int num2, int num3) {
+		ArrayList<Card> cardsForPlayer = player.getCards();
 
-		if(cardsForPlayer.size()<3)
+		if (cardsForPlayer.size() < 3)
 			return false;
-		
-		Card A = cardsForPlayer.get(num1);
-		Card B	=cardsForPlayer.get(num2);
-		Card C	=cardsForPlayer.get(num3);
 
-		if((A.equals(B))&& (B.equals(C))) 
+		Card A = cardsForPlayer.get(num1);
+		Card B = cardsForPlayer.get(num2);
+		Card C = cardsForPlayer.get(num3);
+
+		if ((A.equals(B)) && (B.equals(C)))
 			return true;
 
-		if(!(A.equals(B)) && !(B.equals(C) && !(A.equals(C))))
+		if (!(A.equals(B)) && !(B.equals(C) && !(A.equals(C))))
 			return true;
 
 		return false;
 	}
-	
-	public int exchangeCards(Player player,int num1,int num2,int num3)
-	{
+
+	public int exchangeCards(Player player, int num1, int num2, int num3) {
 		int cardarmies;
-		//	ArrayList<Card> cards= new ArrayList<Card>();
-		ArrayList<Card> cardsforplayerArrayList=player.getCards();
-		Card A	=cardsforplayerArrayList.get(num1);
-		Card B	=cardsforplayerArrayList.get(num2);
-		Card C	=cardsforplayerArrayList.get(num3);
+
+		ArrayList<Card> cardsforplayerArrayList = player.getCards();
+		Card A = cardsforplayerArrayList.get(num1);
+		Card B = cardsforplayerArrayList.get(num2);
+		Card C = cardsforplayerArrayList.get(num3);
 
 		player.addOneToCardCounter();
 
-		return player.getplayerCountForCard()*5;
+		return player.getplayerCountForCard() * 5;
 	}
 
 	/**
@@ -112,8 +110,10 @@ public class MapBuilder {
 	public int getNoOfContinentsControlled() {
 		return continentList.size();
 	}
+
 	/**
 	 * This method sets the continentList
+	 * 
 	 * @param continentList
 	 */
 	public void setContinentList(Map<Integer, Continent> continentList) {
@@ -122,6 +122,7 @@ public class MapBuilder {
 
 	/**
 	 * This method returns size of continentList
+	 * 
 	 * @return size of the continentList
 	 */
 
@@ -132,6 +133,7 @@ public class MapBuilder {
 
 	/**
 	 * This method size of country adjacency
+	 * 
 	 * @return size of the Country Adjacency
 	 */
 	public int getCountryListSize() {
@@ -141,7 +143,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  reads continent Id
+	 * This method reads continent Id
 	 */
 	public String getContinentName(int continentId) {
 
@@ -207,7 +209,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  remove a continent and show is removed
+	 * This method remove a continent and show is removed
 	 * 
 	 * @param continentName
 	 */
@@ -250,49 +252,17 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  will print List of Continents
+	 * This method will print List of Continents
 	 */
 
 	public void showMap() {
 
-		/*
-		 * LinkedList<Country> allCountries = new LinkedList<Country>();
-		 * Iterator<Entry<Integer, Continent>> iteratorForContinent =
-		 * continentList.entrySet().iterator();
-		 * 
-		 * while (iteratorForContinent.hasNext()) {
-		 * 
-		 * Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>)
-		 * iteratorForContinent.next(); int continentID = (int) continentMap.getKey();
-		 * Iterator<Country> iteratorForCountry =
-		 * continentList.get(continentID).getCountriesList().iterator();
-		 * 
-		 * 
-		 * while(iteratorForCountry.hasNext()) {
-		 * allCountries.add(iteratorForCountry.next()); }
-		 * 
-		 * }
-		 */
-
 		theMapView.showMap(this);
-		/*
-		 * System.out.println("\nPrint Continent:\n------------------------");
-		 * Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
-		 * while (it.hasNext()) { Map.Entry<Integer, Continent> continentMap =
-		 * (Map.Entry<Integer, Continent>) it.next(); int continentId = (int)
-		 * continentMap.getKey(); Continent continent = continentList.get(continentId);
-		 * System.out.println("continent name is " + continent.getContinentName() +
-		 * ", continent Id is: " + continent.getContinentId() + " , continent value is "
-		 * + continent.getContinentControlValue()); //
-		 * continent.showContinentAdjacency(); continent.printCountryList(); //
-		 * System.out.println(continent.getCountryListNames()); }
-		 * System.out.println("[borders]"); System.out.println(showCountryAdjacency());
-		 * System.out.println("------------------------\n");
-		 */
+
 	}
 
 	/**
-	 * This method  will print list of maps
+	 * This method will print list of maps
 	 */
 	public void getListOfMaps() {
 
@@ -303,6 +273,7 @@ public class MapBuilder {
 
 	/**
 	 * This method returns country by countryId
+	 * 
 	 * @param countryId
 	 * @return
 	 */
@@ -322,6 +293,7 @@ public class MapBuilder {
 
 	/**
 	 * This method returns countryName by countryId
+	 * 
 	 * @param countryId
 	 * @return Country Name if passed the country id
 	 */
@@ -342,6 +314,7 @@ public class MapBuilder {
 
 	/**
 	 * This method returns countryName by countryName
+	 * 
 	 * @param countryName
 	 * @return
 	 */
@@ -362,6 +335,7 @@ public class MapBuilder {
 
 	/**
 	 * This method returns continent by countryName
+	 * 
 	 * @param countryName
 	 * @return Continent if passed the CountryName
 	 */
@@ -383,6 +357,7 @@ public class MapBuilder {
 
 	/**
 	 * This method checks if map is connected subgraph
+	 * 
 	 * @return false if map is not a connected subgraph
 	 */
 	public boolean isMapSubGraph() {
@@ -428,7 +403,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method returns  will add a new country in adjacency list of country
+	 * This method returns will add a new country in adjacency list of country
 	 * 
 	 * @param countryId
 	 * @param targetCountryId
@@ -439,7 +414,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  addCountryAdjacency
+	 * This method addCountryAdjacency
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
@@ -458,7 +433,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  remove the Country Adjacency
+	 * This method remove the Country Adjacency
 	 * 
 	 * @param countryName
 	 * @param neighborCountryName
@@ -477,14 +452,14 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  shows country adjacency list
+	 * This method shows country adjacency list
 	 */
 	public String showCountryAdjacency() {
 		return getCountryAdjacency().showListEdges();
 	}
 
 	/**
-	 * This method  reads the map files
+	 * This method reads the map files
 	 */
 	public boolean loadMap(String fileName) throws Exception {
 
@@ -605,9 +580,10 @@ public class MapBuilder {
 				countryDetail = matcher.group();
 				countryId = Integer.parseInt(matcher.group(2));
 				String adjCountriesContent = matcher.group(3);
-				//				System.out.println("\nFound countryId=" + countryId + " Adj=" + adjCountriesContent);
+				// System.out.println("\nFound countryId=" + countryId + " Adj=" +
+				// adjCountriesContent);
 				Country c = getCountryById(countryId);
-				System.out.println("Add Adj for " + c.getCountryName()+ " Adj=" + adjCountriesContent);
+				System.out.println("Add Adj for " + c.getCountryName() + " Adj=" + adjCountriesContent);
 				String[] arrOfAdj = adjCountriesContent.split(" ");
 				for (String adj : arrOfAdj)
 					addCountryAdjacency(countryId, Integer.parseInt(adj));
@@ -625,6 +601,7 @@ public class MapBuilder {
 
 	/**
 	 * This method format the map
+	 * 
 	 * @param fileName
 	 * @return
 	 */
@@ -671,6 +648,7 @@ public class MapBuilder {
 
 	/**
 	 * This method add country to corresponding continent
+	 * 
 	 * @param countryName
 	 * @param continentName
 	 */
@@ -691,7 +669,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  remove the Country
+	 * This method remove the Country
 	 * 
 	 * @param countryName
 	 */
@@ -743,6 +721,7 @@ public class MapBuilder {
 
 	/**
 	 * This method return countryList of the continent
+	 * 
 	 * @param continentName
 	 * @return country name list
 	 */
@@ -755,6 +734,7 @@ public class MapBuilder {
 
 	/**
 	 * This method return continent of country
+	 * 
 	 * @param countryName
 	 * @return name of the continent
 	 */
@@ -765,6 +745,7 @@ public class MapBuilder {
 
 	/**
 	 * This method return list of borders
+	 * 
 	 * @return list of borders
 	 */
 	public HashMap<String, ArrayList<String>> getListOfBorders() {
@@ -795,6 +776,7 @@ public class MapBuilder {
 
 	/**
 	 * This method list of all countries
+	 * 
 	 * @return allCountries
 	 */
 	public LinkedList<Country> getAllCountries() {
@@ -820,7 +802,7 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  assigns Players To the Countries
+	 * This method assigns Players To the Countries
 	 * 
 	 * @param playerNames
 	 */
@@ -879,16 +861,16 @@ public class MapBuilder {
 				}
 			}
 		}
-		
-		for(Player player : players) {
+
+		for (Player player : players) {
 			player.registerPhaseObserver(new PlayerObserver(player));
 			player.registerWorldDominationObserver(new PlayerObserver(player));
 		}
-		
+
 	}
 
 	/**
-	 * This method  update the Country IDs
+	 * This method update the Country IDs
 	 * 
 	 * @param playerName
 	 * @param countryID
@@ -905,16 +887,16 @@ public class MapBuilder {
 	}
 
 	/**
-	 * This method  assign Initials Armies To The Specific Country
+	 * This method assign Initials Armies To The Specific Country
 	 * 
 	 * @param countryName
 	 * @param armiesAdded
 	 */
 	public void assignInitialsArmiesToSpecificCountry(String countryName, int armiesAdded) {
 		Country country = getCountryByName(countryName);
-		if(country!=null) {
+		if (country != null) {
 			int oldArmies = country.getArmies();
-			getCountryByName(countryName).setArmies(armiesAdded + oldArmies);  
+			getCountryByName(countryName).setArmies(armiesAdded + oldArmies);
 		} else {
 			System.out.println("Country not found");
 		}
@@ -924,7 +906,7 @@ public class MapBuilder {
 
 		int[] playerCountries = player.getCountryIDs();
 
-		for(int countryID: playerCountries) {
+		for (int countryID : playerCountries) {
 			if (getCountryByName(countryName) == getCountryById(countryID)) {
 				return true;
 			}
@@ -940,88 +922,87 @@ public class MapBuilder {
 	 */
 	public void placeAllArmies() {
 
-		for(Player player : players) {
+		for (Player player : players) {
 			int armiesForEach = calculateNumberOfInitialArmies();
 
-			while(armiesForEach > 0) {
+			while (armiesForEach > 0) {
 				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().length);
 				int randomArmy = random.nextInt(armiesForEach) + 1;
 				armiesForEach -= randomArmy;
 				int[] p = player.getCountryIDs();
 				int randomID = p[randomPlayerCountryID];
 				int oldArmies = getCountryById(randomID).getArmies();
-				getCountryById(randomID).setArmies(oldArmies + armiesForEach);// Check if atleast 25 army should be assigned
+				getCountryById(randomID).setArmies(oldArmies + armiesForEach);// Check if atleast 25 army should be
+																				// assigned
 
 			}
-			
+
 			player.calculateWorldDominationView();
-			//player.calculateTotalNumberOfArmies();
-			//player.notifyObserverForWorldDomination();
+			// player.calculateTotalNumberOfArmies();
+			// player.notifyObserverForWorldDomination();
 		}
-		
+
 	}
-	
+
 	/**
 	 * This method is for getContinentNamesOfPlayer
+	 * 
 	 * @param playerName
 	 * @return getContinentNamesOfPlayer
 	 */
 
-public ArrayList<String> getContinentNamesOfPlayer(String playerName){
+	public ArrayList<String> getContinentNamesOfPlayer(String playerName) {
 
+		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
+		ArrayList<String> ContinentList = new ArrayList<String>(continentList.size());
 
-                int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
-                ArrayList<String> ContinentList=new ArrayList<String>(continentList.size());
+		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+			int continentId = (int) continentMap.getKey();
+			Continent c = continentList.get(continentId);
+			List<Country> countriesList = c.getCountriesList();
+			int[] countriesIdList = new int[countriesList.size()];
 
-                                Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
-                                while (it.hasNext()) {
-                                        Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
-                                        int continentId = (int) continentMap.getKey();
-                                        Continent c = continentList.get(continentId);
-                                        List<Country> countriesList = c.getCountriesList();
-                                        int[] countriesIdList=new int[countriesList.size()];
+			int counter = 0;
+			boolean isThisContinentForPlayer = true;
+			for (Country cId : countriesList) {
+				countriesIdList[counter] = cId.getCountryId();
+				int countryId = cId.getCountryId();
+				counter++;
+				if (!contains(playerCountries, countryId)) {
+					isThisContinentForPlayer = false;
+				}
+			}
 
-                                        int counter=0;
-                                        boolean isThisContinentForPlayer=true;
-                                        for(Country cId: countriesList) {
-                                                countriesIdList[counter]=cId.getCountryId();
-                                                int countryId=cId.getCountryId();
-                                                counter++;
-                                                if(!contains(playerCountries, countryId)) {
-                                                        isThisContinentForPlayer=false;
-                                                }
-                                        }
+			if (isThisContinentForPlayer == true) {
+				ContinentList.add(c.getContinentName());
+			}
 
-                                        if(isThisContinentForPlayer==true) {
-                                                ContinentList.add(c.getContinentName());
-                                        }
+		}
 
-                                }
+		return ContinentList;
+	}
 
-                return ContinentList;
-        }
-/**
- * 
- * @param array
- * @param v
- * @return result
- */
-        public static boolean contains(final int[] array, final int v) {
+	/**
+	 * 
+	 * @param array
+	 * @param v
+	 * @return result
+	 */
+	public static boolean contains(final int[] array, final int v) {
 
-                boolean result = false;
+		boolean result = false;
 
-                for (int i : array) {
-                        if (i == v) {
-                                result = true;
-                                break;
-                        }
-                }
+		for (int i : array) {
+			if (i == v) {
+				result = true;
+				break;
+			}
+		}
 
-                return result;
-        }
-
-
-
+		return result;
+	}
 
 	/**
 	 * This method implements the reinforcement phase
@@ -1035,21 +1016,21 @@ public ArrayList<String> getContinentNamesOfPlayer(String playerName){
 
 		int oldArmies = getCountryByName(countryName).getArmies();
 
-		getCountryByName(countryName)
-		.setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
+		getCountryByName(countryName).setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
 	}
 
 	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
 		calculateNumberOfArmiesEachPlayerGets(playerName);
 
 		if (armiesAdded < 0 || armiesAdded > numberOfArmiesEachPlayerGets) {
-			System.out.println("Armies Added ("+armiesAdded+") is less than 0 or Armies added are more than player armies "+numberOfArmiesEachPlayerGets);
+			System.out.println("Armies Added (" + armiesAdded
+					+ ") is less than 0 or Armies added are more than player armies " + numberOfArmiesEachPlayerGets);
 			return false;
 		}
 
 		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
 
-		for(int countryID: playerCountries) {
+		for (int countryID : playerCountries) {
 			if (getCountryByName(countryName) == getCountryById(countryID)) {
 				return true;
 			}
@@ -1073,42 +1054,43 @@ public ArrayList<String> getContinentNamesOfPlayer(String playerName){
 		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
 
 	}
-/**
- * This method is for checking whether the fortify is valid 
- * @param player
- * @param fromCountry
- * @param toCountry
- * @param num
- * @return false
- */
+
+	/**
+	 * This method is for checking whether the fortify is valid
+	 * 
+	 * @param player
+	 * @param fromCountry
+	 * @param toCountry
+	 * @param num
+	 * @return false
+	 */
 	public boolean fortifyIsValid(Player player, String fromCountry, String toCountry, int num) {
 		boolean fromCountryCheck = false;
 		boolean toCountryCheck = false;
 
-
-		if(num < 0 || num > getCountryByName(fromCountry).getArmies())
+		if (num < 0 || num > getCountryByName(fromCountry).getArmies())
 			return false;
 
-		for(int countryID : player.getCountryIDs()) {
+		for (int countryID : player.getCountryIDs()) {
 			if (getCountryByName(fromCountry) == getCountryById(countryID)) {
 				fromCountryCheck = true;
 			}
 		}
 
-		for(int countryID : player.getCountryIDs()) {
+		for (int countryID : player.getCountryIDs()) {
 			if (getCountryByName(toCountry) == getCountryById(countryID)) {
 				toCountryCheck = true;
 			}
 		}
 
-		if(fromCountryCheck && toCountryCheck)
+		if (fromCountryCheck && toCountryCheck)
 			return true;
 
 		return false;
 	}
 
 	/**
-	 * In This method  The player Continent Values Ownership
+	 * In This method The player Continent Values Ownership
 	 * 
 	 * @param playerName
 	 * @return
@@ -1139,11 +1121,13 @@ public ArrayList<String> getContinentNamesOfPlayer(String playerName){
 
 		return continentValuesPlayerGets;
 	}
-/**
- * This method is for continents Owned By Player
- * @param playerName
- * @return continentsOfPlayerArray
- */
+
+	/**
+	 * This method is for continents Owned By Player
+	 * 
+	 * @param playerName
+	 * @return continentsOfPlayerArray
+	 */
 	public String[] continentsOwnedByPlayer(String playerName) {
 
 		LinkedList<String> continentsOfPlayer = new LinkedList<String>();
@@ -1170,41 +1154,49 @@ public ArrayList<String> getContinentNamesOfPlayer(String playerName){
 
 		String[] continentsOfPlayerArray = new String[continentsOfPlayer.size()];
 
-		for(int i = 0; i < continentsOfPlayerArray.length; i++) {
+		for (int i = 0; i < continentsOfPlayerArray.length; i++) {
 			continentsOfPlayerArray[i] = continentsOfPlayer.get(i);
 		}
 
-
 		return continentsOfPlayerArray;
 	}
+
 	/**
 	 * This method is for calculate Number Of Armies Each Player Gets
+	 * 
 	 * @param playerName
 	 */
 
 	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
-		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
+		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3)
+				? getPlayerByName(playerName).getCountryIDs().length / 3
+				: 3;
 	}
-/**
- * This method is for calculate Number Of Initial Armies
- * @return 20
- */
+
+	/**
+	 * This method is for calculate Number Of Initial Armies
+	 * 
+	 * @return 20
+	 */
 	public int calculateNumberOfInitialArmies() {
-		if(players.length <= 6)
+		if (players.length <= 6)
 			return (50 - (5 * players.length));
 		else
 			return 20;
 	}
-/**
- *  This method get the number of Armies Each Player Gets
- * @return numberOfArmiesEachPlayerGets
- */
+
+	/**
+	 * This method get the number of Armies Each Player Gets
+	 * 
+	 * @return numberOfArmiesEachPlayerGets
+	 */
 	public int getNumberOfArmiesEachPlayerGets() {
 		return numberOfArmiesEachPlayerGets;
 	}
 
 	/**
 	 * This method return all the players
+	 * 
 	 * @return players
 	 */
 	public Player[] getPlayers() {
@@ -1213,6 +1205,7 @@ public ArrayList<String> getContinentNamesOfPlayer(String playerName){
 
 	/**
 	 * This method return all the country adjacency
+	 * 
 	 * @return country Adjacency
 	 */
 	public AdjacencyList getCountryAdjacency() {
@@ -1220,7 +1213,7 @@ public ArrayList<String> getContinentNamesOfPlayer(String playerName){
 	}
 
 	/**
-	 * This method  Country Adjacency
+	 * This method Country Adjacency
 	 * 
 	 * @param countryAdjacency
 	 */
@@ -1228,13 +1221,13 @@ public ArrayList<String> getContinentNamesOfPlayer(String playerName){
 		this.countryAdjacency = countryAdjacency;
 	}
 
-
 	public boolean isAdjacentCountry(int countryId1, int countryId2) {
-		return countryAdjacency.isAdjacent(countryId1,countryId2);
+		return countryAdjacency.isAdjacent(countryId1, countryId2);
 	}
 
 	/**
 	 * This method gets the player by playerName
+	 * 
 	 * @param playerName
 	 * @return name of the player if there is any otherwise it return numm
 	 */
@@ -1246,17 +1239,22 @@ public ArrayList<String> getContinentNamesOfPlayer(String playerName){
 		return null;
 	}
 
+	/**
+	 * This method return the total armies a palyer has
+	 * 
+	 * @param playerName
+	 * @return
+	 */
 	public int totalArmiesAPlayerHas(String playerName) {
 
 		int totalArmies = 0;
 
-		for(Country country : getAllCountries()) {
-			if(country.getPlayerName().equalsIgnoreCase(playerName))
+		for (Country country : getAllCountries()) {
+			if (country.getPlayerName().equalsIgnoreCase(playerName))
 				totalArmies += country.getArmies();
 		}
 
 		return totalArmies;
 	}
 
-	
 }
