@@ -18,7 +18,7 @@ public class TestMap {
 	/**
 	 * Object of the MapBuilder
 	 */
-	MapBuilder mapBuild = new MapBuilder();
+	MapBuilder mapBuild = MapBuilder.getInstance();
 	/**
 	 * Object of the Empty AdjacencyList
 	 */

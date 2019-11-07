@@ -16,7 +16,7 @@ public class TestMapFiles {
 	/**
 	 * Object of the MapBuilder
 	 */
-	MapBuilder mapBuild = new MapBuilder();
+	MapBuilder mapBuild = MapBuilder.getInstance();
 	/**
 	 * String valid_file
 	 */

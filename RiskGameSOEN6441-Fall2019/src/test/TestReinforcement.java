@@ -17,7 +17,7 @@ import model.Player;
 public class TestReinforcement {
 	
 	ArrayList<String> players = new ArrayList<String>();
-	MapBuilder mapBuild = new MapBuilder();
+	MapBuilder mapBuild = MapBuilder.getInstance();
 /**
  * This testcase tests valid number of armies owned by players for reinforcement 
  *

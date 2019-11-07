@@ -13,7 +13,7 @@ import org.junit.Test;
 public class TestArmies {
 
 	ArrayList<String> players = new ArrayList<String>();
-	MapBuilder mapBuild = new MapBuilder();
+	MapBuilder mapBuild = MapBuilder.getInstance();
 /**
  * This testcase tests the number of armies given to only player in game
  *
