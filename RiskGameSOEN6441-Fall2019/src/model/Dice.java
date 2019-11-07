@@ -3,7 +3,7 @@ package model;
 /**
  * This class is for managing Dice during the game
  * @author f_yazdan
- * @author s_ansari
+ * @author s_shehna
  */
 public class Dice {
 	/**

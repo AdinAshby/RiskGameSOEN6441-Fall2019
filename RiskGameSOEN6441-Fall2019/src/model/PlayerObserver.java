@@ -3,7 +3,11 @@ package model;
 import java.util.ArrayList;
 
 import view.MapView;
-
+/**
+ * This class is one of observer classes implementing the observer interface
+ * @author s_shehna
+ *
+ */
 public class PlayerObserver implements Observer {
 	
 	MapView theMapView = new MapView();

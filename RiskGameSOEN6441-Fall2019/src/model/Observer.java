@@ -4,6 +4,7 @@ import java.util.ArrayList;
 /**
  * This is interface for the Observer
  * @author f_yazdan
+ * @author s_shehna
  *
  */
 public interface Observer {

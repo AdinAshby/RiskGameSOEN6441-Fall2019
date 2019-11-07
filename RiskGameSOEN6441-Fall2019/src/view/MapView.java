@@ -17,7 +17,8 @@ import model.Player;
 /**
  * This a Map View Class containing all the styles of the showing map
  * 
- * @author
+ * @author f_yazdan
+ * @author s_shehna
  * 
  *
  */
