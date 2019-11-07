@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * This is subject interface for implementing observer
+ * @author s_shehna
+ *
+ */
 public interface Subject {
 	public void registerPhaseObserver(Observer addObserver);
 	public void registerWorldDominationObserver(Observer addObserver);
