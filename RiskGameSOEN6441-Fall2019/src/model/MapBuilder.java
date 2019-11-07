@@ -960,6 +960,68 @@ public class MapBuilder {
 		}
 		
 	}
+	
+	/**
+	 * This method is for getContinentNamesOfPlayer
+	 * @param playerName
+	 * @return getContinentNamesOfPlayer
+	 */
+
+public ArrayList<String> getContinentNamesOfPlayer(String playerName){
+
+
+                int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
+                ArrayList<String> ContinentList=new ArrayList<String>(continentList.size());
+
+                                Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+                                while (it.hasNext()) {
+                                        Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+                                        int continentId = (int) continentMap.getKey();
+                                        Continent c = continentList.get(continentId);
+                                        List<Country> countriesList = c.getCountriesList();
+                                        int[] countriesIdList=new int[countriesList.size()];
+
+                                        int counter=0;
+                                        boolean isThisContinentForPlayer=true;
+                                        for(Country cId: countriesList) {
+                                                countriesIdList[counter]=cId.getCountryId();
+                                                int countryId=cId.getCountryId();
+                                                counter++;
+                                                if(!contains(playerCountries, countryId)) {
+                                                        isThisContinentForPlayer=false;
+                                                }
+                                        }
+
+                                        if(isThisContinentForPlayer==true) {
+                                                ContinentList.add(c.getContinentName());
+                                        }
+
+                                }
+
+                return ContinentList;
+        }
+/**
+ * 
+ * @param array
+ * @param v
+ * @return result
+ */
+        public static boolean contains(final int[] array, final int v) {
+
+                boolean result = false;
+
+                for (int i : array) {
+                        if (i == v) {
+                                result = true;
+                                break;
+                        }
+                }
+
+                return result;
+        }
+
+
+
 
 	/**
 	 * This method implements the reinforcement phase
@@ -1011,7 +1073,14 @@ public class MapBuilder {
 		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
 
 	}
-
+/**
+ * This method is for checking whether the fortify is valid 
+ * @param player
+ * @param fromCountry
+ * @param toCountry
+ * @param num
+ * @return false
+ */
 	public boolean fortifyIsValid(Player player, String fromCountry, String toCountry, int num) {
 		boolean fromCountryCheck = false;
 		boolean toCountryCheck = false;
@@ -1070,7 +1139,11 @@ public class MapBuilder {
 
 		return continentValuesPlayerGets;
 	}
-
+/**
+ * This method is for continents Owned By Player
+ * @param playerName
+ * @return continentsOfPlayerArray
+ */
 	public String[] continentsOwnedByPlayer(String playerName) {
 
 		LinkedList<String> continentsOfPlayer = new LinkedList<String>();
@@ -1104,18 +1177,28 @@ public class MapBuilder {
 
 		return continentsOfPlayerArray;
 	}
+	/**
+	 * This method is for calculate Number Of Armies Each Player Gets
+	 * @param playerName
+	 */
 
 	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
 		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3) ? getPlayerByName(playerName).getCountryIDs().length / 3 : 3;
 	}
-
+/**
+ * This method is for calculate Number Of Initial Armies
+ * @return 20
+ */
 	public int calculateNumberOfInitialArmies() {
 		if(players.length <= 6)
 			return (50 - (5 * players.length));
 		else
 			return 20;
 	}
-
+/**
+ *  This method get the number of Armies Each Player Gets
+ * @return numberOfArmiesEachPlayerGets
+ */
 	public int getNumberOfArmiesEachPlayerGets() {
 		return numberOfArmiesEachPlayerGets;
 	}
@@ -1175,13 +1258,5 @@ public class MapBuilder {
 		return totalArmies;
 	}
 
-	/*public void playerWorldDomination() {
-		for(Player player : players) {
-			player.setPercentageControlled(player.getCountryIDs().length * 100 / getAllCountries().size());
-			player.setContinentsControlled(continentsOwnedByPlayer(player.getPlayerName()));
-			player.setTotalNumberOfArmies(totalArmiesAPlayerHas(player.getPlayerName()));
-		}
-
-		theMapView.showPlayersWorldDomination(players);
-	}*/
+	
 }
