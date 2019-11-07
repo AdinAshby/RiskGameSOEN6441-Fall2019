@@ -12,6 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * This class is made to implement neighbours of countries
  * 
  * @author f_yazdan
+  * @author s_shehna
  * 
  */
 public class AdjacencyList {
