@@ -6,13 +6,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class is made for defining continents
-<<<<<<< HEAD
- * @author Babita kaur
-=======
- * 
+ *
  * @author f_yazdan
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
+ *
  */
 public class Continent {
 	/**
@@ -38,6 +34,7 @@ public class Continent {
 
 	/**
 	 * This method returns the continent counter
+	 * 
 	 * @return continents Counter
 	 */
 	public static int getContinentsCounter() {
@@ -55,7 +52,7 @@ public class Continent {
 	}
 
 	/**
-	 *  This is parameterized constructor for setting name and continentControlValue
+	 * This is parameterized constructor for setting name and continentControlValue
 	 * 
 	 * @param name
 	 * @param continentControlValue
@@ -119,6 +116,7 @@ public class Continent {
 
 	/**
 	 * This method sets the ContinentName
+	 * 
 	 * @param name
 	 */
 	public void setContinentName(String name) {
@@ -127,6 +125,7 @@ public class Continent {
 
 	/**
 	 * This method returns the ContinentId
+	 * 
 	 * @return continentId
 	 */
 	public int getContinentId() {
@@ -135,6 +134,7 @@ public class Continent {
 
 	/**
 	 * this method sets the continentId
+	 * 
 	 * @param continentId
 	 */
 	public void setContinentId(int continentId) {
@@ -143,6 +143,7 @@ public class Continent {
 
 	/**
 	 * This method returns the country of specific CountryId
+	 * 
 	 * @param countryId
 	 * @return country if there is any otherwise return false
 	 */
@@ -157,6 +158,7 @@ public class Continent {
 
 	/**
 	 * This method returns the country
+	 * 
 	 * @param countryName
 	 * @return country if the name of the country we pass is the same as country
 	 *         name otherwise return null

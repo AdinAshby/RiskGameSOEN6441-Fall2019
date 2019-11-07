@@ -25,7 +25,6 @@ import view.MapView;
  * This is MapBuilder Class to Edit Map
  * 
  * @author f_yazdan
- * @author Babita kaur
  *
  */
 public class MapBuilder {
