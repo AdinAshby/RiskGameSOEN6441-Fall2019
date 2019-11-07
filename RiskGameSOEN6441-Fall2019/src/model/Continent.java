@@ -11,6 +11,7 @@ import java.util.ListIterator;
  *
  */
 public class Continent {
+	
 	/**
 	 * private name attribute
 	 */
