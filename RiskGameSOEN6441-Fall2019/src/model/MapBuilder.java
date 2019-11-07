@@ -952,9 +952,9 @@ public class MapBuilder {
 	 * @return getContinentNamesOfPlayer
 	 */
 
-	public ArrayList<String> getContinentNamesOfPlayer(String playerName) {
+	public void setContinentNamesOfPlayer(Player player) {
 
-		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
+		int[] playerCountries = player.getCountryIDs();
 		ArrayList<String> ContinentList = new ArrayList<String>(continentList.size());
 
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
@@ -981,8 +981,8 @@ public class MapBuilder {
 			}
 
 		}
-
-		return ContinentList;
+		
+		player.setContinentsControlled(ContinentList);
 	}
 
 	/**
