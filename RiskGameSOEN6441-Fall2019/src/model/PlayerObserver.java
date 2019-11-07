@@ -19,14 +19,18 @@ public class PlayerObserver implements Observer {
 		//this.player.registerPhaseObserver(this);
 		//this.player.registerWorldDominationObserver(this);
 	}
-
+/** 
+ * This method is the update method for world domination view
+ */
 	@Override
 	public void update(double percentageControlled, int totalNumberOfArmies,
 			ArrayList<String> continentsControlled) {
 		
 		theMapView.showPlayersWorldDomination(MapBuilder.getInstance().getPlayers());
 	}
-	
+	/**
+	 * This method is update method for game phases view
+	 */
 	@Override
 	public void update(int counterForPhases, String playerName) {
 
