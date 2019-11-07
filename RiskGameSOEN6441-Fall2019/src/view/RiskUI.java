@@ -121,7 +121,7 @@ public class RiskUI {
 		 * boolean placeAllFlag
 		 */
 		boolean placeAllFlag = false;
-		
+
 		boolean editMapWhile = false;
 
 		System.out.println(welcomeMessage);
@@ -139,7 +139,7 @@ public class RiskUI {
 		} */
 		//finished = false;
 
-		
+
 		/**
 		 * String addText
 		 */
@@ -164,9 +164,9 @@ public class RiskUI {
 			// System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
-		
+
 		editMapAnswer = scanner.nextLine();
-		
+
 		while(!editMapWhile) {
 			if (editMapAnswer.equalsIgnoreCase("Y")) {
 				editMapWhile = true;
@@ -181,7 +181,6 @@ public class RiskUI {
 					setPattern(regex);
 					setMatcher(input);
 
-<<<<<<< HEAD
 					if (getMatcher().find()) {
 						mapFileName = getMatcher().group(1);
 						try {
@@ -191,392 +190,201 @@ public class RiskUI {
 							e.printStackTrace();
 						}
 						isValidCommand = true;
-=======
-				// editmap filename
-				regex = "editmap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
 
-				if (getMatcher().find()) {
-					mapFileName = getMatcher().group(1);
-					try {
-						mapBuild.loadMap(mapFileName);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					isValidCommand = true;
-				}
+						// editmap filename
+						regex = "editmap ([\\w*\\_\\-]*)";
+						setPattern(regex);
+						setMatcher(input);
 
-				// add continent
-				regex = "(?<=editcontinent)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-add ([\\w*\\_\\-]*) (\\d*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String continentName = matcher.group(2);
-					int continentValue = Integer.parseInt(matcher.group(3));
-					mapBuild.addContinent(continentName, continentValue);
-					isValidCommand = true;
-
-				}
-
-				// remove continent 
-				regex = "(?<=editcontinent)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-remove ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String continentName = matcher.group(2);
-					mapBuild.removeContinent(continentName);
-					isValidCommand = true;
-
-				}
-
-				// add country
-				regex = "(?<=editcountry)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String countryName = matcher.group(2);
-					String continentName = matcher.group(3);
-					mapBuild.addCountry(countryName, continentName);
-					isValidCommand = true;
-
-				}
-
-				// remove country 
-				regex = "(?<=editcountry)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-remove ([\\w*\\_\\-]*))+";
-				pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-				matcher = pattern.matcher(addText);
-				while (matcher.find()) {
-					String countryName = matcher.group(2);
-					mapBuild.removeCountry(countryName);
-					isValidCommand = true;
-
-				}
-
-				// add neighbor 
-				regex = "(?<=editneighbor)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String countryName = matcher.group(2);
-					String neighborCountryName = matcher.group(3);
-					mapBuild.addCountryAdjacency(countryName, neighborCountryName);
-					isValidCommand = true;
-
-				}
-
-				// remove neighbor
-
-				regex = "(?<=editneighbor)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String countryName = matcher.group(2);
-					String neighborCountryName = matcher.group(3);
-					mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
-					isValidCommand = true;
-
-				}
-
-				// showmap
-				regex = "showmap";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					mapBuild.showMap();
-					isValidCommand = true;
-				}
-
-				// savemap filename 
-				regex = "savemap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					mapFileName = matcher.group(1);
-					isValidCommand = true;
-
-					try {
-						mapBuild.saveMap(mapFileName);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
-					}
-
-<<<<<<< HEAD
-					// added multiple time editcontinent -add aa 1 -add bb 2
-					// add continent done
-					regex = "(?<=editcontinent)(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					addText = "";
-					if (matcher.find()) {
-						addText = matcher.group(1);
-=======
-				}
-
-				// validatemap 
-				regex = "validatemap";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					isValidCommand = true;
-					mapBuild.validateMap();
-
-				}
-
-				// showadjacencymap countryname
-				regex = "showadjacencymap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					mapFileName = matcher.group(1);
-					// call adjacency
-					isValidCommand = true;
-				}
-
-				// finishediting
-				regex = "finishediting";
-				if (input.equalsIgnoreCase(regex)) {
-					finished = true;
-					isValidCommand = true;
-				}
-
-				if (!isValidCommand) {
-					System.out.println("Please Follow the correct command rules");
-				}
-			}
-		} else if (editMapAnswer.equalsIgnoreCase("N")) {
-
-			counterForPhases = 0;
-			mapView.showPhaseView(counterForPhases, "");
-
-			System.out.println(loadMapRequestingMessage);
-			finished = false;
-
-			while (!finished && debug == false) {
-				isValidCommand = false;
-				readInput();
-
-				// loadmap filename done
-				regex = "loadmap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
-
-				if (matcher.find()) {
-					mapFileName = matcher.group(1);
-					isValidCommand = true;
-					boolean isLoaded = false;
-					try {
-						isLoaded = mapBuild.loadMap(mapFileName);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
-					}
-					regex = "(-add ([\\w*\\_\\-]*) (\\d*))+";
-					setPattern(regex);
-					setMatcher(addText);
-					while (matcher.find()) {
-						String continentName = matcher.group(2);
-						int continentValue = Integer.parseInt(matcher.group(3));
-						mapBuild.addContinent(continentName, continentValue);
-						isValidCommand = true;
-
-					}
-
-					// remove continent done
-					regex = "(?<=editcontinent)(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					addText = "";
-					if (matcher.find()) {
-						addText = matcher.group(1);
-					}
-					regex = "(-remove ([\\w*\\_\\-]*))+";
-					setPattern(regex);
-					setMatcher(addText);
-					while (matcher.find()) {
-						String continentName = matcher.group(2);
-						mapBuild.removeContinent(continentName);
-						isValidCommand = true;
-
-					}
-
-					// add country done
-					regex = "(?<=editcountry)(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					addText = "";
-					if (matcher.find()) {
-						addText = matcher.group(1);
-					}
-					regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-					setPattern(regex);
-					setMatcher(addText);
-					while (matcher.find()) {
-						String countryName = matcher.group(2);
-						String continentName = matcher.group(3);
-						mapBuild.addCountry(countryName, continentName);
-						isValidCommand = true;
-
-					}
-
-					// remove country done
-					regex = "(?<=editcountry)(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					addText = "";
-					if (matcher.find()) {
-						addText = matcher.group(1);
-					}
-					regex = "(-remove ([\\w*\\_\\-]*))+";
-					pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-					matcher = pattern.matcher(addText);
-					while (matcher.find()) {
-						String countryName = matcher.group(2);
-						mapBuild.removeCountry(countryName);
-						isValidCommand = true;
-
-					}
-
-					// add neighbor done
-					regex = "(?<=editneighbor)(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					addText = "";
-					if (matcher.find()) {
-						addText = matcher.group(1);
-					}
-					regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-					setPattern(regex);
-					setMatcher(addText);
-					while (matcher.find()) {
-						String countryName = matcher.group(2);
-						String neighborCountryName = matcher.group(3);
-						mapBuild.addCountryAdjacency(countryName, neighborCountryName);
-						isValidCommand = true;
-
-					}
-
-					// remove neighbor done
-
-					regex = "(?<=editneighbor)(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					addText = "";
-					if (matcher.find()) {
-						addText = matcher.group(1);
-					}
-					regex = "(-remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-					setPattern(regex);
-					setMatcher(addText);
-					while (matcher.find()) {
-						String countryName = matcher.group(2);
-						String neighborCountryName = matcher.group(3);
-						mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
-						isValidCommand = true;
-
-					}
-
-					// showmap done
-					regex = "showmap";
-					setPattern(regex);
-					setMatcher(input);
-					if (matcher.find()) {
-						mapBuild.showMap();
-						isValidCommand = true;
-					}
-
-					// savemap filename done
-					regex = "savemap ([\\w*\\_\\-]*)";
-					setPattern(regex);
-					setMatcher(input);
-					if (matcher.find()) {
-						mapFileName = matcher.group(1);
-						isValidCommand = true;
-
-						try {
-							mapBuild.saveMap(mapFileName);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						if (getMatcher().find()) {
+							mapFileName = getMatcher().group(1);
+							try {
+								mapBuild.loadMap(mapFileName);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							isValidCommand = true;
 						}
 
-					}
+						// add continent
+						regex = "(?<=editcontinent)(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						addText = "";
+						if (matcher.find()) {
+							addText = matcher.group(1);
+						}
+						regex = "(-add ([\\w*\\_\\-]*) (\\d*))+";
+						setPattern(regex);
+						setMatcher(addText);
+						while (matcher.find()) {
+							String continentName = matcher.group(2);
+							int continentValue = Integer.parseInt(matcher.group(3));
+							mapBuild.addContinent(continentName, continentValue);
+							isValidCommand = true;
 
-					// validatemap done
-					regex = "validatemap";
-					setPattern(regex);
-					setMatcher(input);
-					if (matcher.find()) {
-						isValidCommand = true;
-						mapBuild.validateMap();
+						}
 
-					}
+						// remove continent 
+						regex = "(?<=editcontinent)(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						addText = "";
+						if (matcher.find()) {
+							addText = matcher.group(1);
+						}
+						regex = "(-remove ([\\w*\\_\\-]*))+";
+						setPattern(regex);
+						setMatcher(addText);
+						while (matcher.find()) {
+							String continentName = matcher.group(2);
+							mapBuild.removeContinent(continentName);
+							isValidCommand = true;
 
-					// showadjacencymap countryname
-					regex = "showadjacencymap ([\\w*\\_\\-]*)";
-					setPattern(regex);
-					setMatcher(input);
-					if (matcher.find()) {
-						mapFileName = matcher.group(1);
-						// call adjacency
-						isValidCommand = true;
-					}
+						}
 
-					// finishediting
-					regex = "finishediting";
-					if (input.equalsIgnoreCase(regex)) {
-						finished = true;
-						isValidCommand = true;
-					}
+						// add country
+						regex = "(?<=editcountry)(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						addText = "";
+						if (matcher.find()) {
+							addText = matcher.group(1);
+						}
+						regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+						setPattern(regex);
+						setMatcher(addText);
+						while (matcher.find()) {
+							String countryName = matcher.group(2);
+							String continentName = matcher.group(3);
+							mapBuild.addCountry(countryName, continentName);
+							isValidCommand = true;
 
-					if (!isValidCommand) {
-						System.out.println("Please Follow the correct command rules");
+						}
+
+						// remove country 
+						regex = "(?<=editcountry)(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						addText = "";
+						if (matcher.find()) {
+							addText = matcher.group(1);
+						}
+						regex = "(-remove ([\\w*\\_\\-]*))+";
+						pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+						matcher = pattern.matcher(addText);
+						while (matcher.find()) {
+							String countryName = matcher.group(2);
+							mapBuild.removeCountry(countryName);
+							isValidCommand = true;
+
+						}
+
+						// add neighbor 
+						regex = "(?<=editneighbor)(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						addText = "";
+						if (matcher.find()) {
+							addText = matcher.group(1);
+						}
+						regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+						setPattern(regex);
+						setMatcher(addText);
+						while (matcher.find()) {
+							String countryName = matcher.group(2);
+							String neighborCountryName = matcher.group(3);
+							mapBuild.addCountryAdjacency(countryName, neighborCountryName);
+							isValidCommand = true;
+
+						}
+
+						// remove neighbor
+
+						regex = "(?<=editneighbor)(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						addText = "";
+						if (matcher.find()) {
+							addText = matcher.group(1);
+						}
+						regex = "(-remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+						setPattern(regex);
+						setMatcher(addText);
+						while (matcher.find()) {
+							String countryName = matcher.group(2);
+							String neighborCountryName = matcher.group(3);
+							mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
+							isValidCommand = true;
+
+						}
+
+						// showmap
+						regex = "showmap";
+						setPattern(regex);
+						setMatcher(input);
+						if (matcher.find()) {
+							mapBuild.showMap();
+							isValidCommand = true;
+						}
+
+						// savemap filename 
+						regex = "savemap ([\\w*\\_\\-]*)";
+						setPattern(regex);
+						setMatcher(input);
+						if (matcher.find()) {
+							mapFileName = matcher.group(1);
+							isValidCommand = true;
+
+							try {
+								mapBuild.saveMap(mapFileName);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+
+								// added multiple time editcontinent -add aa 1 -add bb 2
+								// add continent done
+								regex = "(?<=editcontinent)(.*)";
+								setPattern(regex);
+								setMatcher(input);
+								addText = "";
+								if (matcher.find()) {
+									addText = matcher.group(1);
+								}
+
+								// validatemap 
+								regex = "validatemap";
+								setPattern(regex);
+								setMatcher(input);
+								if (matcher.find()) {
+									isValidCommand = true;
+									mapBuild.validateMap();
+
+								}
+
+								// showadjacencymap countryname
+								regex = "showadjacencymap ([\\w*\\_\\-]*)";
+								setPattern(regex);
+								setMatcher(input);
+								if (matcher.find()) {
+									mapFileName = matcher.group(1);
+									// call adjacency
+									isValidCommand = true;
+								}
+
+								// finishediting
+								regex = "finishediting";
+								if (input.equalsIgnoreCase(regex)) {
+									finished = true;
+									isValidCommand = true;
+								}
+
+								if (!isValidCommand) {
+									System.out.println("Please Follow the correct command rules");
+								}
+							}
+						}
 					}
 				}
 			} else if (editMapAnswer.equalsIgnoreCase("N")) {
@@ -701,31 +509,29 @@ public class RiskUI {
 					}
 				}
 
-<<<<<<< HEAD
+
 				System.out.println(startupRequestingMessage);
-=======
+
 				if (placeAllFlag == true) {
 					break;
 				}
 
-			}
 
-			/******** START GAME PHASE **********************/
+				/******** START GAME PHASE **********************/
 
-			// System.out.println(reinforceRequestingMessage);
-			
-			for (Player player : mapBuild.getPlayers()) {
-
-				player.setCounterForPhases(1);
-				// counterForPhases = 1;
-				// mapView.showPhaseView(counterForPhases, player.getPlayerName());
-
-				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
-				System.out.println(player.getPlayerName() + " is your turn to reinforce");
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
-				finished = false;
+				// System.out.println(reinforceRequestingMessage);
 
 				for (Player player : mapBuild.getPlayers()) {
+
+					player.setCounterForPhases(1);
+					// counterForPhases = 1;
+					// mapView.showPhaseView(counterForPhases, player.getPlayerName());
+
+					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+					System.out.println(player.getPlayerName() + " is your turn to reinforce");
+					finished = false;
+
+					//for (Player player : mapBuild.getPlayers()) {
 
 					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
@@ -784,14 +590,14 @@ public class RiskUI {
 						if (!isValidCommand) {
 							System.out.println("Please Follow the correct command rules");
 						}
-					}
+						//}
 
-					if (placeAllFlag == true) {
-						break;
+						if (placeAllFlag == true) {
+							break;
+						}
 					}
-
 				}
-<<<<<<< HEAD
+
 
 				/******** START GAME PHASE **********************/
 
@@ -826,10 +632,6 @@ public class RiskUI {
 				System.out.println("Please answer by Y or N");
 				editMapAnswer = scanner.nextLine();
 			}
-=======
-			} // End of For Player
-			mapBuild.showMap();
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 		}
 	}
 
