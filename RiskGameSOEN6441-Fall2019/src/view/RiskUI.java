@@ -121,11 +121,13 @@ public class RiskUI {
 		 * boolean placeAllFlag
 		 */
 		boolean placeAllFlag = false;
+		
+		boolean editMapWhile = false;
 
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
-		while (!finished) {
+		/*while (!finished) {
 			String editMapAnswerText = scanner.nextLine();
 			if (editMapAnswerText.equalsIgnoreCase("Y") || editMapAnswerText.equalsIgnoreCase("N")) {
 				editMapAnswer = editMapAnswerText;
@@ -134,10 +136,10 @@ public class RiskUI {
 			} else {
 				System.out.println("Please answer by Y or N");
 			}
-		}
-		finished = false;
+		} */
+		//finished = false;
 
-		editMapAnswer = scanner.nextLine();
+		
 		/**
 		 * String addText
 		 */
@@ -149,7 +151,7 @@ public class RiskUI {
 		 * attribute
 		 */
 
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
 			mapBuild.loadMap("ameroki");// ameroki
 			playerNames.add("Aval");
@@ -162,348 +164,309 @@ public class RiskUI {
 			// System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
+		
+		editMapAnswer = scanner.nextLine();
+		
+		while(!editMapWhile) {
+			if (editMapAnswer.equalsIgnoreCase("Y")) {
+				editMapWhile = true;
+				while (!finished) {
+					System.out.println(editMapRequestingMessage);
 
-		if (editMapAnswer.equalsIgnoreCase("Y")) {
-			while (!finished) {
-				System.out.println(editMapRequestingMessage);
+					isValidCommand = false;
+					readInput();
 
-				isValidCommand = false;
-				readInput();
+					// editmap filename
+					regex = "editmap ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
 
-				// editmap filename
-				regex = "editmap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
-
-				if (getMatcher().find()) {
-					mapFileName = getMatcher().group(1);
-					try {
-						mapBuild.loadMap(mapFileName);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					isValidCommand = true;
-				}
-
-				// added multiple time editcontinent -add aa 1 -add bb 2
-				// add continent done
-				regex = "(?<=editcontinent)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-add ([\\w*\\_\\-]*) (\\d*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String continentName = matcher.group(2);
-					int continentValue = Integer.parseInt(matcher.group(3));
-					mapBuild.addContinent(continentName, continentValue);
-					isValidCommand = true;
-
-				}
-
-				// remove continent done
-				regex = "(?<=editcontinent)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-remove ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String continentName = matcher.group(2);
-					mapBuild.removeContinent(continentName);
-					isValidCommand = true;
-
-				}
-
-				// add country done
-				regex = "(?<=editcountry)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String countryName = matcher.group(2);
-					String continentName = matcher.group(3);
-					mapBuild.addCountry(countryName, continentName);
-					isValidCommand = true;
-
-				}
-
-				// remove country done
-				regex = "(?<=editcountry)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-remove ([\\w*\\_\\-]*))+";
-				pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-				matcher = pattern.matcher(addText);
-				while (matcher.find()) {
-					String countryName = matcher.group(2);
-					mapBuild.removeCountry(countryName);
-					isValidCommand = true;
-
-				}
-
-				// add neighbor done
-				regex = "(?<=editneighbor)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String countryName = matcher.group(2);
-					String neighborCountryName = matcher.group(3);
-					mapBuild.addCountryAdjacency(countryName, neighborCountryName);
-					isValidCommand = true;
-
-				}
-
-				// remove neighbor done
-
-				regex = "(?<=editneighbor)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String countryName = matcher.group(2);
-					String neighborCountryName = matcher.group(3);
-					mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
-					isValidCommand = true;
-
-				}
-
-				// showmap done
-				regex = "showmap";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					mapBuild.showMap();
-					isValidCommand = true;
-				}
-
-				// savemap filename done
-				regex = "savemap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					mapFileName = matcher.group(1);
-					isValidCommand = true;
-
-					try {
-						mapBuild.saveMap(mapFileName);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					if (getMatcher().find()) {
+						mapFileName = getMatcher().group(1);
+						try {
+							mapBuild.loadMap(mapFileName);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						isValidCommand = true;
 					}
 
-				}
-
-				// validatemap done
-				regex = "validatemap";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					isValidCommand = true;
-					mapBuild.validateMap();
-
-				}
-
-				// showadjacencymap countryname
-				regex = "showadjacencymap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					mapFileName = matcher.group(1);
-					// call adjacency
-					isValidCommand = true;
-				}
-
-				// finishediting
-				regex = "finishediting";
-				if (input.equalsIgnoreCase(regex)) {
-					finished = true;
-					isValidCommand = true;
-				}
-
-				if (!isValidCommand) {
-					System.out.println("Please Follow the correct command rules");
-				}
-			}
-		} else if (editMapAnswer.equalsIgnoreCase("N")) {
-
-			counterForPhases = 0;
-			mapView.showPhaseView(counterForPhases, "");
-
-			System.out.println(loadMapRequestingMessage);
-			finished = false;
-
-			while (!finished && debug == false) {
-				isValidCommand = false;
-				readInput();
-
-				// loadmap filename done
-				regex = "loadmap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
-
-				if (matcher.find()) {
-					mapFileName = matcher.group(1);
-					isValidCommand = true;
-					boolean isLoaded = false;
-					try {
-						isLoaded = mapBuild.loadMap(mapFileName);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					// added multiple time editcontinent -add aa 1 -add bb 2
+					// add continent done
+					regex = "(?<=editcontinent)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					addText = "";
+					if (matcher.find()) {
+						addText = matcher.group(1);
 					}
-					if (isLoaded == true) {
+					regex = "(-add ([\\w*\\_\\-]*) (\\d*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					while (matcher.find()) {
+						String continentName = matcher.group(2);
+						int continentValue = Integer.parseInt(matcher.group(3));
+						mapBuild.addContinent(continentName, continentValue);
+						isValidCommand = true;
+
+					}
+
+					// remove continent done
+					regex = "(?<=editcontinent)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					addText = "";
+					if (matcher.find()) {
+						addText = matcher.group(1);
+					}
+					regex = "(-remove ([\\w*\\_\\-]*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					while (matcher.find()) {
+						String continentName = matcher.group(2);
+						mapBuild.removeContinent(continentName);
+						isValidCommand = true;
+
+					}
+
+					// add country done
+					regex = "(?<=editcountry)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					addText = "";
+					if (matcher.find()) {
+						addText = matcher.group(1);
+					}
+					regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					while (matcher.find()) {
+						String countryName = matcher.group(2);
+						String continentName = matcher.group(3);
+						mapBuild.addCountry(countryName, continentName);
+						isValidCommand = true;
+
+					}
+
+					// remove country done
+					regex = "(?<=editcountry)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					addText = "";
+					if (matcher.find()) {
+						addText = matcher.group(1);
+					}
+					regex = "(-remove ([\\w*\\_\\-]*))+";
+					pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+					matcher = pattern.matcher(addText);
+					while (matcher.find()) {
+						String countryName = matcher.group(2);
+						mapBuild.removeCountry(countryName);
+						isValidCommand = true;
+
+					}
+
+					// add neighbor done
+					regex = "(?<=editneighbor)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					addText = "";
+					if (matcher.find()) {
+						addText = matcher.group(1);
+					}
+					regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					while (matcher.find()) {
+						String countryName = matcher.group(2);
+						String neighborCountryName = matcher.group(3);
+						mapBuild.addCountryAdjacency(countryName, neighborCountryName);
+						isValidCommand = true;
+
+					}
+
+					// remove neighbor done
+
+					regex = "(?<=editneighbor)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					addText = "";
+					if (matcher.find()) {
+						addText = matcher.group(1);
+					}
+					regex = "(-remove ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					while (matcher.find()) {
+						String countryName = matcher.group(2);
+						String neighborCountryName = matcher.group(3);
+						mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
+						isValidCommand = true;
+
+					}
+
+					// showmap done
+					regex = "showmap";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						mapBuild.showMap();
+						isValidCommand = true;
+					}
+
+					// savemap filename done
+					regex = "savemap ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						mapFileName = matcher.group(1);
+						isValidCommand = true;
+
+						try {
+							mapBuild.saveMap(mapFileName);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+
+					// validatemap done
+					regex = "validatemap";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						isValidCommand = true;
+						mapBuild.validateMap();
+
+					}
+
+					// showadjacencymap countryname
+					regex = "showadjacencymap ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						mapFileName = matcher.group(1);
+						// call adjacency
+						isValidCommand = true;
+					}
+
+					// finishediting
+					regex = "finishediting";
+					if (input.equalsIgnoreCase(regex)) {
 						finished = true;
+						isValidCommand = true;
 					}
 
+					if (!isValidCommand) {
+						System.out.println("Please Follow the correct command rules");
+					}
 				}
+			} else if (editMapAnswer.equalsIgnoreCase("N")) {
+				editMapWhile = true;
 
-				if (!isValidCommand) {
-					System.out.println("Please Follow the correct command rules");
-				}
-			}
+				counterForPhases = 0;
+				mapView.showPhaseView(counterForPhases, "");
 
-			System.out.println(addOrRemovePlayersRequestingMessage);
-			finished = false;
+				System.out.println(loadMapRequestingMessage);
+				finished = false;
 
-			while (!finished && debug == false) {
+				while (!finished && debug == false) {
+					isValidCommand = false;
+					readInput();
 
-				isValidCommand = false;
-				readInput();
-				// savemap filename done
-				regex = "savemap ([\\w*\\_\\-]*)";
-				setPattern(regex);
-				setMatcher(input);
-				if (matcher.find()) {
-					mapFileName = matcher.group(1);
-					isValidCommand = true;
+					// loadmap filename done
+					regex = "loadmap ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
 
-					try {
-						mapBuild.saveMap(mapFileName);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					if (matcher.find()) {
+						mapFileName = matcher.group(1);
+						isValidCommand = true;
+						boolean isLoaded = false;
+						try {
+							isLoaded = mapBuild.loadMap(mapFileName);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if (isLoaded == true) {
+							finished = true;
+						}
+
 					}
 
-				}
-				// gameplayer -add
-				regex = "(?<=gameplayer)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-add ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String playerName = getMatcher().group(2);
-					playerNames.add(playerName);
-					isValidCommand = true;
+					if (!isValidCommand) {
+						System.out.println("Please Follow the correct command rules");
+					}
 				}
 
-				// gameplayer -remove
-				regex = "(?<=gameplayer)(.*)";
-				setPattern(regex);
-				setMatcher(input);
-				addText = "";
-				if (matcher.find()) {
-					addText = matcher.group(1);
-				}
-				regex = "(-remove ([\\w*\\_\\-]*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				while (matcher.find()) {
-					String playerName = getMatcher().group(2);
-					playerNames.remove(playerName);
-					isValidCommand = true;
-				}
-
-				// populatecountries
-				regex = "populatecountries";
-				setPattern(regex);
-				setMatcher(input);
-				if (getMatcher().find()) {
-					isValidCommand = true;
-					finished = true;
-					mapBuild.assigningPlayersToCountries(playerNames);
-
-				}
-
-				// showmap
-				regex = "showmap";
-				setPattern(regex);
-				setMatcher(input);
-				if (getMatcher().find()) {
-					isValidCommand = true;
-					mapView.showMap(mapBuild);
-
-				}
-
-				if (!isValidCommand) {
-					System.out.println("Please Follow the correct command rules");
-				}
-			}
-
-			System.out.println(startupRequestingMessage);
-			finished = false;
-
-			for (Player player : mapBuild.getPlayers()) {
-
-				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
-
+				System.out.println(addOrRemovePlayersRequestingMessage);
 				finished = false;
 
 				while (!finished && debug == false) {
 
 					isValidCommand = false;
-
-					System.out.println("Player " + player.getPlayerName() + ":");
-					System.out.println("You get -" + mapBuild.calculateNumberOfInitialArmies() + "- armies.");
 					readInput();
-
-					// placeall
-					regex = "placeall";
+					// savemap filename done
+					regex = "savemap ([\\w*\\_\\-]*)";
 					setPattern(regex);
 					setMatcher(input);
 					if (matcher.find()) {
+						mapFileName = matcher.group(1);
 						isValidCommand = true;
-						mapBuild.placeAllArmies();
+
+						try {
+							mapBuild.saveMap(mapFileName);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+					// gameplayer -add
+					regex = "(?<=gameplayer)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					addText = "";
+					if (matcher.find()) {
+						addText = matcher.group(1);
+					}
+					regex = "(-add ([\\w*\\_\\-]*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					while (matcher.find()) {
+						String playerName = getMatcher().group(2);
+						playerNames.add(playerName);
+						isValidCommand = true;
+					}
+
+					// gameplayer -remove
+					regex = "(?<=gameplayer)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					addText = "";
+					if (matcher.find()) {
+						addText = matcher.group(1);
+					}
+					regex = "(-remove ([\\w*\\_\\-]*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					while (matcher.find()) {
+						String playerName = getMatcher().group(2);
+						playerNames.remove(playerName);
+						isValidCommand = true;
+					}
+
+					// populatecountries
+					regex = "populatecountries";
+					setPattern(regex);
+					setMatcher(input);
+					if (getMatcher().find()) {
+						isValidCommand = true;
 						finished = true;
-						placeAllFlag = true;
+						mapBuild.assigningPlayersToCountries(playerNames);
 
 					}
 
@@ -514,27 +477,7 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						isValidCommand = true;
 						mapView.showMap(mapBuild);
-					}
 
-					// placearmy countryname
-
-					regex = "(?<=placearmy )(.*)";
-					setPattern(regex);
-					setMatcher(input);
-					addText = "";
-
-					if (getMatcher().find()) {
-						String countryName = matcher.group(1);
-
-						if (mapBuild.placearmyIsValid(player, countryName) == true) {
-							mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
-									mapBuild.calculateNumberOfInitialArmies());
-							finished = true;
-						} else {
-							System.out.println("placearmy is not valid");
-						}
-
-						isValidCommand = true;
 					}
 
 					if (!isValidCommand) {
@@ -542,41 +485,109 @@ public class RiskUI {
 					}
 				}
 
-				if (placeAllFlag == true) {
-					break;
-				}
-
-			}
-
-			/******** START GAME PHASE **********************/
-
-			// System.out.println(reinforceRequestingMessage);
-			// test:
-			for (Player player : mapBuild.getPlayers()) {
-
-				player.setCounterForPhases(1);
-				// counterForPhases = 1;
-				// mapView.showPhaseView(counterForPhases, player.getPlayerName());
-
-				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
-				System.out.println(player.getPlayerName() + " is your turn to reinforce");
+				System.out.println(startupRequestingMessage);
 				finished = false;
 
-				int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
+				for (Player player : mapBuild.getPlayers()) {
 
-				isValidCommand = player.reinforce(temporaryArmies, mapBuild, mapView);
+					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
-				player.setCounterForPhases(2);
-				isValidCommand = player.attack(mapBuild, mapView);
+					finished = false;
 
-				player.setCounterForPhases(3);
-				isValidCommand = player.fortify(mapBuild, mapView);
+					while (!finished && debug == false) {
 
-				if (!isValidCommand) {
-					System.out.println("Please Follow the correct command rules");
+						isValidCommand = false;
+
+						System.out.println("Player " + player.getPlayerName() + ":");
+						System.out.println("You get -" + mapBuild.calculateNumberOfInitialArmies() + "- armies.");
+						readInput();
+
+						// placeall
+						regex = "placeall";
+						setPattern(regex);
+						setMatcher(input);
+						if (matcher.find()) {
+							isValidCommand = true;
+							mapBuild.placeAllArmies();
+							finished = true;
+							placeAllFlag = true;
+
+						}
+
+						// showmap
+						regex = "showmap";
+						setPattern(regex);
+						setMatcher(input);
+						if (getMatcher().find()) {
+							isValidCommand = true;
+							mapView.showMap(mapBuild);
+						}
+
+						// placearmy countryname
+
+						regex = "(?<=placearmy )(.*)";
+						setPattern(regex);
+						setMatcher(input);
+						addText = "";
+
+						if (getMatcher().find()) {
+							String countryName = matcher.group(1);
+
+							if (mapBuild.placearmyIsValid(player, countryName) == true) {
+								mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
+										mapBuild.calculateNumberOfInitialArmies());
+								finished = true;
+							} else {
+								System.out.println("placearmy is not valid");
+							}
+
+							isValidCommand = true;
+						}
+
+						if (!isValidCommand) {
+							System.out.println("Please Follow the correct command rules");
+						}
+					}
+
+					if (placeAllFlag == true) {
+						break;
+					}
+
 				}
-			} // Endof For Player
-			mapBuild.showMap();
+
+				/******** START GAME PHASE **********************/
+
+				// System.out.println(reinforceRequestingMessage);
+				// test:
+				for (Player player : mapBuild.getPlayers()) {
+
+					player.setCounterForPhases(1);
+					// counterForPhases = 1;
+					// mapView.showPhaseView(counterForPhases, player.getPlayerName());
+
+					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+					System.out.println(player.getPlayerName() + " is your turn to reinforce");
+					finished = false;
+
+					int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
+
+					isValidCommand = player.reinforce(temporaryArmies, mapBuild, mapView);
+
+					player.setCounterForPhases(2);
+					isValidCommand = player.attack(mapBuild, mapView);
+
+					player.setCounterForPhases(3);
+					isValidCommand = player.fortify(mapBuild, mapView);
+
+					if (!isValidCommand) {
+						System.out.println("Please Follow the correct command rules");
+					}
+				} // Endof For Player
+				mapBuild.showMap();
+			} else {
+				System.out.println("Please answer by Y or N");
+				editMapAnswer = scanner.nextLine();
+			}
 		}
 	}
 
