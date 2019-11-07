@@ -130,17 +130,6 @@ public class RiskUI {
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
-		/*while (!finished) {
-			String editMapAnswerText = scanner.nextLine();
-			if (editMapAnswerText.equalsIgnoreCase("Y") || editMapAnswerText.equalsIgnoreCase("N")) {
-				editMapAnswer = editMapAnswerText;
-				finished = true;
-
-			} else {
-				System.out.println("Please answer by Y or N");
-			}
-		} */
-		//finished = false;
 
 
 		/**
@@ -604,13 +593,11 @@ public class RiskUI {
 
 				/******** START GAME PHASE **********************/
 
-				// System.out.println(reinforceRequestingMessage);
-				// test:
+				
 				for (Player player : mapBuild.getPlayers()) {
 
 					player.setCounterForPhases(1);
-					// counterForPhases = 1;
-					// mapView.showPhaseView(counterForPhases, player.getPlayerName());
+					
 
 					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 					System.out.println(player.getPlayerName() + " is your turn to reinforce");
