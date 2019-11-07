@@ -9,7 +9,7 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ TestArmies.class, TestAttack.class, TestPlayer.class })
+@SuiteClasses({ TestArmies.class, TestAttack.class, TestPlayer.class , TestDefend.class})
 public class TestSuite_Attack {
 
 }
