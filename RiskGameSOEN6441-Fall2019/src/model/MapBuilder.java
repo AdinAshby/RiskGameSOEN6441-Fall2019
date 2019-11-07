@@ -45,19 +45,32 @@ public class MapBuilder {
 	 * countryAdjacency
 	 */
 	private AdjacencyList countryAdjacency = new AdjacencyList();
-
+/**
+ * private player
+ */
 	private Player[] players;
 
+	/**
+	 * private random
+	 */
 	private Random random = new Random();
 
+	/**
+	 * private number Of Armies Each Player Gets
+	 */
 	private int numberOfArmiesEachPlayerGets;
-
 	private static MapBuilder instance;
 
+	/**
+	 * This is a constructor
+	 */
 	private MapBuilder() {
 
 	}
-
+/**
+ *  
+ * @return instance
+ */
 	public static MapBuilder getInstance() {
 		if (instance == null) {
 			instance = new MapBuilder();
@@ -66,7 +79,14 @@ public class MapBuilder {
 			return instance;
 		}
 	}
-
+/**
+ * This method check whether is exchange Cards Valid
+ * @param player
+ * @param num1
+ * @param num2
+ * @param num3
+ * @return false
+ */
 	public boolean exchangeCardsIsValid(Player player, int num1, int num2, int num3) {
 		ArrayList<Card> cardsForPlayer = player.getCards();
 
@@ -86,6 +106,14 @@ public class MapBuilder {
 		return false;
 	}
 
+	/**
+	 * This method is exchange the card
+	 * @param player
+	 * @param num1
+	 * @param num2
+	 * @param num3
+	 * @return
+	 */
 	public int exchangeCards(Player player, int num1, int num2, int num3) {
 		int cardarmies;
 
@@ -689,7 +717,7 @@ public class MapBuilder {
 	/**
 	 * This method check the map whether is validate
 	 * 
-	 * @return
+	 * @return isValid
 	 */
 
 	public boolean validateMap() {
@@ -751,16 +779,7 @@ public class MapBuilder {
 	 */
 	public HashMap<String, ArrayList<String>> getListOfBorders() {
 
-		// Map<String, ArrayList<String>> borders= new HashMap<String,
-		// ArrayList<String>>();
-		// Iterator hmIterator = ((Map) countryAdjacency).entrySet().iterator();
-		// while (hmIterator.hasNext()) {
-		// Map.Entry mapElement = (Map.Entry)hmIterator.next();
-		// ArrayList<String> countries=(ArrayList<String>) mapElement.getValue();
-		// borders.put(getCountryById(Integer.parseInt((String)
-		// mapElement.getKey())).getCountryName(), countries);
-		// }
-
+		
 		HashMap<String, ArrayList<String>> borders = new HashMap<String, ArrayList<String>>();
 		ArrayList<Integer> keys = getCountryAdjacency().getKeys();
 		for (int key : keys) {
@@ -903,6 +922,12 @@ public class MapBuilder {
 		}
 	}
 
+	/**
+	 * This method check whether the placearmy Valid
+	 * @param player
+	 * @param countryName
+	 * @return false
+	 */
 	public boolean placearmyIsValid(Player player, String countryName) {
 
 		int[] playerCountries = player.getCountryIDs();
@@ -1019,6 +1044,13 @@ public class MapBuilder {
 
 		getCountryByName(countryName).setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
 	}
+	/**
+	 * This method check whether the reinforce is valid
+	 * @param playerName
+	 * @param countryName
+	 * @param armiesAdded
+	 * @return false
+	 */
 
 	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
 		calculateNumberOfArmiesEachPlayerGets(playerName);
