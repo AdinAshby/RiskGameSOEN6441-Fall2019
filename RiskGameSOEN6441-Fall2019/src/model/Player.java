@@ -535,6 +535,7 @@ public class Player implements Subject {
 											if (winner[i]) {
 												System.out.println("Attacker win dice " + diceNo);
 												attackingCountry.setArmies(attackingCountry.getArmies() - 1);
+												calculateWorldDominationView();
 												if (attackingCountry.getArmies() == 0) {
 													System.out.println(attackingCountry.getCountryName()
 															+ " is conquered");
@@ -573,6 +574,7 @@ public class Player implements Subject {
 																.setArmies(attackerCountry.getArmies()
 																		- numAttack);
 																attackingCountry.setArmies(numAttack);
+																calculateWorldDominationView();
 
 															}
 														} catch (NumberFormatException e) {
@@ -590,6 +592,7 @@ public class Player implements Subject {
 											} else {
 												System.out.println("Defender win dice " + diceNo);
 												attackerCountry.setArmies(attackerCountry.getArmies() - 1);
+												calculateWorldDominationView();
 												if (attackerCountry.getArmies() == 0) {
 													System.out.println(
 															attackerCountry.getCountryName() + " is conquered");
