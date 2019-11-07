@@ -69,6 +69,7 @@ public class Dice {
 		int[] maxArr = null;
 
 		if (diceArray.length < 2) {
+			maxArr= new int[1];
 			maxArr[0] = diceArray[0];
 			return maxArr;
 		}
@@ -124,10 +125,13 @@ public class Dice {
 		} else {
 			winner[0] = false;
 		}
+		
+		if(otherDice.getDiceArray().length>1) {
 		if (winnerCount>1 && this.getMax()[1] > otherDice.getMax()[1]) {
 			winner[1] = true;
 		} else {
 			winner[1] = false;
+		}
 		}
 
 		return winner;
