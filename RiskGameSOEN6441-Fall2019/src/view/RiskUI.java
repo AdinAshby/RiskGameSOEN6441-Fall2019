@@ -15,7 +15,7 @@ import model.Player;
  * This is a Risk UI class
  * 
  * @author f_yazdan
- * @author adin.ashby
+ * @author AdinAshby
  */
 
 public class RiskUI {
