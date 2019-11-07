@@ -121,6 +121,9 @@ public class RiskUI {
 		 * boolean placeAllFlag
 		 */
 		boolean placeAllFlag = false;
+		/**
+		 * boolean editMapWhile
+		 */
 
 		boolean editMapWhile = false;
 
@@ -381,7 +384,7 @@ public class RiskUI {
 								}
 
 								if (!isValidCommand) {
-									System.out.println("Please Follow the correct command rules");
+									System.out.println("Please follow the correct command rules");
 								}
 							}
 						}
@@ -422,7 +425,7 @@ public class RiskUI {
 					}
 
 					if (!isValidCommand) {
-						System.out.println("Please Follow the correct command rules");
+						System.out.println("Please follow the correct command rules");
 					}
 				}
 
@@ -505,7 +508,7 @@ public class RiskUI {
 					}
 
 					if (!isValidCommand) {
-						System.out.println("Please Follow the correct command rules");
+						System.out.println("Please follow the correct command rules");
 					}
 				}
 
@@ -588,7 +591,7 @@ public class RiskUI {
 						}
 
 						if (!isValidCommand) {
-							System.out.println("Please Follow the correct command rules");
+							System.out.println("Please follow the correct command rules");
 						}
 						//}
 
@@ -624,7 +627,7 @@ public class RiskUI {
 					isValidCommand = player.fortify(mapBuild, mapView);
 
 					if (!isValidCommand) {
-						System.out.println("Please Follow the correct command rules");
+						System.out.println("Please follow the correct command rules");
 					}
 				} // Endof For Player
 				mapBuild.showMap();
