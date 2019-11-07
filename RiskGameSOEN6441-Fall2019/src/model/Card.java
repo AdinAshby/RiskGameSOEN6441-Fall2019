@@ -1,7 +1,10 @@
 package model;
 
 import java.util.Random;
-
+/**
+* This function is is a constructor for initializing cardType.
+* @author Golnoosh,Babita Kaur
+*/
 public class Card {
 	private String cardType; 
 
@@ -14,15 +17,8 @@ public class Card {
         
     }};	
 
-	/**
+	
 
- * This function is is a constructor for initializing cardType.
-
- * 
-
- * @author Babita Kaur, Golnoosh
-
- */
 	public Card() {
 		cardType=CardType.getRandomCard();
 //		System.out.println(cardType);
@@ -57,7 +53,10 @@ public class Card {
 	}
 */
 	
-
+/**
+ * 
+ * @return cardType
+ */
 	public String getCardType() {
 
 		return cardType;
