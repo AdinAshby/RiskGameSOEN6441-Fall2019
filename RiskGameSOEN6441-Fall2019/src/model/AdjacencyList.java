@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * This class is made to implement neighbours of countries
  * 
- * 
+ * @author f_yazdan
  * 
  */
 public class AdjacencyList {
@@ -55,14 +55,10 @@ public class AdjacencyList {
 	}
 
 	/**
-	 * <<<<<<< HEAD This method return values of adjacency list
-	 * 
 	 * @param key
-	 *            of the adjacency List =======
-	 * 
+	
 	 * @param key
-	 *            of the adjacency List >>>>>>> branch 'master' of
-	 *            https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
+	 *            
 	 * @return
 	 */
 	public ArrayList<Integer> getValues(int key) {
@@ -90,27 +86,17 @@ public class AdjacencyList {
 	}
 
 	/**
-	 * <<<<<<< HEAD This method returns the adjacency List of Vertex
-	 * 
+	 * This method returns the adjacency List of Vertex
 	 * @param vertexId
-	 *            of the adjacency List =======
-	 * 
 	 * @param vertexId
-	 *            of the adjacency List >>>>>>> branch 'master' of
-	 *            https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
-	 * @return
+	 * @return adjacency List
 	 */
 	public ArrayList<Integer> getVertexAdjacency(int vertexId) {
 		return adjacencyList.get(vertexId);
 	}
 
 	/**
-	 * <<<<<<< HEAD This method return String of the Vertex Adjacency ======= it
-	 * return String of the Vertex Adjacency
-	 * 
-	 * >>>>>>> branch 'master' of
-	 * https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
-	 * 
+	 * This method return String of the Vertex Adjacency
 	 * @param vertexId
 	 * @return
 	 */
@@ -219,7 +205,7 @@ public class AdjacencyList {
 	/**
 	 * This method shows list of edges
 	 * 
-	 * @return listEdges list of Edges
+	 * @return listEdges
 	 */
 	public String showListEdges() {
 		String listEdges = "";

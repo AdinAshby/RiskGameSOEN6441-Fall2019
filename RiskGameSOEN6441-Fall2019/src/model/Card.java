@@ -3,10 +3,21 @@ package model;
 import java.util.Random;
 /**
 * This function is is a constructor for initializing cardType.
-* @author Golnoosh,Babita Kaur
+* 
+*@author f_yazdan
+*@author Babita Kaur
+*
 */
 public class Card {
+	/**
+	 * String card Type
+	 */
 	private String cardType; 
+	/**
+	 * 
+	 * enum class containing Card Types
+	 *
+	 */
 
 	public enum CardType { INFANTRY , CAVALRY , ARTILLERY  ;
 		
@@ -17,7 +28,9 @@ public class Card {
         
     }};	
 
-	
+	/**
+	 * This is a constructor
+	 */
 
 	public Card() {
 		cardType=CardType.getRandomCard();
@@ -25,35 +38,8 @@ public class Card {
 	}
 	 
 	
-/*
-	public Card(CardType card) {
-
-		switch (card) {
-
-		case INFANTRY:
-
-			this.cardType = CardType.INFANTRY;
-
-			break;
-
-		case  CAVALRY:
-
-			this.cardType = CardType.CAVALRY;
-
-			break;
-
-		case  ARTILLERY:
-
-			this.cardType = CardType.ARTILLERY;
-
-			break; 
-
-		}
-
-	}
-*/
-	
 /**
+ * This method is return the type of the card
  * 
  * @return cardType
  */

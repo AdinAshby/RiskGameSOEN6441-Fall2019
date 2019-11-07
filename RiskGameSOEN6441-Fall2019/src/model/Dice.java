@@ -114,7 +114,7 @@ public class Dice {
 /**
  * This method compare the max array and return the winner
  * @param otherDice
- * @return
+ * @return winner
  */
 	public boolean[] isWinner(Dice otherDice) {
 		int winnerCount = 0;

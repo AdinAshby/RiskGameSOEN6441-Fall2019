@@ -25,14 +25,17 @@ import view.MapView;
  * This is MapBuilder Class to Edit Map
  * 
  * @author f_yazdan
- * @author Babita kaur
  *
  */
 public class MapBuilder {
 
-	final File mapFolder = new File("./MapFiles");
 	/**
-	 * continentList
+	 *  file map
+	 */
+	final File mapFolder = new File("./MapFiles");
+	
+	/**
+	 * private continentList
 	 */
 	private Map<Integer, Continent> continentList = new HashMap<Integer, Continent>(); // continentId=> continentName,
 	// continentValue,
