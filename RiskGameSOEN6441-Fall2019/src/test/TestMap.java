@@ -37,15 +37,26 @@ public class TestMap {
 	String INVALID_MAP = "test7";
 
 	/**
-	 *  This is the test method  for checking the validate map
+	 *  This is the test method  for checking the map validation for valid map file
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testvalidateMapForValidMap() throws Exception {
+
+		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
+		Assert.assertEquals(true, mapBuild.validateMap());
+		
+	}
+	/**
+	 *  This is the test method  for checking the map validation for valid map file
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void testvalidateMap() throws Exception {
 
-		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
-		Assert.assertEquals(true, mapBuild.validateMap());
+
 		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
 		Assert.assertEquals(false, mapBuild.validateMap());
 	}
@@ -71,14 +82,24 @@ public class TestMap {
 	}
 
 	/**
-	 * This is the test method for checking whether the map is SubGraph
+	 * This is the test method for checking whether the map is SubGraph with valid map file
 	 * 
 	 * @throws Exception
 	 */
 	@Test
-	public void testIsMapSubGraph() throws Exception {
+	public void testIsMapSubGraphValid() throws Exception {
 		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
 		Assert.assertEquals(true, mapBuild.isMapSubGraph());
+		
+	}
+	/**
+	 * This is the test method for checking whether the map is SubGraph with invalid map file
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testIsMapSubGraphInValid() throws Exception {
+		
 		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
 		Assert.assertEquals(false, mapBuild.isMapSubGraph());
 	}

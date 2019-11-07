@@ -22,23 +22,42 @@ public class TestPlayer {
 	 */
 	Player player1 = new Player("shehnaz", COUNTRYID_CORRECT);
 	/**
-	 * This is the test method for checking the playerName
+	 * This is the test method for checking the valid playerName
 	 * 
 	 * 
 	 */
 	@Test
-	public void testgetPlayerName() {
+	public void testgetPlayerNameValid() {
 		Assert.assertEquals("shehnaz", player1.getPlayerName());
+		
+	}
+	/**
+	 * This is the test method for checking the playerName for invalid name
+	 * 
+	 * 
+	 */
+	@Test
+	public void testgetPlayerNameInvalid() {
 		Assert.assertNotEquals("golnoosh", player1.getPlayerName());
 	}
 	/**
-	 * This is the test method for checking the CountryId of Player
+	 * This is the test method for checking the valid CountryId of Player
 	 * 
 	 */
 	@Test
-	public void testgetCountryId() {
+	public void testgetCountryIdValid() {
 		Assert.assertArrayEquals("country Ids", COUNTRYID_CORRECT, player1.getCountryIDs());
+		
+	}
+	/**
+	 * This is the test method for checking the invalid CountryId for Player 
+	 * 
+	 */
+	@Test
+	public void testgetCountryIdInValid() {
+		
 		Assert.assertNotSame("Country Ids not same", COUNTRYID_INCORRECT, player1.getCountryIDs());
 	}
+
 
 }
