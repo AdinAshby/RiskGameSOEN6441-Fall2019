@@ -448,6 +448,7 @@ public class RiskUI {
 			finished = false;
 
 			for (Player player : mapBuild.getPlayers()) {
+				
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
 				finished = false;
@@ -518,9 +519,10 @@ public class RiskUI {
 			// System.out.println(reinforceRequestingMessage);
 			// test:
 			for (Player player : mapBuild.getPlayers()) {
-
-				counterForPhases = 1;
-				mapView.showPhaseView(counterForPhases, player.getPlayerName());
+				
+				player.setCounterForPhases(1);
+				//counterForPhases = 1;
+				//mapView.showPhaseView(counterForPhases, player.getPlayerName());
 
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 				System.out.println(player.getPlayerName() + " is your turn to reinforce");
@@ -530,9 +532,11 @@ public class RiskUI {
 				
 				
 				isValidCommand=player.reinforce(temporaryArmies, mapBuild, mapView);
-
+				
+				player.setCounterForPhases(2);
 				isValidCommand=player.attack(mapBuild, mapView);
-
+				
+				player.setCounterForPhases(3);
 				isValidCommand=player.fortify(mapBuild, mapView);
 
 				if (!isValidCommand) {
