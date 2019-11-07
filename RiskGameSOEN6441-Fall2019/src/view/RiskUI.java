@@ -16,6 +16,7 @@ import model.Player;
  * 
  * @author f_yazdan
  * @author AdinAshby
+ * @author s_shehna
  */
 
 public class RiskUI {
