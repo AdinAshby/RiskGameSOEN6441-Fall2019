@@ -93,11 +93,8 @@ public class RiskUI {
 	 * private playerNames
 	 */
 	private ArrayList<String> playerNames = new ArrayList<String>();
-<<<<<<< HEAD
-=======
 
 	private int counterForPhases;
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 
 	/**
 	 * This is RiskUI constructor
@@ -335,13 +332,10 @@ public class RiskUI {
 				}
 			}
 		} else if (editMapAnswer.equalsIgnoreCase("N")) {
-<<<<<<< HEAD
-			
-=======
+
 			counterForPhases = 0;
 			mapView.showPhaseView(counterForPhases, "");
 
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 			System.out.println(loadMapRequestingMessage);
 			finished = false;
 
@@ -532,13 +526,10 @@ public class RiskUI {
 			// System.out.println(reinforceRequestingMessage);
 			// test:
 			for (Player player : mapBuild.getPlayers()) {
-<<<<<<< HEAD
-				
-=======
+
 				counterForPhases = 1;
 				mapView.showPhaseView(counterForPhases, player.getPlayerName());
 
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 				System.out.println(player.getPlayerName() + " is your turn to reinforce");
 				finished = false;
@@ -924,11 +915,10 @@ public class RiskUI {
 	public Matcher getMatcher() {
 		return this.matcher;
 	}
-<<<<<<< HEAD
-=======
+
 
 	public int getCounterForPhases() {
 		return counterForPhases;
 	}
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
+
 }
