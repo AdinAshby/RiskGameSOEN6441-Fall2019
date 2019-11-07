@@ -67,6 +67,9 @@ public class MapBuilder {
 	{
 		ArrayList<Card> cardsForPlayer=player.getCards();
 
+		if(cardsForPlayer.size()<3)
+			return false;
+		
 		Card A = cardsForPlayer.get(num1);
 		Card B	=cardsForPlayer.get(num2);
 		Card C	=cardsForPlayer.get(num3);
@@ -74,7 +77,7 @@ public class MapBuilder {
 		if((A.equals(B))&& (B.equals(C))) 
 			return true;
 
-		if(!(A.equals(B)) && !(B.equals(C)))
+		if(!(A.equals(B)) && !(B.equals(C) && !(A.equals(C))))
 			return true;
 
 		return false;
@@ -147,7 +150,7 @@ public class MapBuilder {
 	/**
 	 * This method get the continent by passing the continent Id
 	 * 
-	 * @return continnet
+	 * @return continent
 	 */
 	public Continent getContinent(int continentId) {
 
@@ -949,7 +952,9 @@ public class MapBuilder {
 			}
 			
 			player.calculateTotalNumberOfArmies();
+			//player.notifyObserverForWorldDomination();
 		}
+		
 	}
 
 	/**

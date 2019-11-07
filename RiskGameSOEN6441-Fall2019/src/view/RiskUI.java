@@ -122,6 +122,7 @@ public class RiskUI {
 			playerNames.add("Dovom");
 
 			mapBuild.assigningPlayersToCountries(playerNames);
+			
 			mapBuild.placeAllArmies();
 			mapBuild.showMap();
 			//			System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());

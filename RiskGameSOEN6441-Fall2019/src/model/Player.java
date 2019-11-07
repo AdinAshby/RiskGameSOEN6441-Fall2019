@@ -279,7 +279,7 @@ public class Player implements Subject {
 
 	@Override
 	public void registerWorldDominationObserver(Observer addObserver) {
-		observersForWorldDomination.add(addObserver);
+		observersForWorldDomination.add(addObserver);	
 	}
 
 	@Override
@@ -294,6 +294,7 @@ public class Player implements Subject {
 
 	@Override
 	public void notifyObserverForWorldDomination() {
+//		System.out.println("Ob No.="+observersForWorldDomination.size());
 		for(Observer observer : observersForWorldDomination) {
 			observer.update(percentageControlled, totalNumberOfArmies, continentsControlled);
 		}
@@ -315,11 +316,9 @@ public class Player implements Subject {
 	}
 
 	public void calculateTotalNumberOfArmies() {
-	
 		for(Integer each : countryIDs) {
 			totalNumberOfArmies += MapBuilder.getInstance().getCountryById(each).getArmies();
 		}
-		
 		notifyObserverForWorldDomination();
 	}
 	
@@ -701,6 +700,37 @@ public boolean attack(MapBuilder mapBuild, MapView mapView) {
 					isValidCommand = true;
 				}
 			}
+			
+
+			regex = "(?<=exchangecards)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						addText = matcher.group(1);
+						regex = "(\\d+) (\\d+) (\\d+)";
+						setPattern(regex);
+						setMatcher(addText);
+						if (matcher.find()) {
+
+							int num1 = Integer.parseInt(matcher.group(1));
+							int num2 = Integer.parseInt(matcher.group(2));
+							int num3 = Integer.parseInt(matcher.group(3));
+
+							if (mapBuild.exchangeCardsIsValid(this, num1, num2, num3) == true) {
+
+								int cardarmies=mapBuild.exchangeCards(this, num1, num2,num3);
+								finished = true;
+							} else {
+								System.out.println("exchangecards is not valid");
+							}
+						}
+
+						isValidCommand = true;
+					}
+				
+			
+			
+			
 		}
 		return isValidCommand;
 		
