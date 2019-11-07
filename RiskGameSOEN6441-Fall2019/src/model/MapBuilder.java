@@ -969,8 +969,9 @@ public class MapBuilder {
 	}
 
 	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
+		calculateNumberOfArmiesEachPlayerGets(playerName);
 
-		if (armiesAdded < 0) {
+		if (armiesAdded < 0 || armiesAdded >= numberOfArmiesEachPlayerGets) {
 			return false;
 		}
 
