@@ -411,6 +411,10 @@ public class Player implements Subject {
 				}
 			} // Match Find Reinforce
 
+			
+			if (!isValidCommand) {
+				System.out.println("Correct command not found");
+			}
 		} // while reinforce
 		return isValidCommand;
 	}
@@ -421,24 +425,13 @@ public class Player implements Subject {
 		String addText="";
 		/*
 		 ************************************************
-		 ************************************************
-		 ************************************************
 		 ************* Attack **********************
 		 ************************************************
 		 ************************************************
-		 ************************************************
-		 *
-		 */
+		  */
 		// attack
 		//			System.out.println(attackRequestingMessage);
-		/*
-		 * int maxDic=0; Player maxPlayer=null; for(Player player :
-		 * mapBuild.getPlayers()) { int diceNumber=dice.getNumDice();
-		 * System.out.println(player.getPlayerName()+" rolled: "+diceNumber);
-		 * if(diceNumber>maxDic) { maxDic=diceNumber; maxPlayer=player; }
-		 * 
-		 * } System.out.println("Player "+maxPlayer.getPlayerName()+" start to attack");
-		 */
+		
 		finished = false;
 		while (!finished) {// && debug == false
 			System.out.println(getPlayerName() + " you may attack or fortify or finish your turn");
@@ -513,7 +506,6 @@ public class Player implements Subject {
 
 							isValidCommand = true;
 							// Show name of player of defend country and ask him/her to roll dice by DEFEND
-							// command
 
 							boolean finishedDefend = false;
 							while (!finishedDefend) {

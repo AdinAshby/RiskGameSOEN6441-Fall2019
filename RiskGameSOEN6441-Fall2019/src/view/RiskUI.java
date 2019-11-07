@@ -14,8 +14,7 @@ import model.Player;
 /**
  * This is a Risk UI class
  * 
- * 
- *@author f_yazdan
+ * @author f_yazdan
  */
 
 public class RiskUI {
@@ -59,7 +58,6 @@ public class RiskUI {
 	 */
 	private String startupRequestingMessage = "Place your armies on your selected country or use \"placeall\" command:\n";
 
-
 	/**
 	 * private scanner
 	 */
@@ -101,31 +99,51 @@ public class RiskUI {
 	 */
 	public void RiskUIStartTheGame() throws Exception {
 
+		/**
+		 * boolean isValidCommand
+		 */
 		boolean isValidCommand = false;
+		/**
+		 * String mapFileName
+		 */
 		String mapFileName = null;
 
+		/**
+		 * String editMapAnswer
+		 */
 		String editMapAnswer;
-
+		/**
+		 * boolean finished
+		 */
 		boolean finished = false;
+		/**
+		 * boolean placeAllFlag
+		 */
 		boolean placeAllFlag = false;
 
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
 		editMapAnswer = scanner.nextLine();
+		/**
+		 * String addText
+		 */
 		String addText = "";
-
-		boolean debug = false;
+		/**
+		 * This part is hard code to test the project defined by the boolean debug
+		 * attribute
+		 */
+		boolean debug = true;
 		if (debug == true) {
-			mapBuild.loadMap("test");// ameroki
+			mapBuild.loadMap("ameroki");// ameroki
 			playerNames.add("Aval");
 			playerNames.add("Dovom");
 
 			mapBuild.assigningPlayersToCountries(playerNames);
-			
+
 			mapBuild.placeAllArmies();
 			mapBuild.showMap();
-			//			System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
+			// System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
 
@@ -320,7 +338,7 @@ public class RiskUI {
 				}
 
 				if (!isValidCommand) {
-					System.out.println("Correct command not found");
+					System.out.println("Please Follow the correct command rules");
 				}
 			}
 		} else if (editMapAnswer.equalsIgnoreCase("N")) {
@@ -357,7 +375,7 @@ public class RiskUI {
 				}
 
 				if (!isValidCommand) {
-					System.out.println("Correct command not found");
+					System.out.println("Please Follow the correct command rules");
 				}
 			}
 
@@ -440,7 +458,7 @@ public class RiskUI {
 				}
 
 				if (!isValidCommand) {
-					System.out.println("Correct command not found");
+					System.out.println("Please Follow the correct command rules");
 				}
 			}
 
@@ -448,7 +466,7 @@ public class RiskUI {
 			finished = false;
 
 			for (Player player : mapBuild.getPlayers()) {
-				
+
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 
 				finished = false;
@@ -504,7 +522,7 @@ public class RiskUI {
 					}
 
 					if (!isValidCommand) {
-						System.out.println("Correct command not found");
+						System.out.println("Please Follow the correct command rules");
 					}
 				}
 
@@ -519,28 +537,27 @@ public class RiskUI {
 			// System.out.println(reinforceRequestingMessage);
 			// test:
 			for (Player player : mapBuild.getPlayers()) {
-				
+
 				player.setCounterForPhases(1);
-				//counterForPhases = 1;
-				//mapView.showPhaseView(counterForPhases, player.getPlayerName());
+				// counterForPhases = 1;
+				// mapView.showPhaseView(counterForPhases, player.getPlayerName());
 
 				mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
 				System.out.println(player.getPlayerName() + " is your turn to reinforce");
 				finished = false;
 
 				int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
-				
-				
-				isValidCommand=player.reinforce(temporaryArmies, mapBuild, mapView);
-				
+
+				isValidCommand = player.reinforce(temporaryArmies, mapBuild, mapView);
+
 				player.setCounterForPhases(2);
-				isValidCommand=player.attack(mapBuild, mapView);
-				
+				isValidCommand = player.attack(mapBuild, mapView);
+
 				player.setCounterForPhases(3);
-				isValidCommand=player.fortify(mapBuild, mapView);
+				isValidCommand = player.fortify(mapBuild, mapView);
 
 				if (!isValidCommand) {
-					System.out.println("Correct command not found");
+					System.out.println("Please Follow the correct command rules");
 				}
 			} // Endof For Player
 			mapBuild.showMap();
@@ -582,7 +599,10 @@ public class RiskUI {
 		return this.matcher;
 	}
 
-
+	/**
+	 * 
+	 * @return counterForPhases
+	 */
 	public int getCounterForPhases() {
 		return counterForPhases;
 	}
