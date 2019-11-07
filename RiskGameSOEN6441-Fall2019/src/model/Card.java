@@ -9,7 +9,15 @@ import java.util.Random;
 *
 */
 public class Card {
+	/**
+	 * String card Type
+	 */
 	private String cardType; 
+	/**
+	 * 
+	 * enum class containing Card Types
+	 *
+	 */
 
 	public enum CardType { INFANTRY , CAVALRY , ARTILLERY  ;
 		
@@ -20,7 +28,9 @@ public class Card {
         
     }};	
 
-	
+	/**
+	 * This is a constructor
+	 */
 
 	public Card() {
 		cardType=CardType.getRandomCard();
