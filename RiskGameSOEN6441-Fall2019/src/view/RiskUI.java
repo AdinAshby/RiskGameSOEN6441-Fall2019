@@ -129,6 +129,9 @@ public class RiskUI {
 
 		boolean editMapWhile = false;
 
+		boolean finishedEditing=false;
+		
+		
 		System.out.println(welcomeMessage);
 		System.out.println(editMapYesOrNoMessage);
 
@@ -160,13 +163,14 @@ public class RiskUI {
 		}
 
 		editMapAnswer = scanner.nextLine();
-
+		
 		while(!editMapWhile) {
+			
 			if (editMapAnswer.equalsIgnoreCase("Y")) {
+				System.out.println(editMapRequestingMessage);
 				editMapWhile = true;
 				while (!finished) {
-					System.out.println(editMapRequestingMessage);
-
+			//		System.out.println(editMapRequestingMessage);
 					isValidCommand = false;
 					readInput();
 
@@ -184,23 +188,8 @@ public class RiskUI {
 							e.printStackTrace();
 						}
 						isValidCommand = true;
-
-						// editmap filename
-						regex = "editmap ([\\w*\\_\\-]*)";
-						setPattern(regex);
-						setMatcher(input);
-
-						if (getMatcher().find()) {
-							mapFileName = getMatcher().group(1);
-							try {
-								mapBuild.loadMap(mapFileName);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							isValidCommand = true;
-						}
-
+					}
+					
 						// add continent
 						regex = "(?<=editcontinent)(.*)";
 						setPattern(regex);
@@ -336,7 +325,9 @@ public class RiskUI {
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-
+							}
+						}
+							
 								// added multiple time editcontinent -add aa 1 -add bb 2
 								// add continent done
 								regex = "(?<=editcontinent)(.*)";
@@ -371,26 +362,32 @@ public class RiskUI {
 								regex = "finishediting";
 								if (input.equalsIgnoreCase(regex)) {
 									finished = true;
+									finishedEditing=true;
 									isValidCommand = true;
 								}
 
 								if (!isValidCommand) {
 									System.out.println("Please follow the correct command rules");
+//									System.out.println(editMapRequestingMessage);
 								}
 							}
-						}
-					}
-				}
-			} else if (editMapAnswer.equalsIgnoreCase("N")) {
+						
+					
+				
+			}
+
+			
+			if (editMapAnswer.equalsIgnoreCase("N") || finishedEditing==true) {
 				editMapWhile = true;
 
 				counterForPhases = 0;
 				mapView.showPhaseView(counterForPhases, "");
 
-				System.out.println(loadMapRequestingMessage);
+				
 				finished = false;
 
-				while (!finished && debug == false) {
+				while (!finished && finishedEditing==false && debug == false) {
+					System.out.println(loadMapRequestingMessage);
 					isValidCommand = false;
 					readInput();
 
