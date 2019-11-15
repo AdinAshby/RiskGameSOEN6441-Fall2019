@@ -159,19 +159,31 @@ public class RiskUI {
 			mapBuild.placeAllArmies();
 			mapBuild.showMap();
 			Player[] players = mapBuild.getPlayers();
-			Player player=players[0];
-			player.calculateNumberOfArmiesEachPlayerGets();
-			System.out.println(player.getPlayerName() + " is your turn to reinforce");
-			int temporaryArmies = player.getNumberOfArmiesEachPlayerGets();
-			int attackerCountryId=player.getCountryIDs()[0];
-			int attackingCountryId=player.getCountryIDs()[0];
+			Player player1=players[0];
+			Player player2=players[1];
+			player1.calculateNumberOfArmiesEachPlayerGets();
+			player2.calculateNumberOfArmiesEachPlayerGets();
+			System.out.println(player1.getPlayerName() + " is your turn to reinforce");
+			player1.getNumberOfArmiesEachPlayerGets();
+			player2.getNumberOfArmiesEachPlayerGets();
+			System.out.println("Player 1="+player1.getPlayerName()+" Player2="+player2.getPlayerName());
+			int attackerCountryId=player1.getCountryIDs()[0];
+			int fortifyCountryId=player1.getCountryIDs()[1];
+			int attackingCountryId=player2.getCountryIDs()[0];
 			String attackerCountryName=mapBuild.getCountryNameById(attackerCountryId);
+			String fortifyCountryName=mapBuild.getCountryNameById(fortifyCountryId);
 			String attackingCountryName=mapBuild.getCountryNameById(attackingCountryId);
 			Country attackerCountry=mapBuild.getCountryById(attackerCountryId);
+			Country fortifyCountry=mapBuild.getCountryById(fortifyCountryId);
 			Country attackingCountry=mapBuild.getCountryById(attackingCountryId);
-			isValidCommand = player.reinforce(mapBuild,attackerCountryName , 3, false);
+			isValidCommand = player1.reinforce(mapBuild,attackerCountryName , 3, false);
 			mapBuild.showMap();
-			player.attack(attackerCountry, attackingCountry, 3, 2, mapBuild);
+			System.out.println("\n-------------------\nAttack Scenario from "+attackerCountryName+" to "+attackingCountryName);
+			player1.attack(attackerCountry, attackingCountry, 3, 2, mapBuild);
+			
+			mapBuild.showMap();
+			System.out.println("\n-------------------\nFortify Scenario from "+attackerCountryName+" to "+fortifyCountryName);
+			player1.fortify(attackerCountryName, fortifyCountryName, 5,  mapBuild);
 			mapBuild.showMap();
 			// System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
 			editMapAnswer = "N";
@@ -534,7 +546,7 @@ public class RiskUI {
 					// mapView.showPhaseView(counterForPhases, player.getPlayerName());
 
 					player.calculateNumberOfArmiesEachPlayerGets();
-					System.out.println(player.getPlayerName() + " is your turn to reinforce");
+//					System.out.println(player.getPlayerName() + " is your turn to reinforce");
 					finished = false;
 
 					//for (Player player : mapBuild.getPlayers()) {
@@ -625,7 +637,7 @@ public class RiskUI {
 					isValidCommand = player.attackCommand(mapBuild, mapView);
 
 					player.setCounterForPhases(3);
-					isValidCommand = player.fortify(mapBuild, mapView);
+					isValidCommand = player.fortifyCommand(mapBuild, mapView);
 
 					if (!isValidCommand) {
 						System.out.println("Please follow the correct command rules");

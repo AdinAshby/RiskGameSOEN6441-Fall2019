@@ -478,7 +478,34 @@ public class Player implements Subject {
 
 				}
 			} // Match Find Reinforce
+			////__________________________________________///////
+			//__________________________________________///////
+			//__________________________________________///////
+			regex = "(?<=exchangecards)(.*)";
+			setPattern(regex);
+			setMatcher(input);
+			if (matcher.find()) {
+				addText = matcher.group(1);
+				regex = "(\\d+) (\\d+) (\\d+)";
+				setPattern(regex);
+				setMatcher(addText);
+				if (matcher.find()) {
 
+					int num1 = Integer.parseInt(matcher.group(1));
+					int num2 = Integer.parseInt(matcher.group(2));
+					int num3 = Integer.parseInt(matcher.group(3));
+
+					if (mapBuild.exchangeCardsIsValid(this, num1, num2, num3) == true) {
+
+						int cardarmies = mapBuild.exchangeCards(this, num1, num2, num3);
+						finished = true;
+					} else {
+						System.out.println("exchangecards is not valid");
+					}
+				}
+
+				isValidCommand = true;
+			}
 			if (!isValidCommand) {
 				System.out.println("Correct command not found");
 			}
@@ -599,7 +626,7 @@ public class Player implements Subject {
 
 		finished = false;
 		while (!finished) {// && debug == false
-			System.out.println(getPlayerName() + " you may attack or fortify or finish your turn");
+			System.out.println(getPlayerName() + " you may attack or finish your turn");
 			isValidCommand = false;
 			// Check there is any available attack
 			if (isAttackPossible(mapBuild) == false) {
@@ -729,6 +756,54 @@ public class Player implements Subject {
 		return isValidCommand;
 	}
 
+	
+	/**
+	 * This method is for checking whether the fortify is valid
+	 * 
+	 * @param player
+	 * @param fromCountry
+	 * @param toCountry
+	 * @param num
+	 * @return false
+	 */
+	public boolean fortifyIsValid(String fromCountry, String toCountry, int num, MapBuilder mapBuild) {
+		boolean fromCountryCheck = false;
+		boolean toCountryCheck = false;
+
+		if (num < 0 || num > mapBuild.getCountryByName(fromCountry).getArmies())
+			return false;
+
+		for (int countryID : getCountryIDs()) {
+			if (mapBuild.getCountryByName(fromCountry) == mapBuild.getCountryById(countryID)) {
+				fromCountryCheck = true;
+			}
+		}
+
+		for (int countryID : getCountryIDs()) {
+			if (mapBuild.getCountryByName(toCountry) == mapBuild.getCountryById(countryID)) {
+				toCountryCheck = true;
+			}
+		}
+
+		if (fromCountryCheck && toCountryCheck)
+			return true;
+
+		return false;
+	}
+	
+	
+	public void fortify(String fromCountry, String toCountry, int armiesToMove,  MapBuilder mapBuild) {
+		if (fortifyIsValid(fromCountry, toCountry, armiesToMove, mapBuild) == true) {
+			int oldArmiesFromCountry = mapBuild.getCountryByName(fromCountry).getArmies();
+			mapBuild.getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
+
+			int oldArmiesToCountry = mapBuild.getCountryByName(toCountry).getArmies();
+			mapBuild.getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
+			calculateWorldDominationView();
+
+	}
+	}
+	
 	/**
 	 * 
 	 * @param mapBuild
@@ -736,7 +811,7 @@ public class Player implements Subject {
 	 * @return
 	 */
 
-	public boolean fortify(MapBuilder mapBuild, MapView mapView) {
+	public boolean fortifyCommand(MapBuilder mapBuild, MapView mapView) {
 		System.out.println(fortifyRequestingMessage);
 
 		boolean finished = false;
@@ -781,11 +856,9 @@ public class Player implements Subject {
 					String fromCountry = matcher.group(2);
 					String toCountry = matcher.group(3);
 					int num = Integer.parseInt(matcher.group(4));
-
-					if (mapBuild.fortifyIsValid(this, fromCountry, toCountry, num) == true) {
-						mapBuild.fortify(fromCountry, toCountry, num);
-						calculateWorldDominationView();
-						finished = true;
+					fortify(fromCountry, toCountry, num, mapBuild);
+					finished = true;
+					
 					} else {
 						System.out.println("Fortify is not valid");
 					}
@@ -793,33 +866,9 @@ public class Player implements Subject {
 					isValidCommand = true;
 				}
 			}
-
-			regex = "(?<=exchangecards)(.*)";
-			setPattern(regex);
-			setMatcher(input);
-			if (matcher.find()) {
-				addText = matcher.group(1);
-				regex = "(\\d+) (\\d+) (\\d+)";
-				setPattern(regex);
-				setMatcher(addText);
-				if (matcher.find()) {
-
-					int num1 = Integer.parseInt(matcher.group(1));
-					int num2 = Integer.parseInt(matcher.group(2));
-					int num3 = Integer.parseInt(matcher.group(3));
-
-					if (mapBuild.exchangeCardsIsValid(this, num1, num2, num3) == true) {
-
-						int cardarmies = mapBuild.exchangeCards(this, num1, num2, num3);
-						finished = true;
-					} else {
-						System.out.println("exchangecards is not valid");
-					}
-				}
-
-				isValidCommand = true;
-			}
-		}
+	
+			
+		
 		return isValidCommand;
 	}
 

@@ -1079,48 +1079,48 @@ public class MapBuilder {
 	 * @param toCountry
 	 * @param armiesToMove
 	 */
-	public void fortify(String fromCountry, String toCountry, int armiesToMove) {
-		int oldArmiesFromCountry = getCountryByName(fromCountry).getArmies();
-		getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
+//	public void fortify(String fromCountry, String toCountry, int armiesToMove) {
+//		int oldArmiesFromCountry = getCountryByName(fromCountry).getArmies();
+//		getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
+//
+//		int oldArmiesToCountry = getCountryByName(toCountry).getArmies();
+//		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
+//
+//	}
 
-		int oldArmiesToCountry = getCountryByName(toCountry).getArmies();
-		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
-
-	}
-
-	/**
-	 * This method is for checking whether the fortify is valid
-	 * 
-	 * @param player
-	 * @param fromCountry
-	 * @param toCountry
-	 * @param num
-	 * @return false
-	 */
-	public boolean fortifyIsValid(Player player, String fromCountry, String toCountry, int num) {
-		boolean fromCountryCheck = false;
-		boolean toCountryCheck = false;
-
-		if (num < 0 || num > getCountryByName(fromCountry).getArmies())
-			return false;
-
-		for (int countryID : player.getCountryIDs()) {
-			if (getCountryByName(fromCountry) == getCountryById(countryID)) {
-				fromCountryCheck = true;
-			}
-		}
-
-		for (int countryID : player.getCountryIDs()) {
-			if (getCountryByName(toCountry) == getCountryById(countryID)) {
-				toCountryCheck = true;
-			}
-		}
-
-		if (fromCountryCheck && toCountryCheck)
-			return true;
-
-		return false;
-	}
+//	/**
+//	 * This method is for checking whether the fortify is valid
+//	 * 
+//	 * @param player
+//	 * @param fromCountry
+//	 * @param toCountry
+//	 * @param num
+//	 * @return false
+//	 */
+//	public boolean fortifyIsValid(Player player, String fromCountry, String toCountry, int num) {
+//		boolean fromCountryCheck = false;
+//		boolean toCountryCheck = false;
+//
+//		if (num < 0 || num > getCountryByName(fromCountry).getArmies())
+//			return false;
+//
+//		for (int countryID : player.getCountryIDs()) {
+//			if (getCountryByName(fromCountry) == getCountryById(countryID)) {
+//				fromCountryCheck = true;
+//			}
+//		}
+//
+//		for (int countryID : player.getCountryIDs()) {
+//			if (getCountryByName(toCountry) == getCountryById(countryID)) {
+//				toCountryCheck = true;
+//			}
+//		}
+//
+//		if (fromCountryCheck && toCountryCheck)
+//			return true;
+//
+//		return false;
+//	}
 
 	/**
 	 * In This method The player Continent Values Ownership
