@@ -148,7 +148,7 @@ public class RiskUI {
 		 * attribute
 		 */
 
-		boolean debug = false;
+		boolean debug = true;
 		if (debug == true) {
 			mapBuild.loadMap("test");// ameroki
 			playerNames.add("Aval");
@@ -163,11 +163,16 @@ public class RiskUI {
 			player.calculateNumberOfArmiesEachPlayerGets();
 			System.out.println(player.getPlayerName() + " is your turn to reinforce");
 			int temporaryArmies = player.getNumberOfArmiesEachPlayerGets();
-			int countryId=player.getCountryIDs()[0];
-			String countryName=mapBuild.getCountryNameById(countryId);
-			isValidCommand = player.reinforce(mapBuild,countryName , 3, false);
+			int attackerCountryId=player.getCountryIDs()[0];
+			int attackingCountryId=player.getCountryIDs()[0];
+			String attackerCountryName=mapBuild.getCountryNameById(attackerCountryId);
+			String attackingCountryName=mapBuild.getCountryNameById(attackingCountryId);
+			Country attackerCountry=mapBuild.getCountryById(attackerCountryId);
+			Country attackingCountry=mapBuild.getCountryById(attackingCountryId);
+			isValidCommand = player.reinforce(mapBuild,attackerCountryName , 3, false);
 			mapBuild.showMap();
-			
+			player.attack(attackerCountry, attackingCountry, 3, 2, mapBuild);
+			mapBuild.showMap();
 			// System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
@@ -617,7 +622,7 @@ public class RiskUI {
 					isValidCommand = player.reinforceCommand(mapBuild, mapView);
 
 					player.setCounterForPhases(2);
-					isValidCommand = player.attack(mapBuild, mapView);
+					isValidCommand = player.attackCommand(mapBuild, mapView);
 
 					player.setCounterForPhases(3);
 					isValidCommand = player.fortify(mapBuild, mapView);
