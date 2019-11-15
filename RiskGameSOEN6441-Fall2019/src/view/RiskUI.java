@@ -150,7 +150,7 @@ public class RiskUI {
 
 		boolean debug = false;
 		if (debug == true) {
-			mapBuild.loadMap("ameroki");// ameroki
+			mapBuild.loadMap("test");// ameroki
 			playerNames.add("Aval");
 			playerNames.add("Dovom");
 
@@ -158,6 +158,16 @@ public class RiskUI {
 
 			mapBuild.placeAllArmies();
 			mapBuild.showMap();
+			Player[] players = mapBuild.getPlayers();
+			Player player=players[0];
+			player.calculateNumberOfArmiesEachPlayerGets();
+			System.out.println(player.getPlayerName() + " is your turn to reinforce");
+			int temporaryArmies = player.getNumberOfArmiesEachPlayerGets();
+			int countryId=player.getCountryIDs()[0];
+			String countryName=mapBuild.getCountryNameById(countryId);
+			isValidCommand = player.reinforce(mapBuild,countryName , 3, false);
+			mapBuild.showMap();
+			
 			// System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
@@ -518,13 +528,13 @@ public class RiskUI {
 					// counterForPhases = 1;
 					// mapView.showPhaseView(counterForPhases, player.getPlayerName());
 
-					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+					player.calculateNumberOfArmiesEachPlayerGets();
 					System.out.println(player.getPlayerName() + " is your turn to reinforce");
 					finished = false;
 
 					//for (Player player : mapBuild.getPlayers()) {
 
-					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+					
 
 					finished = false;
 
@@ -598,13 +608,13 @@ public class RiskUI {
 					player.setCounterForPhases(1);
 					
 
-					mapBuild.calculateNumberOfArmiesEachPlayerGets(player.getPlayerName());
+					
 					System.out.println(player.getPlayerName() + " is your turn to reinforce");
 					finished = false;
 
-					int temporaryArmies = mapBuild.getNumberOfArmiesEachPlayerGets();
+					
 
-					isValidCommand = player.reinforce(temporaryArmies, mapBuild, mapView);
+					isValidCommand = player.reinforceCommand(mapBuild, mapView);
 
 					player.setCounterForPhases(2);
 					isValidCommand = player.attack(mapBuild, mapView);

@@ -58,7 +58,7 @@ public class MapBuilder {
 	/**
 	 * private number Of Armies Each Player Gets
 	 */
-	private int numberOfArmiesEachPlayerGets;
+//	private int numberOfArmiesEachPlayerGets;
 	private static MapBuilder instance;
 
 	/**
@@ -1030,20 +1030,20 @@ public class MapBuilder {
 		return result;
 	}
 
-	/**
-	 * This method implements the reinforcement phase
-	 * 
-	 * @param playerName
-	 * @param countryName
-	 * @param armiesAdded
-	 * @param armiesEachPlayerGets
-	 */
-	public void reinforce(String playerName, String countryName, int armiesAdded) {
-
-		int oldArmies = getCountryByName(countryName).getArmies();
-
-		getCountryByName(countryName).setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
-	}
+//	/**
+//	 * This method implements the reinforcement phase
+//	 * 
+//	 * @param playerName
+//	 * @param countryName
+//	 * @param armiesAdded
+//	 * @param armiesEachPlayerGets
+//	 */
+//	public void reinforce(String playerName, String countryName, int armiesAdded) {
+//
+//		int oldArmies = getCountryByName(countryName).getArmies();
+//
+//		getCountryByName(countryName).setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
+//	}
 	/**
 	 * This method check whether the reinforce is valid
 	 * @param playerName
@@ -1052,25 +1052,25 @@ public class MapBuilder {
 	 * @return false
 	 */
 
-	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
-		calculateNumberOfArmiesEachPlayerGets(playerName);
-
-		if (armiesAdded < 0 || armiesAdded > numberOfArmiesEachPlayerGets) {
-			System.out.println("Armies Added (" + armiesAdded
-					+ ") is less than 0 or Armies added are more than player armies " + numberOfArmiesEachPlayerGets);
-			return false;
-		}
-
-		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
-
-		for (int countryID : playerCountries) {
-			if (getCountryByName(countryName) == getCountryById(countryID)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
+//	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
+//		calculateNumberOfArmiesEachPlayerGets(playerName);
+//
+//		if (armiesAdded < 0 || armiesAdded > numberOfArmiesEachPlayerGets) {
+//			System.out.println("Armies Added (" + armiesAdded
+//					+ ") is less than 0 or Armies added are more than player armies " + numberOfArmiesEachPlayerGets);
+//			return false;
+//		}
+//
+//		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
+//
+//		for (int countryID : playerCountries) {
+//			if (getCountryByName(countryName) == getCountryById(countryID)) {
+//				return true;
+//			}
+//		}
+//
+//		return false;
+//	}
 
 	/**
 	 * This method implements the fortification phase
@@ -1194,17 +1194,17 @@ public class MapBuilder {
 		return continentsOfPlayerArray;
 	}
 
-	/**
-	 * This method is for calculate Number Of Armies Each Player Gets
-	 * 
-	 * @param playerName
-	 */
-
-	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
-		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3)
-				? getPlayerByName(playerName).getCountryIDs().length / 3
-				: 3;
-	}
+//	/**
+//	 * This method is for calculate Number Of Armies Each Player Gets
+//	 * 
+//	 * @param playerName
+//	 */
+//
+//	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
+//		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3)
+//				? getPlayerByName(playerName).getCountryIDs().length / 3
+//				: 3;
+//	}
 
 	/**
 	 * This method is for calculate Number Of Initial Armies
@@ -1223,9 +1223,9 @@ public class MapBuilder {
 	 * 
 	 * @return numberOfArmiesEachPlayerGets
 	 */
-	public int getNumberOfArmiesEachPlayerGets() {
-		return numberOfArmiesEachPlayerGets;
-	}
+//	public int getNumberOfArmiesEachPlayerGets() {
+//		return numberOfArmiesEachPlayerGets;
+//	}
 
 	/**
 	 * This method return all the players

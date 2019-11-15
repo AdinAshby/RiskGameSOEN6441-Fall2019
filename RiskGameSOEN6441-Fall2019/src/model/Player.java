@@ -33,10 +33,12 @@ public class Player implements Subject {
 	private int totalNumberOfArmies = 0;
 	private ArrayList<Card> cards;
 	private int playerCountForCard;
-
+	private int numberOfArmiesEachPlayerGets;
 	private boolean allowToGetCard;
 
 	private int counterForPhases;
+	
+	private int temporaryArmies;
 
 	private ArrayList<Observer> observersForPhases = new ArrayList<Observer>();
 	private ArrayList<Observer> observersForWorldDomination = new ArrayList<Observer>();
@@ -370,7 +372,70 @@ public class Player implements Subject {
 		notifyObserverForWorldDomination();
 	}
 
-	public boolean reinforce(int temporaryArmies, MapBuilder mapBuild, MapView mapView) {
+	public int getNumberOfArmiesEachPlayerGets() {
+		return numberOfArmiesEachPlayerGets;
+	}
+	
+	
+	/**
+	 * This method is for calculate Number Of Armies Each Player Gets
+	 * 
+	 * @param playerName
+	 */
+
+	public void calculateNumberOfArmiesEachPlayerGets() {
+		numberOfArmiesEachPlayerGets = (getCountryIDs().length / 3 > 3)
+				? getCountryIDs().length / 3
+				: 3;
+	}
+	
+	public boolean reinforceIsValid(MapBuilder mapBuild, String countryName, int armiesAdded) {
+		calculateNumberOfArmiesEachPlayerGets();
+
+		if (armiesAdded < 0 || armiesAdded > numberOfArmiesEachPlayerGets) {
+			System.out.println("Armies Added (" + armiesAdded
+					+ ") is less than 0 or Armies added are more than player armies " + numberOfArmiesEachPlayerGets);
+			return false;
+		}
+
+		int[] playerCountries = getCountryIDs();
+
+		for (int countryID : playerCountries) {
+			if (mapBuild.getCountryByName(countryName) == mapBuild.getCountryById(countryID)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	
+	
+	public boolean reinforce(MapBuilder mapBuild, String countryName, int num, boolean finished) {
+		if (reinforceIsValid(mapBuild, countryName, num) == true) {
+			int oldArmies = mapBuild.getCountryByName(countryName).getArmies();
+			mapBuild.getCountryByName(countryName).setArmies(oldArmies + mapBuild.playerContinentValuesOwnership(playerName) + num);
+	//		mapBuild.reinforce(getPlayerName(), countryName, num);
+			calculateWorldDominationView();
+			temporaryArmies -= num;
+
+			if (temporaryArmies <= 0) {
+				finished = true;
+			}
+
+		} else {
+			System.out.println("Reinforce is not valid");
+		}
+		return finished;
+		
+	}
+	
+	
+	
+	
+	public boolean reinforceCommand(MapBuilder mapBuild, MapView mapView) {
+		calculateNumberOfArmiesEachPlayerGets();
+		temporaryArmies = numberOfArmiesEachPlayerGets;
 		boolean	finished = false;
 		boolean isValidCommand=false;
 		String addText="";
@@ -413,18 +478,7 @@ public class Player implements Subject {
 					try {
 						num = Integer.parseInt(matcher.group(3));
 
-						if (mapBuild.reinforceIsValid(getPlayerName(), countryName, num) == true) {
-							mapBuild.reinforce(getPlayerName(), countryName, num);
-							calculateWorldDominationView();
-							temporaryArmies -= num;
-
-							if (temporaryArmies <= 0) {
-								finished = true;
-							}
-
-						} else {
-							System.out.println("Reinforce is not valid");
-						}
+						finished=reinforce(mapBuild, countryName, num, finished);
 
 						isValidCommand = true;
 
