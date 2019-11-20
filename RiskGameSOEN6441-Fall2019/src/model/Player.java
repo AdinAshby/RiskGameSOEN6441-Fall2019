@@ -45,6 +45,8 @@ public class Player implements Subject {
 
 	private MapBuilder mapBuild;
 	
+	private Strategy strategy;
+	
 	/**
 	 * private scanner
 	 */
@@ -89,6 +91,10 @@ public class Player implements Subject {
 		this.mapBuild = mapBuild;
 		cards = new ArrayList<Card>();
 		playerCountForCard = 0;
+	}
+	
+	public void setStrategy(Strategy strategy) {
+		this.strategy = strategy;
 	}
 
 	public void addOneToCardCounter() {
