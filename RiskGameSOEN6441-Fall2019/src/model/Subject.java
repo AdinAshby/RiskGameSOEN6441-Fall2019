@@ -1,6 +1,7 @@
 package model;
 /**
  * This is subject interface for implementing observer
+ * @author f_yazdan
  * @author s_shehna
  * @author AdinAshby
  */
