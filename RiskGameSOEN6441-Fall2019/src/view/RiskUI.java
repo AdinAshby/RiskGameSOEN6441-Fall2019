@@ -8,7 +8,10 @@ import java.util.regex.Pattern;
 import model.Card;
 import model.Country;
 import model.Dice;
+import model.MapAdapter;
 import model.MapBuilder;
+import model.MapConquest;
+import model.MapDomination;
 import model.Player;
 
 /**
@@ -21,10 +24,26 @@ import model.Player;
 
 public class RiskUI {
 	/**
-	 * private mapBuild
+	 * private mapDomination
 	 */
 
 	private MapBuilder mapBuild = MapBuilder.getInstance();
+	
+	
+	/**
+	 * private mapDomination
+	 */
+
+	private MapDomination mapDomination = new MapDomination();
+	
+	
+	/**
+	 * private mapConquest
+	 */
+
+	private MapConquest mapConquest = new MapConquest();	
+	
+	
 	/**
 	 * private mapView
 	 */
@@ -150,15 +169,19 @@ public class RiskUI {
 
 		boolean debug = false;
 		if (debug == true) {
-			mapBuild.loadMap("test");// ameroki
+			mapDomination.read("test");// ameroki
+		//	MapAdapter mapAdapter=new MapAdapter(mapConquest);
+		//	mapAdapter.read("testC");
+			
 			playerNames.add("Aval");
 			playerNames.add("Dovom");
 
-			mapBuild.assigningPlayersToCountries(playerNames);
-
-			mapBuild.placeAllArmies();
-			mapBuild.showMap();
-			Player[] players = mapBuild.getPlayers();
+			mapDomination.assigningPlayersToCountries(playerNames);
+			
+			mapDomination.placeAllArmies();
+			
+			mapDomination.showMap();
+			Player[] players = mapDomination.getPlayers();
 			Player player1=players[0];
 			Player player2=players[1];
 			player1.calculateNumberOfArmiesEachPlayerGets();
@@ -170,22 +193,22 @@ public class RiskUI {
 			int attackerCountryId=player1.getCountryIDs()[0];
 			int fortifyCountryId=player1.getCountryIDs()[1];
 			int attackingCountryId=player2.getCountryIDs()[0];
-			String attackerCountryName=mapBuild.getCountryNameById(attackerCountryId);
-			String fortifyCountryName=mapBuild.getCountryNameById(fortifyCountryId);
-			String attackingCountryName=mapBuild.getCountryNameById(attackingCountryId);
-			Country attackerCountry=mapBuild.getCountryById(attackerCountryId);
-			Country fortifyCountry=mapBuild.getCountryById(fortifyCountryId);
-			Country attackingCountry=mapBuild.getCountryById(attackingCountryId);
-			isValidCommand = player1.reinforce(mapBuild,attackerCountryName , 3, false);
-			mapBuild.showMap();
+			String attackerCountryName=mapDomination.getCountryNameById(attackerCountryId);
+			String fortifyCountryName=mapDomination.getCountryNameById(fortifyCountryId);
+			String attackingCountryName=mapDomination.getCountryNameById(attackingCountryId);
+			Country attackerCountry=mapDomination.getCountryById(attackerCountryId);
+			Country fortifyCountry=mapDomination.getCountryById(fortifyCountryId);
+			Country attackingCountry=mapDomination.getCountryById(attackingCountryId);
+			isValidCommand = player1.reinforce(mapDomination,attackerCountryName , 3, false);
+			mapDomination.showMap();
 			System.out.println("\n-------------------\nAttack Scenario from "+attackerCountryName+" to "+attackingCountryName);
-			player1.attack(attackerCountry, attackingCountry, 3, 2, mapBuild);
+			player1.attack(attackerCountry, attackingCountry, 3, 2, mapDomination);
 			
-			mapBuild.showMap();
+			mapDomination.showMap();
 			System.out.println("\n-------------------\nFortify Scenario from "+attackerCountryName+" to "+fortifyCountryName);
-			player1.fortify(attackerCountryName, fortifyCountryName, 5,  mapBuild);
-			mapBuild.showMap();
-			// System.out.println("NCC="+mapBuild.getNoOfContinentsControlled());
+			player1.fortify(attackerCountryName, fortifyCountryName, 5,  mapDomination);
+			mapDomination.showMap();
+			// System.out.println("NCC="+mapDomination.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
 
@@ -209,7 +232,7 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						mapFileName = getMatcher().group(1);
 						try {
-							mapBuild.loadMap(mapFileName);
+							mapDomination.read(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -231,7 +254,7 @@ public class RiskUI {
 						while (matcher.find()) {
 							String continentName = matcher.group(2);
 							int continentValue = Integer.parseInt(matcher.group(3));
-							mapBuild.addContinent(continentName, continentValue);
+							mapDomination.addContinent(continentName, continentValue);
 							isValidCommand = true;
 
 						}
@@ -249,7 +272,7 @@ public class RiskUI {
 						setMatcher(addText);
 						while (matcher.find()) {
 							String continentName = matcher.group(2);
-							mapBuild.removeContinent(continentName);
+							mapDomination.removeContinent(continentName);
 							isValidCommand = true;
 
 						}
@@ -268,7 +291,7 @@ public class RiskUI {
 						while (matcher.find()) {
 							String countryName = matcher.group(2);
 							String continentName = matcher.group(3);
-							mapBuild.addCountry(countryName, continentName);
+							mapDomination.addCountry(countryName, continentName);
 							isValidCommand = true;
 
 						}
@@ -286,7 +309,7 @@ public class RiskUI {
 						matcher = pattern.matcher(addText);
 						while (matcher.find()) {
 							String countryName = matcher.group(2);
-							mapBuild.removeCountry(countryName);
+							mapDomination.removeCountry(countryName);
 							isValidCommand = true;
 
 						}
@@ -305,7 +328,7 @@ public class RiskUI {
 						while (matcher.find()) {
 							String countryName = matcher.group(2);
 							String neighborCountryName = matcher.group(3);
-							mapBuild.addCountryAdjacency(countryName, neighborCountryName);
+							mapDomination.addCountryAdjacency(countryName, neighborCountryName);
 							isValidCommand = true;
 
 						}
@@ -325,7 +348,7 @@ public class RiskUI {
 						while (matcher.find()) {
 							String countryName = matcher.group(2);
 							String neighborCountryName = matcher.group(3);
-							mapBuild.removeCountryAdjacency(countryName, neighborCountryName);
+							mapDomination.removeCountryAdjacency(countryName, neighborCountryName);
 							isValidCommand = true;
 
 						}
@@ -335,7 +358,7 @@ public class RiskUI {
 						setPattern(regex);
 						setMatcher(input);
 						if (matcher.find()) {
-							mapBuild.showMap();
+							mapDomination.showMap();
 							isValidCommand = true;
 						}
 
@@ -348,7 +371,7 @@ public class RiskUI {
 							isValidCommand = true;
 
 							try {
-								mapBuild.saveMap(mapFileName);
+								mapDomination.saveMap(mapFileName);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -371,7 +394,7 @@ public class RiskUI {
 								setMatcher(input);
 								if (matcher.find()) {
 									isValidCommand = true;
-									mapBuild.validateMap();
+									mapDomination.validateMap();
 
 								}
 
@@ -428,7 +451,7 @@ public class RiskUI {
 						isValidCommand = true;
 						boolean isLoaded = false;
 						try {
-							isLoaded = mapBuild.loadMap(mapFileName);
+							isLoaded = mapDomination.read(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -460,7 +483,7 @@ public class RiskUI {
 						isValidCommand = true;
 
 						try {
-							mapBuild.saveMap(mapFileName);
+							mapDomination.saveMap(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -508,7 +531,7 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						isValidCommand = true;
 						finished = true;
-						mapBuild.assigningPlayersToCountries(playerNames);
+						mapDomination.assigningPlayersToCountries(playerNames);
 
 					}
 
@@ -518,7 +541,7 @@ public class RiskUI {
 					setMatcher(input);
 					if (getMatcher().find()) {
 						isValidCommand = true;
-						mapView.showMap(mapBuild);
+						mapView.showMap(mapDomination);
 
 					}
 
@@ -539,7 +562,7 @@ public class RiskUI {
 
 				// System.out.println(reinforceRequestingMessage);
 
-				for (Player player : mapBuild.getPlayers()) {
+				for (Player player : mapDomination.getPlayers()) {
 
 					player.setCounterForPhases(1);
 					// counterForPhases = 1;
@@ -549,7 +572,7 @@ public class RiskUI {
 //					System.out.println(player.getPlayerName() + " is your turn to reinforce");
 					finished = false;
 
-					//for (Player player : mapBuild.getPlayers()) {
+					//for (Player player : mapDomination.getPlayers()) {
 
 					
 
@@ -560,7 +583,7 @@ public class RiskUI {
 						isValidCommand = false;
 
 						System.out.println("Player " + player.getPlayerName() + ":");
-						System.out.println("You get -" + mapBuild.calculateNumberOfInitialArmies() + "- armies.");
+						System.out.println("You get -" + mapDomination.calculateNumberOfInitialArmies() + "- armies.");
 						readInput();
 
 						// placeall
@@ -569,7 +592,7 @@ public class RiskUI {
 						setMatcher(input);
 						if (matcher.find()) {
 							isValidCommand = true;
-							mapBuild.placeAllArmies();
+							mapDomination.placeAllArmies();
 							finished = true;
 							placeAllFlag = true;
 
@@ -581,7 +604,7 @@ public class RiskUI {
 						setMatcher(input);
 						if (getMatcher().find()) {
 							isValidCommand = true;
-							mapView.showMap(mapBuild);
+							mapView.showMap(mapDomination);
 						}
 
 						// placearmy countryname
@@ -594,9 +617,9 @@ public class RiskUI {
 						if (getMatcher().find()) {
 							String countryName = matcher.group(1);
 
-							if (mapBuild.placearmyIsValid(player, countryName) == true) {
-								mapBuild.assignInitialsArmiesToSpecificCountry(countryName,
-										mapBuild.calculateNumberOfInitialArmies());
+							if (mapDomination.placearmyIsValid(player, countryName) == true) {
+								mapDomination.assignInitialsArmiesToSpecificCountry(countryName,
+										mapDomination.calculateNumberOfInitialArmies());
 								finished = true;
 							} else {
 								System.out.println("placearmy is not valid");
@@ -620,7 +643,7 @@ public class RiskUI {
 				/******** START GAME PHASE **********************/
 
 				
-				for (Player player : mapBuild.getPlayers()) {
+				for (Player player : mapDomination.getPlayers()) {
 
 					player.setCounterForPhases(1);
 					
@@ -631,19 +654,19 @@ public class RiskUI {
 
 					
 
-					isValidCommand = player.reinforceCommand(mapBuild, mapView);
+					isValidCommand = player.reinforceCommand(mapDomination, mapView);
 
 					player.setCounterForPhases(2);
-					isValidCommand = player.attackCommand(mapBuild, mapView);
+					isValidCommand = player.attackCommand(mapDomination, mapView);
 
 					player.setCounterForPhases(3);
-					isValidCommand = player.fortifyCommand(mapBuild, mapView);
+					isValidCommand = player.fortifyCommand(mapDomination, mapView);
 
 					if (!isValidCommand) {
 						System.out.println("Please follow the correct command rules");
 					}
 				} // Endof For Player
-				mapBuild.showMap();
+				mapDomination.showMap();
 			} else {
 				System.out.println("Please answer by Y or N");
 				editMapAnswer = scanner.nextLine();
