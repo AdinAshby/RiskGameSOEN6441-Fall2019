@@ -24,9 +24,10 @@ public class PlayerObserver implements Observer {
  */
 	@Override
 	public void update(double percentageControlled, int totalNumberOfArmies,
-			ArrayList<String> continentsControlled) {
+			ArrayList<String> continentsControlled, MapBuilder mapBuild) {
+		//System.out.println(mapBuild.getPlayers());
+		theMapView.showPlayersWorldDomination(mapBuild.getPlayers());
 		
-		theMapView.showPlayersWorldDomination(MapBuilder.getInstance().getPlayers());
 	}
 	/**
 	 * This method is update method for game phases view

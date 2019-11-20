@@ -43,6 +43,8 @@ public class Player implements Subject {
 	private ArrayList<Observer> observersForPhases = new ArrayList<Observer>();
 	private ArrayList<Observer> observersForWorldDomination = new ArrayList<Observer>();
 
+	private MapBuilder mapBuild;
+	
 	/**
 	 * private scanner
 	 */
@@ -81,9 +83,10 @@ public class Player implements Subject {
 	 * @param playerName Corresponding player name.
 	 * @param countryID  List of all countries (IDs) that the player owns.
 	 */
-	public Player(String playerName, int[] countryID) {
+	public Player(String playerName, int[] countryID, MapBuilder mapBuild) {
 		this.playerName = playerName;
 		this.countryIDs = countryID;
+		this.mapBuild = mapBuild;
 		cards = new ArrayList<Card>();
 		playerCountForCard = 0;
 	}
@@ -321,7 +324,7 @@ public class Player implements Subject {
 	public void notifyObserverForWorldDomination() {
 		// System.out.println("Ob No.="+observersForWorldDomination.size());
 		for (Observer observer : observersForWorldDomination) {
-			observer.update(percentageControlled, totalNumberOfArmies, continentsControlled);
+			observer.update(percentageControlled, totalNumberOfArmies, continentsControlled, mapBuild);
 		}
 	}
 
@@ -360,12 +363,12 @@ public class Player implements Subject {
 		totalNumberOfArmies = 0;
 
 		for (Integer each : countryIDs) {
-			totalNumberOfArmies += MapBuilder.getInstance().getCountryById(each).getArmies();
+			totalNumberOfArmies += mapBuild.getCountryById(each).getArmies();
 		}
-
-		MapBuilder.getInstance().continentsOwnedByPlayer(playerName);
-		percentageControlled = getCountryIDs().length * 100 / MapBuilder.getInstance().getAllCountries().size();
-
+		
+		mapBuild.continentsOwnedByPlayer(playerName);
+		percentageControlled = getCountryIDs().length * 100 / mapBuild.getAllCountries().size();
+		
 		notifyObserverForWorldDomination();
 	}
 
