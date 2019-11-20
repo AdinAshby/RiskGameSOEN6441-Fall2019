@@ -148,7 +148,7 @@ public class RiskUI {
 		 * attribute
 		 */
 
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
 			mapBuild.loadMap("test");// ameroki
 			playerNames.add("Aval");
