@@ -781,6 +781,9 @@ public class MapBuilder {
 		} else {
 			System.out.println("Country not found");
 		}
+		
+		
+		getPlayerByName(country.getPlayerName()).calculateWorldDominationView();
 	}
 
 	/**
