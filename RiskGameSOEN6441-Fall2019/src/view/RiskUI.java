@@ -563,8 +563,10 @@ public class RiskUI {
 				// System.out.println(reinforceRequestingMessage);
 
 				for (Player player : mapDomination.getPlayers()) {
-
-					player.setCounterForPhases(1);
+					if (placeAllFlag == true) {
+						break;
+					}
+					//player.setCounterForPhases(1); /*********************************************/
 					// counterForPhases = 1;
 					// mapView.showPhaseView(counterForPhases, player.getPlayerName());
 
@@ -595,6 +597,7 @@ public class RiskUI {
 							mapDomination.placeAllArmies();
 							finished = true;
 							placeAllFlag = true;
+							break;
 
 						}
 
