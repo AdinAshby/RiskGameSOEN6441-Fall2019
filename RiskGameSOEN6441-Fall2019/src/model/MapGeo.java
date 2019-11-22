@@ -574,6 +574,7 @@ public class MapGeo {
 		}
 
 	}
+	
 
 	/**
 	 * This method check the map whether is validate
@@ -687,9 +688,10 @@ public class MapGeo {
 	 * 
 	 * @param playerNames
 	 */
-	public void assigningPlayersToCountries(ArrayList<String> playerNames) {
+	public void assigningPlayersToCountries(ArrayList<String> playerNames, ArrayList<String> playerStrategies) {
 
 		players = new Player[playerNames.size()];
+
 
 		ArrayList<Country> temporaryCountries = new ArrayList<Country>();
 
@@ -711,6 +713,21 @@ public class MapGeo {
 			}
 
 			players[i] = new Player(playerNames.get(i), countriesIDs, this);
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("human"))
+				players[i].setStrategy(new HumanPlayer(playerNames.get(i), countriesIDs, this));
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("aggressive"))
+				players[i].setStrategy(new AggressivePlayer(playerNames.get(i), countriesIDs, this));
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("benevolent"))
+				players[i].setStrategy(new BenevolentPlayer(playerNames.get(i), countriesIDs, this));
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("random"))
+				players[i].setStrategy(new RandomPlayer(playerNames.get(i), countriesIDs, this));
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("cheater"))
+				players[i].setStrategy(new CheaterPlayer(playerNames.get(i), countriesIDs, this));
 
 			for (int m = 0; m < countriesIDs.length; m++) {
 				updateCountryIDs(playerNames.get(i), countriesIDs[m]);

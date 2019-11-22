@@ -1,7 +1,7 @@
 package model;
 
 public interface Strategy {
-	public void attack();
-	public void reinforcement();
-	public void fortification();
+	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, MapGeo mapBuild);
+	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished);
+	public void fortify(String fromCountry, String toCountry, int armiesToMove,  MapGeo mapBuild);
 }
