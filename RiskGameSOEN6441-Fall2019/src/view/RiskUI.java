@@ -665,8 +665,6 @@ public class RiskUI {
 					System.out.println(player.getPlayerName() + " is your turn to reinforce");
 					finished = false;
 
-					
-
 					isValidCommand = player.reinforceCommand(mapDomination, mapView);
 
 					player.setCounterForPhases(2);
