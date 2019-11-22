@@ -155,7 +155,7 @@ public class RiskUI {
 		 * attribute
 		 */
 
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
 		//	mapAdapter.read("test");// ameroki
 			MapGeo mapAdapter=new MapAdapter("d");
@@ -183,6 +183,9 @@ public class RiskUI {
 			player1.getNumberOfArmiesEachPlayerGets();
 			player2.getNumberOfArmiesEachPlayerGets();
 			System.out.println("Player 1="+player1.getPlayerName()+" Player2="+player2.getPlayerName());
+			
+			player1.attackAllout(mapAdapter);
+			System.exit(0);
 			int attackerCountryId=player1.getCountryIDs()[0];
 			int fortifyCountryId=player1.getCountryIDs()[1];
 			int attackingCountryId=player2.getCountryIDs()[0];

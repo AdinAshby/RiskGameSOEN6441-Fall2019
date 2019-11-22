@@ -441,6 +441,8 @@ public class MapGeo {
 		getCountryAdjacency().addEdge(countryId, neighborCountryId);
 
 	}
+	
+	
 
 	/**
 	 * This method addCountryAdjacency
@@ -1127,6 +1129,10 @@ public class MapGeo {
 		return countryAdjacency;
 	}
 
+	public ArrayList<Integer> getCountryAdjacency(int countryId) {
+		return countryAdjacency.getVertexAdjacency(countryId);
+	}
+	
 	/**
 	 * This method Country Adjacency
 	 * 

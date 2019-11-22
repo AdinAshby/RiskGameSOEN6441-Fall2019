@@ -351,17 +351,15 @@ public class Player implements Subject {
 
 	/*
 	 * public void calculateTotalNumberOfArmies() { for(Integer each : countryIDs) {
-	 * totalNumberOfArmies +=
-	 * MapGeo.getInstance().getCountryById(each).getArmies(); }
-	 * notifyObserverForWorldDomination(); }
+	 * totalNumberOfArmies += MapGeo.getInstance().getCountryById(each).getArmies();
+	 * } notifyObserverForWorldDomination(); }
 	 * 
 	 * public void calculateContinentControlled() {
 	 * MapGeo.getInstance().continentsOwnedByPlayer(playerName);
 	 * notifyObserverForWorldDomination(); }
 	 * 
 	 * public void calculatePercentageControlled() { percentageControlled =
-	 * getCountryIDs().length * 100 /
-	 * MapGeo.getInstance().getAllCountries().size();
+	 * getCountryIDs().length * 100 / MapGeo.getInstance().getAllCountries().size();
 	 * notifyObserverForWorldDomination(); }
 	 */
 
@@ -422,7 +420,7 @@ public class Player implements Subject {
 		boolean finished = false;
 		boolean isValidCommand = false;
 
-		if(this.strategy instanceof HumanPlayer) {
+		if (this.strategy instanceof HumanPlayer) {
 			String addText = "";
 			temporaryArmies = numberOfArmiesEachPlayerGets;
 
@@ -475,9 +473,9 @@ public class Player implements Subject {
 
 					}
 				} // Match Find Reinforce
-				////__________________________________________///////
-				//__________________________________________///////
-				//__________________________________________///////
+					//// __________________________________________///////
+					// __________________________________________///////
+					// __________________________________________///////
 				regex = "(?<=exchangecards)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -507,16 +505,16 @@ public class Player implements Subject {
 					System.out.println("Correct command not found");
 				}
 			} // while reinforce
-		} 
+		}
 
-		if(this.strategy instanceof AggressivePlayer) {
+		if (this.strategy instanceof AggressivePlayer) {
 
 			int[] playerCountries = getCountryIDs();
 			int maxArmies = 0;
 			String countryName = "";
 
 			for (int countryID : playerCountries) {
-				if(mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
+				if (mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
 					maxArmies = mapBuild.getCountryById(countryID).getArmies();
 					countryName = mapBuild.getCountryById(countryID).getCountryName();
 				}
@@ -526,26 +524,24 @@ public class Player implements Subject {
 			isValidCommand = true;
 		}
 
-		if(this.strategy instanceof BenevolentPlayer) {
+		if (this.strategy instanceof BenevolentPlayer) {
 
 		}
 
-		if(this.strategy instanceof RandomPlayer) {
+		if (this.strategy instanceof RandomPlayer) {
 
 		}
 
-		if(this.strategy instanceof CheaterPlayer) {
+		if (this.strategy instanceof CheaterPlayer) {
 
 		}
-
 
 		return isValidCommand;
 	}
 
 	public void attackMove(Country attackerCountry, Country attackingCountry, int numAttack) {
 		System.out.println("attackmove : " + numAttack);
-		attackerCountry.setArmies(
-				attackerCountry.getArmies() - numAttack);
+		attackerCountry.setArmies(attackerCountry.getArmies() - numAttack);
 		attackingCountry.setArmies(numAttack);
 		calculateWorldDominationView();
 
@@ -564,10 +560,8 @@ public class Player implements Subject {
 			try {
 				int numAttack = Integer.parseInt(matcher.group(1));
 				if (numAttack < attackerCountry.getArmies() - 1) {
-					System.out.println(numAttack
-							+ " can not move because you have only : "
-							+ attackerCountry.getArmies()
-							+ " armies and one should left there");
+					System.out.println(numAttack + " can not move because you have only : "
+							+ attackerCountry.getArmies() + " armies and one should left there");
 				} else {
 					isValidCommand = true;
 					attackMove(attackerCountry, attackingCountry, numAttack);
@@ -583,11 +577,49 @@ public class Player implements Subject {
 			System.out.println("Please follow the correct command rules");
 		}
 
-
 	}
 
-	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, MapGeo mapBuild) {
+	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice,
+			MapGeo mapBuild) {
 		this.strategy.attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild);
+	}
+
+	public void attackAllout(MapGeo mapBuild) {
+		System.out
+				.println("\n------------------------------\nAttack All out Started\n------------------------------\n");
+		int[] playerCountries = getCountryIDs();
+		int attackerNumDice = 3;
+		int defendNumDice = 1;
+		for (int i = 0; i < playerCountries.length; i++) {
+			int countryId = playerCountries[i];
+			Country attackerCountry = mapBuild.getCountryById(countryId);
+			if (attackerCountry.getArmies() > 1) {
+				ArrayList<Integer> adjCountries = mapBuild.getCountryAdjacency(countryId);
+				for (int attackingCountryId : adjCountries) {
+					Country attackingCountry = mapBuild.getCountryById(attackingCountryId);
+					System.out.println("Attacking From " + attackerCountry.getCountryName() + " ("+getPlayerName()+") To: "
+							+ attackingCountry.getCountryName()+" ("+attackingCountry.getPlayerName()+")");
+					if (!attackingCountry.getPlayerName().equals(getPlayerName())) {
+						// Check Attacking Country should be for other player
+						System.out.println("Attacked From " + attackerCountry.getCountryName() + " To: "
+								+ attackingCountry.getCountryName());
+
+						if (isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry, true) == true) {
+							attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild);
+						}
+					} else {
+						break;
+					}
+				}
+
+			} else {
+				break;
+			}
+		}
+
+		// if (isAttackValid(mapBuild, attackerNumDice, attackerCountry,
+		// attackingCountry, true) == true) {
+
 	}
 
 	public boolean attackCommand(MapGeo mapBuild, MapView mapView) {
@@ -652,6 +684,7 @@ public class Player implements Subject {
 
 						if (matcher.group(6) != null && matcher.group(6).equals("-allout")) {
 							System.out.println("Allout selected");
+							attackAllout(mapBuild);
 							attackerNumDice = 3;
 						} else {
 							attackerNumDice = Integer.parseInt(matcher.group(4));
@@ -667,8 +700,6 @@ public class Player implements Subject {
 								+ attackerNumDice + " dice");
 
 						if (isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry, true) == true) {
-
-
 
 							/**** Start Defend *******/
 
@@ -686,11 +717,8 @@ public class Player implements Subject {
 								if (matcher.find()) {
 									try {
 										int defendNumDice = Integer.parseInt(matcher.group(1));
-										attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice,  mapBuild );
-
-
-
-
+										attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice,
+												mapBuild);
 
 										// if(numDice>attackingCountry.getArmies() || numDice>3) {
 										// System.out.println("defending dice should not be more than the number of
@@ -769,7 +797,7 @@ public class Player implements Subject {
 		return false;
 	}
 
-	public void fortify(String fromCountry, String toCountry, int armiesToMove,  MapGeo mapBuild) {
+	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapBuild) {
 		this.strategy.fortify(fromCountry, toCountry, armiesToMove, mapBuild);
 	}
 
@@ -786,8 +814,8 @@ public class Player implements Subject {
 		boolean finished = false;
 		boolean isValidCommand = false;
 
-		if(this.strategy instanceof HumanPlayer) {
-			
+		if (this.strategy instanceof HumanPlayer) {
+
 			String addText = "";
 
 			while (!finished) {
@@ -831,36 +859,36 @@ public class Player implements Subject {
 						fortify(fromCountry, toCountry, num, mapBuild);
 						finished = true;
 
-					} 
+					}
 
 					isValidCommand = true;
 				}
 			}
 		}
-		
-		if(this.strategy instanceof AggressivePlayer) {
-			
+
+		if (this.strategy instanceof AggressivePlayer) {
+
 		}
-		
-		if(this.strategy instanceof BenevolentPlayer) {
-			
+
+		if (this.strategy instanceof BenevolentPlayer) {
+
 		}
-		
-		if(this.strategy instanceof RandomPlayer) {
-			
+
+		if (this.strategy instanceof RandomPlayer) {
+
 		}
-		
-		if(this.strategy instanceof CheaterPlayer) {
-			
+
+		if (this.strategy instanceof CheaterPlayer) {
+
 		}
 
 		return isValidCommand;
 	}
-	
+
 	public int getTemporaryArmies() {
 		return temporaryArmies;
 	}
-	
+
 	public void setTemporaryArmies(int temporaryArmies) {
 		this.temporaryArmies = temporaryArmies;
 	}
