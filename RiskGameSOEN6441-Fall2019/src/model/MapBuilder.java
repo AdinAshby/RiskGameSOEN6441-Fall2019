@@ -1,10 +1,7 @@
 package model;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,10 +12,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import controller.RiskController;
 import view.MapView;
 
 /**
@@ -45,9 +39,9 @@ public class MapBuilder {
 	 * countryAdjacency
 	 */
 	private AdjacencyList countryAdjacency = new AdjacencyList();
-/**
- * private player
- */
+	/**
+	 * private player
+	 */
 	private Player[] players;
 
 	/**
@@ -58,7 +52,7 @@ public class MapBuilder {
 	/**
 	 * private number Of Armies Each Player Gets
 	 */
-//	private int numberOfArmiesEachPlayerGets;
+	//	private int numberOfArmiesEachPlayerGets;
 	private static MapBuilder instance;
 
 	/**
@@ -67,10 +61,10 @@ public class MapBuilder {
 	protected MapBuilder() {
 
 	}
-/**
- *  
- * @return instance
- */
+	/**
+	 *  
+	 * @return instance
+	 */
 	public static MapBuilder getInstance() {
 		if (instance == null) {
 			instance = new MapBuilder();
@@ -79,14 +73,14 @@ public class MapBuilder {
 			return instance;
 		}
 	}
-/**
- * This method check whether is exchange Cards Valid
- * @param player
- * @param num1
- * @param num2
- * @param num3
- * @return false
- */
+	/**
+	 * This method check whether is exchange Cards Valid
+	 * @param player
+	 * @param num1
+	 * @param num2
+	 * @param num3
+	 * @return false
+	 */
 	public boolean exchangeCardsIsValid(Player player, int num1, int num2, int num3) {
 		ArrayList<Card> cardsForPlayer = player.getCards();
 
@@ -487,7 +481,7 @@ public class MapBuilder {
 		return getCountryAdjacency().showListEdges();
 	}
 
-	
+
 
 	/**
 	 * This method format the map
@@ -640,7 +634,7 @@ public class MapBuilder {
 	 */
 	public HashMap<String, ArrayList<String>> getListOfBorders() {
 
-		
+
 		HashMap<String, ArrayList<String>> borders = new HashMap<String, ArrayList<String>>();
 		ArrayList<Integer> keys = getCountryAdjacency().getKeys();
 		for (int key : keys) {
@@ -687,9 +681,10 @@ public class MapBuilder {
 	 * 
 	 * @param playerNames
 	 */
-	public void assigningPlayersToCountries(ArrayList<String> playerNames) {
+	public void assigningPlayersToCountries(ArrayList<String> playerNames, ArrayList<String> playerStrategies) {
 
 		players = new Player[playerNames.size()];
+
 
 		ArrayList<Country> temporaryCountries = new ArrayList<Country>();
 
@@ -711,6 +706,21 @@ public class MapBuilder {
 			}
 
 			players[i] = new Player(playerNames.get(i), countriesIDs, this);
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("human"))
+				players[i].setStrategy(new HumanPlayer(playerNames.get(i), countriesIDs, this));
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("aggressive"))
+				players[i].setStrategy(new AggressivePlayer(playerNames.get(i), countriesIDs, this));
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("benevolent"))
+				players[i].setStrategy(new BenevolentPlayer(playerNames.get(i), countriesIDs, this));
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("random"))
+				players[i].setStrategy(new RandomPlayer(playerNames.get(i), countriesIDs, this));
+			
+			if(playerStrategies.get(i).equalsIgnoreCase("cheater"))
+				players[i].setStrategy(new CheaterPlayer(playerNames.get(i), countriesIDs, this));
 
 			for (int m = 0; m < countriesIDs.length; m++) {
 				updateCountryIDs(playerNames.get(i), countriesIDs[m]);
@@ -781,8 +791,8 @@ public class MapBuilder {
 		} else {
 			System.out.println("Country not found");
 		}
-		
-		
+
+
 		getPlayerByName(country.getPlayerName()).calculateWorldDominationView();
 	}
 
@@ -823,12 +833,12 @@ public class MapBuilder {
 				int randomID = p[randomPlayerCountryID];
 				int oldArmies = getCountryById(randomID).getArmies();
 				getCountryById(randomID).setArmies(oldArmies + armiesForEach);// Check if atleast 25 army should be
-																				// assigned
+				// assigned
 
 			}
-			
+
 			player.calculateWorldDominationView();
-			
+
 			// player.calculateTotalNumberOfArmies();
 			// player.notifyObserverForWorldDomination();
 		}
@@ -871,7 +881,7 @@ public class MapBuilder {
 			}
 
 		}
-		
+
 		player.setContinentsControlled(ContinentList);
 	}
 
@@ -895,20 +905,20 @@ public class MapBuilder {
 		return result;
 	}
 
-//	/**
-//	 * This method implements the reinforcement phase
-//	 * 
-//	 * @param playerName
-//	 * @param countryName
-//	 * @param armiesAdded
-//	 * @param armiesEachPlayerGets
-//	 */
-//	public void reinforce(String playerName, String countryName, int armiesAdded) {
-//
-//		int oldArmies = getCountryByName(countryName).getArmies();
-//
-//		getCountryByName(countryName).setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
-//	}
+	//	/**
+	//	 * This method implements the reinforcement phase
+	//	 * 
+	//	 * @param playerName
+	//	 * @param countryName
+	//	 * @param armiesAdded
+	//	 * @param armiesEachPlayerGets
+	//	 */
+	//	public void reinforce(String playerName, String countryName, int armiesAdded) {
+	//
+	//		int oldArmies = getCountryByName(countryName).getArmies();
+	//
+	//		getCountryByName(countryName).setArmies(oldArmies + playerContinentValuesOwnership(playerName) + armiesAdded);
+	//	}
 	/**
 	 * This method check whether the reinforce is valid
 	 * @param playerName
@@ -917,25 +927,25 @@ public class MapBuilder {
 	 * @return false
 	 */
 
-//	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
-//		calculateNumberOfArmiesEachPlayerGets(playerName);
-//
-//		if (armiesAdded < 0 || armiesAdded > numberOfArmiesEachPlayerGets) {
-//			System.out.println("Armies Added (" + armiesAdded
-//					+ ") is less than 0 or Armies added are more than player armies " + numberOfArmiesEachPlayerGets);
-//			return false;
-//		}
-//
-//		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
-//
-//		for (int countryID : playerCountries) {
-//			if (getCountryByName(countryName) == getCountryById(countryID)) {
-//				return true;
-//			}
-//		}
-//
-//		return false;
-//	}
+	//	public boolean reinforceIsValid(String playerName, String countryName, int armiesAdded) {
+	//		calculateNumberOfArmiesEachPlayerGets(playerName);
+	//
+	//		if (armiesAdded < 0 || armiesAdded > numberOfArmiesEachPlayerGets) {
+	//			System.out.println("Armies Added (" + armiesAdded
+	//					+ ") is less than 0 or Armies added are more than player armies " + numberOfArmiesEachPlayerGets);
+	//			return false;
+	//		}
+	//
+	//		int[] playerCountries = getPlayerByName(playerName).getCountryIDs();
+	//
+	//		for (int countryID : playerCountries) {
+	//			if (getCountryByName(countryName) == getCountryById(countryID)) {
+	//				return true;
+	//			}
+	//		}
+	//
+	//		return false;
+	//	}
 
 	/**
 	 * This method implements the fortification phase
@@ -944,48 +954,48 @@ public class MapBuilder {
 	 * @param toCountry
 	 * @param armiesToMove
 	 */
-//	public void fortify(String fromCountry, String toCountry, int armiesToMove) {
-//		int oldArmiesFromCountry = getCountryByName(fromCountry).getArmies();
-//		getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
-//
-//		int oldArmiesToCountry = getCountryByName(toCountry).getArmies();
-//		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
-//
-//	}
+	//	public void fortify(String fromCountry, String toCountry, int armiesToMove) {
+	//		int oldArmiesFromCountry = getCountryByName(fromCountry).getArmies();
+	//		getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
+	//
+	//		int oldArmiesToCountry = getCountryByName(toCountry).getArmies();
+	//		getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
+	//
+	//	}
 
-//	/**
-//	 * This method is for checking whether the fortify is valid
-//	 * 
-//	 * @param player
-//	 * @param fromCountry
-//	 * @param toCountry
-//	 * @param num
-//	 * @return false
-//	 */
-//	public boolean fortifyIsValid(Player player, String fromCountry, String toCountry, int num) {
-//		boolean fromCountryCheck = false;
-//		boolean toCountryCheck = false;
-//
-//		if (num < 0 || num > getCountryByName(fromCountry).getArmies())
-//			return false;
-//
-//		for (int countryID : player.getCountryIDs()) {
-//			if (getCountryByName(fromCountry) == getCountryById(countryID)) {
-//				fromCountryCheck = true;
-//			}
-//		}
-//
-//		for (int countryID : player.getCountryIDs()) {
-//			if (getCountryByName(toCountry) == getCountryById(countryID)) {
-//				toCountryCheck = true;
-//			}
-//		}
-//
-//		if (fromCountryCheck && toCountryCheck)
-//			return true;
-//
-//		return false;
-//	}
+	//	/**
+	//	 * This method is for checking whether the fortify is valid
+	//	 * 
+	//	 * @param player
+	//	 * @param fromCountry
+	//	 * @param toCountry
+	//	 * @param num
+	//	 * @return false
+	//	 */
+	//	public boolean fortifyIsValid(Player player, String fromCountry, String toCountry, int num) {
+	//		boolean fromCountryCheck = false;
+	//		boolean toCountryCheck = false;
+	//
+	//		if (num < 0 || num > getCountryByName(fromCountry).getArmies())
+	//			return false;
+	//
+	//		for (int countryID : player.getCountryIDs()) {
+	//			if (getCountryByName(fromCountry) == getCountryById(countryID)) {
+	//				fromCountryCheck = true;
+	//			}
+	//		}
+	//
+	//		for (int countryID : player.getCountryIDs()) {
+	//			if (getCountryByName(toCountry) == getCountryById(countryID)) {
+	//				toCountryCheck = true;
+	//			}
+	//		}
+	//
+	//		if (fromCountryCheck && toCountryCheck)
+	//			return true;
+	//
+	//		return false;
+	//	}
 
 	/**
 	 * In This method The player Continent Values Ownership
@@ -1059,17 +1069,17 @@ public class MapBuilder {
 		return continentsOfPlayerArray;
 	}
 
-//	/**
-//	 * This method is for calculate Number Of Armies Each Player Gets
-//	 * 
-//	 * @param playerName
-//	 */
-//
-//	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
-//		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3)
-//				? getPlayerByName(playerName).getCountryIDs().length / 3
-//				: 3;
-//	}
+	//	/**
+	//	 * This method is for calculate Number Of Armies Each Player Gets
+	//	 * 
+	//	 * @param playerName
+	//	 */
+	//
+	//	public void calculateNumberOfArmiesEachPlayerGets(String playerName) {
+	//		numberOfArmiesEachPlayerGets = (getPlayerByName(playerName).getCountryIDs().length / 3 > 3)
+	//				? getPlayerByName(playerName).getCountryIDs().length / 3
+	//				: 3;
+	//	}
 
 	/**
 	 * This method is for calculate Number Of Initial Armies
@@ -1088,9 +1098,9 @@ public class MapBuilder {
 	 * 
 	 * @return numberOfArmiesEachPlayerGets
 	 */
-//	public int getNumberOfArmiesEachPlayerGets() {
-//		return numberOfArmiesEachPlayerGets;
-//	}
+	//	public int getNumberOfArmiesEachPlayerGets() {
+	//		return numberOfArmiesEachPlayerGets;
+	//	}
 
 	/**
 	 * This method return all the players
@@ -1154,7 +1164,7 @@ public class MapBuilder {
 
 		return totalArmies;
 	}
-	
+
 	public void read() {};
 
 }

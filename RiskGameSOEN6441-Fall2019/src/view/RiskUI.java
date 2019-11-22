@@ -103,6 +103,7 @@ public class RiskUI {
 	 * private playerNames
 	 */
 	private ArrayList<String> playerNames = new ArrayList<String>();
+	private ArrayList<String> playerStrategies = new ArrayList<String>();
 
 	private int counterForPhases;
 
@@ -175,8 +176,11 @@ public class RiskUI {
 			
 			playerNames.add("Aval");
 			playerNames.add("Dovom");
+			
+			playerStrategies.add("human");
+			playerStrategies.add("human");
 
-			mapDomination.assigningPlayersToCountries(playerNames);
+			mapDomination.assigningPlayersToCountries(playerNames, playerStrategies);
 			
 			mapDomination.placeAllArmies();
 			
@@ -498,12 +502,16 @@ public class RiskUI {
 					if (matcher.find()) {
 						addText = matcher.group(1);
 					}
-					regex = "(-add ([\\w*\\_\\-]*))+";
+					regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
 					setPattern(regex);
 					setMatcher(addText);
 					while (matcher.find()) {
 						String playerName = getMatcher().group(2);
+						String playerStrategy = getMatcher().group(3);
+						
 						playerNames.add(playerName);
+						playerStrategies.add(playerStrategy);
+						
 						isValidCommand = true;
 					}
 
@@ -520,7 +528,9 @@ public class RiskUI {
 					setMatcher(addText);
 					while (matcher.find()) {
 						String playerName = getMatcher().group(2);
+						int indexOfPlayerName = playerNames.indexOf(playerName);
 						playerNames.remove(playerName);
+						playerStrategies.remove(indexOfPlayerName);
 						isValidCommand = true;
 					}
 
@@ -531,7 +541,7 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						isValidCommand = true;
 						finished = true;
-						mapDomination.assigningPlayersToCountries(playerNames);
+						mapDomination.assigningPlayersToCountries(playerNames, playerStrategies);
 
 					}
 

@@ -44,9 +44,9 @@ public class Player implements Subject {
 	private ArrayList<Observer> observersForWorldDomination = new ArrayList<Observer>();
 
 	private MapBuilder mapBuild;
-	
+
 	private Strategy strategy;
-	
+
 	/**
 	 * private scanner
 	 */
@@ -92,7 +92,7 @@ public class Player implements Subject {
 		cards = new ArrayList<Card>();
 		playerCountForCard = 0;
 	}
-	
+
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
@@ -371,10 +371,10 @@ public class Player implements Subject {
 		for (Integer each : countryIDs) {
 			totalNumberOfArmies += mapBuild.getCountryById(each).getArmies();
 		}
-		
+
 		mapBuild.continentsOwnedByPlayer(playerName);
 		percentageControlled = getCountryIDs().length * 100 / mapBuild.getAllCountries().size();
-		
+
 		notifyObserverForWorldDomination();
 	}
 
@@ -413,23 +413,7 @@ public class Player implements Subject {
 	}
 
 	public boolean reinforce(MapBuilder mapBuild, String countryName, int num, boolean finished) {
-		if (reinforceIsValid(mapBuild, countryName, num) == true) {
-			int oldArmies = mapBuild.getCountryByName(countryName).getArmies();
-			mapBuild.getCountryByName(countryName)
-					.setArmies(oldArmies + mapBuild.playerContinentValuesOwnership(playerName) + num);
-			// mapBuild.reinforce(getPlayerName(), countryName, num);
-			calculateWorldDominationView();
-			temporaryArmies -= num;
-
-			if (temporaryArmies <= 0) {
-				finished = true;
-			}
-
-		} else {
-			System.out.println("Reinforce is not valid");
-		}
-		return finished;
-
+		return this.strategy.reinforce(mapBuild, countryName, num, finished);
 	}
 
 	public boolean reinforceCommand(MapBuilder mapBuild, MapView mapView) {
@@ -521,7 +505,7 @@ public class Player implements Subject {
 		} // while reinforce
 		return isValidCommand;
 	}
-	
+
 	public void attackMove(Country attackerCountry, Country attackingCountry, int numAttack) {
 		System.out.println("attackmove : " + numAttack);
 		attackerCountry.setArmies(
@@ -550,7 +534,7 @@ public class Player implements Subject {
 							+ " armies and one should left there");
 				} else {
 					isValidCommand = true;
-					 attackMove(attackerCountry, attackingCountry, numAttack);
+					attackMove(attackerCountry, attackingCountry, numAttack);
 				}
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
@@ -562,62 +546,12 @@ public class Player implements Subject {
 			isValidCommand = false;
 			System.out.println("Please follow the correct command rules");
 		}
-		
-		
+
+
 	}
-	
-	
+
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, MapBuilder mapBuild) {
-		Dice attackDice = new Dice(attackerNumDice);
-		int[] attackDiceArray = attackDice.getDiceArray();
-		attackDice.showDice();
-		
-		Dice defendDice = new Dice(defendNumDice);
-		int[] defendDiceArray = defendDice.getDiceArray();
-		defendDice.showDice();
-
-		boolean[] winner = attackDice.isWinner(defendDice);
-		
-		
-		for (int i = 0; i < winner.length; i++) {
-			int diceNo = i + 1;
-			if (winner[i]) {
-				System.out.println("Attacker win dice " + diceNo);
-				attackingCountry.setArmies(attackingCountry.getArmies() - 1);
-				calculateWorldDominationView();
-				if (attackingCountry.getArmies() == 0) {
-					System.out.println(
-							attackingCountry.getCountryName() + " is conquered");
-					mapBuild.setContinentNamesOfPlayer(this);
-					Card card = new Card();
-					addCard(card);
-					System.out.println("You have the following cards now :");
-					System.out.println(getCardNames());
-					attackingCountry.setPlayer(attackerCountry.getPlayerName());
-					int NoOfContinentsControlled = getContinentsControlled().size();
-					if (NoOfContinentsControlled == mapBuild
-							.getNoOfContinentsControlled()) {
-						System.out.println(attackerCountry.getPlayerName()
-								+ " is winner. Game over!");
-						System.exit(0);
-					}
-
-					attackMoveCommand(attackerCountry, attackingCountry);
-
-				}
-
-			} else {
-				System.out.println("Defender win dice " + diceNo);
-				attackerCountry.setArmies(attackerCountry.getArmies() - 1);
-				calculateWorldDominationView();
-				if (attackerCountry.getArmies() == 0) {
-					System.out.println(
-							attackerCountry.getCountryName() + " is conquered");
-					attackerCountry.setPlayer(attackingCountry.getPlayerName());
-				}
-			}
-
-		}
+		this.strategy.attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild);
 	}
 
 	public boolean attackCommand(MapBuilder mapBuild, MapView mapView) {
@@ -698,7 +632,7 @@ public class Player implements Subject {
 
 						if (isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry, true) == true) {
 
-							
+
 
 							/**** Start Defend *******/
 
@@ -717,10 +651,10 @@ public class Player implements Subject {
 									try {
 										int defendNumDice = Integer.parseInt(matcher.group(1));
 										attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice,  mapBuild );
-										
-										
-										
-						
+
+
+
+
 
 										// if(numDice>attackingCountry.getArmies() || numDice>3) {
 										// System.out.println("defending dice should not be more than the number of
@@ -765,7 +699,6 @@ public class Player implements Subject {
 		return isValidCommand;
 	}
 
-	
 	/**
 	 * This method is for checking whether the fortify is valid
 	 * 
@@ -799,20 +732,11 @@ public class Player implements Subject {
 
 		return false;
 	}
-	
-	
+
 	public void fortify(String fromCountry, String toCountry, int armiesToMove,  MapBuilder mapBuild) {
-		if (fortifyIsValid(fromCountry, toCountry, armiesToMove, mapBuild) == true) {
-			int oldArmiesFromCountry = mapBuild.getCountryByName(fromCountry).getArmies();
-			mapBuild.getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
-
-			int oldArmiesToCountry = mapBuild.getCountryByName(toCountry).getArmies();
-			mapBuild.getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
-			calculateWorldDominationView();
-
+		this.strategy.fortify(fromCountry, toCountry, armiesToMove, mapBuild);
 	}
-	}
-	
+
 	/**
 	 * 
 	 * @param mapBuild
@@ -867,18 +791,24 @@ public class Player implements Subject {
 					int num = Integer.parseInt(matcher.group(4));
 					fortify(fromCountry, toCountry, num, mapBuild);
 					finished = true;
-					
-					} else {
-						System.out.println("Fortify is not valid");
-					}
 
-					isValidCommand = true;
+				} else {
+					System.out.println("Fortify is not valid");
 				}
+
+				isValidCommand = true;
 			}
-	
-			
-		
+		}
+
 		return isValidCommand;
+	}
+	
+	public int getTemporaryArmies() {
+		return temporaryArmies;
+	}
+	
+	public void setTemporaryArmies(int temporaryArmies) {
+		this.temporaryArmies = temporaryArmies;
 	}
 
 	/**
