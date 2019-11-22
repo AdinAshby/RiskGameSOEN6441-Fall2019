@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import junit.framework.Assert;
-import model.MapBuilder;
+import model.MapGeo;
 import model.Player;
 
 public class TestContientsByPlayer {
 	
-	MapBuilder mapBuild = MapBuilder.getInstance();
+	MapGeo mapBuild = MapGeo.getInstance();
 	ArrayList<String> Players = new ArrayList<String>();
 	ArrayList<String> playerContinents = new ArrayList<String>();
 	ArrayList<String> mapContinents = new ArrayList<String>();

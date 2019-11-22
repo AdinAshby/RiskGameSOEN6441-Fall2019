@@ -2,7 +2,7 @@ package test;
 
 import org.junit.Assert.*;
 
-import model.MapBuilder;
+import model.MapGeo;
 import model.Player;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import org.junit.Assert;
  *
  */
 public class TestAttack {
-	MapBuilder mapBuild = MapBuilder.getInstance();
+	MapGeo mapBuild = MapGeo.getInstance();
 	ArrayList<String> players = new ArrayList<String>();
 
        /**

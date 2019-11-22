@@ -2,7 +2,7 @@ package test;
 
 import org.junit.Test;
 import org.junit.Assert;
-import model.MapBuilder;
+import model.MapGeo;
 
 /**
  * This class contain test cases to test map files
@@ -16,7 +16,7 @@ public class TestMapFiles {
 	/**
 	 * Object of the MapBuilder
 	 */
-	MapBuilder mapBuild = MapBuilder.getInstance();
+	MapGeo mapBuild = MapGeo.getInstance();
 	/**
 	 * String valid_file
 	 */

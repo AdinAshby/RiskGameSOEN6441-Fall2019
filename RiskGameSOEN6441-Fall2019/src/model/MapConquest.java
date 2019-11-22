@@ -1,16 +1,18 @@
 	package model;
 
-	public class MapConquest extends MapBuilder {
+	public class MapConquest extends MapGeo {
 
-		public void readConquest() {
+		public boolean readConquest(String fileName) {
 			// TODO Auto-generated method stub
 			System.out.println("Read Conq");
+			return false;
 			
 		}
 
-		public void writeConquest() {
+		public boolean writeConquest(String fileName) {
 			// TODO Auto-generated method stub
 			System.out.println("Write Conq");
+			return false;
 			
 		}
 

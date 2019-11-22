@@ -24,7 +24,7 @@ public class PlayerObserver implements Observer {
  */
 	@Override
 	public void update(double percentageControlled, int totalNumberOfArmies,
-			ArrayList<String> continentsControlled, MapBuilder mapBuild) {
+			ArrayList<String> continentsControlled, MapGeo mapBuild) {
 		//System.out.println(mapBuild.getPlayers());
 		theMapView.showPlayersWorldDomination(mapBuild.getPlayers());
 		

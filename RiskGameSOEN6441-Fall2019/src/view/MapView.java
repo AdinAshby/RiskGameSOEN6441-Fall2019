@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import controller.RiskController;
 import model.Continent;
 import model.Country;
-import model.MapBuilder;
+import model.MapGeo;
 import model.Player;
 
 /**
@@ -37,7 +37,7 @@ public class MapView {
 	 * 
 	 * @param theMapBuilder
 	 */
-	public void showMap(MapBuilder theMapBuilder) {
+	public void showMap(MapGeo theMapBuilder) {
 
 		Iterator<Entry<Integer, Continent>> iteratorForContinents = theMapBuilder.getContinentList().entrySet()
 				.iterator();

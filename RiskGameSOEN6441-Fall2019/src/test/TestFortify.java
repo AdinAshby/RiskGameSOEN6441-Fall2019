@@ -5,7 +5,7 @@ import java.util.Random;
 
 import org.junit.Assert.*;
 
-import model.MapBuilder;
+import model.MapGeo;
 import model.Player;
 
 import org.junit.Assert;
@@ -16,7 +16,7 @@ import org.junit.Test;
  *
  */
 public class TestFortify {
-	MapBuilder mapBuild = MapBuilder.getInstance();
+	MapGeo mapBuild = MapGeo.getInstance();
 	ArrayList<String> Players = new ArrayList<>();
 /**
  * This testcase test the fortify method for valid input

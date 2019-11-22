@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import model.AdjacencyList;
-import model.MapBuilder;
+import model.MapGeo;
 
 /**
  * This class include testcases to test maps to be valid with given constraints
@@ -18,7 +18,7 @@ public class TestMap {
 	/**
 	 * Object of the MapBuilder
 	 */
-	MapBuilder mapBuild = MapBuilder.getInstance();
+	MapGeo mapBuild = MapGeo.getInstance();
 	/**
 	 * Object of the Empty AdjacencyList
 	 */

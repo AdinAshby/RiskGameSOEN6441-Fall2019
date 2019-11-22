@@ -1,19 +1,43 @@
 package model;
 
-public class MapAdapter extends MapDomination {
+public class MapAdapter extends MapGeo {
 	
-	private MapConquest mapConquest;
+	private MapGeo mapGeo;
+	private String mapType;
 	
-	public MapAdapter(MapConquest mapConquest) {
-		this.mapConquest=mapConquest;
+	public MapAdapter(String mapType) {
+	
+		if(mapType.equalsIgnoreCase("d")){
+		mapGeo= new MapDomination();
+		}else if(mapType.equalsIgnoreCase("c")){
+		mapGeo= new MapConquest();
+		}
+		this.mapType=mapType;
+		
 	}
 	
-	public void read() {
-		mapConquest.readConquest();
+//	public MapAdapter(MapDomination mapDomination) {
+//		this.mapDomination=mapDomination;
+//	}
+//	
+	public boolean read(String mapName) {
+		if(mapType.equalsIgnoreCase("d")){
+			mapGeo.readDomination(this, mapName);
+			}else if(mapType.equalsIgnoreCase("c")){
+			mapGeo.readConquest(mapName);
+			}
+		return true;
+		
 	}
 	
-	public void write() {
-		mapConquest.writeConquest();
+	public boolean write(String mapName) {
+		if(mapType.equalsIgnoreCase("d")){
+			mapGeo.write(mapName);
+			}else if(mapType.equalsIgnoreCase("c")){
+			mapGeo.writeConquest(mapName);
+			}
+		return true;
+		
 	}
 
 }

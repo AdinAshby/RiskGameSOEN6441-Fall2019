@@ -7,7 +7,7 @@ import org.junit.Assert;
 
 import org.junit.Test;
 
-import model.MapBuilder;
+import model.MapGeo;
 
 import model.Player;
 /**
@@ -17,7 +17,7 @@ import model.Player;
 public class TestReinforcement {
 	
 	ArrayList<String> players = new ArrayList<String>();
-	MapBuilder mapBuild = MapBuilder.getInstance();
+	MapGeo mapBuild = MapGeo.getInstance();
 /**
  * This testcase tests valid number of armies owned by players for reinforcement 
  *

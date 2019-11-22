@@ -28,7 +28,7 @@ import view.MapView;
  * @author s_shehna
  * @author AdinAshby
  */
-public class MapBuilder {
+public class MapGeo {
 
 	/**
 	 * file map
@@ -59,21 +59,21 @@ public class MapBuilder {
 	 * private number Of Armies Each Player Gets
 	 */
 //	private int numberOfArmiesEachPlayerGets;
-	private static MapBuilder instance;
+	private static MapGeo instance;
 
 	/**
 	 * This is a constructor
 	 */
-	protected MapBuilder() {
+	protected MapGeo() {
 
 	}
 /**
  *  
  * @return instance
  */
-	public static MapBuilder getInstance() {
+	public static MapGeo getInstance() {
 		if (instance == null) {
-			instance = new MapBuilder();
+			instance = new MapGeo();
 			return instance;
 		} else {
 			return instance;
@@ -1155,6 +1155,18 @@ public class MapBuilder {
 		return totalArmies;
 	}
 	
-	public void read() {};
+	public boolean read(String mapName) {
+		return false;}
+	protected boolean readConquest(String mapName) {
+		return false;}
+	protected boolean write(String mapName) {
+		return false;}
+	protected boolean writeConquest(String mapName) {
+		return false;}
+	public boolean readDomination(MapAdapter mapAdapter, String mapName) {
+		return false;
+		// TODO Auto-generated method stub
+		
+	};
 
 }
