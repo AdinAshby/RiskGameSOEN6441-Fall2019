@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -473,9 +474,9 @@ public class Player implements Subject {
 
 					}
 				} // Match Find Reinforce
-					//// __________________________________________///////
-					// __________________________________________///////
-					// __________________________________________///////
+				//// __________________________________________///////
+				// __________________________________________///////
+				// __________________________________________///////
 				regex = "(?<=exchangecards)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -526,14 +527,43 @@ public class Player implements Subject {
 
 		if (this.strategy instanceof BenevolentPlayer) {
 
+			int[] playerCountries = getCountryIDs();
+			int minArmies = 999;
+			String countryName = "";
+
+			for (int countryID : playerCountries) {
+				if(mapBuild.getCountryById(countryID).getArmies() < minArmies) {
+					minArmies = mapBuild.getCountryById(countryID).getArmies();
+					countryName = mapBuild.getCountryById(countryID).getCountryName();
+				}
+			}
+
+			finished = reinforce(mapBuild, countryName, numberOfArmiesEachPlayerGets, true);
+			isValidCommand = true;	
 		}
 
 		if (this.strategy instanceof RandomPlayer) {
+			Random random = new Random();
+			int[] playerCountries = getCountryIDs();
 
+			int randomCountryID = random.nextInt(playerCountries.length);
+			String countryName = mapBuild.getCountryById(randomCountryID).getCountryName();
+
+			finished = reinforce(mapBuild, countryName, numberOfArmiesEachPlayerGets, true);
+			isValidCommand = true;	
 		}
 
 		if (this.strategy instanceof CheaterPlayer) {
 
+			int[] playerCountries = getCountryIDs();
+
+			for (int countryID : playerCountries) {
+				String countryName = mapBuild.getCountryById(countryID).getCountryName();
+				int oldArmies = mapBuild.getCountryById(countryID).getArmies();
+				finished = reinforce(mapBuild, countryName, oldArmies, true);		
+			}
+
+			isValidCommand = true;	
 		}
 
 		return isValidCommand;
@@ -586,7 +616,7 @@ public class Player implements Subject {
 
 	public void attackAllout(MapGeo mapBuild) {
 		System.out
-				.println("\n------------------------------\nAttack All out Started\n------------------------------\n");
+		.println("\n------------------------------\nAttack All out Started\n------------------------------\n");
 		int[] playerCountries = getCountryIDs();
 		int attackerNumDice = 3;
 		int defendNumDice = 1;

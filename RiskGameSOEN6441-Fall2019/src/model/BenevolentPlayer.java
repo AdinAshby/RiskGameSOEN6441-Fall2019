@@ -13,7 +13,13 @@ public class BenevolentPlayer extends Player implements Strategy {
 
 	@Override
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
-		return false;
+		int oldArmies = mapBuild.getCountryByName(countryName).getArmies();
+		mapBuild.getCountryByName(countryName)
+		.setArmies(oldArmies + mapBuild.playerContinentValuesOwnership(this.getPlayerName()) + num);
+		// mapBuild.reinforce(getPlayerName(), countryName, num);
+		calculateWorldDominationView();
+		
+		return true;
 	}
 
 	@Override

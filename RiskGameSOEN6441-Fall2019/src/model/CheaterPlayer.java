@@ -14,7 +14,12 @@ public class CheaterPlayer extends Player implements Strategy {
 
 	@Override
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
-		return false;
+		mapBuild.getCountryByName(countryName)
+		.setArmies(mapBuild.playerContinentValuesOwnership(this.getPlayerName()) + num * 2);
+		// mapBuild.reinforce(getPlayerName(), countryName, num);
+		calculateWorldDominationView();
+		
+		return true;
 	}
 
 	@Override
