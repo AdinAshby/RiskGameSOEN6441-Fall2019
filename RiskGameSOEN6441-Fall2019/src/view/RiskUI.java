@@ -655,13 +655,11 @@ public class RiskUI {
 					System.out.println(player.getPlayerName() + " is your turn to reinforce");
 					finished = false;
 
-<<<<<<< HEAD
+
 					
 
 					isValidCommand = player.reinforceCommand(mapAdapter, mapView);
-=======
-					isValidCommand = player.reinforceCommand(mapDomination, mapView);
->>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
+
 
 					player.setCounterForPhases(2);
 					isValidCommand = player.attackCommand(mapAdapter, mapView);
