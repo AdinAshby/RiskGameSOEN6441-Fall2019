@@ -418,91 +418,127 @@ public class Player implements Subject {
 
 	public boolean reinforceCommand(MapGeo mapBuild, MapView mapView) {
 		calculateNumberOfArmiesEachPlayerGets();
-		temporaryArmies = numberOfArmiesEachPlayerGets;
+
 		boolean finished = false;
 		boolean isValidCommand = false;
-		String addText = "";
-		while (!finished) {// && debug == false
 
-			isValidCommand = false;
+		if(this.strategy instanceof HumanPlayer) {
+			String addText = "";
+			temporaryArmies = numberOfArmiesEachPlayerGets;
 
-			System.out.println("Player " + getPlayerName() + ":");
-			if (temporaryArmies != 0) {
-				System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
-			}
-			// Card card=new Card();
-			// player.addCard(card);
-			System.out.println("You have following cards: ");
-			System.out.println(getCardNames());
-			readInput();
+			while (!finished) {// && debug == false
 
-			// showmap
-			regex = "showmap";
-			setPattern(regex);
-			setMatcher(input);
-			if (getMatcher().find()) {
-				isValidCommand = true;
-				mapView.showMap(mapBuild);
-			}
+				isValidCommand = false;
 
-			// reinforce
-			regex = "(?<=reinforce)(.*)";
-			setPattern(regex);
-			setMatcher(input);
-			if (matcher.find()) {
-				addText = matcher.group(1);
-
-				regex = "(([\\w*\\_\\-]*) (\\d*))+";
-				setPattern(regex);
-				setMatcher(addText);
-				if (matcher.find()) {
-					String countryName = matcher.group(2);
-					int num;
-					try {
-						num = Integer.parseInt(matcher.group(3));
-
-						finished = reinforce(mapBuild, countryName, num, finished);
-
-						isValidCommand = true;
-
-					} catch (NumberFormatException e) {
-						System.out.println("Enter number of armies");
-					}
-
+				System.out.println("Player " + getPlayerName() + ":");
+				if (temporaryArmies != 0) {
+					System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
 				}
-			} // Match Find Reinforce
-			////__________________________________________///////
-			//__________________________________________///////
-			//__________________________________________///////
-			regex = "(?<=exchangecards)(.*)";
-			setPattern(regex);
-			setMatcher(input);
-			if (matcher.find()) {
-				addText = matcher.group(1);
-				regex = "(\\d+) (\\d+) (\\d+)";
+				// Card card=new Card();
+				// player.addCard(card);
+				System.out.println("You have following cards: ");
+				System.out.println(getCardNames());
+				readInput();
+
+				// showmap
+				regex = "showmap";
 				setPattern(regex);
-				setMatcher(addText);
-				if (matcher.find()) {
-
-					int num1 = Integer.parseInt(matcher.group(1));
-					int num2 = Integer.parseInt(matcher.group(2));
-					int num3 = Integer.parseInt(matcher.group(3));
-
-					if (mapBuild.exchangeCardsIsValid(this, num1, num2, num3) == true) {
-
-						int cardarmies = mapBuild.exchangeCards(this, num1, num2, num3);
-						finished = true;
-					} else {
-						System.out.println("exchangecards is not valid");
-					}
+				setMatcher(input);
+				if (getMatcher().find()) {
+					isValidCommand = true;
+					mapView.showMap(mapBuild);
 				}
 
-				isValidCommand = true;
+				// reinforce
+				regex = "(?<=reinforce)(.*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+					addText = matcher.group(1);
+
+					regex = "(([\\w*\\_\\-]*) (\\d*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					if (matcher.find()) {
+						String countryName = matcher.group(2);
+						int num;
+						try {
+							num = Integer.parseInt(matcher.group(3));
+
+							finished = reinforce(mapBuild, countryName, num, finished);
+
+							isValidCommand = true;
+
+						} catch (NumberFormatException e) {
+							System.out.println("Enter number of armies");
+						}
+
+					}
+				} // Match Find Reinforce
+				////__________________________________________///////
+				//__________________________________________///////
+				//__________________________________________///////
+				regex = "(?<=exchangecards)(.*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+					addText = matcher.group(1);
+					regex = "(\\d+) (\\d+) (\\d+)";
+					setPattern(regex);
+					setMatcher(addText);
+					if (matcher.find()) {
+
+						int num1 = Integer.parseInt(matcher.group(1));
+						int num2 = Integer.parseInt(matcher.group(2));
+						int num3 = Integer.parseInt(matcher.group(3));
+
+						if (mapBuild.exchangeCardsIsValid(this, num1, num2, num3) == true) {
+
+							int cardarmies = mapBuild.exchangeCards(this, num1, num2, num3);
+							finished = true;
+						} else {
+							System.out.println("exchangecards is not valid");
+						}
+					}
+
+					isValidCommand = true;
+				}
+				if (!isValidCommand) {
+					System.out.println("Correct command not found");
+				}
+			} // while reinforce
+		} 
+
+		if(this.strategy instanceof AggressivePlayer) {
+
+			int[] playerCountries = getCountryIDs();
+			int maxArmies = 0;
+			String countryName = "";
+
+			for (int countryID : playerCountries) {
+				if(mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
+					maxArmies = mapBuild.getCountryById(countryID).getArmies();
+					countryName = mapBuild.getCountryById(countryID).getCountryName();
+				}
 			}
-			if (!isValidCommand) {
-				System.out.println("Correct command not found");
-			}
-		} // while reinforce
+
+			finished = reinforce(mapBuild, countryName, numberOfArmiesEachPlayerGets, true);
+			isValidCommand = true;
+		}
+
+		if(this.strategy instanceof BenevolentPlayer) {
+
+		}
+
+		if(this.strategy instanceof RandomPlayer) {
+
+		}
+
+		if(this.strategy instanceof CheaterPlayer) {
+
+		}
+
+
 		return isValidCommand;
 	}
 
@@ -749,55 +785,73 @@ public class Player implements Subject {
 
 		boolean finished = false;
 		boolean isValidCommand = false;
-		String addText = "";
 
-		while (!finished) {
+		if(this.strategy instanceof HumanPlayer) {
+			
+			String addText = "";
 
-			isValidCommand = false;
+			while (!finished) {
 
-			System.out.println("Player " + getPlayerName() + ":");
-			readInput();
+				isValidCommand = false;
 
-			// showmap
-			regex = "showmap";
-			setPattern(regex);
-			setMatcher(input);
-			if (getMatcher().find()) {
-				isValidCommand = true;
-				mapView.showMap(mapBuild);
-			}
+				System.out.println("Player " + getPlayerName() + ":");
+				readInput();
 
-			// fortify none
-			regex = "fortify -none";
-
-			if (input.equalsIgnoreCase(regex)) {
-				isValidCommand = true;
-				finished = true;
-			}
-
-			// fortify
-			regex = "(?<=fortify)(.*)";
-			setPattern(regex);
-			setMatcher(input);
-			if (matcher.find()) {
-				addText = matcher.group(1);
-				regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+))+";
+				// showmap
+				regex = "showmap";
 				setPattern(regex);
-				setMatcher(addText);
-				if (matcher.find()) {
-
-					String fromCountry = matcher.group(2);
-					String toCountry = matcher.group(3);
-					int num = Integer.parseInt(matcher.group(4));
-					fortify(fromCountry, toCountry, num, mapBuild);
-					finished = true;
-
-				} else {
-					System.out.println("Fortify is not valid");
+				setMatcher(input);
+				if (getMatcher().find()) {
+					isValidCommand = true;
+					mapView.showMap(mapBuild);
 				}
 
-				isValidCommand = true;
+				// fortify -none
+				regex = "fortify -none";
+
+				if (input.equalsIgnoreCase(regex)) {
+					isValidCommand = true;
+					finished = true;
+				}
+
+				// fortify
+				regex = "(?<=fortify)(.*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+					addText = matcher.group(1);
+					regex = "(([\\w*\\_\\-]*) ([\\w*\\_\\-]*) (\\d+))+";
+					setPattern(regex);
+					setMatcher(addText);
+					if (matcher.find()) {
+
+						String fromCountry = matcher.group(2);
+						String toCountry = matcher.group(3);
+						int num = Integer.parseInt(matcher.group(4));
+						fortify(fromCountry, toCountry, num, mapBuild);
+						finished = true;
+
+					} 
+
+					isValidCommand = true;
+				}
 			}
+		}
+		
+		if(this.strategy instanceof AggressivePlayer) {
+			
+		}
+		
+		if(this.strategy instanceof BenevolentPlayer) {
+			
+		}
+		
+		if(this.strategy instanceof RandomPlayer) {
+			
+		}
+		
+		if(this.strategy instanceof CheaterPlayer) {
+			
 		}
 
 		return isValidCommand;
