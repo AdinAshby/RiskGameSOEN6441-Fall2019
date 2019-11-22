@@ -418,24 +418,17 @@ public class Player implements Subject {
 
 	public boolean reinforceCommand(MapGeo mapGeo, MapView mapView) {
 		calculateNumberOfArmiesEachPlayerGets();
-		temporaryArmies = numberOfArmiesEachPlayerGets;
+
 		boolean finished = false;
 		boolean isValidCommand = false;
-		String addText = "";
-		while (!finished) {// && debug == false
 
-			isValidCommand = false;
+		if(this.strategy instanceof HumanPlayer) {
+			String addText = "";
+			temporaryArmies = numberOfArmiesEachPlayerGets;
 
-			System.out.println("Player " + getPlayerName() + ":");
-			if (temporaryArmies != 0) {
-				System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
-			}
-			// Card card=new Card();
-			// player.addCard(card);
-			System.out.println("You have following cards: ");
-			System.out.println(getCardNames());
-			readInput();
+			while (!finished) {// && debug == false
 
+<<<<<<< HEAD
 			// showmap
 			regex = "showmap";
 			setPattern(regex);
@@ -444,7 +437,11 @@ public class Player implements Subject {
 				isValidCommand = true;
 				mapView.showMap(mapGeo);
 			}
+=======
+				isValidCommand = false;
+>>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 
+<<<<<<< HEAD
 			// reinforce
 			regex = "(?<=reinforce)(.*)";
 			setPattern(regex);
@@ -469,18 +466,22 @@ public class Player implements Subject {
 						System.out.println("Enter number of armies");
 					}
 
+=======
+				System.out.println("Player " + getPlayerName() + ":");
+				if (temporaryArmies != 0) {
+					System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
+>>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 				}
-			} // Match Find Reinforce
-			////__________________________________________///////
-			//__________________________________________///////
-			//__________________________________________///////
-			regex = "(?<=exchangecards)(.*)";
-			setPattern(regex);
-			setMatcher(input);
-			if (matcher.find()) {
-				addText = matcher.group(1);
-				regex = "(\\d+) (\\d+) (\\d+)";
+				// Card card=new Card();
+				// player.addCard(card);
+				System.out.println("You have following cards: ");
+				System.out.println(getCardNames());
+				readInput();
+
+				// showmap
+				regex = "showmap";
 				setPattern(regex);
+<<<<<<< HEAD
 				setMatcher(addText);
 				if (matcher.find()) {
 
@@ -495,14 +496,90 @@ public class Player implements Subject {
 					} else {
 						System.out.println("exchangecards is not valid");
 					}
+=======
+				setMatcher(input);
+				if (getMatcher().find()) {
+					isValidCommand = true;
+					mapView.showMap(mapBuild);
+>>>>>>> branch 'master' of https://github.com/AdinAshby/RiskGameSOEN6441-Fall2019.git
 				}
 
-				isValidCommand = true;
+				// reinforce
+				regex = "(?<=reinforce)(.*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+					addText = matcher.group(1);
+
+					regex = "(([\\w*\\_\\-]*) (\\d*))+";
+					setPattern(regex);
+					setMatcher(addText);
+					if (matcher.find()) {
+						String countryName = matcher.group(2);
+						int num;
+						try {
+							num = Integer.parseInt(matcher.group(3));
+
+							finished = reinforce(mapBuild, countryName, num, finished);
+
+							isValidCommand = true;
+
+						} catch (NumberFormatException e) {
+							System.out.println("Enter number of armies");
+						}
+
+					}
+				} // Match Find Reinforce
+				////__________________________________________///////
+				//__________________________________________///////
+				//__________________________________________///////
+				regex = "(?<=exchangecards)(.*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+					addText = matcher.group(1);
+					regex = "(\\d+) (\\d+) (\\d+)";
+					setPattern(regex);
+					setMatcher(addText);
+					if (matcher.find()) {
+
+						int num1 = Integer.parseInt(matcher.group(1));
+						int num2 = Integer.parseInt(matcher.group(2));
+						int num3 = Integer.parseInt(matcher.group(3));
+
+						if (mapBuild.exchangeCardsIsValid(this, num1, num2, num3) == true) {
+
+							int cardarmies = mapBuild.exchangeCards(this, num1, num2, num3);
+							finished = true;
+						} else {
+							System.out.println("exchangecards is not valid");
+						}
+					}
+
+					isValidCommand = true;
+				}
+				if (!isValidCommand) {
+					System.out.println("Correct command not found");
+				}
+			} // while reinforce
+		} 
+
+		if(this.strategy instanceof AggressivePlayer) {
+
+			int[] playerCountries = getCountryIDs();
+			int maxArmies = 0;
+			String countryName = "";
+
+			for (int countryID : playerCountries) {
+				if(mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
+					maxArmies = mapBuild.getCountryById(countryID).getArmies();
+					countryName = mapBuild.getCountryById(countryID).getCountryName();
+				}
 			}
-			if (!isValidCommand) {
-				System.out.println("Correct command not found");
-			}
-		} // while reinforce
+
+			finished = reinforce(mapBuild, countryName, numberOfArmiesEachPlayerGets, true);
+		}
+
 		return isValidCommand;
 	}
 
@@ -767,7 +844,7 @@ public class Player implements Subject {
 				mapView.showMap(mapGeo);
 			}
 
-			// fortify none
+			// fortify -none
 			regex = "fortify -none";
 
 			if (input.equalsIgnoreCase(regex)) {
@@ -792,9 +869,7 @@ public class Player implements Subject {
 					fortify(fromCountry, toCountry, num, mapGeo);
 					finished = true;
 
-				} else {
-					System.out.println("Fortify is not valid");
-				}
+				} 
 
 				isValidCommand = true;
 			}
@@ -802,11 +877,11 @@ public class Player implements Subject {
 
 		return isValidCommand;
 	}
-	
+
 	public int getTemporaryArmies() {
 		return temporaryArmies;
 	}
-	
+
 	public void setTemporaryArmies(int temporaryArmies) {
 		this.temporaryArmies = temporaryArmies;
 	}
