@@ -28,24 +28,60 @@ public class Player implements Subject {
 	 * List of all countryIDs that the player owns.
 	 */
 	private int[] countryIDs;
+	/**
+	 * private percentage Controlled 
+	 */
 
 	private double percentageControlled = 0.00;
-
+/**
+ * private continentsControlled
+ */
 	private ArrayList<String> continentsControlled = new ArrayList<String>();
+	/**
+	 * private int total Number Of Armies
+	 */
 	private int totalNumberOfArmies = 0;
+	/**
+	 * private cards
+	 */
 	private ArrayList<Card> cards;
+	/**
+	 * private player Count For Card 
+	 */
 	private int playerCountForCard;
+	/**
+	 * private number Of Armies Each Player Gets
+	 */
 	private int numberOfArmiesEachPlayerGets;
+	/**
+	 * private allow To Get Card
+	 */
 	private boolean allowToGetCard;
+	/**
+	 * private counter For Phases
+	 */
 
 	private int counterForPhases;
-
+/**
+ * private temporary Armies
+ */
 	private int temporaryArmies;
-
+/**
+ * private observers For Phases
+ */
 	private ArrayList<Observer> observersForPhases = new ArrayList<Observer>();
+	/**
+	 * private observers For World Domination
+	 */
 	private ArrayList<Observer> observersForWorldDomination = new ArrayList<Observer>();
-
+/**
+ * private mapBuild
+ */
 	private MapGeo mapBuild;
+	
+	/**
+	 * private strategy
+	 */
 
 	private Strategy strategy;
 
@@ -94,11 +130,16 @@ public class Player implements Subject {
 		cards = new ArrayList<Card>();
 		playerCountForCard = 0;
 	}
-
+/**
+ * private set strategy
+ * @param strategy
+ */
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
-
+/**
+ * private add One To Card Counter
+ */
 	public void addOneToCardCounter() {
 		playerCountForCard++;
 	}
@@ -111,13 +152,20 @@ public class Player implements Subject {
 	public String getPlayerName() {
 		return playerName;
 	}
-
+/**
+ * This method get player Count For Card
+ * 
+ * @return player Count For Card
+ */
 	public int getplayerCountForCard() {
 
 		return playerCountForCard;
 
 	}
-
+/**
+ * 
+ * @return cardsList
+ */
 	public String getCardNames() {
 		String cardsList = "Cards: -";
 		for (Card c : cards) {
@@ -126,13 +174,19 @@ public class Player implements Subject {
 		return cardsList;
 
 	}
-
+/**
+ * 
+ * @return cards
+ */
 	public ArrayList<Card> getCards() {
 
 		return cards;
 
 	}
-
+/**
+ * 
+ * @param cardList
+ */
 	public void setCards(ArrayList<Card> cardList) {
 
 		for (int i = 0; i < cardList.size(); i++) {
@@ -148,7 +202,10 @@ public class Player implements Subject {
 		}
 
 	}
-
+/**
+ * 
+ * @param cardToAdd
+ */
 	public void addCard(Card cardToAdd) {
 
 		this.cards.add(cardToAdd);
@@ -166,13 +223,19 @@ public class Player implements Subject {
 			return false;
 
 	}
-
+/**
+ * 
+ * @return
+ */
 	public boolean getAllowingCardStatus() {
 
 		return this.allowToGetCard;
 
 	}
-
+/**
+ * 
+ * @param status
+ */
 	public void setAllowingStatus(boolean status) {
 
 		this.allowToGetCard = status;
@@ -196,23 +259,43 @@ public class Player implements Subject {
 	public void setCountryIDs(int[] countriesIDs) {
 		this.countryIDs = countriesIDs;
 	}
-
+/**
+ * 
+ * @return percentageControlled
+ */
 	public double getPercentageControlled() {
 		return percentageControlled;
 	}
-
+/**
+ * 
+ * @return continentsControlled
+ */
 	public ArrayList<String> getContinentsControlled() {
 		return continentsControlled;
 	}
-
+/**
+ * 
+ * @param continentsControlled
+ */
 	public void setContinentsControlled(ArrayList<String> continentsControlled) {
 		this.continentsControlled = continentsControlled;
 	}
-
+/**
+ * 
+ * @return totalNumberOfArmies
+ */
 	public int getTotalNumberOfArmies() {
 		return totalNumberOfArmies;
 	}
-
+/**
+ * 
+ * @param mapBuild
+ * @param attackerNumDice
+ * @param attackerCountry
+ * @param attackingCountry
+ * @param enablePrint
+ * @return isValid
+ */
 	public boolean isAttackValid(MapGeo mapBuild, int attackerNumDice, Country attackerCountry,
 			Country attackingCountry, boolean enablePrint) {
 		boolean isValid = true;
@@ -249,7 +332,11 @@ public class Player implements Subject {
 		}
 		return isValid;
 	}
-
+/**
+ * 
+ * @param mapBuild
+ * @return isAttackPossible
+ */
 	public boolean isAttackPossible(MapGeo mapBuild) {
 		boolean isAttackPossible = false;
 		for (int countyId : countryIDs) {
@@ -273,7 +360,12 @@ public class Player implements Subject {
 
 		return isAttackPossible;
 	}
-
+/**
+ * 
+ * @param array
+ * @param v
+ * @return result
+ */
 	public static boolean contains(final int[] array, final int v) {
 
 		boolean result = false;
