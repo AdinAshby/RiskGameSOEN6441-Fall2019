@@ -7,7 +7,7 @@ public class BenevolentPlayer extends Player implements Strategy {
 	}
 
 	@Override
-	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, MapGeo mapBuild){
+	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, MapGeo mapBuild, int attackAllout){
 		
 	}
 

@@ -219,8 +219,7 @@ public class Player implements Subject {
 			System.out.println("You can not attack to your own country");
 			isValid = false;
 		}
-		
-		
+
 		if (attackerCountry.getArmies() <= 1) {
 			System.out.println("Attacker Country should have more than 1 army");
 			isValid = false;
@@ -586,88 +585,93 @@ public class Player implements Subject {
 
 	}
 
-	public void attackMoveCommand(Country attackerCountry, Country attackingCountry) {
+	public void attackMoveCommand(Country attackerCountry, Country attackingCountry, int attackAllout) {
 		boolean isValidCommand = false;
 		// attackmove num
 		System.out.println("Ready for attackmove");
-		readInput();
-		regex = "(?<=attackmove) (\\d+)";
-		setPattern(regex);
-		setMatcher(input);
+		if (attackAllout == 0) {
+			readInput();
+			regex = "(?<=attackmove) (\\d+)";
+			setPattern(regex);
+			setMatcher(input);
 
-		if (matcher.find()) {
-			try {
-				int numAttack = Integer.parseInt(matcher.group(1));
-				if (numAttack > (attackerCountry.getArmies() - 1)) {
-					System.out.println(numAttack + " can not move because you have only : "
-							+ attackerCountry.getArmies() + " armies and one should left there");
-				} else {
-					isValidCommand = true;
-					attackMove(attackerCountry, attackingCountry, numAttack);
+			if (matcher.find()) {
+				try {
+					int numAttack = Integer.parseInt(matcher.group(1));
+					if (numAttack > (attackerCountry.getArmies() - 1)) {
+						System.out.println(numAttack + " can not move because you have only : "
+								+ attackerCountry.getArmies() + " armies and one should left there");
+					} else {
+						isValidCommand = true;
+						attackMove(attackerCountry, attackingCountry, numAttack);
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					System.out.println("NumDice should be integer");
 				}
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				System.out.println("NumDice should be integer");
-			}
-			isValidCommand = true;
+				isValidCommand = true;
 
+			} else {
+				isValidCommand = false;
+				System.out.println("Please follow the correct command rules");
+			}
 		} else {
-			isValidCommand = false;
-			System.out.println("Please follow the correct command rules");
+			attackMove(attackerCountry, attackingCountry, 1);
 		}
 
 	}
 
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice,
-			MapGeo mapBuild) {
-		this.strategy.attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild);
+			MapGeo mapBuild, int attackAllout) {
+		this.strategy.attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild, attackAllout);
 	}
 
 	public void attackAllout(MapGeo mapBuild) {
 		System.out
 				.println("\n------------------------------\nAttack All out Started\n------------------------------\n");
-		int[] playerCountries = getCountryIDs();
-		int attackerNumDice = 1;
-		int defendNumDice = 1;
-		System.out.println("You own "+playerCountries.length+" countries, let's attack");
-		for (int i = 0; i < playerCountries.length; i++) {
-			int countryId = playerCountries[i];
-			Country attackerCountry = mapBuild.getCountryById(countryId);
-//			if (attackerCountry.getArmies() > 1) {
+		boolean isConqueredNewCountry;
+		do {
+			isConqueredNewCountry = false;
+			int[] playerCountries = getCountryIDs();
+			int attackerNumDice = 1;
+			int defendNumDice = 1;
+			System.out.println("You own " + playerCountries.length + " countries, let's attack");
+			
+			for (int i = 0; i < playerCountries.length; i++) {
+				int countryId = playerCountries[i];
+				Country attackerCountry = mapBuild.getCountryById(countryId);
 				ArrayList<Integer> adjCountries = mapBuild.getCountryAdjacency(countryId);
 				for (int attackingCountryId : adjCountries) {
 					Country attackingCountry = mapBuild.getCountryById(attackingCountryId);
-//					if (!attackingCountry.getPlayerName().equals(getPlayerName())) {
-						System.out.println("\n-----------------------------------------------------");
-						System.out.println("Attack From " + attackerCountry.getCountryName() +"="+attackerCountry.getArmies()+" (" + getPlayerName()
-								+ ") To: " + attackingCountry.getCountryName()+"="+attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName()
-								+ ")");
-						
-						
-						boolean thisCountryCanAttack = true;
-						while (thisCountryCanAttack) {
-							if (isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry,
-									true) == true) {
-								attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild);
-								System.out.println(attackerCountry.getCountryName()+"="+attackerCountry.getArmies()+" -> "+attackingCountry.getCountryName()+"="+attackingCountry.getArmies());
-							} else {
-								thisCountryCanAttack = false;
-							}
+
+					System.out.println("\n-----------------------------------------------------");
+					System.out.println(
+							"Attack From " + attackerCountry.getCountryName() + "=" + attackerCountry.getArmies() + " ("
+									+ getPlayerName() + ") To: " + attackingCountry.getCountryName() + "="
+									+ attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName() + ")");
+
+					boolean thisCountryCanAttack = true;
+					while (thisCountryCanAttack) {
+						if (isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry, true) == true) {
+							attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild, 1);
+							System.out.println(attackerCountry.getCountryName() + "=" + attackerCountry.getArmies()
+									+ " -> " + attackingCountry.getCountryName() + "=" + attackingCountry.getArmies());
+						} else {
+							thisCountryCanAttack = false;
 						}
-//					} else {
-//						continue;
-//					}
+					}
 
-				}
+				} // For Adj Countries
 
-//			} else {
-//				continue;
-//			}
-		}
+			} // For player countries
+			System.out.println("No. of Countries before this round attack="+playerCountries.length+" and after attack"+ getCountryIDs().length);
+			if (playerCountries.length != getCountryIDs().length) {
+				isConqueredNewCountry = true;
+			}
 
-		// if (isAttackValid(mapBuild, attackerNumDice, attackerCountry,
-		// attackingCountry, true) == true) {
-		System.out.println("\n------------------------------\nNo More attack is possible\n------------------------------\n");
+		} while (isConqueredNewCountry == true);
+		System.out.println(
+				"\n------------------------------\nNo More attack is possible\n------------------------------\n");
 	}
 
 	public boolean attackCommand(MapGeo mapBuild, MapView mapView) {
@@ -766,7 +770,7 @@ public class Player implements Subject {
 									try {
 										int defendNumDice = Integer.parseInt(matcher.group(1));
 										attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice,
-												mapBuild);
+												mapBuild, 0);
 
 										// if(numDice>attackingCountry.getArmies() || numDice>3) {
 										// System.out.println("defending dice should not be more than the number of
@@ -931,8 +935,8 @@ public class Player implements Subject {
 			maxArmies = 0;
 			String fromCountry = "";
 
-			for(int countryID : mapBuild.getCountryAdjacency(toCountryID)) {
-				if(mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
+			for (int countryID : mapBuild.getCountryAdjacency(toCountryID)) {
+				if (mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
 					maxArmies = mapBuild.getCountryById(countryID).getArmies();
 					fromCountry = mapBuild.getCountryById(countryID).getCountryName();
 				}
@@ -961,8 +965,8 @@ public class Player implements Subject {
 			int minArmies = 999;
 			String toCountry = "";
 
-			for(int countryID : mapBuild.getCountryAdjacency(fromCountryID)) {
-				if(mapBuild.getCountryById(countryID).getArmies() < minArmies) {
+			for (int countryID : mapBuild.getCountryAdjacency(fromCountryID)) {
+				if (mapBuild.getCountryById(countryID).getArmies() < minArmies) {
 					minArmies = mapBuild.getCountryById(countryID).getArmies();
 					toCountry = mapBuild.getCountryById(countryID).getCountryName();
 				}
@@ -982,7 +986,7 @@ public class Player implements Subject {
 
 			int randomToCountryID = random.nextInt(mapBuild.getCountryAdjacency(randomFromCountryID).size());
 
-			while(!(mapBuild.getCountryById(randomToCountryID).getArmies() > 1)) {
+			while (!(mapBuild.getCountryById(randomToCountryID).getArmies() > 1)) {
 				randomToCountryID = random.nextInt(mapBuild.getCountryAdjacency(randomFromCountryID).size());
 			}
 
@@ -997,8 +1001,9 @@ public class Player implements Subject {
 			int[] playerCountries = getCountryIDs();
 
 			for (int countryID : playerCountries) {
-				for(int neighborCountryID : mapBuild.getCountryAdjacency(countryID)) {
-					if(mapBuild.getCountryById(neighborCountryID).getPlayerName() != mapBuild.getCountryById(countryID).getPlayerName()) {
+				for (int neighborCountryID : mapBuild.getCountryAdjacency(countryID)) {
+					if (mapBuild.getCountryById(neighborCountryID).getPlayerName() != mapBuild.getCountryById(countryID)
+							.getPlayerName()) {
 						fortify(mapBuild.getCountryById(countryID).getCountryName(), "", 0, mapBuild);
 						break;
 					}

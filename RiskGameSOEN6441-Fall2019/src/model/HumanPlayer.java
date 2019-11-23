@@ -7,14 +7,14 @@ public class HumanPlayer extends Player implements Strategy {
 	}
 	
 	@Override
-	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, MapGeo mapBuild){
+	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, MapGeo mapBuild, int attackAllout){
 		Dice attackDice = new Dice(attackerNumDice);
 		int[] attackDiceArray = attackDice.getDiceArray();
-		attackDice.showDice();
+		//attackDice.showDice();
 
 		Dice defendDice = new Dice(defendNumDice);
 		int[] defendDiceArray = defendDice.getDiceArray();
-		defendDice.showDice();
+		//defendDice.showDice();
 
 		boolean[] winner = attackDice.isWinner(defendDice);
 
@@ -42,7 +42,8 @@ public class HumanPlayer extends Player implements Strategy {
 						System.exit(0);
 					}
 
-					attackMoveCommand(attackerCountry, attackingCountry);
+					
+					attackMoveCommand(attackerCountry, attackingCountry, attackAllout);
 
 				}
 

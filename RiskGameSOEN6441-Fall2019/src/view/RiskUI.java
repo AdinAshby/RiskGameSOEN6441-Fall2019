@@ -198,7 +198,7 @@ public class RiskUI {
 			isValidCommand = player1.reinforce(mapAdapter,attackerCountryName , 3, false);
 			mapAdapter.showMap();
 			System.out.println("\n-------------------\nAttack Scenario from "+attackerCountryName+" to "+attackingCountryName);
-			player1.attack(attackerCountry, attackingCountry, 3, 2, mapAdapter);
+			player1.attack(attackerCountry, attackingCountry, 3, 2, mapAdapter, 0);
 			
 			mapAdapter.showMap();
 			System.out.println("\n-------------------\nFortify Scenario from "+attackerCountryName+" to "+fortifyCountryName);
