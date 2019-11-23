@@ -215,7 +215,10 @@ public class Player implements Subject {
 	public boolean isAttackValid(MapGeo mapBuild, int attackerNumDice, Country attackerCountry,
 			Country attackingCountry, boolean enablePrint) {
 		boolean isValid = true;
-
+		if (attackerCountry.getArmies() <= 1) {
+			System.out.println("Attacker Country should have more than 1 army");
+			isValid = false;
+		}
 		if (attackerCountry == null || attackingCountry == null) {
 			System.out.println("Enter Attacker and Attacking Country");
 			isValid = false;
@@ -474,9 +477,9 @@ public class Player implements Subject {
 
 					}
 				} // Match Find Reinforce
-				//// __________________________________________///////
-				// __________________________________________///////
-				// __________________________________________///////
+					//// __________________________________________///////
+					// __________________________________________///////
+					// __________________________________________///////
 				regex = "(?<=exchangecards)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -532,14 +535,14 @@ public class Player implements Subject {
 			String countryName = "";
 
 			for (int countryID : playerCountries) {
-				if(mapBuild.getCountryById(countryID).getArmies() < minArmies) {
+				if (mapBuild.getCountryById(countryID).getArmies() < minArmies) {
 					minArmies = mapBuild.getCountryById(countryID).getArmies();
 					countryName = mapBuild.getCountryById(countryID).getCountryName();
 				}
 			}
 
 			finished = reinforce(mapBuild, countryName, numberOfArmiesEachPlayerGets, true);
-			isValidCommand = true;	
+			isValidCommand = true;
 		}
 
 		if (this.strategy instanceof RandomPlayer) {
@@ -550,7 +553,7 @@ public class Player implements Subject {
 			String countryName = mapBuild.getCountryById(randomCountryID).getCountryName();
 
 			finished = reinforce(mapBuild, countryName, numberOfArmiesEachPlayerGets, true);
-			isValidCommand = true;	
+			isValidCommand = true;
 		}
 
 		if (this.strategy instanceof CheaterPlayer) {
@@ -560,10 +563,10 @@ public class Player implements Subject {
 			for (int countryID : playerCountries) {
 				String countryName = mapBuild.getCountryById(countryID).getCountryName();
 				int oldArmies = mapBuild.getCountryById(countryID).getArmies();
-				finished = reinforce(mapBuild, countryName, oldArmies, true);		
+				finished = reinforce(mapBuild, countryName, oldArmies, true);
 			}
 
-			isValidCommand = true;	
+			isValidCommand = true;
 		}
 
 		return isValidCommand;
@@ -589,7 +592,7 @@ public class Player implements Subject {
 		if (matcher.find()) {
 			try {
 				int numAttack = Integer.parseInt(matcher.group(1));
-				if (numAttack < attackerCountry.getArmies() - 1) {
+				if (numAttack > (attackerCountry.getArmies() - 1)) {
 					System.out.println(numAttack + " can not move because you have only : "
 							+ attackerCountry.getArmies() + " armies and one should left there");
 				} else {
@@ -616,9 +619,9 @@ public class Player implements Subject {
 
 	public void attackAllout(MapGeo mapBuild) {
 		System.out
-		.println("\n------------------------------\nAttack All out Started\n------------------------------\n");
+				.println("\n------------------------------\nAttack All out Started\n------------------------------\n");
 		int[] playerCountries = getCountryIDs();
-		int attackerNumDice = 3;
+		int attackerNumDice = 1;
 		int defendNumDice = 1;
 		for (int i = 0; i < playerCountries.length; i++) {
 			int countryId = playerCountries[i];
@@ -627,29 +630,37 @@ public class Player implements Subject {
 				ArrayList<Integer> adjCountries = mapBuild.getCountryAdjacency(countryId);
 				for (int attackingCountryId : adjCountries) {
 					Country attackingCountry = mapBuild.getCountryById(attackingCountryId);
-					System.out.println("Attacking From " + attackerCountry.getCountryName() + " ("+getPlayerName()+") To: "
-							+ attackingCountry.getCountryName()+" ("+attackingCountry.getPlayerName()+")");
 					if (!attackingCountry.getPlayerName().equals(getPlayerName())) {
-						// Check Attacking Country should be for other player
-						System.out.println("Attacked From " + attackerCountry.getCountryName() + " To: "
-								+ attackingCountry.getCountryName());
-
-						if (isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry, true) == true) {
-							attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild);
+						System.out.println("\n-----------------------------------------------------");
+						System.out.println("Attack From " + attackerCountry.getCountryName() +"="+attackerCountry.getArmies()+" (" + getPlayerName()
+								+ ") To: " + attackingCountry.getCountryName()+"="+attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName()
+								+ ")");
+						
+						
+						boolean thisCountryCanAttack = true;
+						while (thisCountryCanAttack) {
+							if (isAttackValid(mapBuild, attackerNumDice, attackerCountry, attackingCountry,
+									true) == true) {
+								attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, mapBuild);
+								System.out.println(attackerCountry.getCountryName()+"="+attackerCountry.getArmies()+" -> "+attackingCountry.getCountryName()+"="+attackingCountry.getArmies());
+							} else {
+								thisCountryCanAttack = false;
+							}
 						}
 					} else {
-						break;
+						continue;
 					}
+
 				}
 
 			} else {
-				break;
+				continue;
 			}
 		}
 
 		// if (isAttackValid(mapBuild, attackerNumDice, attackerCountry,
 		// attackingCountry, true) == true) {
-
+		System.out.println("\n------------------------------\nNo More attack is possible\n------------------------------\n");
 	}
 
 	public boolean attackCommand(MapGeo mapBuild, MapView mapView) {

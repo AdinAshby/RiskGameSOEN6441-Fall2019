@@ -155,7 +155,7 @@ public class RiskUI {
 		 * attribute
 		 */
 
-		boolean debug = false;
+		boolean debug = true;
 		if (debug == true) {
 		//	mapAdapter.read("test");// ameroki
 			MapGeo mapAdapter=new MapAdapter("d");
