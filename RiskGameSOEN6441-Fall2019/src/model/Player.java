@@ -666,6 +666,7 @@ public class Player implements Subject {
 
 			} // For player countries
 			System.out.println("No. of Countries before this round attack="+playerCountries.length+" and after attack="+ getCountryIDs().length);
+			System.out.println("You own now " + playerCountries.length + " countries ("+Arrays.toString(countryIDs)+")");
 			if (playerCountries.length != getCountryIDs().length) {
 				isConqueredNewCountry = true;
 			}
