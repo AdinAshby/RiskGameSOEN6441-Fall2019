@@ -1179,15 +1179,15 @@ public class MapGeo {
 	}
 	
 	public boolean read(String mapName) {
-		return false;}
+		return true;}
 	protected boolean readConquest(String mapName) {
-		return false;}
+		return true;}
 	protected boolean write(String mapName) {
-		return false;}
+		return true;}
 	protected boolean writeConquest(String mapName) {
-		return false;}
+		return true;}
 	public boolean readDomination(MapAdapter mapAdapter, String mapName) {
-		return false;
+		return true;
 		// TODO Auto-generated method stub
 		
 	};
