@@ -25,6 +25,10 @@ public class CheaterPlayer extends Player implements Strategy {
 	@Override
 	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapBuild) {
 		
+		int oldArmies = mapBuild.getCountryByName(fromCountry).getArmies();
+		mapBuild.getCountryByName(fromCountry).setArmies(oldArmies * 2);
+
+		calculateWorldDominationView();
 	}
 
 }

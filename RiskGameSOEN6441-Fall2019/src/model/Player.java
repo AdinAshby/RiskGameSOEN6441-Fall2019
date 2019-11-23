@@ -897,19 +897,95 @@ public class Player implements Subject {
 		}
 
 		if (this.strategy instanceof AggressivePlayer) {
+			int[] playerCountries = getCountryIDs();
+			int maxArmies = 0;
+			String toCountry = "";
+			int toCountryID = 0;
 
+			for (int countryID : playerCountries) {
+				if (mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
+					maxArmies = mapBuild.getCountryById(countryID).getArmies();
+					toCountry = mapBuild.getCountryById(countryID).getCountryName();
+					toCountryID = countryID;
+				}
+			}
+
+			maxArmies = 0;
+			String fromCountry = "";
+
+			for(int countryID : mapBuild.getCountryAdjacency(toCountryID)) {
+				if(mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
+					maxArmies = mapBuild.getCountryById(countryID).getArmies();
+					fromCountry = mapBuild.getCountryById(countryID).getCountryName();
+				}
+			}
+
+			int numberOfArmiesToMove = mapBuild.getCountryByName(fromCountry).getArmies() - 1;
+
+			fortify(fromCountry, toCountry, numberOfArmiesToMove, mapBuild);
 		}
 
 		if (this.strategy instanceof BenevolentPlayer) {
 
+			int[] playerCountries = getCountryIDs();
+			int maxArmies = 0;
+			String fromCountry = "";
+			int fromCountryID = 0;
+
+			for (int countryID : playerCountries) {
+				if (mapBuild.getCountryById(countryID).getArmies() > maxArmies) {
+					maxArmies = mapBuild.getCountryById(countryID).getArmies();
+					fromCountry = mapBuild.getCountryById(countryID).getCountryName();
+					fromCountryID = countryID;
+				}
+			}
+
+			int minArmies = 999;
+			String toCountry = "";
+
+			for(int countryID : mapBuild.getCountryAdjacency(fromCountryID)) {
+				if(mapBuild.getCountryById(countryID).getArmies() < minArmies) {
+					minArmies = mapBuild.getCountryById(countryID).getArmies();
+					toCountry = mapBuild.getCountryById(countryID).getCountryName();
+				}
+			}
+
+			int numberOfArmiesToMove = mapBuild.getCountryByName(fromCountry).getArmies() / 2;
+
+			fortify(fromCountry, toCountry, numberOfArmiesToMove, mapBuild);
 		}
 
 		if (this.strategy instanceof RandomPlayer) {
+			Random random = new Random();
+			int[] playerCountries = getCountryIDs();
 
+			int randomFromCountryID = random.nextInt(playerCountries.length);
+			String fromCountry = mapBuild.getCountryById(randomFromCountryID).getCountryName();
+
+			int randomToCountryID = random.nextInt(mapBuild.getCountryAdjacency(randomFromCountryID).size());
+
+			while(!(mapBuild.getCountryById(randomToCountryID).getArmies() > 1)) {
+				randomToCountryID = random.nextInt(mapBuild.getCountryAdjacency(randomFromCountryID).size());
+			}
+
+			String toCountry = mapBuild.getCountryById(randomToCountryID).getCountryName();
+
+			int numberOfArmiesToMove = random.nextInt(mapBuild.getCountryByName(fromCountry).getArmies());
+
+			fortify(fromCountry, toCountry, numberOfArmiesToMove, mapBuild);
 		}
 
 		if (this.strategy instanceof CheaterPlayer) {
+			int[] playerCountries = getCountryIDs();
 
+			for (int countryID : playerCountries) {
+				for(int neighborCountryID : mapBuild.getCountryAdjacency(countryID)) {
+					if(mapBuild.getCountryById(neighborCountryID).getPlayerName() != mapBuild.getCountryById(countryID).getPlayerName()) {
+						fortify(mapBuild.getCountryById(countryID).getCountryName(), "", 0, mapBuild);
+						break;
+					}
+				}
+			}
 		}
 
 		return isValidCommand;

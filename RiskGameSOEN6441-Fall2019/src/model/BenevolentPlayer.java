@@ -24,8 +24,12 @@ public class BenevolentPlayer extends Player implements Strategy {
 
 	@Override
 	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapBuild) {
-		
-		
+		int oldArmiesFromCountry = mapBuild.getCountryByName(fromCountry).getArmies();
+		mapBuild.getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
+
+		int oldArmiesToCountry = mapBuild.getCountryByName(toCountry).getArmies();
+		mapBuild.getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
+		calculateWorldDominationView();	
 	}
 	
 
