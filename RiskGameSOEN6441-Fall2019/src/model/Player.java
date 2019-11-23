@@ -215,6 +215,12 @@ public class Player implements Subject {
 	public boolean isAttackValid(MapGeo mapBuild, int attackerNumDice, Country attackerCountry,
 			Country attackingCountry, boolean enablePrint) {
 		boolean isValid = true;
+		if (attackingCountry.getPlayerName().equals(getPlayerName())) {
+			System.out.println("You can not attack to your own country");
+			isValid = false;
+		}
+		
+		
 		if (attackerCountry.getArmies() <= 1) {
 			System.out.println("Attacker Country should have more than 1 army");
 			isValid = false;
@@ -623,14 +629,15 @@ public class Player implements Subject {
 		int[] playerCountries = getCountryIDs();
 		int attackerNumDice = 1;
 		int defendNumDice = 1;
+		System.out.println("You own "+playerCountries.length+" countries, let's attack");
 		for (int i = 0; i < playerCountries.length; i++) {
 			int countryId = playerCountries[i];
 			Country attackerCountry = mapBuild.getCountryById(countryId);
-			if (attackerCountry.getArmies() > 1) {
+//			if (attackerCountry.getArmies() > 1) {
 				ArrayList<Integer> adjCountries = mapBuild.getCountryAdjacency(countryId);
 				for (int attackingCountryId : adjCountries) {
 					Country attackingCountry = mapBuild.getCountryById(attackingCountryId);
-					if (!attackingCountry.getPlayerName().equals(getPlayerName())) {
+//					if (!attackingCountry.getPlayerName().equals(getPlayerName())) {
 						System.out.println("\n-----------------------------------------------------");
 						System.out.println("Attack From " + attackerCountry.getCountryName() +"="+attackerCountry.getArmies()+" (" + getPlayerName()
 								+ ") To: " + attackingCountry.getCountryName()+"="+attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName()
@@ -647,15 +654,15 @@ public class Player implements Subject {
 								thisCountryCanAttack = false;
 							}
 						}
-					} else {
-						continue;
-					}
+//					} else {
+//						continue;
+//					}
 
 				}
 
-			} else {
-				continue;
-			}
+//			} else {
+//				continue;
+//			}
 		}
 
 		// if (isAttackValid(mapBuild, attackerNumDice, attackerCountry,
