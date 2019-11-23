@@ -26,14 +26,15 @@ public class HumanPlayer extends Player implements Strategy {
 				attackingCountry.setArmies(attackingCountry.getArmies() - 1);
 				calculateWorldDominationView();
 				if (attackingCountry.getArmies() == 0) {
-					System.out.println(
-							attackingCountry.getCountryName() + " is conquered");
+					System.out.println("\n*****"+
+							attackingCountry.getCountryName() + " is conquered"+"*****\n");
 					mapBuild.setContinentNamesOfPlayer(this);
 					Card card = new Card();
 					addCard(card);
 					System.out.println("You have the following cards now :");
 					System.out.println(getCardNames());
 					attackingCountry.setPlayer(attackerCountry.getPlayerName());
+					addCountryIdToPlayer(attackingCountry.getCountryId());
 					int NoOfContinentsControlled = getContinentsControlled().size();
 					if (NoOfContinentsControlled == mapBuild
 							.getNoOfContinentsControlled()) {
@@ -41,7 +42,7 @@ public class HumanPlayer extends Player implements Strategy {
 								+ " is winner. Game over!");
 						System.exit(0);
 					}
-
+					mapBuild.showMap();
 					
 					attackMoveCommand(attackerCountry, attackingCountry, attackAllout);
 
@@ -60,6 +61,8 @@ public class HumanPlayer extends Player implements Strategy {
 
 		}
 	}
+
+
 
 	@Override
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {

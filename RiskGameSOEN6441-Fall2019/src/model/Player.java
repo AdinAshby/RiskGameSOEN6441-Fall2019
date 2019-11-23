@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -635,7 +636,7 @@ public class Player implements Subject {
 			int[] playerCountries = getCountryIDs();
 			int attackerNumDice = 1;
 			int defendNumDice = 1;
-			System.out.println("You own " + playerCountries.length + " countries, let's attack");
+			System.out.println("You own " + playerCountries.length + " countries ("+Arrays.toString(countryIDs)+"), let's attack");
 			
 			for (int i = 0; i < playerCountries.length; i++) {
 				int countryId = playerCountries[i];
@@ -664,7 +665,7 @@ public class Player implements Subject {
 				} // For Adj Countries
 
 			} // For player countries
-			System.out.println("No. of Countries before this round attack="+playerCountries.length+" and after attack"+ getCountryIDs().length);
+			System.out.println("No. of Countries before this round attack="+playerCountries.length+" and after attack="+ getCountryIDs().length);
 			if (playerCountries.length != getCountryIDs().length) {
 				isConqueredNewCountry = true;
 			}
@@ -1012,6 +1013,15 @@ public class Player implements Subject {
 		}
 
 		return isValidCommand;
+	}
+	
+	protected void addCountryIdToPlayer(int countryId) {
+		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs));
+		int[] array = Arrays.copyOf(countryIDs, countryIDs.length + 1); //create new array from old array and allocate one more element
+		array[array.length - 1] = countryId;
+		countryIDs=array;
+		System.out.println("New Array="+Arrays.toString(countryIDs));
+		
 	}
 
 	public int getTemporaryArmies() {
