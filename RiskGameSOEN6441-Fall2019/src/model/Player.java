@@ -398,16 +398,24 @@ public class Player implements Subject {
 
 		return isDefendPossible;
 	}
-
+/**
+ * 
+ * @return counterForPhases
+ */
 	public int getCounterForPhases() {
 		return counterForPhases;
 	}
-
+/**
+ * 
+ * @param counterForPhases
+ */
 	public void setCounterForPhases(int counterForPhases) {
 		this.counterForPhases = counterForPhases;
 		notifyObserverForPhases();
 	}
-
+/**
+ * @param addObserver
+ */
 	@Override
 	public void registerPhaseObserver(Observer addObserver) {
 		observersForPhases.add(addObserver);
@@ -450,20 +458,9 @@ public class Player implements Subject {
 	public ArrayList<Observer> getObserversForWorldDomination() {
 		return observersForWorldDomination;
 	}
-
-	/*
-	 * public void calculateTotalNumberOfArmies() { for(Integer each : countryIDs) {
-	 * totalNumberOfArmies += MapGeo.getInstance().getCountryById(each).getArmies();
-	 * } notifyObserverForWorldDomination(); }
-	 * 
-	 * public void calculateContinentControlled() {
-	 * MapGeo.getInstance().continentsOwnedByPlayer(playerName);
-	 * notifyObserverForWorldDomination(); }
-	 * 
-	 * public void calculatePercentageControlled() { percentageControlled =
-	 * getCountryIDs().length * 100 / MapGeo.getInstance().getAllCountries().size();
-	 * notifyObserverForWorldDomination(); }
-	 */
+/**
+ * This method calculate World Domination View
+ */
 
 	public void calculateWorldDominationView() {
 		totalNumberOfArmies = 0;
@@ -478,6 +475,10 @@ public class Player implements Subject {
 		notifyObserverForWorldDomination();
 	}
 
+	/**
+	 *  
+	 * @return number Of Armies Each Player Gets
+	 */
 	public int getNumberOfArmiesEachPlayerGets() {
 		return numberOfArmiesEachPlayerGets;
 	}
@@ -491,7 +492,13 @@ public class Player implements Subject {
 	public void calculateNumberOfArmiesEachPlayerGets() {
 		numberOfArmiesEachPlayerGets = (getCountryIDs().length / 3 > 3) ? getCountryIDs().length / 3 : 3;
 	}
-
+/**
+ * 
+ * @param mapBuild
+ * @param countryName
+ * @param armiesAdded
+ * @return false
+ */
 	public boolean reinforceIsValid(MapGeo mapBuild, String countryName, int armiesAdded) {
 		calculateNumberOfArmiesEachPlayerGets();
 
@@ -511,11 +518,23 @@ public class Player implements Subject {
 
 		return false;
 	}
-
+/**
+ * 
+ * @param mapBuild
+ * @param countryName
+ * @param num
+ * @param finished
+ * @return
+ */
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
 		return this.strategy.reinforce(mapBuild, countryName, num, finished);
 	}
-
+/**
+ * 
+ * @param mapBuild
+ * @param mapView
+ * @return
+ */
 	public boolean reinforceCommand(MapGeo mapBuild, MapView mapView) {
 		calculateNumberOfArmiesEachPlayerGets();
 
@@ -951,7 +970,7 @@ public class Player implements Subject {
 	 * 
 	 * @param mapBuild
 	 * @param mapView
-	 * @return
+	 * @return isValidCommand
 	 */
 
 	public boolean fortifyCommand(MapGeo mapBuild, MapView mapView) {
@@ -1107,7 +1126,10 @@ public class Player implements Subject {
 
 		return isValidCommand;
 	}
-	
+	/**
+	 * 
+	 * @param countryId
+	 */
 	protected void addCountryIdToPlayer(int countryId) {
 		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs));
 		int[] array = Arrays.copyOf(countryIDs, countryIDs.length + 1); //create new array from old array and allocate one more element
@@ -1116,11 +1138,17 @@ public class Player implements Subject {
 		System.out.println("New Array="+Arrays.toString(countryIDs));
 		
 	}
-
+/**
+ * 
+ * @return temporaryArmies
+ */
 	public int getTemporaryArmies() {
 		return temporaryArmies;
 	}
-
+/**
+ * 
+ * @param temporaryArmies
+ */
 	public void setTemporaryArmies(int temporaryArmies) {
 		this.temporaryArmies = temporaryArmies;
 	}
