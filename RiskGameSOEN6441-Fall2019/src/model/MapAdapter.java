@@ -1,10 +1,18 @@
 package model;
 
 public class MapAdapter extends MapGeo {
-	
+	/**
+	 * private MapGeo
+	 */
 	private MapGeo mapGeo;
+	/**
+	 * private mapType
+	 */
 	private String mapType;
-	
+	/**
+	 * 
+	 * @param mapType
+	 */
 	public MapAdapter(String mapType) {
 	
 		if(mapType.equalsIgnoreCase("d")){
