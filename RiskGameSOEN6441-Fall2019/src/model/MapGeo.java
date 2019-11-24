@@ -40,20 +40,20 @@ public class MapGeo {
 	 */
 	protected Map<Integer, Continent> continentList = new HashMap<Integer, Continent>(); // continentId=> continentName,
 	// continentValue,
-	private MapView theMapView = new MapView(); // continentColor
+	protected MapView theMapView = new MapView(); // continentColor
 	/**
 	 * countryAdjacency
 	 */
-	private AdjacencyList countryAdjacency = new AdjacencyList();
+	protected AdjacencyList countryAdjacency = new AdjacencyList();
 	/**
 	 * private player
 	 */
-	private Player[] players;
+	protected Player[] players;
 
 	/**
 	 * private random
 	 */
-	private Random random = new Random();
+	protected Random random = new Random();
 
 	/**
 	 * private number Of Armies Each Player Gets
@@ -856,6 +856,8 @@ public class MapGeo {
 
 	}
 
+	
+
 	/**
 	 * This method is for getContinentNamesOfPlayer
 	 * 
@@ -1087,7 +1089,7 @@ public class MapGeo {
 	}
 
 	/**
-	 * This method return the total armies a palyer has
+	 * This method return the total armies a player has
 	 * 
 	 * @param playerName
 	 * @return
@@ -1104,14 +1106,7 @@ public class MapGeo {
 		return totalArmies;
 	}
 
-	/**
-	 * 
-	 * @param mapName
-	 * @return true
-	 */
-	public boolean read(String mapName) {
-		return true;
-	}
+	
 
 	/**
 	 * 
@@ -1140,14 +1135,18 @@ public class MapGeo {
 		return true;
 	}
 
-	/**
-	 * 
-	 * @param mapAdapter
-	 * @param mapName
-	 * @return true
-	 */
-	public boolean readDomination(MapAdapter mapAdapter, String mapName) {
+	public boolean readDomination(String mapName) {
+		System.out.println("Read Domi Map Geo");
 		return true;
-	};
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean read(String mapFileName) {
+		// TODO Auto-generated method stub
+		System.out.println("Read Map Geo");
+		return true;
+	}
+
 
 }

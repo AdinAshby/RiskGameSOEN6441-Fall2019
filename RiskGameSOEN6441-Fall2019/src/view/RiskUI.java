@@ -11,6 +11,7 @@ import model.Dice;
 import model.MapAdapter;
 import model.MapGeo;
 import model.MapConquest;
+import model.MapDomination;
 import model.Player;
 
 /**
@@ -26,9 +27,9 @@ public class RiskUI {
 	 * private mapAdapter
 	 */
 
-	private MapGeo mapBuild = MapGeo.getInstance();
+//	private MapGeo mapBuild = MapGeo.getInstance();
 
-	private MapGeo mapAdapter = MapGeo.getInstance();
+	private MapDomination mapAdapter;
 
 	/**
 	 * private mapView
@@ -164,10 +165,24 @@ public class RiskUI {
 
 		boolean debug = true;
 		if (debug == true) {
-			// mapAdapter.read("test");// ameroki
-			MapGeo mapAdapter = new MapAdapter("d");
+			String mapName="test";
+			String mapType="d";
+			MapDomination mapDomination = new MapDomination();
+			MapConquest mapConquest= new MapConquest();
+			
+			if (mapType.equalsIgnoreCase("d")) {
+				mapDomination.read(mapName);
+				mapAdapter=mapDomination;
+			} else if (mapType.equalsIgnoreCase("c")) {
+				MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
+				mapAdapterFromDomination.read(mapName);
+				mapAdapter=mapAdapterFromDomination;
+			}
+			
+			
+			
 			// mapAdapter mapAdapter=new MapAdapter(mapAdapter);
-			mapAdapter.read("test");
+			//mapAdapter.read("test");
 
 			playerNames.add("Aval");
 			playerNames.add("Dovom");
@@ -236,6 +251,8 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						mapFileName = getMatcher().group(1);
 						try {
+							MapConquest mapConquest=new MapConquest();
+							mapAdapter=new MapAdapter(mapConquest);
 							mapAdapter.read(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block

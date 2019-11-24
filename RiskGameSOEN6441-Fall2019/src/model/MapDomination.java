@@ -13,16 +13,18 @@ public class MapDomination extends MapGeo {
 	/**
 	 * This method reads the map files
 	 */
-	public boolean readDomination(MapAdapter mapAdapter, String fileName) {
+	public boolean read(String fileName) {
 
 		File file = new File(mapFolder + "/" + fileName + ".map");
 		if (!file.exists()) {
 			System.out.println(fileName + " map file not found. Please try again");
 			return false;
+		}else {
+			System.out.println("Read File: "+mapFolder + "/" + fileName + ".map");
 		}
 
-		mapAdapter.continentList = new HashMap<Integer, Continent>();
-		mapAdapter.setCountryAdjacency(new AdjacencyList());
+		continentList = new HashMap<Integer, Continent>();
+		setCountryAdjacency(new AdjacencyList());
 		Continent.setContinentsCounter(0);
 
 		BufferedReader bufferedReader = null;
@@ -66,7 +68,7 @@ public class MapDomination extends MapGeo {
 				continentColor = matcher.group(5);
 
 				Continent continent = new Continent(continentName, Integer.parseInt(continentValue));
-				mapAdapter.addContinent(continent);
+				addContinent(continent);
 				System.out.println("Found Continent " + continent.getContinentId() + " " + continentName + "  Value="
 						+ continentValue + " Color:" + continentColor);
 			}
@@ -104,8 +106,8 @@ public class MapDomination extends MapGeo {
 				System.out.println("Found country countryId=" + countryId + " Name=" + countryName + "  in continentId="
 						+ continentId + " L1=" + countryL1 + ", L2=" + countryL2);
 				Country country = new Country(countryName, countryId);
-				mapAdapter.getContinent(continentId).addCountry(country);
-				mapAdapter.getCountryAdjacency().addVertex(countryId);
+				getContinent(continentId).addCountry(country);
+				getCountryAdjacency().addVertex(countryId);
 			}
 			System.out.println("-------------------------------");
 
@@ -134,11 +136,11 @@ public class MapDomination extends MapGeo {
 				String adjCountriesContent = matcher.group(3);
 				// System.out.println("\nFound countryId=" + countryId + " Adj=" +
 				// adjCountriesContent);
-				Country c = mapAdapter.getCountryById(countryId);
+				Country c = getCountryById(countryId);
 				System.out.println("Add Adj for " + c.getCountryName() + " Adj=" + adjCountriesContent);
 				String[] arrOfAdj = adjCountriesContent.split(" ");
 				for (String adj : arrOfAdj)
-					mapAdapter.addCountryAdjacency(countryId, Integer.parseInt(adj));
+					addCountryAdjacency(countryId, Integer.parseInt(adj));
 			}
 
 			System.out.println("-------------------------------");
@@ -148,7 +150,7 @@ public class MapDomination extends MapGeo {
 		} catch (Exception e) {
 			System.out.println("Map is invalid");
 		}
-		return mapAdapter.validateMap();
+		return validateMap();
 	}
 
 	/**

@@ -25,7 +25,7 @@ public class HumanPlayer extends Player implements Strategy {
 		for (int i = 0; i < winner.length; i++) {
 			int diceNo = i + 1;
 			if (winner[i]) {
-				System.out.println("Attacker win dice " + diceNo + " Current Countries=("+Arrays.toString(getCountryIDs().toArray())+")");
+				System.out.println("Attacker win dice " + diceNo );
 				attackingCountry.setArmies(attackingCountry.getArmies() - 1);
 				calculateWorldDominationView();
 				if (attackingCountry.getArmies() == 0) {
@@ -52,7 +52,7 @@ public class HumanPlayer extends Player implements Strategy {
 				}
 
 			} else {
-				System.out.println("Defender win dice " + diceNo + " Current Countries=("+Arrays.toString(getCountryIDs().toArray())+")");
+				System.out.println("Defender win dice " + diceNo );
 				attackerCountry.setArmies(attackerCountry.getArmies() - 1);
 				calculateWorldDominationView();
 				if (attackerCountry.getArmies() == 0) {

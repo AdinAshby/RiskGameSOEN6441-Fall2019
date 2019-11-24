@@ -1,27 +1,15 @@
 package model;
 
-public class MapAdapter extends MapGeo {
-	/**
-	 * private MapGeo
-	 */
-	private MapGeo mapGeo;
-	/**
-	 * private mapType
-	 */
-	private String mapType;
+public class MapAdapter extends MapDomination {
+
+	private MapConquest mapConquest;
 
 	/**
 	 * 
 	 * @param mapType
 	 */
-	public MapAdapter(String mapType) {
-
-		if (mapType.equalsIgnoreCase("d")) {
-			mapGeo = new MapDomination();
-		} else if (mapType.equalsIgnoreCase("c")) {
-			mapGeo = new MapConquest();
-		}
-		this.mapType = mapType;
+	public MapAdapter( MapConquest mapConquest) {
+		this.mapConquest = mapConquest;
 
 	}
 
@@ -31,13 +19,11 @@ public class MapAdapter extends MapGeo {
 	 * @param mapName
 	 */
 	public boolean read(String mapName) {
-		if (mapType.equalsIgnoreCase("d")) {
-			mapGeo.readDomination(this, mapName);
-		} else if (mapType.equalsIgnoreCase("c")) {
-			mapGeo.readConquest(mapName);
-		}
+		mapConquest.readConquest(mapName);
+		//this.continentList=mapConquest.continentList;
+		this.mapAdapterCopy(mapConquest);
 		return true;
-
+		
 	}
 
 	/**
@@ -46,13 +32,16 @@ public class MapAdapter extends MapGeo {
 	 * @param mapName
 	 */
 	public boolean write(String mapName) {
-		if (mapType.equalsIgnoreCase("d")) {
-			mapGeo.write(mapName);
-		} else if (mapType.equalsIgnoreCase("c")) {
-			mapGeo.writeConquest(mapName);
-		}
-		return true;
+		return mapConquest.writeConquest(mapName);
 
 	}
-
+	
+	public void mapAdapterCopy(MapConquest mapConquest) {
+		this.continentList = mapConquest.continentList;
+		this.theMapView = mapConquest.theMapView;
+		this.countryAdjacency = mapConquest.countryAdjacency;
+		this.players = mapConquest.players;
+		this.random = mapConquest.random;
+	}
+	
 }
