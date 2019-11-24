@@ -58,7 +58,6 @@ public class MapGeo {
 	/**
 	 * private number Of Armies Each Player Gets
 	 */
-	// private int numberOfArmiesEachPlayerGets;
 	private static MapGeo instance;
 
 	/**
