@@ -1,9 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+
 public class AggressivePlayer extends Player implements Strategy {
 
-	public AggressivePlayer(String playerName, int[] countryID, MapGeo mapBuild) {
-		super(playerName, countryID, mapBuild);
+	public AggressivePlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
+		super(playerName, countriesIDs, mapBuild);
 	}
 
 	@Override

@@ -1,9 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+
 public class RandomPlayer extends Player implements Strategy {
 
-	public RandomPlayer(String playerName, int[] countryID, MapGeo mapBuild) {
-		super(playerName, countryID, mapBuild);
+	public RandomPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
+		super(playerName, countriesIDs, mapBuild);
 		
 	}
 	

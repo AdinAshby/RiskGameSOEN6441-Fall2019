@@ -1,9 +1,12 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class HumanPlayer extends Player implements Strategy {
 
-	public HumanPlayer(String playerName, int[] countryID, MapGeo mapBuild) {
-		super(playerName, countryID, mapBuild);
+	public HumanPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
+		super(playerName, countriesIDs, mapBuild);
 	}
 	
 	@Override
@@ -17,12 +20,12 @@ public class HumanPlayer extends Player implements Strategy {
 		//defendDice.showDice();
 
 		boolean[] winner = attackDice.isWinner(defendDice);
-
+		
 
 		for (int i = 0; i < winner.length; i++) {
 			int diceNo = i + 1;
 			if (winner[i]) {
-				System.out.println("Attacker win dice " + diceNo);
+				System.out.println("Attacker win dice " + diceNo + " Current Countries=("+Arrays.toString(getCountryIDs().toArray())+")");
 				attackingCountry.setArmies(attackingCountry.getArmies() - 1);
 				calculateWorldDominationView();
 				if (attackingCountry.getArmies() == 0) {
@@ -49,7 +52,7 @@ public class HumanPlayer extends Player implements Strategy {
 				}
 
 			} else {
-				System.out.println("Defender win dice " + diceNo);
+				System.out.println("Defender win dice " + diceNo + " Current Countries=("+Arrays.toString(getCountryIDs().toArray())+")");
 				attackerCountry.setArmies(attackerCountry.getArmies() - 1);
 				calculateWorldDominationView();
 				if (attackerCountry.getArmies() == 0) {

@@ -192,9 +192,9 @@ public class RiskUI {
 
 			player1.attackAllout(mapAdapter);
 			System.exit(0);
-			int attackerCountryId = player1.getCountryIDs()[0];
-			int fortifyCountryId = player1.getCountryIDs()[1];
-			int attackingCountryId = player2.getCountryIDs()[0];
+			int attackerCountryId = player1.getCountryIDs().get(0);
+			int fortifyCountryId = player1.getCountryIDs().get(1);
+			int attackingCountryId = player2.getCountryIDs().get(0);
 			String attackerCountryName = mapAdapter.getCountryNameById(attackerCountryId);
 			String fortifyCountryName = mapAdapter.getCountryNameById(fortifyCountryId);
 			String attackingCountryName = mapAdapter.getCountryNameById(attackingCountryId);

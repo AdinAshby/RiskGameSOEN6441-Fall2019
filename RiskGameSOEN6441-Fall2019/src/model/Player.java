@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -27,7 +28,7 @@ public class Player implements Subject {
 	/**
 	 * List of all countryIDs that the player owns.
 	 */
-	private int[] countryIDs;
+	private ArrayList<Integer> countryIDs;
 	/**
 	 * private percentage Controlled 
 	 */
@@ -123,7 +124,7 @@ public class Player implements Subject {
 	 * @param playerName Corresponding player name.
 	 * @param countryID  List of all countries (IDs) that the player owns.
 	 */
-	public Player(String playerName, int[] countryID, MapGeo mapBuild) {
+	public Player(String playerName, ArrayList<Integer> countryID, MapGeo mapBuild) {
 		this.playerName = playerName;
 		this.countryIDs = countryID;
 		this.mapBuild = mapBuild;
@@ -247,7 +248,7 @@ public class Player implements Subject {
 	 * 
 	 * @return getCountryID Returns CountryIDs as an array of integers.
 	 */
-	public int[] getCountryIDs() {
+	public  ArrayList<Integer> getCountryIDs() {
 		return countryIDs;
 	}
 
@@ -256,7 +257,7 @@ public class Player implements Subject {
 	 * 
 	 * @param countriesIDs Sets a list of countriesIDs to the corresponding field.
 	 */
-	public void setCountryIDs(int[] countriesIDs) {
+	public void setCountryIDs( ArrayList<Integer> countriesIDs) {
 		this.countryIDs = countriesIDs;
 	}
 /**
@@ -346,7 +347,7 @@ public class Player implements Subject {
 			// System.out.println(CountryAdjList); //Arrays.toString(
 
 			for (int adjCountry : CountryAdjList) {
-				if (!contains(countryIDs, adjCountry)) {
+				if (!countryIDs.contains(adjCountry)) {
 					for (int i = 1; i < 4; i++) {
 						if (isAttackValid(mapBuild, i, mapBuild.getCountryById(countyId),
 								mapBuild.getCountryById(adjCountry), false)) {
@@ -389,7 +390,7 @@ public class Player implements Subject {
 	public boolean isDefendPossible(MapGeo mapBuild, int defendCountry, int numDice) {
 
 		boolean isDefendPossible = true;
-		if (!contains(this.getCountryIDs(), defendCountry)) {
+		if (!getCountryIDs().contains(defendCountry)) {
 			isDefendPossible = false;
 		}
 		if (mapBuild.getCountryById(defendCountry).getArmies() < numDice) {
@@ -470,7 +471,7 @@ public class Player implements Subject {
 		}
 
 		mapBuild.continentsOwnedByPlayer(playerName);
-		percentageControlled = getCountryIDs().length * 100 / mapBuild.getAllCountries().size();
+		percentageControlled = getCountryIDs().size() * 100 / mapBuild.getAllCountries().size();
 
 		notifyObserverForWorldDomination();
 	}
@@ -490,7 +491,7 @@ public class Player implements Subject {
 	 */
 
 	public void calculateNumberOfArmiesEachPlayerGets() {
-		numberOfArmiesEachPlayerGets = (getCountryIDs().length / 3 > 3) ? getCountryIDs().length / 3 : 3;
+		numberOfArmiesEachPlayerGets = (getCountryIDs().size() / 3 > 3) ? getCountryIDs().size() / 3 : 3;
 	}
 /**
  * 
@@ -508,7 +509,7 @@ public class Player implements Subject {
 			return false;
 		}
 
-		int[] playerCountries = getCountryIDs();
+		ArrayList<Integer> playerCountries = getCountryIDs();
 
 		for (int countryID : playerCountries) {
 			if (mapBuild.getCountryByName(countryName) == mapBuild.getCountryById(countryID)) {
@@ -630,7 +631,7 @@ public class Player implements Subject {
 
 		if (this.strategy instanceof AggressivePlayer) {
 
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 			int maxArmies = 0;
 			String countryName = "";
 
@@ -647,7 +648,7 @@ public class Player implements Subject {
 
 		if (this.strategy instanceof BenevolentPlayer) {
 
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 			int minArmies = 999;
 			String countryName = "";
 
@@ -664,9 +665,9 @@ public class Player implements Subject {
 
 		if (this.strategy instanceof RandomPlayer) {
 			Random random = new Random();
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 
-			int randomCountryID = random.nextInt(playerCountries.length);
+			int randomCountryID = random.nextInt(playerCountries.size());
 			String countryName = mapBuild.getCountryById(randomCountryID).getCountryName();
 
 			finished = reinforce(mapBuild, countryName, numberOfArmiesEachPlayerGets, true);
@@ -675,7 +676,7 @@ public class Player implements Subject {
 
 		if (this.strategy instanceof CheaterPlayer) {
 
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 
 			for (int countryID : playerCountries) {
 				String countryName = mapBuild.getCountryById(countryID).getCountryName();
@@ -744,13 +745,13 @@ public class Player implements Subject {
 		boolean isConqueredNewCountry;
 		do {
 			isConqueredNewCountry = false;
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 			int attackerNumDice = 1;
 			int defendNumDice = 1;
-			System.out.println("You own " + playerCountries.length + " countries ("+Arrays.toString(countryIDs)+"), let's attack");
+			System.out.println("You own " + playerCountries.size() + " countries ("+Arrays.toString(countryIDs.toArray())+"), let's attack");
 			
-			for (int i = 0; i < playerCountries.length; i++) {
-				int countryId = playerCountries[i];
+			for (int i = 0; i < playerCountries.size(); i++) {
+				int countryId = playerCountries.get(i);
 				Country attackerCountry = mapBuild.getCountryById(countryId);
 				ArrayList<Integer> adjCountries = mapBuild.getCountryAdjacency(countryId);
 				for (int attackingCountryId : adjCountries) {
@@ -760,7 +761,7 @@ public class Player implements Subject {
 					System.out.println(
 							"Attack From " + attackerCountry.getCountryName() + "=" + attackerCountry.getArmies() + " ("
 									+ getPlayerName() + ") To: " + attackingCountry.getCountryName() + "="
-									+ attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName() + ")");
+									+ attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName() + ") Current Countries=("+Arrays.toString(getCountryIDs().toArray())+")");
 
 					boolean thisCountryCanAttack = true;
 					while (thisCountryCanAttack) {
@@ -776,9 +777,9 @@ public class Player implements Subject {
 				} // For Adj Countries
 
 			} // For player countries
-			System.out.println("No. of Countries before this round attack="+playerCountries.length+" and after attack="+ getCountryIDs().length);
-			System.out.println("You own now " + playerCountries.length + " countries ("+Arrays.toString(countryIDs)+")");
-			if (playerCountries.length != getCountryIDs().length) {
+			System.out.println("No. of Countries before this round attack="+playerCountries.size()+" and after attack="+ getCountryIDs().size());
+			System.out.println("You own now " + playerCountries.size() + " countries ("+Arrays.toString(countryIDs.toArray())+")");
+			if (playerCountries.size() != getCountryIDs().size()) {
 				isConqueredNewCountry = true;
 			}
 
@@ -1032,7 +1033,7 @@ public class Player implements Subject {
 		}
 
 		if (this.strategy instanceof AggressivePlayer) {
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 			int maxArmies = 0;
 			String toCountry = "";
 			int toCountryID = 0;
@@ -1062,7 +1063,7 @@ public class Player implements Subject {
 
 		if (this.strategy instanceof BenevolentPlayer) {
 
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 			int maxArmies = 0;
 			String fromCountry = "";
 			int fromCountryID = 0;
@@ -1092,9 +1093,9 @@ public class Player implements Subject {
 
 		if (this.strategy instanceof RandomPlayer) {
 			Random random = new Random();
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 
-			int randomFromCountryID = random.nextInt(playerCountries.length);
+			int randomFromCountryID = random.nextInt(playerCountries.size());
 			String fromCountry = mapBuild.getCountryById(randomFromCountryID).getCountryName();
 
 			int randomToCountryID = random.nextInt(mapBuild.getCountryAdjacency(randomFromCountryID).size());
@@ -1111,7 +1112,7 @@ public class Player implements Subject {
 		}
 
 		if (this.strategy instanceof CheaterPlayer) {
-			int[] playerCountries = getCountryIDs();
+			ArrayList<Integer> playerCountries = getCountryIDs();
 
 			for (int countryID : playerCountries) {
 				for (int neighborCountryID : mapBuild.getCountryAdjacency(countryID)) {
@@ -1131,11 +1132,10 @@ public class Player implements Subject {
 	 * @param countryId
 	 */
 	protected void addCountryIdToPlayer(int countryId) {
-		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs));
-		int[] array = Arrays.copyOf(countryIDs, countryIDs.length + 1); //create new array from old array and allocate one more element
-		array[array.length - 1] = countryId;
-		countryIDs=array;
-		System.out.println("New Array="+Arrays.toString(countryIDs));
+		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs.toArray()));
+		
+		countryIDs.add(countryId);
+		System.out.println("New Array="+Arrays.toString(countryIDs.toArray()));
 		
 	}
 /**

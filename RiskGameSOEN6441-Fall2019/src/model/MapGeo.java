@@ -705,11 +705,13 @@ public class MapGeo {
 		int leftOverCountries = temporaryCountries.size() % players.length;
 
 		for (int i = 0; i < players.length; i++) {
-			int[] countriesIDs = new int[numberOfCountriesEachPlayerGet];
+			ArrayList<Integer> countriesIDs = new ArrayList<Integer>(numberOfCountriesEachPlayerGet);
 
-			for (int j = 0; j < countriesIDs.length; j++) {
+			for (int j = 0; j < numberOfCountriesEachPlayerGet; j++) {
 				int randomCountryID = random.nextInt(temporaryCountries.size());
-				countriesIDs[j] = temporaryCountries.get(randomCountryID).getCountryId();
+				//countriesIDs.add(j, temporaryCountries.get(randomCountryID).getCountryId());
+				countriesIDs.add(temporaryCountries.get(randomCountryID).getCountryId());
+				System.out.println("Rand="+randomCountryID+" Country="+temporaryCountries.get(randomCountryID).getCountryId());
 				temporaryCountries.remove(randomCountryID);
 				// updateCountryById(i, countriesIds[j]);
 			}
@@ -731,8 +733,8 @@ public class MapGeo {
 			if (playerStrategies.get(i).equalsIgnoreCase("cheater"))
 				players[i].setStrategy(new CheaterPlayer(playerNames.get(i), countriesIDs, this));
 
-			for (int m = 0; m < countriesIDs.length; m++) {
-				updateCountryIDs(playerNames.get(i), countriesIDs[m]);
+			for (int m = 0; m < countriesIDs.size(); m++) {
+				updateCountryIDs(playerNames.get(i), countriesIDs.get(m));
 			}
 
 		}
@@ -740,16 +742,16 @@ public class MapGeo {
 		if (leftOverCountries > 0) {
 			for (Player giveMoreCountriesToPlayer : players) {
 				int randomCountryID = random.nextInt(temporaryCountries.size());
-				int playerCountryCount = giveMoreCountriesToPlayer.getCountryIDs().length + 1;
-				int[] currentPlayerCountries = giveMoreCountriesToPlayer.getCountryIDs();
-				int[] receivedMoreCountriesPlayerCountriesList = new int[playerCountryCount];
+				int playerCountryCount = giveMoreCountriesToPlayer.getCountryIDs().size() + 1;
+				ArrayList<Integer> currentPlayerCountries = giveMoreCountriesToPlayer.getCountryIDs();
+				ArrayList<Integer> receivedMoreCountriesPlayerCountriesList = new ArrayList<Integer>(playerCountryCount);
 
-				for (int i = 0; i < giveMoreCountriesToPlayer.getCountryIDs().length; i++) {
-					receivedMoreCountriesPlayerCountriesList[i] = currentPlayerCountries[i];
+				for (int i = 0; i < giveMoreCountriesToPlayer.getCountryIDs().size(); i++) {
+					receivedMoreCountriesPlayerCountriesList.add(currentPlayerCountries.get(i)); //i, 
 				}
 
 				int newCountryIDForPlayer = temporaryCountries.get(randomCountryID).getCountryId();
-				receivedMoreCountriesPlayerCountriesList[playerCountryCount - 1] = newCountryIDForPlayer;
+				receivedMoreCountriesPlayerCountriesList.add(newCountryIDForPlayer); //playerCountryCount - 1, 
 				giveMoreCountriesToPlayer.setCountryIDs(receivedMoreCountriesPlayerCountriesList);
 
 				updateCountryIDs(giveMoreCountriesToPlayer.getPlayerName(), newCountryIDForPlayer);
@@ -813,7 +815,7 @@ public class MapGeo {
 	 */
 	public boolean placearmyIsValid(Player player, String countryName) {
 
-		int[] playerCountries = player.getCountryIDs();
+		ArrayList<Integer> playerCountries = player.getCountryIDs();
 
 		for (int countryID : playerCountries) {
 			if (getCountryByName(countryName) == getCountryById(countryID)) {
@@ -835,11 +837,11 @@ public class MapGeo {
 			int armiesForEach = calculateNumberOfInitialArmies();
 
 			while (armiesForEach > 0) {
-				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().length);
+				int randomPlayerCountryID = random.nextInt(player.getCountryIDs().size());
 				int randomArmy = random.nextInt(armiesForEach) + 1;
 				armiesForEach -= randomArmy;
-				int[] p = player.getCountryIDs();
-				int randomID = p[randomPlayerCountryID];
+				ArrayList<Integer> p = player.getCountryIDs();
+				int randomID = p.get(randomPlayerCountryID);
 				int oldArmies = getCountryById(randomID).getArmies();
 				getCountryById(randomID).setArmies(oldArmies + armiesForEach);// Check if atleast 25 army should be
 																				// assigned
@@ -863,7 +865,7 @@ public class MapGeo {
 
 	public void setContinentNamesOfPlayer(Player player) {
 
-		int[] playerCountries = player.getCountryIDs();
+		ArrayList<Integer> playerCountries = player.getCountryIDs();
 		ArrayList<String> ContinentList = new ArrayList<String>(continentList.size());
 
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
@@ -880,7 +882,7 @@ public class MapGeo {
 				countriesIdList[counter] = cId.getCountryId();
 				int countryId = cId.getCountryId();
 				counter++;
-				if (!contains(playerCountries, countryId)) {
+				if (!playerCountries.contains(countryId)) {
 					isThisContinentForPlayer = false;
 				}
 			}

@@ -1,9 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+
 public class CheaterPlayer extends Player implements Strategy {
 
-	public CheaterPlayer(String playerName, int[] countryID, MapGeo mapBuild) {
-		super(playerName, countryID, mapBuild);
+	public CheaterPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
+		super(playerName, countriesIDs, mapBuild);
 		
 	}
 	

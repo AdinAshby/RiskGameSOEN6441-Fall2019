@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -298,7 +299,7 @@ public class MapView {
 	}
 
 	/**
-	 * This method return adajcent countries of country
+	 * This method return adjacent countries of country
 	 * @param countryName
 	 * @param countriesList
 	 * @return adjacent Countries
@@ -324,7 +325,7 @@ public class MapView {
 			List<Country> countriesList) {
 
 		Player[] allPlayers = RiskController.getInstance().getPlayers();
-		int[] playerCountries = null;
+		ArrayList<Integer> playerCountries = null;
 
 		for (int i = 0; i < allPlayers.length; i++) {
 			if (allPlayers[i].getPlayerName().equalsIgnoreCase(playerName)) {
@@ -347,8 +348,8 @@ public class MapView {
 					specificCountryAdjacentsForFortification.add(countriesList.get(i));
 
 		for (int i = 0; i < specificCountryAdjacentsForFortification.size(); i++)
-			for (int j = 0; j < playerCountries.length; j++)
-				if (returnCountryID(specificCountryAdjacentsForFortification, i) == playerCountries[j])
+			for (int j = 0; j < playerCountries.size(); j++)
+				if (returnCountryID(specificCountryAdjacentsForFortification, i) == playerCountries.get(j))
 					myCountries.add(specificCountryAdjacentsForFortification.get(i));
 
 		return myCountries;
