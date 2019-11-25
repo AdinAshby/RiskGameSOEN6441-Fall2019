@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -97,6 +98,10 @@ public class RiskUI {
 
 	private int counterForPhases;
 
+	private MapDomination mapDomination = new MapDomination();
+	private MapConquest mapConquest= new MapConquest();
+	
+	
 	/**
 	 * This is RiskUI constructor
 	 */
@@ -163,21 +168,13 @@ public class RiskUI {
 		 * attribute
 		 */
 
-		boolean debug = true;
+		
+		
+		boolean debug = false;
 		if (debug == true) {
-			String mapName="test";
-			String mapType="d";
-			MapDomination mapDomination = new MapDomination();
-			MapConquest mapConquest= new MapConquest();
-			
-			if (mapType.equalsIgnoreCase("d")) {
-				mapDomination.read(mapName);
-				mapAdapter=mapDomination;
-			} else if (mapType.equalsIgnoreCase("c")) {
-				MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
-				mapAdapterFromDomination.read(mapName);
-				mapAdapter=mapAdapterFromDomination;
-			}
+			mapFileName="test";
+						
+			isDominationMap(mapFileName);
 			
 			
 			
@@ -205,8 +202,8 @@ public class RiskUI {
 			player2.getNumberOfArmiesEachPlayerGets();
 			System.out.println("Player 1=" + player1.getPlayerName() + " Player2=" + player2.getPlayerName());
 
-			player1.attackAllout(mapAdapter);
-			System.exit(0);
+			//player1.attackAllout(mapAdapter);
+		//	System.exit(0);
 			int attackerCountryId = player1.getCountryIDs().get(0);
 			int fortifyCountryId = player1.getCountryIDs().get(1);
 			int attackingCountryId = player2.getCountryIDs().get(0);
@@ -392,7 +389,7 @@ public class RiskUI {
 						isValidCommand = true;
 
 						try {
-							mapAdapter.saveMap(mapFileName);
+							mapAdapter.write(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -468,6 +465,7 @@ public class RiskUI {
 						isValidCommand = true;
 						boolean isLoaded = false;
 						try {
+							isDominationMap(mapFileName);
 							isLoaded = mapAdapter.read(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -500,7 +498,7 @@ public class RiskUI {
 						isValidCommand = true;
 
 						try {
-							mapAdapter.saveMap(mapFileName);
+							mapAdapter.write(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -518,13 +516,13 @@ public class RiskUI {
 					regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
 					setPattern(regex);
 					setMatcher(addText);
+					
 					while (matcher.find()) {
 						String playerName = getMatcher().group(2);
 						String playerStrategy = getMatcher().group(3);
 
 						playerNames.add(playerName);
 						playerStrategies.add(playerStrategy);
-
 						isValidCommand = true;
 					}
 
@@ -689,6 +687,19 @@ public class RiskUI {
 				editMapAnswer = scanner.nextLine();
 			}
 		}
+	}
+
+	private void isDominationMap(String mapName) {
+		String mapType="d";
+		if (mapType.equalsIgnoreCase("d")) {
+			mapDomination.read(mapName);
+			mapAdapter=mapDomination;
+		} else if (mapType.equalsIgnoreCase("c")) {
+			MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
+			mapAdapterFromDomination.read(mapName);
+			mapAdapter=mapAdapterFromDomination;
+		}
+		
 	}
 
 	/**

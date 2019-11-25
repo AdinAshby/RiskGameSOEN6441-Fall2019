@@ -494,52 +494,7 @@ public class MapGeo {
 		return getCountryAdjacency().showListEdges();
 	}
 
-	/**
-	 * This method format the map
-	 * 
-	 * @param fileName
-	 * @return
-	 */
-	public String mapFormat(String fileName) {
-		String mapCountries = "";
-		String mapContent = "name " + fileName + " Map\r\n" + "\r\n" + "[files]\r\n" + "\r\n" + "[continents]\r\n";
-		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
-			int continentId = (int) continentMap.getKey();
-			Continent c = continentList.get(continentId);
-			mapContent += c.getContinentName() + " " + c.getContinentControlValue() + " #FFFFFF\r\n";
-			List<Country> countryList = c.getCountriesList();
-			for (Country co : countryList) {
-				mapCountries += co.getCountryId() + " " + co.getCountryName() + " " + continentId + " 0 0\r\n";
-			}
-		}
-		mapContent += "\r\n[countries]\r\n" + mapCountries;
-
-		mapContent += "\r\n[borders]\r\n" + showCountryAdjacency();
-		return mapContent;
-	}
-
-	/**
-	 * This method write the map with a string file name
-	 * 
-	 * @param fileName
-	 * @throws Exception
-	 */
-	public void saveMap(String fileName) throws Exception {
-
-		if (validateMap()) {
-			File file = new File(mapFolder + "/" + fileName + ".map");
-
-			BufferedWriter br = new BufferedWriter(new FileWriter(file));
-
-			br.write(mapFormat(fileName));
-
-			br.close();
-		} else {
-			System.out.println("Map is not valid, we can not save it");
-		}
-	}
+	
 
 	/**
 	 * This method add country to corresponding continent
@@ -1108,45 +1063,6 @@ public class MapGeo {
 
 	
 
-	/**
-	 * 
-	 * @param mapName
-	 * @return true
-	 */
-	protected boolean readConquest(String mapName) {
-		return true;
-	}
-
-	/**
-	 * 
-	 * @param mapName
-	 * @return true
-	 */
-	protected boolean write(String mapName) {
-		return true;
-	}
-
-	/**
-	 * 
-	 * @param mapName
-	 * @return true
-	 */
-	protected boolean writeConquest(String mapName) {
-		return true;
-	}
-
-	public boolean readDomination(String mapName) {
-		System.out.println("Read Domi Map Geo");
-		return true;
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean read(String mapFileName) {
-		// TODO Auto-generated method stub
-		System.out.println("Read Map Geo");
-		return true;
-	}
-
+	
 
 }

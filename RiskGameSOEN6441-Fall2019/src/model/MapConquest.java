@@ -1,10 +1,16 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -162,11 +168,54 @@ public class MapConquest extends MapGeo {
 		return validateMap();
 	}
 
-	/**
-	 * This method is for write the domination map
-	 */
-	public void writeConquest() {
-		System.out.println("Write Dom");
 
+	/**
+	 * This method is for write the conquest map
+	 */
+	/**
+	 * This method format the map
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	public String mapFormat(String fileName) {
+		String mapCountries = "";
+		String mapContent = "name " + fileName + " Map\r\n" + "\r\n" + "[files]\r\n" + "\r\n" + "[continents]\r\n";
+		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+			int continentId = (int) continentMap.getKey();
+			Continent c = continentList.get(continentId);
+			mapContent += c.getContinentName() + " " + c.getContinentControlValue() + " #FFFFFF\r\n";
+			List<Country> countryList = c.getCountriesList();
+			for (Country co : countryList) {
+				mapCountries += co.getCountryId() + " " + co.getCountryName() + " " + continentId + " 0 0\r\n";
+			}
+		}
+		mapContent += "\r\n[countries]\r\n" + mapCountries;
+
+		mapContent += "\r\n[borders]\r\n" + showCountryAdjacency();
+		return mapContent;
+	}
+
+	/**
+	 * This method write the map with a string file name
+	 * 
+	 * @param fileName
+	 * @throws Exception
+	 */
+	public void write(String fileName) throws Exception {
+
+		if (validateMap()) {
+			File file = new File(mapFolder + "/" + fileName + ".map");
+
+			BufferedWriter br = new BufferedWriter(new FileWriter(file));
+
+			br.write(mapFormat(fileName));
+
+			br.close();
+		} else {
+			System.out.println("Map is not valid, we can not save it");
+		}
 	}
 }
