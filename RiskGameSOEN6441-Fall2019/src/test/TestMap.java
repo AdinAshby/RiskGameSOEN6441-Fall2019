@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import model.AdjacencyList;
+import model.MapConquest;
 import model.MapGeo;
 
 /**
@@ -22,6 +23,7 @@ public class TestMap {
 	/**
 	 * Object of the Empty AdjacencyList
 	 */
+	MapConquest mapConquest = new MapConquest();
 	AdjacencyList adEmpty = new AdjacencyList();
 	/**
 	 * Object of the AdjacencyList
@@ -44,7 +46,7 @@ public class TestMap {
 	@Test
 	public void testvalidateMapForValidMap() throws Exception {
 
-		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
+		Assert.assertEquals(true, mapConquest.readConquest(VALID_MAP));
 		Assert.assertEquals(true, mapBuild.validateMap());
 		
 	}
@@ -57,7 +59,7 @@ public class TestMap {
 	public void testvalidateMap() throws Exception {
 
 
-		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
+		Assert.assertEquals(false, mapConquest.readConquest(INVALID_MAP));
 		Assert.assertEquals(false, mapBuild.validateMap());
 	}
 
@@ -75,9 +77,9 @@ public class TestMap {
 		ad.addEdge(555, 8686);
 		ad.addEdge(622, 8686);
 		ad.addEdge(45, 555);
-		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
+		Assert.assertEquals(true, mapConquest.readConquest(VALID_MAP));
 		Assert.assertEquals(true, ad.isConnected());
-		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
+		Assert.assertEquals(false, mapConquest.readConquest(INVALID_MAP));
 		Assert.assertEquals(false, adEmpty.isConnected());
 	}
 
@@ -88,7 +90,7 @@ public class TestMap {
 	 */
 	@Test
 	public void testIsMapSubGraphValid() throws Exception {
-		Assert.assertEquals(true, mapBuild.loadMap(VALID_MAP));
+		Assert.assertEquals(true, mapConquest.readConquest(VALID_MAP));
 		Assert.assertEquals(true, mapBuild.isMapSubGraph());
 		
 	}
@@ -100,7 +102,7 @@ public class TestMap {
 	@Test
 	public void testIsMapSubGraphInValid() throws Exception {
 		
-		Assert.assertEquals(false, mapBuild.loadMap(INVALID_MAP));
+		Assert.assertEquals(false, mapConquest.readConquest(INVALID_MAP));
 		Assert.assertEquals(false, mapBuild.isMapSubGraph());
 	}
 }
