@@ -20,6 +20,7 @@ public class MapAdapter extends MapDomination {
 	 */
 	public boolean read(String mapName) {
 		mapConquest.readConquest(mapName);
+		System.out.println(mapConquest.continentList);
 		//this.continentList=mapConquest.continentList;
 		this.mapAdapterCopy(mapConquest);
 		return true;
@@ -30,8 +31,9 @@ public class MapAdapter extends MapDomination {
 	 * This method is for write the map
 	 * 
 	 * @param mapName
+	 * @throws Exception 
 	 */
-	public boolean write(String mapName) {
+	public boolean write(String mapName) throws Exception {
 		return mapConquest.writeConquest(mapName);
 
 	}

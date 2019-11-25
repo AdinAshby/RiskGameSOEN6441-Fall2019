@@ -1,5 +1,9 @@
 package view;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -30,7 +34,7 @@ public class RiskUI {
 
 //	private MapGeo mapBuild = MapGeo.getInstance();
 
-	private MapDomination mapAdapter;
+
 
 	/**
 	 * private mapView
@@ -97,7 +101,7 @@ public class RiskUI {
 	private ArrayList<String> playerStrategies = new ArrayList<String>();
 
 	private int counterForPhases;
-
+	private MapDomination mapAdapter;
 	private MapDomination mapDomination = new MapDomination();
 	private MapConquest mapConquest= new MapConquest();
 	
@@ -170,9 +174,9 @@ public class RiskUI {
 
 		
 		
-		boolean debug = false;
+		boolean debug = true;
 		if (debug == true) {
-			mapFileName="test";
+			mapFileName="Aden";
 						
 			isDominationMap(mapFileName);
 			
@@ -689,16 +693,43 @@ public class RiskUI {
 		}
 	}
 
-	private void isDominationMap(String mapName) {
-		String mapType="d";
-		if (mapType.equalsIgnoreCase("d")) {
-			mapDomination.read(mapName);
-			mapAdapter=mapDomination;
-		} else if (mapType.equalsIgnoreCase("c")) {
-			MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
-			mapAdapterFromDomination.read(mapName);
-			mapAdapter=mapAdapterFromDomination;
+	private boolean isDominationMap(String mapFileName) {
+		File mapFolder=mapDomination.getMapFolder();
+		File file = new File(mapFolder + "/" + mapFileName + ".map");
+		if (!file.exists()) {
+			System.out.println(mapFileName + " map file not found. Please try again");
+			return false;
+		}else {
+			System.out.println("Read File: "+mapFolder + "/" + mapFileName + ".map");
 		}
+		
+		BufferedReader bufferedReader = null;
+		try {
+
+			bufferedReader = new BufferedReader(new FileReader(file));
+
+			StringBuffer stringBuffer = new StringBuffer();
+			String fileContent = "";
+			String line = null;
+
+			line = bufferedReader.readLine();
+			if(!line.equals("[Map]")) {
+				mapDomination.read(mapFileName);
+				mapAdapter=mapDomination;
+			}else {
+				MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
+				mapAdapterFromDomination.read(mapFileName);
+				mapAdapter=mapAdapterFromDomination;
+			
+			}
+			}catch (FileNotFoundException e) {
+				System.out.println("File Not Found");
+			} catch (Exception e) {
+				System.out.println("Error in reading Map"+e);
+			}
+		
+	
+		return true;
 		
 	}
 

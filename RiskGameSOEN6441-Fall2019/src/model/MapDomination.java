@@ -19,14 +19,14 @@ public class MapDomination extends MapGeo {
 	/**
 	 * This method reads the map files
 	 */
-	public boolean read(String fileName) {
+	public boolean read(String mapFileName) {
 
-		File file = new File(mapFolder + "/" + fileName + ".map");
+		File file = new File(mapFolder + "/" + mapFileName + ".map");
 		if (!file.exists()) {
-			System.out.println(fileName + " domination map file not found. Please try again");
+			System.out.println(mapFileName + " domination map file not found. Please try again");
 			return false;
 		}else {
-			System.out.println("Read Domination File: "+mapFolder + "/" + fileName + ".map");
+			System.out.println("Read Domination File: "+mapFolder + "/" + mapFileName + ".map");
 		}
 
 		continentList = new HashMap<Integer, Continent>();
@@ -192,9 +192,10 @@ public class MapDomination extends MapGeo {
 	 * This method write the map with a string file name
 	 * 
 	 * @param fileName
+	 * @return 
 	 * @throws Exception
 	 */
-	public void write(String fileName) throws Exception {
+	public boolean write(String fileName) throws Exception {
 
 		if (validateMap()) {
 			File file = new File(mapFolder + "/" + fileName + ".map");
@@ -207,6 +208,7 @@ public class MapDomination extends MapGeo {
 		} else {
 			System.out.println("Map is not valid, we can not save it");
 		}
+		return true;
 	}
 
 }

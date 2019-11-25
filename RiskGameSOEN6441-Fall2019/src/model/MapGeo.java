@@ -35,6 +35,10 @@ public class MapGeo {
 	 */
 	final File mapFolder = new File("./MapFiles");
 
+	public File getMapFolder() {
+		return mapFolder;
+	}
+
 	/**
 	 * private continentList
 	 */
@@ -369,6 +373,20 @@ public class MapGeo {
 		return null;
 	}
 
+	public int getCountryIdByName(String countryName) {
+		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
+			int continentId = (int) continentMap.getKey();
+			Continent c = continentList.get(continentId);
+			Country country = c.getCountry(countryName);
+			if (country != null) {
+				return country.getCountryId();
+			}
+		}
+		return 0;
+	}
+	
 	/**
 	 * This method returns continent by countryName
 	 * 
@@ -542,6 +560,7 @@ public class MapGeo {
 	 */
 
 	public boolean validateMap() {
+		
 		boolean isValid = true;
 		if (getContinentListSize() < 2) {
 			isValid = false;
@@ -549,7 +568,7 @@ public class MapGeo {
 		}
 		if (getCountryListSize() < 2) {
 			isValid = false;
-			System.out.println("Countries are less than 2");
+			System.out.println("Countries with no adjacency or Countries are less than 2");
 		}
 		if (!getCountryAdjacency().isConnected()) {
 			isValid = false;
