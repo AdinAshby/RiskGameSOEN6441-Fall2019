@@ -1,0 +1,17 @@
+[Map]
+image=world.bmp
+warn=yes
+author=Sean O'Connor
+scroll=horizontal
+wrap=no
+
+[Continents]
+
+North America=5
+South America=2
+Africa=3
+Europe=5
+Asia=7
+Australia=2
+
+[Territories]
