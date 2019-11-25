@@ -1,0 +1,52 @@
+[Map]
+image=world.bmp
+warn=yes
+author=Sean O'Connor
+scroll=horizontal
+wrap=no
+
+[Continents]
+
+[Territories]
+Ural,55,70,Asia,Siberia,China,Afghanistan,Ukraine
+Central America,65,80,North America,Western United States,Eastern United States,Venezuala
+Western Australia,75,90,Australia,Indonesia,New Guinea,Eastern Australia
+Afghanistan,85,100,Asia,Ural,China,India,Middle East,Ukraine
+Alberta,95,110,North America,Alaska,Northwest Territory,Ontario,Western United States
+Siam,105,120,Asia,China,India,Indonesia
+Egypt,115,130,Africa,Southern Europe,North Africa,Middle East,East Africa
+North Africa,125,140,Africa,Brazil,Western Europe,Southern Europe,Egypt,East Africa,Congo
+Madagascar,135,150,Africa,East Africa,South Africa
+Scandinavia,145,160,Europe,Iceland,Great Britain,Northern Europe,Ukraine
+Iceland,155,170,Europe,Greenland,Great Britain,Scandinavia
+Middle East,165,180,Asia,Ukraine,Afghanistan,India,Southern Europe,Egypt,East Africa
+Great Britain,175,190,Europe,Iceland,Scandinavia,Western Europe,Northern Europe
+Mongolia,185,200,Asia,Siberia,Irkutsk,Japan,China,Kamchatka
+China,195,210,Asia,Ural,Siberia,Mongolia,Siam,India,Afghanistan
+Siberia,205,220,Asia,Yatusk,Irkutsk,Mongolia,China,Ural
+Brazil,215,230,South America,Venezuala,Peru,Argentina,North Africa
+Alaska,225,240,North America,Northwest Territory,Alberta,Kamchatka
+Kamchatka,235,250,Asia,Yatusk,Irkutsk,Japan,Alaska,Mongolia
+Eastern Australia,245,260,Australia,Western Australia,New Guinea
+Argentina,255,270,South America,Peru,Brazil
+Northern Europe,265,280,Europe,Great Britain,Scandinavia,Ukraine,Southern Europe,Western Europe
+Northwest Territory,275,290,North America,Alaska,Alberta,Ontario,Greenland
+Eastern United States,285,300,North America,Ontario,Quebec,Western United States,Central America
+Japan,295,310,Asia,Kamchatka,Mongolia
+Quebec,305,320,North America,Greenland,Ontario,Eastern United States
+Ukraine,315,330,Europe,Ural,Afghanistan,Middle East,Southern Europe,Northern Europe,Scandinavia
+Yatusk,325,340,Asia,Siberia,Irkutsk,Kamchatka
+Congo,335,350,Africa,North Africa,East Africa,South Africa
+Western Europe,345,360,Europe,Great Britain,Northern Europe,Southern Europe,North Africa
+India,355,370,Asia,China,Siam,Afghanistan,Middle East
+New Guinea,365,380,Australia,Indonesia,Western Australia,Eastern Australia
+Irkutsk,375,390,Asia,Siberia,Yatusk,Kamchatka,Mongolia
+South Africa,385,400,Africa,Congo,East Africa,Madagascar
+Southern Europe,395,410,Europe,Northern Europe,Ukraine,Middle East,Egypt,North Africa,Western Europe
+Western United States,405,420,North America,Alberta,Ontario,Eastern United States,Central America
+Ontario,415,430,North America,Northwest Territory,Alberta,Greenland,Quebec,Western United States,Eastern United States
+Venezuala,425,440,South America,Central America,Peru,Brazil
+Peru,435,450,South America,Venezuala,Brazil,Argentina
+Greenland,445,460,North America,Northwest Territory,Ontario,Quebec,Iceland
+East Africa,455,470,Africa,Egypt,Middle East,Congo,North Africa,South Africa,Madagascar
+Indonesia,465,480,Australia,Siam,New Guinea,Western Australia
