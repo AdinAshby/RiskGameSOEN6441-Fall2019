@@ -106,13 +106,13 @@ public class TestMap {
 		Assert.assertEquals(false, mapBuild.isMapSubGraph());
 	}
 	@Test
-	public void testNoCountriesMapFile() throws Exception {
+	public void testNoCountries() throws Exception {
 		
 		Assert.assertEquals(true, mapConquest.readConquest("no_countries"));
 		Assert.assertEquals(false, mapBuild.validateMap());
 	}
 	@Test
-	public void testNoContinentsMapFile() throws Exception {
+	public void testNoContinents() throws Exception {
 		
 		Assert.assertEquals(true, mapConquest.readConquest("no_continents"));
 		Assert.assertEquals(false, mapBuild.validateMap());

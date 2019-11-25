@@ -2,6 +2,8 @@ package test;
 
 import org.junit.Test;
 import org.junit.Assert;
+
+import model.MapConquest;
 import model.MapGeo;
 
 /**
@@ -25,7 +27,7 @@ public class TestMapFiles {
 	 * String inValid_file
 	 */
 	String INVALID_FILE = "test2";
-
+MapConquest mapConquest = new MapConquest();
 	/**
 	 * This is the test method for checking whether the map file is valid
 	 * 
@@ -33,7 +35,7 @@ public class TestMapFiles {
 	 */
 	@Test
 	public void testValidMapFiles() throws Exception {
-		Assert.assertEquals(true, mapBuild.loadMap(VALID_FILE));
+		Assert.assertEquals(true, mapConquest.readConquest(VALID_FILE));
 	}
 
 	/**
@@ -43,7 +45,7 @@ public class TestMapFiles {
 	 */
 	@Test
 	public void testInvalidMapFiles() throws Exception {
-		Assert.assertEquals(false, mapBuild.loadMap(INVALID_FILE));
+		Assert.assertEquals(false, mapConquest.readConquest(INVALID_FILE));
 	}
 
 }
