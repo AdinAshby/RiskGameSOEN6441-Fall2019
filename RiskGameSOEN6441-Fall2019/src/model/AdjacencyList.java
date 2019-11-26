@@ -29,9 +29,12 @@ public class AdjacencyList {
 	 * @param id
 	 */
 	public void addVertex(int id) {
-
-		adjacencyList.putIfAbsent(id, new ArrayList<Integer>());
-
+		try {
+			adjacencyList.putIfAbsent(id, new ArrayList<Integer>());
+//			System.out.println(id + " added.");
+		} catch (Exception e) {
+			System.out.println("Error in Add " + e);
+		}
 	}
 
 	/**
@@ -58,9 +61,9 @@ public class AdjacencyList {
 
 	/**
 	 * @param key
-
+	 * 
 	 * @param key
-	 *            
+	 * 
 	 * @return
 	 */
 	public ArrayList<Integer> getValues(int key) {
@@ -89,6 +92,7 @@ public class AdjacencyList {
 
 	/**
 	 * This method returns the adjacency List of Vertex
+	 * 
 	 * @param vertexId
 	 * @param vertexId
 	 * @return adjacency List
@@ -99,6 +103,7 @@ public class AdjacencyList {
 
 	/**
 	 * This method return String of the Vertex Adjacency
+	 * 
 	 * @param vertexId
 	 * @return
 	 */
@@ -136,19 +141,26 @@ public class AdjacencyList {
 	 * @param id
 	 */
 	public void addEdge(int start, int end) {
-		// System.out.println("Add Edge between " + start + " to " + end);
+//		 System.out.println("Add Edge between " + start + " to " + end);
+		try {
+			List<Integer> list;
+			list = adjacencyList.get(start);
+			if (list == null) {
+				list = new ArrayList<Integer>();
+			}
+			if (!list.contains(end)) {
+				list.add(end);
+			}
 
-		List<Integer> list;
-		list = adjacencyList.get(start);
-if(list==null) {list=new ArrayList<Integer>();}
-		if (!list.contains(end)) {
-			list.add(end);
-		}
-
-		list = adjacencyList.get(end);
-		if(list==null) {list=new ArrayList<Integer>();}
-		if (!list.contains(start)) {
-			list.add(start);
+			list = adjacencyList.get(end);
+			if (list == null) {
+				list = new ArrayList<Integer>();
+			}
+			if (!list.contains(start)) {
+				list.add(start);
+			}
+		} catch (Exception e) {
+			System.out.println("Error" + e);
 		}
 
 	}
@@ -156,10 +168,8 @@ if(list==null) {list=new ArrayList<Integer>();}
 	/**
 	 * This method removes an edge.
 	 * 
-	 * @param start
-	 *            specifies start of edge
-	 * @param end
-	 *            specifies end of edge
+	 * @param start specifies start of edge
+	 * @param end   specifies end of edge
 	 */
 	public void removeEdge(int start, int end) {
 		List<Integer> list = null;

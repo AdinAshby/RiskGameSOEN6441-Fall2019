@@ -97,66 +97,46 @@ public class MapConquest extends MapGeo {
 			if (matcher.find()) {
 				countryLines = matcher.group(0);
 			}
-			
-			Map<Integer, String[]> AdjCountryList=new HashMap<Integer, String[]>();
-			
-			String[] countriesOfContinent = countryLines.split("\n\n");
-			
-			for (int cc = 0; cc < countriesOfContinent.length; cc++) {
-				
-				String[] countryLine = countriesOfContinent[cc].split("\n");
 
-				
+			// Map<Integer, String[]> AdjCountryList=new HashMap<Integer, String[]>();
+
+			String[] countriesOfContinent = countryLines.split("\n\n");
+			for (int cc = 0; cc < countriesOfContinent.length; cc++) {
+				String[] countryLine = countriesOfContinent[cc].split("\n");
 				for (int cl = 0; cl < countryLine.length; cl++) {
-					
+
 					String[] currentLine = countryLine[cl].split(",");
-					
+
 					String countryName = currentLine[0];
 					int countryId = CountryId++;
-					String[] AdjThisCountry=new String[currentLine.length-4];
-					for(int i=4; i<currentLine.length;i++) {
-						AdjThisCountry[i-4]=currentLine[i];	
-					}
-					AdjCountryList.put(CountryId,AdjThisCountry );
 					Country country = new Country(countryName, CountryId);
-					getCountryAdjacency().addVertex(countryId);
-//					System.out.println(getContinent(cc+1).getContinentName()+"\n\n");
-					getContinent(cc+1).addCountry(country);
-					System.out.println(CountryId+"- Adding " + countryName + " to " + getContinent(cc+1).getContinentName());
+					Continent continent = getContinent(currentLine[3]);
+					countryAdjacency.addVertex(countryId);
+					System.out.println(
+							CountryId + "- Adding " + countryName + " to " + continent.getContinentName());
+					
+					continent.addCountry(country);
+					
 				}
+
 			}
-			for (Map.Entry<Integer, String[]> entry : AdjCountryList.entrySet()) {
-				Integer countryId = entry.getKey();
-				String[] AdjThisCountry = entry.getValue();
-				//System.out.println("CC="+AdjCountryList.size());
-				for(int j=0;j<AdjThisCountry.length;j++) {
-					String countryName=AdjThisCountry[j];
-					int AdjCountyId=getCountryIdByName(countryName);
-//					System.out.println("Adding "+countryId+" To "+AdjCountyId);
-					addCountryAdjacency(countryId,AdjCountyId );
+
+
+			for (int cc = 0; cc < countriesOfContinent.length; cc++) {
+				String[] countryLine = countriesOfContinent[cc].split("\n");
+				for (int cl = 0; cl < countryLine.length; cl++) {
+					String[] currentLine = countryLine[cl].split(",");
+					String countryName = currentLine[0];
+					Country country = getCountryByName(countryName);
+					for (int i = 4; i < currentLine.length; i++) {
+						System.out.println("Connect " + currentLine[i] + " to " + countryName);
+						countryAdjacency.addEdge(country.getCountryId(), getCountryIdByName(currentLine[i]));
 					}
+
+				}
+
 			}
-			
-			
-		//	System.out.println("Adj for 8"+this.getCountryAdjacency(8));
-			
-			//System.out.println(getCountryById(3).getCountryName()+"="+Arrays.toString(AdjCountryList.get(3)));
-			
-			
-			
-			
-		//	System.out.println(getCountryByName("Gray").getContinentName());
-			//continentList.get(8).getCountriesList()
-			//System.out.println(this.getCountryListNames("Queensbasin"));
 
-//				System.out.println("\n-------------\n"+countryOfContinent[i]+"\n-------------\n");
-
-			// getCountryAdjacency().addVertex(countryId);
-
-//				System.out.println("Add Adj for " + c.getCountryName() + " Adj=" + adjCountriesContent);
-//				String[] arrOfAdj = adjCountriesContent.split(" ");
-//				for (String adj : arrOfAdj)
-//					addCountryAdjacency(countryId, Integer.parseInt(adj));
 
 			System.out.println("-------------------------------");
 
@@ -165,10 +145,9 @@ public class MapConquest extends MapGeo {
 		} catch (Exception e) {
 			System.out.println("Map is invalid");
 		}
-		
-		return true; //validateMap();
-	}
 
+		return true; // validateMap();
+	}
 
 	/**
 	 * This method is for write the conquest map
@@ -181,29 +160,23 @@ public class MapConquest extends MapGeo {
 	 */
 	public String mapFormat(String fileName) {
 		String mapCountries = "";
-		String mapContent = "[Map]\r\n" + 
-				"author=System\r\n" + 
-				"warn=yes\r\n" + 
-				"image=\r\n" + 
-				"wrap=no\r\n" + 
-				"scroll=none\r\n" + 
-				"\r\n" + 
-				"[Continents]" + "\r\n";
+		String mapContent = "[Map]\r\n" + "author=System\r\n" + "warn=yes\r\n" + "image=\r\n" + "wrap=no\r\n"
+				+ "scroll=none\r\n" + "\r\n" + "[Continents]" + "\r\n";
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
 			int continentId = (int) continentMap.getKey();
 			Continent c = continentList.get(continentId);
-			
+
 			mapContent += c.getContinentName() + "=" + c.getContinentControlValue() + "\r\n";
 			List<Country> countryList = c.getCountriesList();
 			for (Country co : countryList) {
-				String AdjCountries="";
-				for(int AdjCountry : this.getCountryAdjacency(co.getCountryId())) {
-					AdjCountries += getCountryById(AdjCountry).getCountryName()+",";
+				String AdjCountries = "";
+				for (int AdjCountry : this.getCountryAdjacency(co.getCountryId())) {
+					AdjCountries += getCountryById(AdjCountry).getCountryName() + ",";
 				}
-				AdjCountries=AdjCountries.substring(0, AdjCountries.length()-1);
-				mapCountries += co.getCountryName() + ",0,0," +c.getContinentName()+"," + AdjCountries +"\r\n";
+				AdjCountries = AdjCountries.substring(0, AdjCountries.length() - 1);
+				mapCountries += co.getCountryName() + ",0,0," + c.getContinentName() + "," + AdjCountries + "\r\n";
 			}
 		}
 		mapContent += "\r\n[Territories]\r\n" + mapCountries;
@@ -232,14 +205,13 @@ public class MapConquest extends MapGeo {
 		}
 		return true;
 	}
-	
-	
+
 	public MapConquest(MapDomination mapDomination) {
-		 this.continentList=mapDomination.continentList;
-		 this.theMapView=mapDomination.theMapView;
-		 this.countryAdjacency=mapDomination.countryAdjacency;
-		 this.players=mapDomination.players;
-		 this.random=mapDomination.random;
-		
+		this.continentList = mapDomination.continentList;
+		this.theMapView = mapDomination.theMapView;
+		this.countryAdjacency = mapDomination.countryAdjacency;
+		this.players = mapDomination.players;
+		this.random = mapDomination.random;
+
 	}
 }
