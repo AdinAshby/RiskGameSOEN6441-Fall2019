@@ -140,12 +140,13 @@ public class AdjacencyList {
 
 		List<Integer> list;
 		list = adjacencyList.get(start);
-
+if(list==null) {list=new ArrayList<Integer>();}
 		if (!list.contains(end)) {
 			list.add(end);
 		}
 
 		list = adjacencyList.get(end);
+		if(list==null) {list=new ArrayList<Integer>();}
 		if (!list.contains(start)) {
 			list.add(start);
 		}

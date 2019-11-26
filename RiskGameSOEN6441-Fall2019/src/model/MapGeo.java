@@ -685,7 +685,7 @@ public class MapGeo {
 				int randomCountryID = random.nextInt(temporaryCountries.size());
 				//countriesIDs.add(j, temporaryCountries.get(randomCountryID).getCountryId());
 				countriesIDs.add(temporaryCountries.get(randomCountryID).getCountryId());
-				System.out.println("Rand="+randomCountryID+" Country="+temporaryCountries.get(randomCountryID).getCountryId());
+//				System.out.println("Rand="+randomCountryID+" Country="+temporaryCountries.get(randomCountryID).getCountryId());
 				temporaryCountries.remove(randomCountryID);
 				// updateCountryById(i, countriesIds[j]);
 			}
