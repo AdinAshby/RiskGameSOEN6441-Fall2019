@@ -178,12 +178,12 @@ public class RiskUI {
 		 * Map Builder Pattern
 		 */
 		
-		MapGeo mapDomination2;
-		MapBuilder mapGeo=new MapDominationBuilder();
-		MapDirector mapDirector= new MapDirector();
-		mapDirector.setBuilder(mapGeo);
-		mapDirector.constructMapGeo();
-		mapDomination2=mapDirector.getMapGeo();
+//		MapGeo mapDomination2;
+//		MapBuilder mapGeo=new MapDominationBuilder();
+//		MapDirector mapDirector= new MapDirector();
+//		mapDirector.setBuilder(mapGeo);
+//		mapDirector.constructMapGeo();
+//		mapDomination2=mapDirector.getMapGeo();
 		
 		
 		
