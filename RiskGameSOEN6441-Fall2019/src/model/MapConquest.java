@@ -98,8 +98,6 @@ public class MapConquest extends MapGeo {
 				countryLines = matcher.group(0);
 			}
 
-			// Map<Integer, String[]> AdjCountryList=new HashMap<Integer, String[]>();
-
 			String[] countriesOfContinent = countryLines.split("\n\n");
 			for (int cc = 0; cc < countriesOfContinent.length; cc++) {
 				String[] countryLine = countriesOfContinent[cc].split("\n");
@@ -108,7 +106,7 @@ public class MapConquest extends MapGeo {
 					String[] currentLine = countryLine[cl].split(",");
 
 					String countryName = currentLine[0];
-					int countryId = CountryId++;
+					int countryId = ++CountryId;
 					Country country = new Country(countryName, CountryId);
 					Continent continent = getContinent(currentLine[3]);
 					countryAdjacency.addVertex(countryId);
@@ -120,7 +118,7 @@ public class MapConquest extends MapGeo {
 				}
 
 			}
-
+		
 
 			for (int cc = 0; cc < countriesOfContinent.length; cc++) {
 				String[] countryLine = countriesOfContinent[cc].split("\n");
@@ -136,6 +134,8 @@ public class MapConquest extends MapGeo {
 				}
 
 			}
+			
+			
 
 
 			System.out.println("-------------------------------");

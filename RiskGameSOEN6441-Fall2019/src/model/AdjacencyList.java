@@ -30,8 +30,8 @@ public class AdjacencyList {
 	 */
 	public void addVertex(int id) {
 		try {
-			adjacencyList.putIfAbsent(id, new ArrayList<Integer>());
-//			System.out.println(id + " added.");
+				adjacencyList.putIfAbsent(id, new ArrayList<Integer>());
+
 		} catch (Exception e) {
 			System.out.println("Error in Add " + e);
 		}

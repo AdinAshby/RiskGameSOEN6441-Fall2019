@@ -193,9 +193,9 @@ public class RiskUI {
 		 */
 
 		
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
-			mapFileName="Africa2"; //Aden
+			mapFileName="Africa"; //Aden
 
 			isDominationMap(mapFileName);
 
