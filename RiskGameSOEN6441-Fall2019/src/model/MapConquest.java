@@ -89,7 +89,7 @@ public class MapConquest extends MapGeo {
 
 			// Start getting countries
 			System.out.println("\n---------Loading Country-------------");
-			patternString = "(?<=\\[Territories\\]\\s)([\\w\\d\\,\\s]*)";
+			patternString = "(?<=\\[Territories\\]\\s)([\\w\\d\\,\\.\\s]*)";
 			pattern = Pattern.compile(patternString);
 			matcher = pattern.matcher(fileContent);
 			String countryLines = "";

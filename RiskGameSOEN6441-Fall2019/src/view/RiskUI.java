@@ -14,9 +14,12 @@ import model.Card;
 import model.Country;
 import model.Dice;
 import model.MapAdapter;
+import model.MapBuilder;
 import model.MapGeo;
 import model.MapConquest;
+import model.MapDirector;
 import model.MapDomination;
+import model.MapDominationBuilder;
 import model.Player;
 import model.Tournament;
 
@@ -170,16 +173,29 @@ public class RiskUI {
 
 		String addText = "";
 
+		
+		/**
+		 * Map Builder Pattern
+		 */
+		
+		MapGeo mapDomination2;
+		MapBuilder mapGeo=new MapDominationBuilder();
+		MapDirector mapDirector= new MapDirector();
+		mapDirector.setBuilder(mapGeo);
+		mapDirector.constructMapGeo();
+		mapDomination2=mapDirector.getMapGeo();
+		
+		
+		
 		/**
 		 * This part is hard code to test the project defined by the boolean debug
 		 * attribute
 		 */
 
-
-
-		boolean debug = false;
+		
+		boolean debug = true;
 		if (debug == true) {
-			mapFileName="Aden";
+			mapFileName="Africa2"; //Aden
 
 			isDominationMap(mapFileName);
 
