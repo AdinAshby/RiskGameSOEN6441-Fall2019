@@ -18,6 +18,7 @@ import model.MapGeo;
 import model.MapConquest;
 import model.MapDomination;
 import model.Player;
+import model.Tournament;
 
 /**
  * This is a Risk UI class
@@ -32,7 +33,7 @@ public class RiskUI {
 	 * private mapAdapter
 	 */
 
-//	private MapGeo mapBuild = MapGeo.getInstance();
+	//	private MapGeo mapBuild = MapGeo.getInstance();
 
 
 
@@ -100,12 +101,14 @@ public class RiskUI {
 	 */
 	private ArrayList<String> playerStrategies = new ArrayList<String>();
 
+	private Tournament theTournament;
+
 	private int counterForPhases;
 	private MapDomination mapAdapter;
 	private MapDomination mapDomination = new MapDomination();
 	private MapConquest mapConquest= new MapConquest();
-	
-	
+
+
 	/**
 	 * This is RiskUI constructor
 	 */
@@ -172,16 +175,16 @@ public class RiskUI {
 		 * attribute
 		 */
 
-		
-		
-		boolean debug = true;
+
+
+		boolean debug = false;
 		if (debug == true) {
 			mapFileName="Aden";
-						
+
 			isDominationMap(mapFileName);
-			
-			
-			
+
+
+
 			// mapAdapter mapAdapter=new MapAdapter(mapAdapter);
 			//mapAdapter.read("test");
 
@@ -207,7 +210,7 @@ public class RiskUI {
 			System.out.println("Player 1=" + player1.getPlayerName() + " Player2=" + player2.getPlayerName());
 
 			//player1.attackAllout(mapAdapter);
-		//	System.exit(0);
+			//	System.exit(0);
 			int attackerCountryId = player1.getCountryIDs().get(0);
 			int fortifyCountryId = player1.getCountryIDs().get(1);
 			int attackingCountryId = player2.getCountryIDs().get(0);
@@ -481,6 +484,76 @@ public class RiskUI {
 
 					}
 
+					// tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
+
+					ArrayList<String> listOfMapFiles = new ArrayList<String>();
+					ArrayList<String> listOfPlayerStrategies = new ArrayList<String>();
+					int numberOfGames = 0;
+					int maxNumberOfTurns = 0;
+
+					regex = "(?<=tournament)(.*)";
+					setPattern(regex);
+					setMatcher(input);
+
+					addText = "";
+					if (matcher.find()) {
+						addText = getMatcher().group(1);
+					}
+
+					regex = "-M (([\\w*\\_\\-]*))+";
+					setPattern(regex);
+					setMatcher(addText);
+
+					while (matcher.find()) {
+						listOfMapFiles.add(getMatcher().group(2));
+					}
+
+					regex = "(-P ([\\w*\\_\\-]*))+";
+					setPattern(regex);
+					setMatcher(addText);
+
+					while (matcher.find()) {
+						listOfPlayerStrategies.add(getMatcher().group(2));
+					}
+
+					regex = "-G \\d+";
+					setPattern(regex);
+					setMatcher(addText);
+
+					while (matcher.find()) {
+						numberOfGames = Integer.parseInt(getMatcher().group(2));
+					}
+
+					regex = "-D \\d+";
+					setPattern(regex);
+					setMatcher(addText);
+
+					while (matcher.find()) {
+						maxNumberOfTurns = Integer.parseInt(getMatcher().group(2));
+					}
+
+					if((listOfMapFiles.size() > 0 && listOfMapFiles.size() < 6) && (listOfPlayerStrategies.size() > 1 && listOfPlayerStrategies.size() < 5) && (numberOfGames > 0 && numberOfGames < 6) && (maxNumberOfTurns > 9 && maxNumberOfTurns < 51)) {
+
+						isValidCommand = true;
+
+						for(String each : listOfMapFiles) {
+							if(isDominationMap(each) == false) {
+								isValidCommand = false;
+								break;
+							}
+						}
+
+						for(String each : listOfPlayerStrategies) {
+							if(!(each.equalsIgnoreCase("aggressive") || each.equalsIgnoreCase("benevolent") || each.equalsIgnoreCase("random") || each.equalsIgnoreCase("cheater"))) {
+								isValidCommand = false;
+								break;
+							}
+						}
+
+						if(isValidCommand)
+							theTournament = new Tournament(listOfMapFiles, listOfPlayerStrategies, numberOfGames, maxNumberOfTurns);
+					}
+
 					if (!isValidCommand) {
 						System.out.println("Please follow the correct command rules");
 					}
@@ -520,7 +593,7 @@ public class RiskUI {
 					regex = "(-add ([\\w*\\_\\-]*) ([\\w*\\_\\-]*))+";
 					setPattern(regex);
 					setMatcher(addText);
-					
+
 					while (matcher.find()) {
 						String playerName = getMatcher().group(2);
 						String playerStrategy = getMatcher().group(3);
@@ -702,7 +775,7 @@ public class RiskUI {
 		}else {
 			System.out.println("Read File: "+mapFolder + "/" + mapFileName + ".map");
 		}
-		
+
 		BufferedReader bufferedReader = null;
 		try {
 
@@ -720,17 +793,17 @@ public class RiskUI {
 				MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
 				mapAdapterFromDomination.read(mapFileName);
 				mapAdapter=mapAdapterFromDomination;
-			
+
 			}
-			}catch (FileNotFoundException e) {
-				System.out.println("File Not Found");
-			} catch (Exception e) {
-				System.out.println("Error in reading Map"+e);
-			}
-		
-	
+		}catch (FileNotFoundException e) {
+			System.out.println("File Not Found");
+		} catch (Exception e) {
+			System.out.println("Error in reading Map"+e);
+		}
+
+
 		return true;
-		
+
 	}
 
 	/**

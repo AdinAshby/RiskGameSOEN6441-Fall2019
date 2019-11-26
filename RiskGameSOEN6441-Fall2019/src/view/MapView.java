@@ -91,6 +91,25 @@ public class MapView {
 		System.out.format(
 				"+--------------+-----------------------+------------------+----------------------------+---------------+---------------+%n");
 	}
+	
+	public void showTournamentResult(ArrayList<String> results, int numberOfGames) {
+		
+		int counter = 0;
+		
+		System.out.println("Results:");
+		System.out.println("The columns are for Games and the rows are for Maps");
+		System.out.println("----------------------------------------------------------------------------------------");
+		
+		for(String each : results) {
+			System.out.print(each);
+			
+			if(counter % numberOfGames == 0) {
+				System.out.println();
+			}
+			
+			++counter;
+		}
+	}
 
 	public void showPlayersWorldDomination(Player[] players) {
 
