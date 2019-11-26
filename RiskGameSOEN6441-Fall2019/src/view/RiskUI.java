@@ -104,9 +104,9 @@ public class RiskUI {
 	private Tournament theTournament;
 
 	private int counterForPhases;
-	private MapDomination mapAdapter;
+//	private MapDomination mapDomination;
 	private MapDomination mapDomination = new MapDomination();
-	private MapConquest mapConquest= new MapConquest();
+	private MapConquest mapConquest;
 
 
 	/**
@@ -177,7 +177,7 @@ public class RiskUI {
 
 
 
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
 			mapFileName="Aden";
 
@@ -194,12 +194,12 @@ public class RiskUI {
 			playerStrategies.add("human");
 			playerStrategies.add("human");
 
-			mapAdapter.assigningPlayersToCountries(playerNames, playerStrategies);
-			mapAdapter.showMap();
-			mapAdapter.placeAllArmies();
+			mapDomination.assigningPlayersToCountries(playerNames, playerStrategies);
+			mapDomination.showMap();
+			mapDomination.placeAllArmies();
 
-			mapAdapter.showMap();
-			Player[] players = mapAdapter.getPlayers();
+			mapDomination.showMap();
+			Player[] players = mapDomination.getPlayers();
 			Player player1 = players[0];
 			Player player2 = players[1];
 			player1.calculateNumberOfArmiesEachPlayerGets();
@@ -214,23 +214,23 @@ public class RiskUI {
 			int attackerCountryId = player1.getCountryIDs().get(0);
 			int fortifyCountryId = player1.getCountryIDs().get(1);
 			int attackingCountryId = player2.getCountryIDs().get(0);
-			String attackerCountryName = mapAdapter.getCountryNameById(attackerCountryId);
-			String fortifyCountryName = mapAdapter.getCountryNameById(fortifyCountryId);
-			String attackingCountryName = mapAdapter.getCountryNameById(attackingCountryId);
-			Country attackerCountry = mapAdapter.getCountryById(attackerCountryId);
-			Country fortifyCountry = mapAdapter.getCountryById(fortifyCountryId);
-			Country attackingCountry = mapAdapter.getCountryById(attackingCountryId);
-			isValidCommand = player1.reinforce(mapAdapter, attackerCountryName, 3, false);
-			mapAdapter.showMap();
+			String attackerCountryName = mapDomination.getCountryNameById(attackerCountryId);
+			String fortifyCountryName = mapDomination.getCountryNameById(fortifyCountryId);
+			String attackingCountryName = mapDomination.getCountryNameById(attackingCountryId);
+			Country attackerCountry = mapDomination.getCountryById(attackerCountryId);
+			Country fortifyCountry = mapDomination.getCountryById(fortifyCountryId);
+			Country attackingCountry = mapDomination.getCountryById(attackingCountryId);
+			isValidCommand = player1.reinforce(mapDomination, attackerCountryName, 3, false);
+			mapDomination.showMap();
 			System.out.println("\n-------------------\nAttack Scenario from " + attackerCountryName + " to "
 					+ attackingCountryName);
-			player1.attack(attackerCountry, attackingCountry, 3, 2, mapAdapter, 0);
+			player1.attack(attackerCountry, attackingCountry, 3, 2, mapDomination, 0);
 
-			mapAdapter.showMap();
+			mapDomination.showMap();
 			System.out.println("\n-------------------\nFortify Scenario from " + attackerCountryName + " to "
 					+ fortifyCountryName);
-			player1.fortify(attackerCountryName, fortifyCountryName, 5, mapAdapter);
-			mapAdapter.showMap();
+			player1.fortify(attackerCountryName, fortifyCountryName, 5, mapDomination);
+			mapDomination.showMap();
 			// System.out.println("NCC="+mapAdapter.getNoOfContinentsControlled());
 			editMapAnswer = "N";
 		}
@@ -255,9 +255,7 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						mapFileName = getMatcher().group(1);
 						try {
-							MapConquest mapConquest=new MapConquest();
-							mapAdapter=new MapAdapter(mapConquest);
-							mapAdapter.read(mapFileName);
+
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -279,7 +277,7 @@ public class RiskUI {
 					while (matcher.find()) {
 						String continentName = matcher.group(2);
 						int continentValue = Integer.parseInt(matcher.group(3));
-						mapAdapter.addContinent(continentName, continentValue);
+						mapDomination.addContinent(continentName, continentValue);
 						isValidCommand = true;
 
 					}
@@ -297,7 +295,7 @@ public class RiskUI {
 					setMatcher(addText);
 					while (matcher.find()) {
 						String continentName = matcher.group(2);
-						mapAdapter.removeContinent(continentName);
+						mapDomination.removeContinent(continentName);
 						isValidCommand = true;
 
 					}
@@ -316,7 +314,7 @@ public class RiskUI {
 					while (matcher.find()) {
 						String countryName = matcher.group(2);
 						String continentName = matcher.group(3);
-						mapAdapter.addCountry(countryName, continentName);
+						mapDomination.addCountry(countryName, continentName);
 						isValidCommand = true;
 
 					}
@@ -334,7 +332,7 @@ public class RiskUI {
 					matcher = pattern.matcher(addText);
 					while (matcher.find()) {
 						String countryName = matcher.group(2);
-						mapAdapter.removeCountry(countryName);
+						mapDomination.removeCountry(countryName);
 						isValidCommand = true;
 
 					}
@@ -353,7 +351,7 @@ public class RiskUI {
 					while (matcher.find()) {
 						String countryName = matcher.group(2);
 						String neighborCountryName = matcher.group(3);
-						mapAdapter.addCountryAdjacency(countryName, neighborCountryName);
+						mapDomination.addCountryAdjacency(countryName, neighborCountryName);
 						isValidCommand = true;
 
 					}
@@ -373,7 +371,7 @@ public class RiskUI {
 					while (matcher.find()) {
 						String countryName = matcher.group(2);
 						String neighborCountryName = matcher.group(3);
-						mapAdapter.removeCountryAdjacency(countryName, neighborCountryName);
+						mapDomination.removeCountryAdjacency(countryName, neighborCountryName);
 						isValidCommand = true;
 
 					}
@@ -383,7 +381,7 @@ public class RiskUI {
 					setPattern(regex);
 					setMatcher(input);
 					if (matcher.find()) {
-						mapAdapter.showMap();
+						mapDomination.showMap();
 						isValidCommand = true;
 					}
 
@@ -396,7 +394,10 @@ public class RiskUI {
 						isValidCommand = true;
 
 						try {
-							mapAdapter.write(mapFileName);
+							mapDomination.write(mapFileName);
+							mapConquest=new MapConquest(mapDomination);
+							MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
+							mapAdapterFromDomination.write(mapFileName+"Conquest");
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -419,7 +420,7 @@ public class RiskUI {
 					setMatcher(input);
 					if (matcher.find()) {
 						isValidCommand = true;
-						mapAdapter.validateMap();
+						mapDomination.validateMap();
 
 					}
 
@@ -472,8 +473,8 @@ public class RiskUI {
 						isValidCommand = true;
 						boolean isLoaded = false;
 						try {
-							isDominationMap(mapFileName);
-							isLoaded = mapAdapter.read(mapFileName);
+							isLoaded = isDominationMap(mapFileName);
+//							isLoaded = mapDomination.read(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -575,7 +576,10 @@ public class RiskUI {
 						isValidCommand = true;
 
 						try {
-							mapAdapter.write(mapFileName);
+							mapDomination.write(mapFileName);
+							mapConquest=new MapConquest(mapDomination);
+							MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
+							mapAdapterFromDomination.write(mapFileName+"Conquest");
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -629,7 +633,7 @@ public class RiskUI {
 					if (getMatcher().find()) {
 						isValidCommand = true;
 						finished = true;
-						mapAdapter.assigningPlayersToCountries(playerNames, playerStrategies);
+						mapDomination.assigningPlayersToCountries(playerNames, playerStrategies);
 
 					}
 
@@ -639,7 +643,7 @@ public class RiskUI {
 					setMatcher(input);
 					if (getMatcher().find()) {
 						isValidCommand = true;
-						mapView.showMap(mapAdapter);
+						mapView.showMap(mapDomination);
 
 					}
 
@@ -658,7 +662,7 @@ public class RiskUI {
 
 				// System.out.println(reinforceRequestingMessage);
 
-				for (Player player : mapAdapter.getPlayers()) {
+				for (Player player : mapDomination.getPlayers()) {
 					if (placeAllFlag == true) {
 						break;
 					}
@@ -680,7 +684,7 @@ public class RiskUI {
 						isValidCommand = false;
 
 						System.out.println("Player " + player.getPlayerName() + ":");
-						System.out.println("You get -" + mapAdapter.calculateNumberOfInitialArmies() + "- armies.");
+						System.out.println("You get -" + mapDomination.calculateNumberOfInitialArmies() + "- armies.");
 						readInput();
 
 						// placeall
@@ -689,7 +693,7 @@ public class RiskUI {
 						setMatcher(input);
 						if (matcher.find()) {
 							isValidCommand = true;
-							mapAdapter.placeAllArmies();
+							mapDomination.placeAllArmies();
 							finished = true;
 							placeAllFlag = true;
 							break;
@@ -702,7 +706,7 @@ public class RiskUI {
 						setMatcher(input);
 						if (getMatcher().find()) {
 							isValidCommand = true;
-							mapView.showMap(mapAdapter);
+							mapView.showMap(mapDomination);
 						}
 
 						// placearmy countryname
@@ -715,9 +719,9 @@ public class RiskUI {
 						if (getMatcher().find()) {
 							String countryName = matcher.group(1);
 
-							if (mapAdapter.placearmyIsValid(player, countryName) == true) {
-								mapAdapter.assignInitialsArmiesToSpecificCountry(countryName,
-										mapAdapter.calculateNumberOfInitialArmies());
+							if (mapDomination.placearmyIsValid(player, countryName) == true) {
+								mapDomination.assignInitialsArmiesToSpecificCountry(countryName,
+										mapDomination.calculateNumberOfInitialArmies());
 								finished = true;
 							} else {
 								System.out.println("placearmy is not valid");
@@ -739,26 +743,26 @@ public class RiskUI {
 
 				/******** START GAME PHASE **********************/
 
-				for (Player player : mapAdapter.getPlayers()) {
+				for (Player player : mapDomination.getPlayers()) {
 
 					player.setCounterForPhases(1);
 
 					System.out.println(player.getPlayerName() + " is your turn to reinforce");
 					finished = false;
 
-					isValidCommand = player.reinforceCommand(mapAdapter, mapView);
+					isValidCommand = player.reinforceCommand(mapDomination, mapView);
 
 					player.setCounterForPhases(2);
-					isValidCommand = player.attackCommand(mapAdapter, mapView);
+					isValidCommand = player.attackCommand(mapDomination, mapView);
 
 					player.setCounterForPhases(3);
-					isValidCommand = player.fortifyCommand(mapAdapter, mapView);
+					isValidCommand = player.fortifyCommand(mapDomination, mapView);
 
 					if (!isValidCommand) {
 						System.out.println("Please follow the correct command rules");
 					}
 				} // Endof For Player
-				mapAdapter.showMap();
+				mapDomination.showMap();
 			} else {
 				System.out.println("Please answer by Y or N");
 				editMapAnswer = scanner.nextLine();
@@ -766,14 +770,17 @@ public class RiskUI {
 		}
 	}
 
+	
+
 	private boolean isDominationMap(String mapFileName) {
+		boolean isLoaded=false;
 		File mapFolder=mapDomination.getMapFolder();
 		File file = new File(mapFolder + "/" + mapFileName + ".map");
 		if (!file.exists()) {
 			System.out.println(mapFileName + " map file not found. Please try again");
 			return false;
 		}else {
-			System.out.println("Read File: "+mapFolder + "/" + mapFileName + ".map");
+//			System.out.println("Read File: "+mapFolder + "/" + mapFileName + ".map");
 		}
 
 		BufferedReader bufferedReader = null;
@@ -787,12 +794,13 @@ public class RiskUI {
 
 			line = bufferedReader.readLine();
 			if(!line.equals("[Map]")) {
-				mapDomination.read(mapFileName);
-				mapAdapter=mapDomination;
+				isLoaded=mapDomination.read(mapFileName);
+				//mapAdapter=mapDomination;
 			}else {
+				mapConquest = new MapConquest(mapDomination);
 				MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
-				mapAdapterFromDomination.read(mapFileName);
-				mapAdapter=mapAdapterFromDomination;
+				isLoaded=mapAdapterFromDomination.read(mapFileName);
+				mapDomination=mapAdapterFromDomination;
 
 			}
 		}catch (FileNotFoundException e) {
@@ -802,7 +810,7 @@ public class RiskUI {
 		}
 
 
-		return true;
+		return isLoaded;
 
 	}
 

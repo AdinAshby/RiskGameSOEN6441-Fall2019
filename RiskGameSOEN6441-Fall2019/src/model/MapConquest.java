@@ -125,7 +125,6 @@ public class MapConquest extends MapGeo {
 					System.out.println(CountryId+"- Adding " + countryName + " to " + getContinent(cc+1).getContinentName());
 				}
 			}
-			System.out.println(Arrays.toString(AdjCountryList.get(31)));
 			for (Map.Entry<Integer, String[]> entry : AdjCountryList.entrySet()) {
 				Integer countryId = entry.getKey();
 				String[] AdjThisCountry = entry.getValue();
@@ -133,7 +132,7 @@ public class MapConquest extends MapGeo {
 				for(int j=0;j<AdjThisCountry.length;j++) {
 					String countryName=AdjThisCountry[j];
 					int AdjCountyId=getCountryIdByName(countryName);
-					System.out.println("Adding "+countryId+" To "+AdjCountyId);
+//					System.out.println("Adding "+countryId+" To "+AdjCountyId);
 					addCountryAdjacency(countryId,AdjCountyId );
 					}
 			}
@@ -182,21 +181,33 @@ public class MapConquest extends MapGeo {
 	 */
 	public String mapFormat(String fileName) {
 		String mapCountries = "";
-		String mapContent = "name " + fileName + " Map\r\n" + "\r\n" + "[files]\r\n" + "\r\n" + "[continents]\r\n";
+		String mapContent = "[Map]\r\n" + 
+				"author=System\r\n" + 
+				"warn=yes\r\n" + 
+				"image=\r\n" + 
+				"wrap=no\r\n" + 
+				"scroll=none\r\n" + 
+				"\r\n" + 
+				"[Continents]" + "\r\n";
 		Iterator<Entry<Integer, Continent>> it = continentList.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
 			int continentId = (int) continentMap.getKey();
 			Continent c = continentList.get(continentId);
-			mapContent += c.getContinentName() + " " + c.getContinentControlValue() + " #FFFFFF\r\n";
+			
+			mapContent += c.getContinentName() + "=" + c.getContinentControlValue() + "\r\n";
 			List<Country> countryList = c.getCountriesList();
 			for (Country co : countryList) {
-				mapCountries += co.getCountryId() + " " + co.getCountryName() + " " + continentId + " 0 0\r\n";
+				String AdjCountries="";
+				for(int AdjCountry : this.getCountryAdjacency(co.getCountryId())) {
+					AdjCountries += getCountryById(AdjCountry).getCountryName()+",";
+				}
+				AdjCountries=AdjCountries.substring(0, AdjCountries.length()-1);
+				mapCountries += co.getCountryName() + ",0,0," +c.getContinentName()+"," + AdjCountries +"\r\n";
 			}
 		}
-		mapContent += "\r\n[countries]\r\n" + mapCountries;
+		mapContent += "\r\n[Territories]\r\n" + mapCountries;
 
-		mapContent += "\r\n[borders]\r\n" + showCountryAdjacency();
 		return mapContent;
 	}
 
@@ -220,5 +231,15 @@ public class MapConquest extends MapGeo {
 			System.out.println("Map is not valid, we can not save it");
 		}
 		return true;
+	}
+	
+	
+	public MapConquest(MapDomination mapDomination) {
+		 this.continentList=mapDomination.continentList;
+		 this.theMapView=mapDomination.theMapView;
+		 this.countryAdjacency=mapDomination.countryAdjacency;
+		 this.players=mapDomination.players;
+		 this.random=mapDomination.random;
+		
 	}
 }
