@@ -301,15 +301,18 @@ public class Player implements Subject {
 			Country attackingCountry, boolean enablePrint) {
 		boolean isValid = true;
 		if (attackingCountry.getPlayerName().equals(getPlayerName())) {
+			if (enablePrint)
 			System.out.println("You can not attack to your own country");
 			isValid = false;
 		}
 
 		if (attackerCountry.getArmies() <= 1) {
+			if (enablePrint)
 			System.out.println("Attacker Country should have more than 1 army");
 			isValid = false;
 		}
 		if (attackerCountry == null || attackingCountry == null) {
+			if (enablePrint)
 			System.out.println("Enter Attacker and Attacking Country");
 			isValid = false;
 		} else {
