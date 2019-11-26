@@ -1,14 +1,16 @@
 package model;
 
 public class MapAdapter extends MapDomination {
-
+	/**
+	 * private mapConquest
+	 */
 	private MapConquest mapConquest;
 
 	/**
 	 * 
 	 * @param mapType
 	 */
-	public MapAdapter( MapConquest mapConquest) {
+	public MapAdapter(MapConquest mapConquest) {
 		this.mapConquest = mapConquest;
 
 	}
@@ -20,24 +22,28 @@ public class MapAdapter extends MapDomination {
 	 */
 	public boolean read(String mapName) {
 		mapConquest.readConquest(mapName);
-		//this.continentList=mapConquest.continentList;
+		// this.continentList=mapConquest.continentList;
 		this.mapAdapterCopy(mapConquest);
 		return true;
-		
+
 	}
 
 	/**
 	 * This method is for write the map
 	 * 
 	 * @param mapName
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean write(String mapName) throws Exception {
 		mapConquest.writeConquest(mapName);
 		return true;
 
 	}
-	
+
+	/**
+	 * 
+	 * @param mapConquest
+	 */
 	public void mapAdapterCopy(MapConquest mapConquest) {
 		this.continentList = mapConquest.continentList;
 		this.theMapView = mapConquest.theMapView;
@@ -45,13 +51,16 @@ public class MapAdapter extends MapDomination {
 		this.players = mapConquest.players;
 		this.random = mapConquest.random;
 	}
-	
+
+	/**
+	 * mapConquestCopy
+	 */
 	public void mapConquestCopy() {
-		 mapConquest.continentList=this.continentList;
-		mapConquest.theMapView=this.theMapView;
-		mapConquest.countryAdjacency=this.countryAdjacency;
-		mapConquest.players=this.players;
-		mapConquest.random=this.random;
+		mapConquest.continentList = this.continentList;
+		mapConquest.theMapView = this.theMapView;
+		mapConquest.countryAdjacency = this.countryAdjacency;
+		mapConquest.players = this.players;
+		mapConquest.random = this.random;
 	}
-	
+
 }

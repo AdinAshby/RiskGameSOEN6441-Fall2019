@@ -787,7 +787,11 @@ public class RiskUI {
 	}
 
 	
-
+/**
+ * This method is to check whether the map is domination
+ * @param mapFileName
+ * @return isLoaded
+ */
 	private boolean isDominationMap(String mapFileName) {
 		boolean isLoaded=false;
 		File mapFolder=mapDomination.getMapFolder();

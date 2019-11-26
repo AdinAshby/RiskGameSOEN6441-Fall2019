@@ -110,15 +110,13 @@ public class MapConquest extends MapGeo {
 					Country country = new Country(countryName, CountryId);
 					Continent continent = getContinent(currentLine[3]);
 					countryAdjacency.addVertex(countryId);
-					System.out.println(
-							CountryId + "- Adding " + countryName + " to " + continent.getContinentName());
-					
+					System.out.println(CountryId + "- Adding " + countryName + " to " + continent.getContinentName());
+
 					continent.addCountry(country);
-					
+
 				}
 
 			}
-		
 
 			for (int cc = 0; cc < countriesOfContinent.length; cc++) {
 				String[] countryLine = countriesOfContinent[cc].split("\n");
@@ -134,9 +132,6 @@ public class MapConquest extends MapGeo {
 				}
 
 			}
-			
-			
-
 
 			System.out.println("-------------------------------");
 
@@ -206,6 +201,9 @@ public class MapConquest extends MapGeo {
 		return true;
 	}
 
+	/**
+	 * @param mapDomination
+	 */
 	public MapConquest(MapDomination mapDomination) {
 		this.continentList = mapDomination.continentList;
 		this.theMapView = mapDomination.theMapView;
