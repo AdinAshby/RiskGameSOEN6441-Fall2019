@@ -1,11 +1,15 @@
 package test;
 
 import org.junit.Assert.*;
+import org.junit.BeforeClass;
 
+import model.MapConquest;
 import model.MapGeo;
 import model.Player;
 
 import java.util.ArrayList;
+
+import javax.naming.InitialContext;
 
 import org.junit.Test;
 import org.junit.Assert;
@@ -16,24 +20,27 @@ import org.junit.Assert;
  */
 public class TestAttack {
 	MapGeo mapBuild = MapGeo.getInstance();
-	ArrayList<String> players = new ArrayList<String>();
-
+	MapConquest mapConquest = new MapConquest();
        /**
         * This testcase tests if attack is possible for two players with ameroki map
         * @throws Exception
         */
+	
+		ArrayList<String> players = new ArrayList<String>();
+		ArrayList<String> strategy = new ArrayList<String>();
+		
 	@Test
 	public void testAttackValid() throws Exception {
-		mapBuild.loadMap("ameroki");
 		players.add("Shehnaz");
 		players.add("Golnoosh");
-		mapBuild.assigningPlayersToCountries(players);
+		mapConquest.readConquest("ameroki");
+		mapBuild.assigningPlayersToCountries(players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
-		int[] countryListForPlayerOne = myPlayers[0].getCountryIDs();
-		int[] countryListForPlayerTwo = myPlayers[1].getCountryIDs();
-		Player player1 = new Player("Shehnaz",countryListForPlayerOne);
-		Player player2 = new Player("Golnoosh", countryListForPlayerTwo);
-		Assert.assertEquals(true, player1.isAttackPossible(mapBuild));
-		Assert.assertEquals(true, player2.isAttackPossible(mapBuild));
+		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();
+		ArrayList<Integer> countryListForPlayerTwo = myPlayers[1].getCountryIDs();
+		Player playerOne = new Player("Shehnaz", countryListPlayerOne, mapBuild);
+		Player playerTwo = new Player("Golnoosh", countryListForPlayerTwo, mapBuild);
+		Assert.assertEquals(true, playerOne.isAttackPossible(mapBuild));
+		Assert.assertEquals(true, playerTwo.isAttackPossible(mapBuild));
 	}
 }

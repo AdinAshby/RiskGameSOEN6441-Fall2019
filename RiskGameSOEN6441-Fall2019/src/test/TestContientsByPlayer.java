@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import junit.framework.Assert;
+import model.MapConquest;
 import model.MapGeo;
 import model.Player;
 
@@ -14,9 +15,10 @@ public class TestContientsByPlayer {
 	ArrayList<String> Players = new ArrayList<String>();
 	ArrayList<String> playerContinents = new ArrayList<String>();
 	ArrayList<String> mapContinents = new ArrayList<String>();
-	
+	ArrayList<String> strategy = new ArrayList<String>();
+	MapConquest mapConquest = new MapConquest();
 	@Test
-	public void test() throws Exception {
+	public void testContinents() throws Exception {
 		mapContinents.add("azio");
 		mapContinents.add("ameroki");
 		mapContinents.add("utropa");
@@ -25,9 +27,9 @@ public class TestContientsByPlayer {
 		mapContinents.add("ulstrailia");
 		
 		
-		mapBuild.loadMap("ameroki");
+		mapConquest.readConquest("ameroki");
 		Players.add("Shehnaz");
-		mapBuild.assigningPlayersToCountries(Players);
+		mapBuild.assigningPlayersToCountries(Players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		
 		for(Player player : myPlayers) {
