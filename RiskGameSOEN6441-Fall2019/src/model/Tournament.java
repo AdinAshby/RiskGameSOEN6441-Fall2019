@@ -42,12 +42,14 @@ public class Tournament {
 						player.attackCommand(mapView);
 
 						player.fortifyCommand(mapDomination, mapView);
+						
+						mapDomination.showMap();
 					}
 
 				}
 
 				for(Player player : mapDomination.getPlayers()) {
-					if(!player.getWon()) {
+					if(player.getWon()) {
 						somebodyWon = true;
 						results.add(player.getPlayerName());
 					}
