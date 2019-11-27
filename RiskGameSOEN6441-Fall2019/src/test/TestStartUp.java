@@ -2,6 +2,7 @@ package test;
 
 import org.junit.Assert;
 import org.junit.Assert.*;
+import org.junit.Before;
 import model.*;
 import controller.*;
 
@@ -13,9 +14,10 @@ public class TestStartUp {
 
 	MapGeo mapBuild = MapGeo.getInstance();
 	MapDomination mapDomination = new MapDomination();
-	
+
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<String> strategy = new ArrayList<String>();
+		ArrayList<ArrayList<Integer>> countryList = new ArrayList<>();
 		
 		ArrayList<Integer> countryListOne = new ArrayList<>();
 		ArrayList<Integer> countryListTwo = new ArrayList<>();
@@ -25,12 +27,17 @@ public class TestStartUp {
 		ArrayList<Integer> countryListSix = new ArrayList<>();
 		ArrayList<Integer> countryListSeven = new ArrayList<>();
 		
+       Player playerOne = new Player("a", countryListOne, mapBuild);
+       Player playerTwo = new Player("b", countryListTwo, mapBuild);
+       Player playerThree = new Player("c", countryListThree, mapBuild);
+       Player playerFour = new Player("d", countryListThree, mapBuild);
+       Player playerFive = new Player("e", countryListFive, mapBuild);
+       Player playerSix = new Player("f", countryListSix, mapBuild);
+       Player playerSeven = new Player("g", countryListSeven, mapBuild);
+		
+		
 	@Test
 	public void initialArmiesForTwoPlayers() {
-		
-Player playerOne = new Player("a", countryListOne, mapBuild);
-Player playerTwo = new Player("b", countryListTwo, mapBuild);
-//Player playerThree = new Player("c", countryListThree, mapBuild);
 		
  Player twoPlayers[] = {playerOne, playerTwo};
  
@@ -48,10 +55,6 @@ Player playerTwo = new Player("b", countryListTwo, mapBuild);
 	@Test
 	public void initialArmiesForThreePlayers() {
 		
-Player playerOne = new Player("a", countryListOne, mapBuild);
-Player playerTwo = new Player("b", countryListTwo, mapBuild);
-Player playerThree = new Player("c", countryListThree, mapBuild);
-		
  Player threePlayers[] = {playerOne, playerTwo, playerThree};
  
  mapBuild.setPlayers(threePlayers);
@@ -67,11 +70,7 @@ Player playerThree = new Player("c", countryListThree, mapBuild);
 	}
 	@Test
 	public void initialArmiesForFourPlayers() {
-		
-Player playerOne = new Player("a", countryListOne, mapBuild);
-Player playerTwo = new Player("b", countryListTwo, mapBuild);
-Player playerThree = new Player("c", countryListThree, mapBuild);
-Player playerFour = new Player("d", countryListFour, mapBuild);
+
 		
  Player fourPlayers[] = {playerOne, playerTwo, playerThree, playerFour};
  
@@ -88,12 +87,7 @@ Player playerFour = new Player("d", countryListFour, mapBuild);
 	}
 	@Test
 	public void initialArmiesForFivePlayers() {
-		
-Player playerOne = new Player("a", countryListOne, mapBuild);
-Player playerTwo = new Player("b", countryListTwo, mapBuild);
-Player playerThree = new Player("c", countryListThree, mapBuild);
-Player playerFour = new Player("d", countryListFour, mapBuild);
-Player playerFive = new Player("e", countryListFive, mapBuild);
+
 		
  Player fivePlayers[] = {playerOne, playerTwo, playerThree, playerFour, playerFive};
  
@@ -110,13 +104,7 @@ Player playerFive = new Player("e", countryListFive, mapBuild);
 	}
 	@Test
 	public void initialArmiesForSixPlayers() {
-		
-Player playerOne = new Player("a", countryListOne, mapBuild);
-Player playerTwo = new Player("b", countryListTwo, mapBuild);
-Player playerThree = new Player("c", countryListThree, mapBuild);
-Player playerFour = new Player("d", countryListThree, mapBuild);
-Player playerFive = new Player("e", countryListFive, mapBuild);
-Player playerSix = new Player("f", countryListSix, mapBuild);
+
 		
  Player sixPlayers[] = {playerOne, playerTwo, playerThree, playerFour, playerFive, playerSix};
  
@@ -133,14 +121,7 @@ Player playerSix = new Player("f", countryListSix, mapBuild);
 	}
 	@Test
 	public void initialArmiesForSevenPlayers() {
-		
-Player playerOne = new Player("a", countryListOne, mapBuild);
-Player playerTwo = new Player("b", countryListTwo, mapBuild);
-Player playerThree = new Player("c", countryListThree, mapBuild);
-Player playerFour = new Player("d", countryListThree, mapBuild);
-Player playerFive = new Player("e", countryListFive, mapBuild);
-Player playerSix = new Player("f", countryListSix, mapBuild);
-Player playerSeven = new Player("g", countryListSeven, mapBuild);
+
 		
  Player sevenPlayers[] = {playerOne, playerTwo, playerThree, playerFour, playerFive, playerSix, playerSeven};
  
@@ -155,30 +136,59 @@ Player playerSeven = new Player("g", countryListSeven, mapBuild);
         Assert.assertEquals(20, armiesGot);
         
 	}
-	//@Test
-//public void randomCountryAssignment()
-//{
-//	playerNames.add("a");
-//	playerNames.add("b");
-//	playerNames.add("c");
-//	mapDomination.isDominationMap("test");
-//
-//
-//
-//	strategy.add("human");
-//	strategy.add("human");
-//	strategy.add("human");
-//	
-//	mapDomination.assigningPlayersToCountries(playerNames, strategy);
-//	for(int i=0; i<=2; i++) {
-//		
-//		for(int j=0;j<=2;j++) {
-//					
-//	assertNotNull(playerNames.get(i).);
-//
-//	
-//}
+	@Test
+	public void InvalidInitialArmies() {
+
+
+     Player sevenPlayers[] = {playerOne, playerTwo, playerThree, playerFour, playerFive, playerSix, playerSeven};
+ 
+     mapBuild.setPlayers(sevenPlayers);
+
+		Player[] players = mapDomination.getPlayers();
 	
-//}
-//}
+	
+     	int armiesGot = mapBuild.calculateNumberOfInitialArmies();
+		
+
+        Assert.assertNotEquals(0, armiesGot);
+        
+	}
+	/*
+	@Test
+public void randomArmyAssignment()
+{
+	playerNames.add("a");
+	playerNames.add("b");
+	
+	//mapDomination.isDominationMap("test");
+
+    countryListOne.add(1);
+    countryListOne.add(2);
+    countryListOne.add(3);
+    
+    countryListTwo.add(1);
+    countryListTwo.add(2);
+    countryListTwo.add(3);
+    
+    countryList.add(countryListOne);
+    countryList.add(countryListTwo);
+	strategy.add("human");
+	strategy.add("human");
+	strategy.add("human");
+	
+	mapDomination.assigningPlayersToCountries(playerNames, strategy);
+	mapBuild.placeAllArmies();
+	
+	for(int i=0; i<=1; i++) {
+		
+		for(int j=0;j<=1;j++) {
+					
+	  Assert.assertNotNull(playerNames.get(i).countryList.get(j).getArmies());
+
+	
+}
+	
+}
+}
+*/
 }

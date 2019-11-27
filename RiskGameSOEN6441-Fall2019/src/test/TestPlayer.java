@@ -28,14 +28,14 @@ public class TestPlayer {
 	/**
 	 * int CountryId_incorrect with incorrect initialization
 	 */
-//int COUNTRYID_INCORRECT[] = { 1, 2, 3, 4, 35 };
+
 	ArrayList<Integer> counrtyIdInCorrect = new ArrayList<Integer>();
 	
 	/**
 	 * object of the player
 	 */
 	MapGeo mapBuild = MapGeo.getInstance();
-//	Player playerOne = new Player("shehnaz", COUNTRYID_CORRECT, mapBuild);
+
 	/**
 	 * This is the test method for checking the valid playerName
 	 * 
@@ -43,8 +43,12 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetPlayerNameValid() {
-	
-//		Assert.assertEquals("shehnaz", playerOne.getPlayerName());
+	countryIdCorrect.add(1);
+	countryIdCorrect.add(2);
+	countryIdCorrect.add(3);
+	countryIdCorrect.add(4);
+	Player playerOne = new Player("shehnaz", counrtyIdInCorrect, mapBuild);
+	Assert.assertEquals("shehnaz", playerOne.getPlayerName());
 		
 	}
 	/**
@@ -54,7 +58,12 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetPlayerNameInvalid() {
-	//	Assert.assertNotEquals("golnoosh", player1.getPlayerName());
+		countryIdCorrect.add(1);
+		countryIdCorrect.add(2);
+		countryIdCorrect.add(3);
+		countryIdCorrect.add(4);
+		Player playerOne = new Player("shehnaz", counrtyIdInCorrect, mapBuild);
+	      Assert.assertNotEquals("golnoosh", playerOne.getPlayerName());
 	}
 	/**
 	 * This is the test method for checking the valid CountryId of Player
@@ -62,7 +71,13 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetCountryIdValid() {
-	//	Assert.assertArrayEquals("country Ids", COUNTRYID_CORRECT, player1.getCountryIDs());
+		countryIdCorrect.add(1);
+		countryIdCorrect.add(2);
+		countryIdCorrect.add(3);
+		countryIdCorrect.add(4);
+		Player playerOne = new Player("shehnaz", counrtyIdInCorrect, mapBuild);
+	     
+	Assert.assertEquals("country Ids", counrtyIdInCorrect, playerOne.getCountryIDs());
 		
 	}
 	/**
@@ -71,8 +86,16 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetCountryIdInValid() {
+		countryIdCorrect.add(1);
+		countryIdCorrect.add(2);
+		countryIdCorrect.add(3);
+		countryIdCorrect.add(4);
+		counrtyIdInCorrect.add(12);
+		counrtyIdInCorrect.add(42);
+		counrtyIdInCorrect.add(32);
 		
-	//	Assert.assertNotSame("Country Ids not same", COUNTRYID_INCORRECT, player1.getCountryIDs());
+		Player playerOne = new Player("shehnaz", counrtyIdInCorrect, mapBuild);
+		Assert.assertEquals("Country Ids not same", counrtyIdInCorrect, playerOne.getCountryIDs());
 	}
 
 

@@ -9,7 +9,7 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ TestFortify.class, TestReinforcement.class })
+@SuiteClasses({ TestFortify.class, TestReinforcement.class, TestStartUp.class })
 public class TestSuite_GamePhases {
 
 }
