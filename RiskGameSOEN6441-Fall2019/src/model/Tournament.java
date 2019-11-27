@@ -35,12 +35,16 @@ public class Tournament {
 				for (int turnCounter = 0; turnCounter < maxNumberOfTurns; turnCounter++) {
 
 					for(Player player : mapDomination.getPlayers()) {
-
-
+						
+						player.calculateWorldDominationView();
+						
+						player.setCounterForPhases(1);
 						player.reinforceCommand(mapDomination, mapView);
-
+						
+						player.setCounterForPhases(2);
 						player.attackCommand(mapView);
-
+						
+						player.setCounterForPhases(3);
 						player.fortifyCommand(mapDomination, mapView);
 						
 						mapDomination.showMap();
