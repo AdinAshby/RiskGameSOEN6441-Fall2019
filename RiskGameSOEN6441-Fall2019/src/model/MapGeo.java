@@ -62,7 +62,15 @@ public class MapGeo {
 	protected MapGeo() {
 
 	}
-
+	public MapView getTheMapView() {
+		return theMapView;
+	}
+	public void setTheMapView(MapView theMapView) {
+		this.theMapView = theMapView;
+	}
+	public void setPlayers(Player[] players) {
+		this.players = players;
+	}
 	/**
 	 * 
 	 * @return instance
