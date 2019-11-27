@@ -299,7 +299,6 @@ public class Player implements Subject {
  */
 	public boolean isAttackValid(int attackerNumDice, Country attackerCountry,
 			Country attackingCountry, boolean enablePrint) {
-		System.out.println("Start Valid"+this.countryIDs);
 		boolean isValid = true;
 		if (attackingCountry.getPlayerName().equals(getPlayerName())) {
 			if (enablePrint)
@@ -335,7 +334,6 @@ public class Player implements Subject {
 				/// Country should be owned and attacking country for opponent
 			}
 		}
-		System.out.println("End Valid"+this.countryIDs);
 		return isValid;
 	}
 /**
@@ -754,7 +752,6 @@ public class Player implements Subject {
 			//ArrayList<Integer> playerCountries = getCountryIDs();
 			int attackerNumDice = 1;
 			int defendNumDice = 1;
-			System.out.println(this.playerName+" own " + countryIDs.size() + " countries ("+countryIDs+"), let's attack");
 			
 			for (int i = 0; i < countryIDs.size(); i++) {
 				int countryId = countryIDs.get(i);
@@ -767,15 +764,14 @@ public class Player implements Subject {
 					System.out.println(
 							"Attack From " + attackerCountry.getCountryName() + "=" + attackerCountry.getArmies() + " ("
 									+ getPlayerName() + ") To: " + attackingCountry.getCountryName() + "="
-									+ attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName() + ") Current Countries=("+countryIDs+")");
+									+ attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName() + ")");
 
 					boolean thisCountryCanAttack = true;
 					while (thisCountryCanAttack) {
-						System.out.println("Inside Country "+this.playerName+" own " + countryIDs.size() + " countries ("+countryIDs+"), let's attack");	
 						if (isAttackValid(attackerNumDice, attackerCountry, attackingCountry, true) == true) {
 							attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, 1);
-							System.out.println(attackerCountry.getCountryName() + "=" + attackerCountry.getArmies()
-									+ " -> " + attackingCountry.getCountryName() + "=" + attackingCountry.getArmies());
+//							System.out.println(attackerCountry.getCountryName() + "=" + attackerCountry.getArmies()
+//									+ " -> " + attackingCountry.getCountryName() + "=" + attackingCountry.getArmies());
 							
 						} else {
 							thisCountryCanAttack = false;
@@ -786,7 +782,7 @@ public class Player implements Subject {
 
 			} // For player countries
 			System.out.println("No. of Countries before this round attack="+countryIDs.size()+" and after attack="+ countryIDs.size());
-			System.out.println("You own now " + countryIDs.size() + " countries ("+Arrays.toString(countryIDs.toArray())+")");
+			System.out.println("You own now " + countryIDs.size() + " countries");
 			if (countryIDs.size() != getCountryIDs().size()) {
 				isConqueredNewCountry = true;
 			}
@@ -1140,10 +1136,10 @@ public class Player implements Subject {
 	 * @param countryId
 	 */
 	protected void addCountryIdToPlayer(int countryId) {
-		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs.toArray()));
+//		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs.toArray()));
 		
 		countryIDs.add(countryId);
-		System.out.println("New Array="+Arrays.toString(countryIDs.toArray()));
+//		System.out.println("New Array="+Arrays.toString(countryIDs.toArray()));
 		
 	}
 /**

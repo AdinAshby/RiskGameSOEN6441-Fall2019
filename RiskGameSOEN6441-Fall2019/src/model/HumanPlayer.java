@@ -8,12 +8,10 @@ public class HumanPlayer extends Player implements Strategy {
 	public HumanPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapGeo) {
 		
 		super(playerName, countriesIDs, mapGeo);
-		System.out.println("Human Created"+countriesIDs);
 	}
 	
 	@Override
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
-		System.out.println(this.getPlayerName()+" Inside Attack "+countryIDs);
 		Dice attackDice = new Dice(attackerNumDice);
 		int[] attackDiceArray = attackDice.getDiceArray();
 		//attackDice.showDice();
