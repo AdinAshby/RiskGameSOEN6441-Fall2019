@@ -65,7 +65,7 @@ public class RiskUI {
 	 * private loadMapRequestingMessage
 	 */
 
-	private String loadMapRequestingMessage = "Load the map you with to play by using \"loadmap\" command:\n";
+	private String loadMapRequestingMessage = "Load the map you with to play by using \"loadmap\" command or start the tournament command like\n tournament -M test ameroki -P human aggressive -G 5 -D 15\n";
 	/**
 	 * private addOrRemovePlayersRequestingMessage
 	 */
@@ -193,7 +193,7 @@ public class RiskUI {
 		 */
 
 		
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
 			mapFileName="All For One"; //Aden Africa
 
@@ -508,47 +508,59 @@ public class RiskUI {
 					int numberOfGames = 0;
 					int maxNumberOfTurns = 0;
 
-					regex = "(?<=tournament)(.*)";
+					String[] maps;
+					String[] strategy;
+					
+					regex = "(?<=tournament )(.*)";
 					setPattern(regex);
 					setMatcher(input);
-
-					addText = "";
 					if (matcher.find()) {
-						addText = getMatcher().group(1);
-					}
-
-					regex = "-M (([\\w*\\_\\-]*))+";
+					addText = getMatcher().group(1);
+					
+					
+					regex = "(?=(-M )(?<maps>([\\w\\s]+)))";
 					setPattern(regex);
 					setMatcher(addText);
 
-					while (matcher.find()) {
-						listOfMapFiles.add(getMatcher().group(2));
+					if (matcher.find()) {
+						maps = getMatcher().group("maps").split(" ");
+						for(int i=0;i<maps.length;i++) {
+							listOfMapFiles.add(maps[i]);
+						}
+						
 					}
-
-					regex = "(-P ([\\w*\\_\\-]*))+";
+					
+					regex = "(?=(-P )(?<strategy>([\\w\\s]+)))";
 					setPattern(regex);
 					setMatcher(addText);
-
-					while (matcher.find()) {
-						listOfPlayerStrategies.add(getMatcher().group(2));
+					if (matcher.find()) {
+						
+						strategy = getMatcher().group("strategy").split(" ");
+						for(int i=0;i<strategy.length;i++) {
+							listOfPlayerStrategies.add(strategy[i]);
+						}
 					}
-
-					regex = "-G \\d+";
+						
+					regex = "(?=(-G )(?<numberOfGames>\\d))";
 					setPattern(regex);
 					setMatcher(addText);
-
-					while (matcher.find()) {
-						numberOfGames = Integer.parseInt(getMatcher().group(2));
+					if (matcher.find()) {
+						numberOfGames = Integer.parseInt(getMatcher().group("numberOfGames"));
 					}
-
-					regex = "-D \\d+";
+					
+					regex = "(?=(-D )(?<maxNumberOfTurns>\\d\\d))";
 					setPattern(regex);
 					setMatcher(addText);
-
-					while (matcher.find()) {
-						maxNumberOfTurns = Integer.parseInt(getMatcher().group(2));
+					if (matcher.find()) {
+						maxNumberOfTurns = Integer.parseInt(getMatcher().group("maxNumberOfTurns"));
 					}
+					
+					
 
+								
+						
+
+					
 					if((listOfMapFiles.size() > 0 && listOfMapFiles.size() < 6) && (listOfPlayerStrategies.size() > 1 && listOfPlayerStrategies.size() < 5) && (numberOfGames > 0 && numberOfGames < 6) && (maxNumberOfTurns > 9 && maxNumberOfTurns < 51)) {
 
 						isValidCommand = true;
@@ -574,6 +586,7 @@ public class RiskUI {
 					if (!isValidCommand) {
 						System.out.println("Please follow the correct command rules");
 					}
+				}
 				}
 
 				System.out.println(addOrRemovePlayersRequestingMessage);
