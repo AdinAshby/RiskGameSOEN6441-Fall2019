@@ -1,25 +1,15 @@
 package view;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import model.Card;
 import model.Country;
-import model.Dice;
 import model.MapAdapter;
-import model.MapBuilder;
-import model.MapGeo;
 import model.MapConquest;
-import model.MapDirector;
 import model.MapDomination;
-import model.MapDominationBuilder;
 import model.Player;
 import model.Tournament;
 
@@ -612,8 +602,11 @@ public class RiskUI {
 							}
 						}
 
-						if(isValidCommand)
+						if(isValidCommand) {
 							theTournament = new Tournament(listOfMapFiles, listOfPlayerStrategies, numberOfGames, maxNumberOfTurns);
+							theTournament.startTheTournament();
+							System.exit(0);
+						}
 					}
 
 					if (!isValidCommand) {

@@ -1,8 +1,6 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -34,9 +32,9 @@ public class Player implements Subject {
 	 */
 
 	protected double percentageControlled = 0.00;
-/**
- * protected continentsControlled
- */
+	/**
+	 * protected continentsControlled
+	 */
 	protected ArrayList<String> continentsControlled = new ArrayList<String>();
 	/**
 	 * protected int total Number Of Armies
@@ -63,23 +61,23 @@ public class Player implements Subject {
 	 */
 
 	protected int counterForPhases;
-/**
- * protected temporary Armies
- */
+	/**
+	 * protected temporary Armies
+	 */
 	protected int temporaryArmies;
-/**
- * protected observers For Phases
- */
+	/**
+	 * protected observers For Phases
+	 */
 	protected ArrayList<Observer> observersForPhases = new ArrayList<Observer>();
 	/**
 	 * protected observers For World Domination
 	 */
 	protected ArrayList<Observer> observersForWorldDomination = new ArrayList<Observer>();
-/**
- * protected mapGeo
- */
+	/**
+	 * protected mapGeo
+	 */
 	protected MapGeo mapGeo;
-	
+
 	/**
 	 * protected strategy
 	 */
@@ -131,16 +129,16 @@ public class Player implements Subject {
 		cards = new ArrayList<Card>();
 		playerCountForCard = 0;
 	}
-/**
- * protected set strategy
- * @param strategy
- */
+	/**
+	 * protected set strategy
+	 * @param strategy
+	 */
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
-/**
- * protected add One To Card Counter
- */
+	/**
+	 * protected add One To Card Counter
+	 */
 	public void addOneToCardCounter() {
 		playerCountForCard++;
 	}
@@ -153,20 +151,20 @@ public class Player implements Subject {
 	public String getPlayerName() {
 		return playerName;
 	}
-/**
- * This method get player Count For Card
- * 
- * @return player Count For Card
- */
+	/**
+	 * This method get player Count For Card
+	 * 
+	 * @return player Count For Card
+	 */
 	public int getplayerCountForCard() {
 
 		return playerCountForCard;
 
 	}
-/**
- * 
- * @return cardsList
- */
+	/**
+	 * 
+	 * @return cardsList
+	 */
 	public String getCardNames() {
 		String cardsList = "Cards: -";
 		for (Card c : cards) {
@@ -175,19 +173,19 @@ public class Player implements Subject {
 		return cardsList;
 
 	}
-/**
- * 
- * @return cards
- */
+	/**
+	 * 
+	 * @return cards
+	 */
 	public ArrayList<Card> getCards() {
 
 		return cards;
 
 	}
-/**
- * 
- * @param cardList
- */
+	/**
+	 * 
+	 * @param cardList
+	 */
 	public void setCards(ArrayList<Card> cardList) {
 
 		for (int i = 0; i < cardList.size(); i++) {
@@ -203,10 +201,10 @@ public class Player implements Subject {
 		}
 
 	}
-/**
- * 
- * @param cardToAdd
- */
+	/**
+	 * 
+	 * @param cardToAdd
+	 */
 	public void addCard(Card cardToAdd) {
 
 		this.cards.add(cardToAdd);
@@ -224,19 +222,19 @@ public class Player implements Subject {
 			return false;
 
 	}
-/**
- * 
- * @return
- */
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean getAllowingCardStatus() {
 
 		return this.allowToGetCard;
 
 	}
-/**
- * 
- * @param status
- */
+	/**
+	 * 
+	 * @param status
+	 */
 	public void setAllowingStatus(boolean status) {
 
 		this.allowToGetCard = status;
@@ -260,60 +258,60 @@ public class Player implements Subject {
 	public void setCountryIDs( ArrayList<Integer> countriesIDs) {
 		this.countryIDs = countriesIDs;
 	}
-/**
- * 
- * @return percentageControlled
- */
+	/**
+	 * 
+	 * @return percentageControlled
+	 */
 	public double getPercentageControlled() {
 		return percentageControlled;
 	}
-/**
- * 
- * @return continentsControlled
- */
+	/**
+	 * 
+	 * @return continentsControlled
+	 */
 	public ArrayList<String> getContinentsControlled() {
 		return continentsControlled;
 	}
-/**
- * 
- * @param continentsControlled
- */
+	/**
+	 * 
+	 * @param continentsControlled
+	 */
 	public void setContinentsControlled(ArrayList<String> continentsControlled) {
 		this.continentsControlled = continentsControlled;
 	}
-/**
- * 
- * @return totalNumberOfArmies
- */
+	/**
+	 * 
+	 * @return totalNumberOfArmies
+	 */
 	public int getTotalNumberOfArmies() {
 		return totalNumberOfArmies;
 	}
-/**
- * 
- * @param mapGeo
- * @param attackerNumDice
- * @param attackerCountry
- * @param attackingCountry
- * @param enablePrint
- * @return isValid
- */
+	/**
+	 * 
+	 * @param mapGeo
+	 * @param attackerNumDice
+	 * @param attackerCountry
+	 * @param attackingCountry
+	 * @param enablePrint
+	 * @return isValid
+	 */
 	public boolean isAttackValid(int attackerNumDice, Country attackerCountry,
 			Country attackingCountry, boolean enablePrint) {
 		boolean isValid = true;
 		if (attackingCountry.getPlayerName().equals(getPlayerName())) {
 			if (enablePrint)
-			System.out.println("You can not attack to your own country");
+				System.out.println("You can not attack to your own country");
 			isValid = false;
 		}
 
 		if (attackerCountry.getArmies() <= 1) {
 			if (enablePrint)
-			System.out.println("Attacker Country should have more than 1 army");
+				System.out.println("Attacker Country should have more than 1 army");
 			isValid = false;
 		}
 		if (attackerCountry == null || attackingCountry == null) {
 			if (enablePrint)
-			System.out.println("Enter Attacker and Attacking Country");
+				System.out.println("Enter Attacker and Attacking Country");
 			isValid = false;
 		} else {
 
@@ -336,11 +334,11 @@ public class Player implements Subject {
 		}
 		return isValid;
 	}
-/**
- * 
- * @param mapGeo
- * @return isAttackPossible
- */
+	/**
+	 * 
+	 * @param mapGeo
+	 * @return isAttackPossible
+	 */
 	public boolean isAttackPossible() {
 		boolean isAttackPossible = false;
 		for (int countyId : countryIDs) {
@@ -364,12 +362,12 @@ public class Player implements Subject {
 
 		return isAttackPossible;
 	}
-/**
- * 
- * @param array
- * @param v
- * @return result
- */
+	/**
+	 * 
+	 * @param array
+	 * @param v
+	 * @return result
+	 */
 	public static boolean contains(final int[] array, final int v) {
 
 		boolean result = false;
@@ -404,24 +402,24 @@ public class Player implements Subject {
 
 		return isDefendPossible;
 	}
-/**
- * 
- * @return counterForPhases
- */
+	/**
+	 * 
+	 * @return counterForPhases
+	 */
 	public int getCounterForPhases() {
 		return counterForPhases;
 	}
-/**
- * 
- * @param counterForPhases
- */
+	/**
+	 * 
+	 * @param counterForPhases
+	 */
 	public void setCounterForPhases(int counterForPhases) {
 		this.counterForPhases = counterForPhases;
 		notifyObserverForPhases();
 	}
-/**
- * @param addObserver
- */
+	/**
+	 * @param addObserver
+	 */
 	@Override
 	public void registerPhaseObserver(Observer addObserver) {
 		observersForPhases.add(addObserver);
@@ -464,9 +462,9 @@ public class Player implements Subject {
 	public ArrayList<Observer> getObserversForWorldDomination() {
 		return observersForWorldDomination;
 	}
-/**
- * This method calculate World Domination View
- */
+	/**
+	 * This method calculate World Domination View
+	 */
 
 	public void calculateWorldDominationView() {
 		totalNumberOfArmies = 0;
@@ -498,13 +496,13 @@ public class Player implements Subject {
 	public void calculateNumberOfArmiesEachPlayerGets() {
 		numberOfArmiesEachPlayerGets = (countryIDs.size() / 3 > 3) ? countryIDs.size() / 3 : 3;
 	}
-/**
- * 
- * @param mapGeo
- * @param countryName
- * @param armiesAdded
- * @return false
- */
+	/**
+	 * 
+	 * @param mapGeo
+	 * @param countryName
+	 * @param armiesAdded
+	 * @return false
+	 */
 	public boolean reinforceIsValid(MapGeo mapGeo, String countryName, int armiesAdded) {
 		calculateNumberOfArmiesEachPlayerGets();
 
@@ -524,23 +522,23 @@ public class Player implements Subject {
 
 		return false;
 	}
-/**
- * 
- * @param mapGeo
- * @param countryName
- * @param num
- * @param finished
- * @return
- */
+	/**
+	 * 
+	 * @param mapGeo
+	 * @param countryName
+	 * @param num
+	 * @param finished
+	 * @return
+	 */
 	public boolean reinforce(MapGeo mapGeo, String countryName, int num, boolean finished) {
 		return this.strategy.reinforce(mapGeo, countryName, num, finished);
 	}
-/**
- * 
- * @param mapGeo
- * @param mapView
- * @return
- */
+	/**
+	 * 
+	 * @param mapGeo
+	 * @param mapView
+	 * @return
+	 */
 	public boolean reinforceCommand(MapGeo mapGeo, MapView mapView) {
 		calculateNumberOfArmiesEachPlayerGets();
 
@@ -549,7 +547,15 @@ public class Player implements Subject {
 
 		if (this.strategy instanceof HumanPlayer) {
 			String addText = "";
-			temporaryArmies = numberOfArmiesEachPlayerGets;
+
+
+			if (this.strategy instanceof AggressivePlayer || this.strategy instanceof BenevolentPlayer || this.strategy instanceof RandomPlayer || this.strategy instanceof CheaterPlayer) {
+
+				System.out.println("Player " + getPlayerName() + ":");
+
+				System.out.println("You have following cards: ");
+				System.out.println(getCardNames());
+			}
 
 			while (!finished) {// && debug == false
 
@@ -600,9 +606,9 @@ public class Player implements Subject {
 
 					}
 				} // Match Find Reinforce
-					//// __________________________________________///////
-					// __________________________________________///////
-					// __________________________________________///////
+				//// __________________________________________///////
+				// __________________________________________///////
+				// __________________________________________///////
 				regex = "(?<=exchangecards)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -741,20 +747,20 @@ public class Player implements Subject {
 
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice,
 			int attackAllout) {
-	
+
 		this.strategy.attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, attackAllout);
 	}
 
 	public void attackAllout() {
 		System.out
-				.println("\n------------------------------\nAttack All out Started\n------------------------------\n");
+		.println("\n------------------------------\nAttack All out Started\n------------------------------\n");
 		boolean isConqueredNewCountry;
 		do {
 			isConqueredNewCountry = false;
 			//ArrayList<Integer> playerCountries = getCountryIDs();
 			int attackerNumDice = 1;
 			int defendNumDice = 1;
-			
+
 			for (int i = 0; i < countryIDs.size(); i++) {
 				int countryId = countryIDs.get(i);
 				Country attackerCountry = mapGeo.getCountryById(countryId);
@@ -772,9 +778,9 @@ public class Player implements Subject {
 					while (thisCountryCanAttack) {
 						if (isAttackValid(attackerNumDice, attackerCountry, attackingCountry, true) == true) {
 							attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, 1);
-//							System.out.println(attackerCountry.getCountryName() + "=" + attackerCountry.getArmies()
-//									+ " -> " + attackingCountry.getCountryName() + "=" + attackingCountry.getArmies());
-							
+							//							System.out.println(attackerCountry.getCountryName() + "=" + attackerCountry.getArmies()
+							//									+ " -> " + attackingCountry.getCountryName() + "=" + attackingCountry.getArmies());
+
 						} else {
 							thisCountryCanAttack = false;
 						}
@@ -1138,23 +1144,23 @@ public class Player implements Subject {
 	 * @param countryId
 	 */
 	protected void addCountryIdToPlayer(int countryId) {
-//		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs.toArray()));
-		
+		//		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs.toArray()));
+
 		countryIDs.add(countryId);
-//		System.out.println("New Array="+Arrays.toString(countryIDs.toArray()));
-		
+		//		System.out.println("New Array="+Arrays.toString(countryIDs.toArray()));
+
 	}
-/**
- * 
- * @return temporaryArmies
- */
+	/**
+	 * 
+	 * @return temporaryArmies
+	 */
 	public int getTemporaryArmies() {
 		return temporaryArmies;
 	}
-/**
- * 
- * @param temporaryArmies
- */
+	/**
+	 * 
+	 * @param temporaryArmies
+	 */
 	public void setTemporaryArmies(int temporaryArmies) {
 		this.temporaryArmies = temporaryArmies;
 	}
