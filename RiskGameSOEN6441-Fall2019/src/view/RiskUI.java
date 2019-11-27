@@ -8,8 +8,12 @@ import java.util.regex.Pattern;
 
 import model.Country;
 import model.MapAdapter;
+import model.MapBuilder;
 import model.MapConquest;
+import model.MapDirector;
 import model.MapDomination;
+import model.MapDominationBuilder;
+import model.MapGeo;
 import model.Player;
 import model.Tournament;
 
@@ -168,12 +172,12 @@ public class RiskUI {
 		 * Map Builder Pattern
 		 */
 
-		//		MapGeo mapDomination2;
-		//		MapBuilder mapGeo=new MapDominationBuilder();
-		//		MapDirector mapDirector= new MapDirector();
-		//		mapDirector.setBuilder(mapGeo);
-		//		mapDirector.constructMapGeo();
-		//		mapDomination2=mapDirector.getMapGeo();
+				MapGeo mapDomination2;
+				MapBuilder mapGeo=new MapDominationBuilder();
+				MapDirector mapDirector= new MapDirector();
+				mapDirector.setBuilder(mapGeo);
+				mapDirector.constructMapGeo();
+				mapDomination2=mapDirector.getMapGeo();
 
 
 
