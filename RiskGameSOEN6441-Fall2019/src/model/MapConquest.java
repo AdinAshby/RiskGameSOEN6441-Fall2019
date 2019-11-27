@@ -125,7 +125,7 @@ public class MapConquest extends MapGeo {
 					String countryName = currentLine[0];
 					Country country = getCountryByName(countryName);
 					for (int i = 4; i < currentLine.length; i++) {
-						System.out.println("Connect " + currentLine[i] + " to " + countryName);
+//						System.out.println("Connect " + currentLine[i] + " to " + countryName);
 						countryAdjacency.addEdge(country.getCountryId(), getCountryIdByName(currentLine[i]));
 					}
 

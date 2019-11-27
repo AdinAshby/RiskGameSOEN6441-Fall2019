@@ -5,12 +5,15 @@ import java.util.Arrays;
 
 public class HumanPlayer extends Player implements Strategy {
 
-	public HumanPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
-		super(playerName, countriesIDs, mapBuild);
+	public HumanPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapGeo) {
+		
+		super(playerName, countriesIDs, mapGeo);
+		System.out.println("Human Created"+countriesIDs);
 	}
 	
 	@Override
-	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, MapGeo mapBuild, int attackAllout){
+	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
+		System.out.println(this.getPlayerName()+" Inside Attack "+countryIDs);
 		Dice attackDice = new Dice(attackerNumDice);
 		int[] attackDiceArray = attackDice.getDiceArray();
 		//attackDice.showDice();
@@ -31,7 +34,7 @@ public class HumanPlayer extends Player implements Strategy {
 				if (attackingCountry.getArmies() == 0) {
 					System.out.println("\n*****"+
 							attackingCountry.getCountryName() + " is conquered"+"*****\n");
-					mapBuild.setContinentNamesOfPlayer(this);
+					mapGeo.setContinentNamesOfPlayer(this);
 					Card card = new Card();
 					addCard(card);
 					System.out.println("You have the following cards now :");
@@ -39,13 +42,13 @@ public class HumanPlayer extends Player implements Strategy {
 					attackingCountry.setPlayer(attackerCountry.getPlayerName());
 					addCountryIdToPlayer(attackingCountry.getCountryId());
 					int NoOfContinentsControlled = getContinentsControlled().size();
-					if (NoOfContinentsControlled == mapBuild
+					if (NoOfContinentsControlled == mapGeo
 							.getNoOfContinentsControlled()) {
 						System.out.println(attackerCountry.getPlayerName()
 								+ " is winner. Game over!");
 						System.exit(0);
 					}
-					mapBuild.showMap();
+					mapGeo.showMap();
 					
 					attackMoveCommand(attackerCountry, attackingCountry, attackAllout);
 
@@ -68,13 +71,13 @@ public class HumanPlayer extends Player implements Strategy {
 
 
 	@Override
-	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
+	public boolean reinforce(MapGeo mapGeo, String countryName, int num, boolean finished) {
 
-		if (reinforceIsValid(mapBuild, countryName, num) == true) {
-			int oldArmies = mapBuild.getCountryByName(countryName).getArmies();
-			mapBuild.getCountryByName(countryName)
-			.setArmies(oldArmies + mapBuild.playerContinentValuesOwnership(super.getPlayerName()) + num);
-			// mapBuild.reinforce(getPlayerName(), countryName, num);
+		if (reinforceIsValid(mapGeo, countryName, num) == true) {
+			int oldArmies = mapGeo.getCountryByName(countryName).getArmies();
+			mapGeo.getCountryByName(countryName)
+			.setArmies(oldArmies + mapGeo.playerContinentValuesOwnership(super.getPlayerName()) + num);
+			// mapGeo.reinforce(getPlayerName(), countryName, num);
 			calculateWorldDominationView();
 			//temporaryArmies -= num;
 			super.setTemporaryArmies(super.getTemporaryArmies() - num);
@@ -91,13 +94,13 @@ public class HumanPlayer extends Player implements Strategy {
 	}
 
 	@Override
-	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapBuild) {
-		if (fortifyIsValid(fromCountry, toCountry, armiesToMove, mapBuild) == true) {
-			int oldArmiesFromCountry = mapBuild.getCountryByName(fromCountry).getArmies();
-			mapBuild.getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
+	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapGeo) {
+		if (fortifyIsValid(fromCountry, toCountry, armiesToMove, mapGeo) == true) {
+			int oldArmiesFromCountry = mapGeo.getCountryByName(fromCountry).getArmies();
+			mapGeo.getCountryByName(fromCountry).setArmies(oldArmiesFromCountry - armiesToMove);
 
-			int oldArmiesToCountry = mapBuild.getCountryByName(toCountry).getArmies();
-			mapBuild.getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
+			int oldArmiesToCountry = mapGeo.getCountryByName(toCountry).getArmies();
+			mapGeo.getCountryByName(toCountry).setArmies(oldArmiesToCountry + armiesToMove);
 			calculateWorldDominationView();
 
 		}

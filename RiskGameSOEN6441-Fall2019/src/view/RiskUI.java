@@ -36,7 +36,7 @@ public class RiskUI {
 	 * private mapAdapter
 	 */
 
-	//	private MapGeo mapBuild = MapGeo.getInstance();
+	//	private MapGeo mapGeo = MapGeo.getInstance();
 
 
 
@@ -193,9 +193,9 @@ public class RiskUI {
 		 */
 
 		
-		boolean debug = false;
+		boolean debug = true;
 		if (debug == true) {
-			mapFileName="Africa"; //Aden
+			mapFileName="test"; //Aden Africa
 
 			isDominationMap(mapFileName);
 
@@ -225,8 +225,8 @@ public class RiskUI {
 			player2.getNumberOfArmiesEachPlayerGets();
 			System.out.println("Player 1=" + player1.getPlayerName() + " Player2=" + player2.getPlayerName());
 
-			//player1.attackAllout(mapAdapter);
-			//	System.exit(0);
+			player1.attackAllout();
+				System.exit(0);
 			int attackerCountryId = player1.getCountryIDs().get(0);
 			int fortifyCountryId = player1.getCountryIDs().get(1);
 			int attackingCountryId = player2.getCountryIDs().get(0);
@@ -240,7 +240,7 @@ public class RiskUI {
 			mapDomination.showMap();
 			System.out.println("\n-------------------\nAttack Scenario from " + attackerCountryName + " to "
 					+ attackingCountryName);
-			player1.attack(attackerCountry, attackingCountry, 3, 2, mapDomination, 0);
+			player1.attack(attackerCountry, attackingCountry, 3, 2, 0);
 
 			mapDomination.showMap();
 			System.out.println("\n-------------------\nFortify Scenario from " + attackerCountryName + " to "
@@ -769,7 +769,7 @@ public class RiskUI {
 					isValidCommand = player.reinforceCommand(mapDomination, mapView);
 
 					player.setCounterForPhases(2);
-					isValidCommand = player.attackCommand(mapDomination, mapView);
+					isValidCommand = player.attackCommand(mapView);
 
 					player.setCounterForPhases(3);
 					isValidCommand = player.fortifyCommand(mapDomination, mapView);

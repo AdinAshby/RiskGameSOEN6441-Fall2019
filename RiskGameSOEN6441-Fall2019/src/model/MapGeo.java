@@ -22,7 +22,7 @@ import controller.RiskController;
 import view.MapView;
 
 /**
- * This is MapBuilder Class to Edit Map
+ * This is mapGeoer Class to Edit Map
  * 
  * @author f_yazdan
  * @author s_shehna
@@ -691,9 +691,11 @@ public class MapGeo {
 			}
 
 			players[i] = new Player(playerNames.get(i), countriesIDs, this);
+			
 
-			if (playerStrategies.get(i).equalsIgnoreCase("human"))
+			if (playerStrategies.get(i).equalsIgnoreCase("human")) {
 				players[i].setStrategy(new HumanPlayer(playerNames.get(i), countriesIDs, this));
+			}
 
 			if (playerStrategies.get(i).equalsIgnoreCase("aggressive"))
 				players[i].setStrategy(new AggressivePlayer(playerNames.get(i), countriesIDs, this));
