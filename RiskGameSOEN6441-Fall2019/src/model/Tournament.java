@@ -10,9 +10,8 @@ public class Tournament {
 	private ArrayList<String> listOfPlayerStrategies;
 	private int numberOfGames;
 	private int maxNumberOfTurns;
-	
+
 	private MapView mapView = new MapView();
-	private MapGeo mapBuilder = new MapGeo();
 	private MapDomination mapDomination = new MapDomination();
 
 	public Tournament(ArrayList<String> listOfMapFiles, ArrayList<String> listOfPlayerStrategies, int numberOfGames, int maxNumberOfTurns) {
@@ -24,34 +23,49 @@ public class Tournament {
 
 	public void startTheTournament() {
 		ArrayList<String> results = new ArrayList<String>();
-		String result = "";
-		
-		
+		boolean somebodyWon = false;
+
+
 		for (int mapCounter = 0; mapCounter < listOfMapFiles.size(); mapCounter++) {
 			mapDomination.isDominationMap(listOfMapFiles.get(mapCounter));
-			
+
 			for (int gameCounter = 0; gameCounter < numberOfGames; gameCounter++) {
-				mapBuilder.assigningPlayersToCountries(listOfPlayerStrategies, listOfPlayerStrategies);
-				
+				mapDomination.assigningPlayersToCountries(listOfPlayerStrategies, listOfPlayerStrategies);
+
 				for (int turnCounter = 0; turnCounter < maxNumberOfTurns; turnCounter++) {
-					
-					for(Player each : mapBuilder.getPlayers()) {
-						each.reinforceCommand(mapBuilder, mapView);
+
+					for(Player player : mapDomination.getPlayers()) {
 						
-						each.attackCommand(mapView);
+						player.calculateWorldDominationView();
 						
-						System.out.println(each.fortifyRequestingMessage);
+						player.setCounterForPhases(1);
+						player.reinforceCommand(mapDomination, mapView);
 						
-						each.fortifyCommand(mapBuilder, mapView);
+						player.setCounterForPhases(2);
+						player.attackCommand(mapView);
+						
+						player.setCounterForPhases(3);
+						player.fortifyCommand(mapDomination, mapView);
+						
+						mapDomination.showMap();
 					}
-					
+
+				}
+
+				for(Player player : mapDomination.getPlayers()) {
+					if(player.getWon()) {
+						somebodyWon = true;
+						results.add(player.getPlayerName());
+					}
 				}
 				
-				results.add(result);
+				if(!somebodyWon) {
+					results.add("Draw");
+					somebodyWon = false;
+				}
 			}
-			
 		}
-		
+
 		mapView.showTournamentResult(results, numberOfGames);
 	}
 

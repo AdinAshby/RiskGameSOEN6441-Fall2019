@@ -95,17 +95,19 @@ public class MapView {
 	public void showTournamentResult(ArrayList<String> results, int numberOfGames) {
 		
 		int counter = 0;
+		boolean firstTime = false;
 		
 		System.out.println("Results:");
 		System.out.println("The columns are for Games and the rows are for Maps");
 		System.out.println("----------------------------------------------------------------------------------------");
 		
 		for(String each : results) {
-			System.out.print(each);
 			
 			if(counter % numberOfGames == 0) {
 				System.out.println();
 			}
+			
+			System.out.print(each + "   ");
 			
 			++counter;
 		}
