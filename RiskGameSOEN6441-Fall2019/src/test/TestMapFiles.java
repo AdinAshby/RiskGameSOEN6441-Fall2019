@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import model.MapConquest;
+import model.MapDomination;
 import model.MapGeo;
 
 /**
@@ -27,7 +28,8 @@ public class TestMapFiles {
 	 * String inValid_file
 	 */
 	String INVALID_FILE = "test2";
-MapConquest mapConquest = new MapConquest();
+	MapDomination mapDomination = new MapDomination();
+	MapConquest mapConquest = new MapConquest(mapDomination);
 	/**
 	 * This is the test method for checking whether the map file is valid
 	 * 
@@ -35,7 +37,7 @@ MapConquest mapConquest = new MapConquest();
 	 */
 	@Test
 	public void testValidMapFiles() throws Exception {
-		Assert.assertEquals(true, mapConquest.readConquest(VALID_FILE));
+		Assert.assertEquals(true, mapConquest.readConquest(INVALID_FILE));
 	}
 
 	/**

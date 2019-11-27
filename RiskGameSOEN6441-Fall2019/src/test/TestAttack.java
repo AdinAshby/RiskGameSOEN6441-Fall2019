@@ -4,6 +4,7 @@ import org.junit.Assert.*;
 import org.junit.BeforeClass;
 
 import model.MapConquest;
+import model.MapDomination;
 import model.MapGeo;
 import model.Player;
 
@@ -20,7 +21,8 @@ import org.junit.Assert;
  */
 public class TestAttack {
 	MapGeo mapBuild = MapGeo.getInstance();
-	MapConquest mapConquest = new MapConquest();
+	MapDomination mapDomination = new MapDomination();
+	MapConquest mapConquest = new MapConquest(mapDomination);
        /**
         * This testcase tests if attack is possible for two players with ameroki map
         * @throws Exception
@@ -33,7 +35,7 @@ public class TestAttack {
 	public void testAttackValid() throws Exception {
 		players.add("Shehnaz");
 		players.add("Golnoosh");
-		mapConquest.readConquest("ameroki");
+		mapConquest.readConquest("Africa");
 		mapBuild.assigningPlayersToCountries(players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();

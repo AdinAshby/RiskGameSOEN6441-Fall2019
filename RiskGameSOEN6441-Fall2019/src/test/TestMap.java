@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import model.AdjacencyList;
 import model.MapConquest;
+import model.MapDomination;
 import model.MapGeo;
 
 /**
@@ -23,7 +24,8 @@ public class TestMap {
 	/**
 	 * Object of the Empty AdjacencyList
 	 */
-	MapConquest mapConquest = new MapConquest();
+	MapDomination mapDomination = new MapDomination();
+	MapConquest mapConquest = new MapConquest(mapDomination);
 	AdjacencyList adEmpty = new AdjacencyList();
 	/**
 	 * Object of the AdjacencyList
@@ -46,7 +48,7 @@ public class TestMap {
 	@Test
 	public void testvalidateMapForValidMap() throws Exception {
 
-		Assert.assertEquals(true, mapConquest.readConquest(VALID_MAP));
+		Assert.assertEquals(true, mapConquest.readConquest("test"));
 		Assert.assertEquals(true, mapBuild.validateMap());
 		
 	}

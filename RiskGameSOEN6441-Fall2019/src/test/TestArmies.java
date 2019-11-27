@@ -17,7 +17,8 @@ public class TestArmies {
 	ArrayList<String> players = new ArrayList<String>();
 	ArrayList<String> strategy = new ArrayList<String>();
 	MapGeo mapBuild = MapGeo.getInstance();
-	MapConquest mapConquest = new MapConquest();
+	MapDomination mapDomination = new MapDomination();
+	MapConquest mapConquest = new MapConquest(mapDomination);
 	
 /**
  * This testcase tests the number of armies given to only player in game

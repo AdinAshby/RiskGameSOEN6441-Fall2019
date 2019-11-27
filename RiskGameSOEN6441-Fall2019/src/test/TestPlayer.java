@@ -2,9 +2,12 @@ package test;
 
 import org.junit.Test;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 
+import java.util.*;
 import org.junit.Assert;
+
 
 import model.MapGeo;
 import model.Player;
@@ -17,8 +20,9 @@ public class TestPlayer {
 	/**
 	 * int CountryId
 	 */
-	ArrayList<Integer> counrtyIdCorrect = new ArrayList<Integer>();
-	counrtyIdCorrect.add(1);
+	ArrayList<Integer> countryIdCorrect = new ArrayList<Integer>();
+	
+	
 	
 	
 	/**
@@ -26,7 +30,7 @@ public class TestPlayer {
 	 */
 //int COUNTRYID_INCORRECT[] = { 1, 2, 3, 4, 35 };
 	ArrayList<Integer> counrtyIdInCorrect = new ArrayList<Integer>();
-	counrtyIdInCorrect.add(1);
+	
 	/**
 	 * object of the player
 	 */
@@ -39,6 +43,7 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetPlayerNameValid() {
+	
 //		Assert.assertEquals("shehnaz", playerOne.getPlayerName());
 		
 	}

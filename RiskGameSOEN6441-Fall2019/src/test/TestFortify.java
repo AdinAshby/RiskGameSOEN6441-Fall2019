@@ -6,6 +6,7 @@ import java.util.Random;
 import org.junit.Assert.*;
 
 import model.MapConquest;
+import model.MapDomination;
 import model.MapGeo;
 import model.Player;
 
@@ -20,7 +21,8 @@ public class TestFortify {
 	MapGeo mapBuild = MapGeo.getInstance();
 	ArrayList<String> Players = new ArrayList<>();
 	ArrayList<String> strategy = new ArrayList<>();
-	MapConquest mapConquest = new MapConquest();
+	MapDomination mapDomination = new MapDomination();
+	MapConquest mapConquest = new MapConquest(mapDomination);
 /**
  * This testcase test the fortify method for valid input
  * @throws Exception

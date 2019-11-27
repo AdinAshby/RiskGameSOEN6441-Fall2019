@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import model.MapConquest;
+import model.MapDomination;
 import model.MapGeo;
 
 import model.Player;
@@ -21,7 +22,8 @@ public class TestReinforcement {
 	ArrayList<String> players = new ArrayList<String>();
 	ArrayList<String> strategy = new ArrayList<String>();
 	MapGeo mapBuild = MapGeo.getInstance();
-	MapConquest mapConquest = new MapConquest();
+	MapDomination mapDomination = new MapDomination();
+	MapConquest mapConquest = new MapConquest(mapDomination);
 	/**
  * This testcase tests valid number of armies owned by players for reinforcement 
  *

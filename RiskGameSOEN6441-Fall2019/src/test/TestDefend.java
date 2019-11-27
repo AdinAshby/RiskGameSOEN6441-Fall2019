@@ -5,6 +5,7 @@ package test;
 import org.junit.Assert.*;
 
 import model.MapConquest;
+import model.MapDomination;
 import model.MapGeo;
 import model.Player;
 
@@ -21,7 +22,8 @@ public class TestDefend {
         MapGeo mapBuild = MapGeo.getInstance();
         ArrayList<String> players = new ArrayList<String>();
         ArrayList<String> strategy = new ArrayList<String>();
-MapConquest mapConquest = new MapConquest();
+        MapDomination mapDomination = new MapDomination();
+    	MapConquest mapConquest = new MapConquest(mapDomination);
        /**
         * This testcase tests if defend is possible for two players with ameroki map
         * @throws Exception

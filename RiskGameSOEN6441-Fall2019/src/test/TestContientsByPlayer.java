@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 import model.MapConquest;
+import model.MapDomination;
 import model.MapGeo;
 import model.Player;
 
@@ -16,7 +17,8 @@ public class TestContientsByPlayer {
 	ArrayList<String> playerContinents = new ArrayList<String>();
 	ArrayList<String> mapContinents = new ArrayList<String>();
 	ArrayList<String> strategy = new ArrayList<String>();
-	MapConquest mapConquest = new MapConquest();
+	MapDomination mapDomination = new MapDomination();
+	MapConquest mapConquest = new MapConquest(mapDomination);
 	@Test
 	public void testContinents() throws Exception {
 		mapContinents.add("azio");
