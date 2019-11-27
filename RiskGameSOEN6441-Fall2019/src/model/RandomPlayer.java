@@ -27,7 +27,7 @@ public class RandomPlayer extends Player implements Strategy {
 			if (winner[i]) {
 				System.out.println("Attacker win dice " + diceNo );
 				attackingCountry.setArmies(attackingCountry.getArmies() - 1);
-				calculateWorldDominationView();
+				//calculateWorldDominationView();
 				if (attackingCountry.getArmies() == 0) {
 					System.out.println("\n*****"+
 							attackingCountry.getCountryName() + " is conquered"+"*****\n");

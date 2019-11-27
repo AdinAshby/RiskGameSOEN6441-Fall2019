@@ -26,7 +26,7 @@ public class AggressivePlayer extends Player implements Strategy {
 			if (winner[i]) {
 				System.out.println("Attacker win dice " + diceNo );
 				attackingCountry.setArmies(attackingCountry.getArmies() - 1);
-				calculateWorldDominationView();
+				//calculateWorldDominationView();
 				if (attackingCountry.getArmies() == 0) {
 					System.out.println("\n*****"+
 							attackingCountry.getCountryName() + " is conquered"+"*****\n");
@@ -47,7 +47,7 @@ public class AggressivePlayer extends Player implements Strategy {
 					}
 					mapGeo.showMap();
 					
-					attackMoveCommand(attackerCountry, attackingCountry, attackAllout);
+					attackMoveCommand(attackerCountry, attackingCountry, attackerCountry.getArmies() / 2);
 				}
 
 			} else {

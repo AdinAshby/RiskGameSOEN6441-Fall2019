@@ -935,82 +935,6 @@ public class Player implements Subject {
 
 				}
 			}
-			
-			if(this.strategy instanceof AggressivePlayer) {		
-				
-				ArrayList<Integer> playerCountries = getCountryIDs();
-				int maxArmies = 0;
-				Country attackerCountry = null;
-				int attackerCountryID = 0;
-				
-				Country attackingCountry = null;
-				
-				int attackerNumDice = 0;
-				int defendNumDice = 0;
-
-				for (int countryID : playerCountries) {
-					if (mapGeo.getCountryById(countryID).getArmies() > maxArmies) {
-						maxArmies = mapGeo.getCountryById(countryID).getArmies();
-						attackerCountry = mapGeo.getCountryById(countryID);
-						attackerCountryID = countryID;
-						attackerNumDice = attackerCountry.getArmies();
-					}
-				}
-				
-				
-				
-				for (int countryID : mapGeo.getCountryAdjacency(attackerCountryID)) {
-					if (!mapGeo.getCountryById(countryID).getPlayerName().equalsIgnoreCase(mapGeo.getCountryById(attackerCountryID).getPlayerName()) ) {
-						attackingCountry = mapGeo.getCountryById(countryID);
-						defendNumDice = attackingCountry.getArmies();
-						break;
-					}
-				}
-				
-				attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, 0);
-			}
-			
-			if(this.strategy instanceof BenevolentPlayer) {
-
-			}
-			
-			if(this.strategy instanceof RandomPlayer) {
-				
-				Random random = new Random();
-				ArrayList<Integer> playerCountries = countryIDs;
-
-				int randomAttackerCountryID = random.nextInt(playerCountries.size());
-				Country attackerCountry = mapGeo.getCountryById(randomAttackerCountryID);
-
-				int randomAttackingCountryID = random.nextInt(mapGeo.getCountryAdjacency(randomAttackerCountryID).size());
-
-				while (mapGeo.getCountryById(randomAttackingCountryID).getPlayerName().equalsIgnoreCase(mapGeo.getCountryById(randomAttackerCountryID).getPlayerName())) {
-					randomAttackingCountryID = random.nextInt(mapGeo.getCountryAdjacency(randomAttackerCountryID).size());
-				}
-
-				Country attackingCountry = mapGeo.getCountryById(randomAttackingCountryID);
-
-				int numberOfArmiesToAttack = random.nextInt(attackerCountry.getArmies());
-				int numberOfArmiesToDefend = random.nextInt(attackingCountry.getArmies());
-				
-				attack(attackerCountry, attackingCountry, numberOfArmiesToAttack, numberOfArmiesToDefend, 0);	
-			}
-			
-			if(this.strategy instanceof CheaterPlayer) {
-				
-				ArrayList<Integer> playerCountries = countryIDs;
-
-				for (int countryID : playerCountries) {
-					for (int neighborCountryID : mapGeo.getCountryAdjacency(countryID)) {
-						if (mapGeo.getCountryById(neighborCountryID).getPlayerName() != mapGeo.getCountryById(countryID)
-								.getPlayerName()) {
-							attack(mapGeo.getCountryById(countryID), mapGeo.getCountryById(neighborCountryID), 0, 0, 0);
-							break;
-						}
-					}
-				}
-				
-			}
 				
 			if (!isValidCommand) {
 				System.out.println("Correct command not found");
@@ -1019,6 +943,83 @@ public class Player implements Subject {
 			/// end of the attack phase
 
 		} // End of While(!finished)
+		
+		if(this.strategy instanceof AggressivePlayer) {		
+			
+			ArrayList<Integer> playerCountries = getCountryIDs();
+			int maxArmies = 0;
+			Country attackerCountry = null;
+			int attackerCountryID = 0;
+			
+			Country attackingCountry = null;
+			
+			int attackerNumDice = 0;
+			int defendNumDice = 0;
+
+			for (int countryID : playerCountries) {
+				if (mapGeo.getCountryById(countryID).getArmies() > maxArmies) {
+					maxArmies = mapGeo.getCountryById(countryID).getArmies();
+					attackerCountry = mapGeo.getCountryById(countryID);
+					attackerCountryID = countryID;
+					attackerNumDice = attackerCountry.getArmies();
+				}
+			}
+			
+			
+			
+			for (int countryID : mapGeo.getCountryAdjacency(attackerCountryID)) {
+				if (!mapGeo.getCountryById(countryID).getPlayerName().equalsIgnoreCase(mapGeo.getCountryById(attackerCountryID).getPlayerName()) ) {
+					attackingCountry = mapGeo.getCountryById(countryID);
+					defendNumDice = attackingCountry.getArmies();
+					break;
+				}
+			}
+			
+			attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, 0);
+		}
+		
+		if(this.strategy instanceof BenevolentPlayer) {
+
+		}
+		
+		if(this.strategy instanceof RandomPlayer) {
+			
+			Random random = new Random();
+			ArrayList<Integer> playerCountries = countryIDs;
+
+			int randomAttackerCountryID = random.nextInt(playerCountries.size());
+			Country attackerCountry = mapGeo.getCountryById(randomAttackerCountryID);
+
+			int randomAttackingCountryID = random.nextInt(mapGeo.getCountryAdjacency(randomAttackerCountryID).size());
+
+			while (mapGeo.getCountryById(randomAttackingCountryID).getPlayerName().equalsIgnoreCase(mapGeo.getCountryById(randomAttackerCountryID).getPlayerName())) {
+				randomAttackingCountryID = random.nextInt(mapGeo.getCountryAdjacency(randomAttackerCountryID).size());
+			}
+
+			Country attackingCountry = mapGeo.getCountryById(randomAttackingCountryID);
+
+			int numberOfArmiesToAttack = random.nextInt(attackerCountry.getArmies());
+			int numberOfArmiesToDefend = random.nextInt(attackingCountry.getArmies());
+			
+			attack(attackerCountry, attackingCountry, numberOfArmiesToAttack, numberOfArmiesToDefend, 0);	
+		}
+		
+		if(this.strategy instanceof CheaterPlayer) {
+			
+			ArrayList<Integer> playerCountries = countryIDs;
+
+			for (int countryID : playerCountries) {
+				for (int neighborCountryID : mapGeo.getCountryAdjacency(countryID)) {
+					if (mapGeo.getCountryById(neighborCountryID).getPlayerName() != mapGeo.getCountryById(countryID)
+							.getPlayerName()) {
+						attack(mapGeo.getCountryById(countryID), mapGeo.getCountryById(neighborCountryID), 0, 0, 0);
+						break;
+					}
+				}
+			}
+			
+		}
+		
 		return isValidCommand;
 	}
 
