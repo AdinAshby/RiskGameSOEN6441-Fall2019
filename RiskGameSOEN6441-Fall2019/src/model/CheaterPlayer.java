@@ -12,6 +12,18 @@ public class CheaterPlayer extends Player implements Strategy {
 	@Override
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
 		
+		attackingCountry.setPlayer(attackerCountry.getPlayerName());
+		addCountryIdToPlayer(attackingCountry.getCountryId());
+		int NoOfContinentsControlled = getContinentsControlled().size();
+		
+		if (NoOfContinentsControlled == mapGeo
+				.getNoOfContinentsControlled()) {
+			System.out.println(attackerCountry.getPlayerName()
+					+ " is winner. Game over!");
+			this.setWon(true);
+			//System.exit(0);
+		}
+		mapGeo.showMap();
 	}
 
 	@Override

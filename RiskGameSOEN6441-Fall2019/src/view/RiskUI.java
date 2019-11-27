@@ -97,7 +97,7 @@ public class RiskUI {
 	private Tournament theTournament;
 
 	private int counterForPhases;
-//	private MapDomination mapDomination;
+	//	private MapDomination mapDomination;
 	private MapDomination mapDomination = new MapDomination();
 	private MapConquest mapConquest;
 
@@ -163,31 +163,31 @@ public class RiskUI {
 
 		String addText = "";
 
-		
+
 		/**
 		 * Map Builder Pattern
 		 */
-		
-//		MapGeo mapDomination2;
-//		MapBuilder mapGeo=new MapDominationBuilder();
-//		MapDirector mapDirector= new MapDirector();
-//		mapDirector.setBuilder(mapGeo);
-//		mapDirector.constructMapGeo();
-//		mapDomination2=mapDirector.getMapGeo();
-		
-		
-		
+
+		//		MapGeo mapDomination2;
+		//		MapBuilder mapGeo=new MapDominationBuilder();
+		//		MapDirector mapDirector= new MapDirector();
+		//		mapDirector.setBuilder(mapGeo);
+		//		mapDirector.constructMapGeo();
+		//		mapDomination2=mapDirector.getMapGeo();
+
+
+
 		/**
 		 * This part is hard code to test the project defined by the boolean debug
 		 * attribute
 		 */
 
-		
+
 		boolean debug = false;
 		if (debug == true) {
 			mapFileName="All For One"; //Aden Africa
 
-			 mapDomination.isDominationMap(mapFileName);
+			mapDomination.isDominationMap(mapFileName);
 
 
 
@@ -216,7 +216,7 @@ public class RiskUI {
 			System.out.println("Player 1=" + player1.getPlayerName() + " Player2=" + player2.getPlayerName());
 
 			player1.attackAllout();
-				System.exit(0);
+			System.exit(0);
 			int attackerCountryId = player1.getCountryIDs().get(0);
 			int fortifyCountryId = player1.getCountryIDs().get(1);
 			int attackingCountryId = player2.getCountryIDs().get(0);
@@ -480,7 +480,7 @@ public class RiskUI {
 						boolean isLoaded = false;
 						try {
 							isLoaded = mapDomination.isDominationMap(mapFileName);
-//							isLoaded = mapDomination.read(mapFileName);
+							//							isLoaded = mapDomination.read(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -500,119 +500,119 @@ public class RiskUI {
 
 					String[] maps;
 					String[] strategy;
-					
+
 					regex = "(?<=tournament )(.*)";
 					setPattern(regex);
 					setMatcher(input);
 					if (matcher.find()) {
-					addText = getMatcher().group(1);
-					
-					
-					regex = "(?=(-M )(?<maps>([\\w\\s]+)))";
-					setPattern(regex);
-					setMatcher(addText);
+						addText = getMatcher().group(1);
 
-					if (matcher.find()) {
-						maps = getMatcher().group("maps").split(" ");
-						System.out.println("Maps are selected :"+Arrays.toString(maps));
-						if(maps.length>5 || maps.length<1) {
-							System.out.println("Maps should be between 1 to 5");
-							isValidCommand = false;
-						}else {
-						for(int i=0;i<maps.length;i++) {
-							listOfMapFiles.add(maps[i]);
+
+						regex = "(?=(-M )(?<maps>([\\w\\s]+)))";
+						setPattern(regex);
+						setMatcher(addText);
+
+						if (matcher.find()) {
+							maps = getMatcher().group("maps").split(" ");
+							System.out.println("Maps are selected :"+Arrays.toString(maps));
+							if(maps.length>5 || maps.length<1) {
+								System.out.println("Maps should be between 1 to 5");
+								isValidCommand = false;
+							}else {
+								for(int i=0;i<maps.length;i++) {
+									listOfMapFiles.add(maps[i]);
+								}
+							}
+
 						}
+
+						regex = "(?=(-P )(?<strategy>([\\w\\s]+)))";
+						setPattern(regex);
+						setMatcher(addText);
+						if (matcher.find()) {
+
+							strategy = getMatcher().group("strategy").split(" ");
+							System.out.println("Strategies are selected :"+Arrays.toString(strategy));
+							if(strategy.length>4 || strategy.length<2) {
+								System.out.println("Strategy should be between 2 to 4");
+								isValidCommand = false;
+							}else {
+								for(int i=0;i<strategy.length;i++) {
+									listOfPlayerStrategies.add(strategy[i]);
+								}
+							}
 						}
-						
-					}
-					
-					regex = "(?=(-P )(?<strategy>([\\w\\s]+)))";
-					setPattern(regex);
-					setMatcher(addText);
-					if (matcher.find()) {
-						
-						strategy = getMatcher().group("strategy").split(" ");
-						System.out.println("Strategies are selected :"+Arrays.toString(strategy));
-						if(strategy.length>4 || strategy.length<2) {
-							System.out.println("Strategy should be between 2 to 4");
-							isValidCommand = false;
-						}else {
-						for(int i=0;i<strategy.length;i++) {
-							listOfPlayerStrategies.add(strategy[i]);
-						}
-						}
-					}
-						
-					regex = "(?=(-G )(?<numberOfGames>\\d+))";
-					setPattern(regex);
-					setMatcher(addText);
-					if (matcher.find()) {
-						try {
-						numberOfGames = Integer.parseInt(getMatcher().group("numberOfGames"));
-						System.out.println("Number Of games are selected :"+numberOfGames);
-						if(numberOfGames>5 || numberOfGames<1) {
-							System.out.println("Number of games should be between 1 to 5");
-							isValidCommand = false;
-						}
-						}catch (Exception e){
-							System.out.println("Enter number for the number of games");
-							isValidCommand = false;
-						}
-					}
-					
-					regex = "(?=(-D )(?<maxNumberOfTurns>\\d+))";
-					setPattern(regex);
-					setMatcher(addText);
-					if (matcher.find()) {
-						try {
-							maxNumberOfTurns = Integer.parseInt(getMatcher().group("maxNumberOfTurns"));
-							System.out.println("Max number Of turns are selected :"+maxNumberOfTurns);
-							if(maxNumberOfTurns>50 || maxNumberOfTurns<10) {
-								System.out.println("Number of turns should be between 10 to 50");
+
+						regex = "(?=(-G )(?<numberOfGames>\\d+))";
+						setPattern(regex);
+						setMatcher(addText);
+						if (matcher.find()) {
+							try {
+								numberOfGames = Integer.parseInt(getMatcher().group("numberOfGames"));
+								System.out.println("Number Of games are selected :"+numberOfGames);
+								if(numberOfGames>5 || numberOfGames<1) {
+									System.out.println("Number of games should be between 1 to 5");
+									isValidCommand = false;
+								}
+							}catch (Exception e){
+								System.out.println("Enter number for the number of games");
 								isValidCommand = false;
 							}
+						}
+
+						regex = "(?=(-D )(?<maxNumberOfTurns>\\d+))";
+						setPattern(regex);
+						setMatcher(addText);
+						if (matcher.find()) {
+							try {
+								maxNumberOfTurns = Integer.parseInt(getMatcher().group("maxNumberOfTurns"));
+								System.out.println("Max number Of turns are selected :"+maxNumberOfTurns);
+								if(maxNumberOfTurns>50 || maxNumberOfTurns<10) {
+									System.out.println("Number of turns should be between 10 to 50");
+									isValidCommand = false;
+								}
 							}catch (Exception e){
 								System.out.println("Enter number for the number of turns");
 								isValidCommand = false;
 							}
-						
-					}
-					
-					
 
-								
-						
+						}
 
-					
-					if((listOfMapFiles.size() > 0 && listOfMapFiles.size() < 6) && (listOfPlayerStrategies.size() > 1 && listOfPlayerStrategies.size() < 5) && (numberOfGames > 0 && numberOfGames < 6) && (maxNumberOfTurns > 9 && maxNumberOfTurns < 51)) {
 
-						isValidCommand = true;
 
-						for(String each : listOfMapFiles) {
-							if( mapDomination.isDominationMap(each) == false) {
-								isValidCommand = false;
-								break;
+
+
+
+
+						if((listOfMapFiles.size() > 0 && listOfMapFiles.size() < 6) && (listOfPlayerStrategies.size() > 1 && listOfPlayerStrategies.size() < 5) && (numberOfGames > 0 && numberOfGames < 6) && (maxNumberOfTurns > 9 && maxNumberOfTurns < 51)) {
+
+							isValidCommand = true;
+
+							for(String each : listOfMapFiles) {
+								if( mapDomination.isDominationMap(each) == false) {
+									isValidCommand = false;
+									break;
+								}
+							}
+
+							for(String each : listOfPlayerStrategies) {
+								if(!(each.equalsIgnoreCase("aggressive") || each.equalsIgnoreCase("benevolent") || each.equalsIgnoreCase("random") || each.equalsIgnoreCase("cheater"))) {
+									isValidCommand = false;
+									break;
+								}
+							}
+
+							if(isValidCommand) {
+								theTournament = new Tournament(listOfMapFiles, listOfPlayerStrategies, numberOfGames, maxNumberOfTurns);
+								theTournament.startTheTournament();
+								System.exit(0);
 							}
 						}
 
-						for(String each : listOfPlayerStrategies) {
-							if(!(each.equalsIgnoreCase("aggressive") || each.equalsIgnoreCase("benevolent") || each.equalsIgnoreCase("random") || each.equalsIgnoreCase("cheater"))) {
-								isValidCommand = false;
-								break;
-							}
-						}
-
-						if(isValidCommand) {
-							theTournament = new Tournament(listOfMapFiles, listOfPlayerStrategies, numberOfGames, maxNumberOfTurns);
-							theTournament.startTheTournament();
-							System.exit(0);
+						if (!isValidCommand) {
+							System.out.println("Please follow the correct command rules");
 						}
 					}
-
-					if (!isValidCommand) {
-						System.out.println("Please follow the correct command rules");
-					}
-				}
 				}
 
 				System.out.println(addOrRemovePlayersRequestingMessage);
@@ -798,26 +798,36 @@ public class RiskUI {
 
 				/******** START GAME PHASE **********************/
 
-				for (Player player : mapDomination.getPlayers()) {
+				whileLoop:
+					while(true) {
 
-					player.setCounterForPhases(1);
+						for (Player player : mapDomination.getPlayers()) {
 
-					System.out.println(player.getPlayerName() + " is your turn to reinforce");
-					finished = false;
+							player.setCounterForPhases(1);
 
-					isValidCommand = player.reinforceCommand(mapDomination, mapView);
+							System.out.println(player.getPlayerName() + " is your turn to reinforce");
+							finished = false;
 
-					player.setCounterForPhases(2);
-					isValidCommand = player.attackCommand(mapView);
+							isValidCommand = player.reinforceCommand(mapDomination, mapView);
 
-					player.setCounterForPhases(3);
-					isValidCommand = player.fortifyCommand(mapDomination, mapView);
+							player.setCounterForPhases(2);
+							isValidCommand = player.attackCommand(mapView);
 
-					if (!isValidCommand) {
-						System.out.println("Please follow the correct command rules");
+							if(player.getWon()) {
+								break whileLoop;
+							}
+
+							player.setCounterForPhases(3);
+							isValidCommand = player.fortifyCommand(mapDomination, mapView);
+
+							if (!isValidCommand) {
+								System.out.println("Please follow the correct command rules");
+							}
+						}// Endof For Player
 					}
-				} // Endof For Player
+
 				mapDomination.showMap();
+
 			} else {
 				System.out.println("Please answer by Y or N");
 				editMapAnswer = scanner.nextLine();
@@ -825,7 +835,7 @@ public class RiskUI {
 		}
 	}
 
-	
+
 
 
 	/**

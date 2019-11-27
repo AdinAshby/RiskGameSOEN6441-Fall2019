@@ -44,7 +44,8 @@ public class HumanPlayer extends Player implements Strategy {
 							.getNoOfContinentsControlled()) {
 						System.out.println(attackerCountry.getPlayerName()
 								+ " is winner. Game over!");
-						System.exit(0);
+						this.setWon(true);
+						//System.exit(0);
 					}
 					mapGeo.showMap();
 					

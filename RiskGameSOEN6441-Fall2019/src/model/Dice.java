@@ -27,14 +27,13 @@ public class Dice {
 			diceArray[i] = numDice;
 		}
 	}
-/**
- * This method return the array containing dice
- * @return diceArray
- */
+	/**
+	 * This method return the array containing dice
+	 * @return diceArray
+	 */
 	public int[] getDiceArray() {
 		return diceArray;
 	}
-
 	/**
 	 * This method initializes the dice array object
 	 * @param diceArray
@@ -42,34 +41,34 @@ public class Dice {
 	public void setDiceArray(int[] diceArray) {
 		this.diceArray = diceArray;
 	}
-/**
- * This method returns number of dice
- * @return numDice
- */
+	/**
+	 * This method returns number of dice
+	 * @return numDice
+	 */
 	public int getNumDice() {
 		numDice = (int) (Math.random() * 6 + 1);
 		return numDice;
 	}
-/**
-* This method sets the dice to a given number
- * @param numDice integer
- */
+	/**
+	 * This method sets the dice to a given number
+	 * @param numDice integer
+	 */
 	public void setNumDice(int numDice) {
 		this.numDice = numDice;
 	}
-/**
- * This method show dice number
- */
+	/**
+	 * This method show dice number
+	 */
 	public void showDice() {
 		for (int i = 0; i < diceArray.length; i++) {
 			System.out.print(diceArray[i] + "-");
 		}
 		System.out.println("");
 	}
-/**
- * This method return first and second maximum number of dice
- * @return max 
- */
+	/**
+	 * This method return first and second maximum number of dice
+	 * @return max 
+	 */
 	public int[] getMax() {
 		int i, first, second;
 		int[] maxArr = null;
@@ -105,18 +104,18 @@ public class Dice {
 			}
 
 		}
-//		showDice();
-//		System.out.println("Two largest dice are " + first + " " + second);
+		//		showDice();
+		//		System.out.println("Two largest dice are " + first + " " + second);
 		maxArr = new int[2];
 		maxArr[0] = first;
 		maxArr[1] = second;
 		return maxArr;
 	}
-/**
- * This method compare the max array and return the winner
- * @param otherDice
- * @return winner
- */
+	/**
+	 * This method compare the max array and return the winner
+	 * @param otherDice
+	 * @return winner
+	 */
 	public boolean[] isWinner(Dice otherDice) {
 		int winnerCount = 0;
 		if (this.diceArray.length > otherDice.getDiceArray().length) {
@@ -131,13 +130,13 @@ public class Dice {
 		} else {
 			winner[0] = false;
 		}
-		
+
 		if(otherDice.getDiceArray().length>1) {
-		if (winnerCount>1 && this.getMax()[1] > otherDice.getMax()[1]) {
-			winner[1] = true;
-		} else {
-			winner[1] = false;
-		}
+			if (winnerCount>1 && this.getMax()[1] > otherDice.getMax()[1]) {
+				winner[1] = true;
+			} else {
+				winner[1] = false;
+			}
 		}
 
 		return winner;
