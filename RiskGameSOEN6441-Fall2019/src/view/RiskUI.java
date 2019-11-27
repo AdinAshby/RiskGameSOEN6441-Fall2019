@@ -65,7 +65,7 @@ public class RiskUI {
 	 * private loadMapRequestingMessage
 	 */
 
-	private String loadMapRequestingMessage = "Load the map you with to play by using \"loadmap\" command or start the tournament command like\n tournament -M test ameroki -P human aggressive -G 5 -D 15\n";
+	private String loadMapRequestingMessage = "Load the map you with to play by using \"loadmap\" command or start the tournament command \n";
 	/**
 	 * private addOrRemovePlayersRequestingMessage
 	 */
@@ -524,8 +524,14 @@ public class RiskUI {
 
 					if (matcher.find()) {
 						maps = getMatcher().group("maps").split(" ");
+						System.out.println("Maps are selected :"+Arrays.toString(maps));
+						if(maps.length>5 || maps.length<1) {
+							System.out.println("Maps should be between 1 to 5");
+							isValidCommand = false;
+						}else {
 						for(int i=0;i<maps.length;i++) {
 							listOfMapFiles.add(maps[i]);
+						}
 						}
 						
 					}
@@ -536,23 +542,50 @@ public class RiskUI {
 					if (matcher.find()) {
 						
 						strategy = getMatcher().group("strategy").split(" ");
+						System.out.println("Strategies are selected :"+Arrays.toString(strategy));
+						if(strategy.length>4 || strategy.length<2) {
+							System.out.println("Strategy should be between 2 to 4");
+							isValidCommand = false;
+						}else {
 						for(int i=0;i<strategy.length;i++) {
 							listOfPlayerStrategies.add(strategy[i]);
 						}
+						}
 					}
 						
-					regex = "(?=(-G )(?<numberOfGames>\\d))";
+					regex = "(?=(-G )(?<numberOfGames>\\d+))";
 					setPattern(regex);
 					setMatcher(addText);
 					if (matcher.find()) {
+						try {
 						numberOfGames = Integer.parseInt(getMatcher().group("numberOfGames"));
+						System.out.println("Number Of games are selected :"+numberOfGames);
+						if(numberOfGames>5 || numberOfGames<1) {
+							System.out.println("Number of games should be between 1 to 5");
+							isValidCommand = false;
+						}
+						}catch (Exception e){
+							System.out.println("Enter number for the number of games");
+							isValidCommand = false;
+						}
 					}
 					
-					regex = "(?=(-D )(?<maxNumberOfTurns>\\d\\d))";
+					regex = "(?=(-D )(?<maxNumberOfTurns>\\d+))";
 					setPattern(regex);
 					setMatcher(addText);
 					if (matcher.find()) {
-						maxNumberOfTurns = Integer.parseInt(getMatcher().group("maxNumberOfTurns"));
+						try {
+							maxNumberOfTurns = Integer.parseInt(getMatcher().group("maxNumberOfTurns"));
+							System.out.println("Max number Of turns are selected :"+maxNumberOfTurns);
+							if(maxNumberOfTurns>50 || maxNumberOfTurns<10) {
+								System.out.println("Number of turns should be between 10 to 50");
+								isValidCommand = false;
+							}
+							}catch (Exception e){
+								System.out.println("Enter number for the number of turns");
+								isValidCommand = false;
+							}
+						
 					}
 					
 					
