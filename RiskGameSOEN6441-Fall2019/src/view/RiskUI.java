@@ -197,7 +197,7 @@ public class RiskUI {
 		if (debug == true) {
 			mapFileName="All For One"; //Aden Africa
 
-			isDominationMap(mapFileName);
+			 mapDomination.isDominationMap(mapFileName);
 
 
 
@@ -489,7 +489,7 @@ public class RiskUI {
 						isValidCommand = true;
 						boolean isLoaded = false;
 						try {
-							isLoaded = isDominationMap(mapFileName);
+							isLoaded = mapDomination.isDominationMap(mapFileName);
 //							isLoaded = mapDomination.read(mapFileName);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -599,7 +599,7 @@ public class RiskUI {
 						isValidCommand = true;
 
 						for(String each : listOfMapFiles) {
-							if(isDominationMap(each) == false) {
+							if( mapDomination.isDominationMap(each) == false) {
 								isValidCommand = false;
 								break;
 							}
@@ -833,52 +833,7 @@ public class RiskUI {
 	}
 
 	
-/**
- * This method is to check whether the map is domination
- * @param mapFileName
- * @return isLoaded
- */
-	private boolean isDominationMap(String mapFileName) {
-		boolean isLoaded=false;
-		File mapFolder=mapDomination.getMapFolder();
-		File file = new File(mapFolder + "/" + mapFileName + ".map");
-		if (!file.exists()) {
-			System.out.println(mapFileName + " map file not found. Please try again");
-			return false;
-		}else {
-//			System.out.println("Read File: "+mapFolder + "/" + mapFileName + ".map");
-		}
 
-		BufferedReader bufferedReader = null;
-		try {
-
-			bufferedReader = new BufferedReader(new FileReader(file));
-
-			StringBuffer stringBuffer = new StringBuffer();
-			String fileContent = "";
-			String line = null;
-
-			line = bufferedReader.readLine();
-			if(!line.equals("[Map]")) {
-				isLoaded=mapDomination.read(mapFileName);
-				//mapAdapter=mapDomination;
-			}else {
-				mapConquest = new MapConquest(mapDomination);
-				MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
-				isLoaded=mapAdapterFromDomination.read(mapFileName);
-				mapDomination=mapAdapterFromDomination;
-
-			}
-		}catch (FileNotFoundException e) {
-			System.out.println("File Not Found");
-		} catch (Exception e) {
-			System.out.println("Error in reading Map"+e);
-		}
-
-
-		return isLoaded;
-
-	}
 
 	/**
 	 * This method is for reading the input from console

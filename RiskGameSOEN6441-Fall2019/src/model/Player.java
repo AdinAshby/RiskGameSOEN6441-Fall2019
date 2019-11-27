@@ -390,13 +390,15 @@ public class Player implements Subject {
 	 * @return isDefendPossible
 	 */
 
-	public boolean isDefendPossible(MapGeo mapGeo, int defendCountry, int numDice) {
+	public boolean isDefendPossible(int defendCountry, int numDice) {
 
 		boolean isDefendPossible = true;
-		if (!getCountryIDs().contains(defendCountry)) {
+		if (getCountryIDs().contains(defendCountry)) {
+			System.out.println(this.playerName+", Defend Country "+mapGeo.getCountryNameById(defendCountry)+" ("+defendCountry+") should be for other players"+getCountryIDs());
 			isDefendPossible = false;
 		}
-		if (mapGeo.getCountryById(defendCountry).getArmies() < numDice) {
+		if (mapGeo.getCountryById(defendCountry).getArmies() <= numDice) {
+			System.out.println("Army of Country"+mapGeo.getCountryNameById(defendCountry)+" should be more than number of dice "+numDice);
 			isDefendPossible = false;
 		}
 

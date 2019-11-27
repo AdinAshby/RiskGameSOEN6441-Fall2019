@@ -53,14 +53,15 @@ public class MapAdapter extends MapDomination {
 	}
 
 	/**
+	 * 
 	 * mapConquestCopy
 	 */
-	public void mapConquestCopy() {
-		mapConquest.continentList = this.continentList;
-		mapConquest.theMapView = this.theMapView;
-		mapConquest.countryAdjacency = this.countryAdjacency;
-		mapConquest.players = this.players;
-		mapConquest.random = this.random;
-	}
+//	public void mapConquestCopy() {
+//		mapConquest.continentList = this.continentList;
+//		mapConquest.theMapView = this.theMapView;
+//		mapConquest.countryAdjacency = this.countryAdjacency;
+//		mapConquest.players = this.players;
+//		mapConquest.random = this.random;
+//	}
 
 }

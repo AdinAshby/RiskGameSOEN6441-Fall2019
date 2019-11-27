@@ -211,4 +211,62 @@ public class MapDomination extends MapGeo {
 		return true;
 	}
 
+	/**
+	 * This method is to check whether the map is domination
+	 * @param mapFileName
+	 * @return isLoaded
+	 */
+		public boolean isDominationMap(String mapFileName) {
+			boolean isLoaded=false;
+			File mapFolder=getMapFolder();
+			File file = new File(mapFolder + "/" + mapFileName + ".map");
+			if (!file.exists()) {
+				System.out.println(mapFileName + " map file not found. Please try again");
+				return false;
+			}else {
+//				System.out.println("Read File: "+mapFolder + "/" + mapFileName + ".map");
+			}
+
+			BufferedReader bufferedReader = null;
+			try {
+
+				bufferedReader = new BufferedReader(new FileReader(file));
+
+				StringBuffer stringBuffer = new StringBuffer();
+				String fileContent = "";
+				String line = null;
+
+				line = bufferedReader.readLine();
+				if(!line.equals("[Map]")) {
+					isLoaded=read(mapFileName);
+					//mapAdapter=mapDomination;
+				}else {
+					MapConquest mapConquest;
+					mapConquest = new MapConquest(this);
+					MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
+					isLoaded=mapAdapterFromDomination.read(mapFileName);
+					mapDominationCopy(mapAdapterFromDomination);
+
+				}
+			}catch (FileNotFoundException e) {
+				System.out.println("File Not Found");
+			} catch (Exception e) {
+				System.out.println("Error in reading Map"+e);
+			}
+
+
+			return isLoaded;
+
+		}
+	
+		
+		
+		public void mapDominationCopy(MapDomination mapAdapter) {
+			this.continentList = mapAdapter.continentList;
+			this.theMapView = mapAdapter.theMapView;
+			this.countryAdjacency = mapAdapter.countryAdjacency;
+			this.players = mapAdapter.players;
+			this.random = mapAdapter.random;
+		}
+	
 }
