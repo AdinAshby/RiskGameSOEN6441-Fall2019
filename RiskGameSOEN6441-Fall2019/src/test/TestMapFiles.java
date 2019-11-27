@@ -23,7 +23,7 @@ public class TestMapFiles {
 	/**
 	 * String valid_file
 	 */
-	String VALID_FILE = "test";
+	String VALID_FILE = "valid_map";
 	/**
 	 * String inValid_file
 	 */
@@ -37,7 +37,7 @@ public class TestMapFiles {
 	 */
 	@Test
 	public void testValidMapFiles() throws Exception {
-		Assert.assertEquals(true, mapConquest.readConquest(INVALID_FILE));
+		Assert.assertEquals(true, mapConquest.readConquest(VALID_FILE));
 	}
 
 	/**
