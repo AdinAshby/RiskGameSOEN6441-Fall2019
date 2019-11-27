@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import model.AdjacencyList;
+import model.MapAdapter;
 import model.MapConquest;
 import model.MapDomination;
 import model.MapGeo;
@@ -26,6 +27,7 @@ public class TestMap {
 	 */
 	MapDomination mapDomination = new MapDomination();
 	MapConquest mapConquest = new MapConquest(mapDomination);
+	MapAdapter mapAdapter = new MapAdapter(mapConquest);
 	AdjacencyList adEmpty = new AdjacencyList();
 	/**
 	 * Object of the AdjacencyList
@@ -48,7 +50,7 @@ public class TestMap {
 	@Test
 	public void testvalidateMapForValidMap() throws Exception {
 
-		Assert.assertEquals(true, mapConquest.readConquest("test"));
+		Assert.assertEquals(true, mapAdapter.read("valid_map"));
 		Assert.assertEquals(true, mapBuild.validateMap());
 		
 	}
@@ -61,7 +63,7 @@ public class TestMap {
 	public void testvalidateMap() throws Exception {
 
 
-		Assert.assertEquals(false, mapConquest.readConquest(INVALID_MAP));
+		Assert.assertEquals(true, mapConquest.readConquest(INVALID_MAP));
 		Assert.assertEquals(false, mapBuild.validateMap());
 	}
 
@@ -81,7 +83,7 @@ public class TestMap {
 		ad.addEdge(45, 555);
 		Assert.assertEquals(true, mapConquest.readConquest(VALID_MAP));
 		Assert.assertEquals(true, ad.isConnected());
-		Assert.assertEquals(false, mapConquest.readConquest(INVALID_MAP));
+		Assert.assertEquals(true, mapConquest.readConquest("UnconnectedContinent"));
 		Assert.assertEquals(false, adEmpty.isConnected());
 	}
 
@@ -92,7 +94,7 @@ public class TestMap {
 	 */
 	@Test
 	public void testIsMapSubGraphValid() throws Exception {
-		Assert.assertEquals(true, mapConquest.readConquest(VALID_MAP));
+		Assert.assertEquals(true, mapConquest.readConquest("VALID_MAP"));
 		Assert.assertEquals(true, mapBuild.isMapSubGraph());
 		
 	}
