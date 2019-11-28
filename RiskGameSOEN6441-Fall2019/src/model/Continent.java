@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.ListIterator;
  * @author AdinAshby
  *
  */
-public class Continent {
+public class Continent implements Serializable {
 	
 	/**
 	 * private name attribute

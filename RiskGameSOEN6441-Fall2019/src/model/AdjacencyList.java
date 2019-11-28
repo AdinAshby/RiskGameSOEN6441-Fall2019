@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author AdinAshby
  * 
  */
-public class AdjacencyList {
+public class AdjacencyList implements Serializable {
 	/**
 	 * This is private adjacencyList object of HashMap
 	 */

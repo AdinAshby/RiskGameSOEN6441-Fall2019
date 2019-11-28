@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ import view.MapView;
  * @author s_shehna
  * @author AdinAshby
  */
-public class Player implements Subject {
+public class Player implements Subject, Serializable {
 
 	/**
 	 * PlayerName is name of the player corresponding to the ID.
@@ -89,7 +90,7 @@ public class Player implements Subject {
 	/**
 	 * protected scanner
 	 */
-	protected Scanner scanner = new Scanner(System.in);
+	protected transient Scanner scanner = new Scanner(System.in);
 	/**
 	 * protected input
 	 */

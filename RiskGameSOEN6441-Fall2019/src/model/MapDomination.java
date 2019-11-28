@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MapDomination extends MapGeo {
+public class MapDomination extends MapGeo implements Serializable {
 
 	/**
 	 * This method reads the map files
@@ -268,5 +269,24 @@ public class MapDomination extends MapGeo {
 			this.players = mapAdapter.players;
 			this.random = mapAdapter.random;
 		}
+
+		
+		public void saveGame(String mapFileName) {
+			try {
+				/**
+				 * Map Builder Pattern
+				 */
+						MapBuilder mapBuilder=new MapDominationBuilder(this);
+						MapDirector mapDirector= new MapDirector();
+						mapDirector.setBuilder(mapBuilder);
+						mapDirector.saveGame(mapFileName);
+						//mapDomination2=mapDirector.getMapGeo();
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}		
 	
 }

@@ -1,16 +1,25 @@
 package model;
 
-public class MapDominationBuilder extends MapBuilder {
+import java.io.Serializable;
+
+public class MapDominationBuilder extends MapBuilder implements Serializable{
+	//default serialVersion id
+    private static final long serialVersionUID = 1L;
+	private MapDomination mapDomination;
+
+	public MapDominationBuilder(MapDomination mapDomination) {
+		this.mapDomination=mapDomination;
+	}
 
 	@Override
 	void buildContinents() {
-		// TODO Auto-generated method stub
+		mapGeo.continentList=mapDomination.continentList;
 		
 	}
 
 	@Override
 	void buildPlayers() {
-		// TODO Auto-generated method stub
+		mapGeo.players=mapDomination.players;
 		
 	}
 

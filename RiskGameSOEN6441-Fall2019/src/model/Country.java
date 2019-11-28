@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * This class defines countries in the map
  * @author f_yazdan
  * @author s_shehna
  * @author AdinAshby
  */
-public class Country {
+public class Country implements Serializable{
 	/**
 	 * private name
 	 */

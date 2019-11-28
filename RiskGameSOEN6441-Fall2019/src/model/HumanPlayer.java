@@ -13,8 +13,9 @@ public class HumanPlayer extends Player implements Strategy {
 	
 	@Override
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
+
 		System.out.println("Own Contries by Human Player" + this.countryIDs);
-		
+
 		Dice attackDice = new Dice(attackerNumDice);
 		int[] attackDiceArray = attackDice.getDiceArray();
 		//attackDice.showDice();

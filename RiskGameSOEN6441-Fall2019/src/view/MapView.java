@@ -1,5 +1,6 @@
 package view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -24,7 +25,7 @@ import model.Player;
  *
  */
 
-public class MapView {
+public class MapView implements Serializable {
 	
 	private final String[] phases = {"Startup", "Reinforcement", "Attack", "Fortification"};
 	private final String[] phasesDescription = {

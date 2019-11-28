@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * This class is for managing Dice during the game
  * @author f_yazdan
  * @author s_shehna
  * @author AdinAshby
  */
-public class Dice {
+public class Dice implements Serializable {
 	/**
 	 *private number of Dice
 	 */

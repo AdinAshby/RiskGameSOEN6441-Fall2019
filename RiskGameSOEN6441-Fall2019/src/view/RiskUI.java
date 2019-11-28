@@ -72,7 +72,7 @@ public class RiskUI {
 	/**
 	 * private scanner
 	 */
-	private Scanner scanner;
+	private transient Scanner scanner;
 	/**
 	 * private input
 	 */
@@ -168,16 +168,7 @@ public class RiskUI {
 		String addText = "";
 
 
-		/**
-		 * Map Builder Pattern
-		 */
 
-				MapGeo mapDomination2;
-				MapBuilder mapGeo=new MapDominationBuilder();
-				MapDirector mapDirector= new MapDirector();
-				mapDirector.setBuilder(mapGeo);
-				mapDirector.constructMapGeo();
-				mapDomination2=mapDirector.getMapGeo();
 
 
 
@@ -209,6 +200,9 @@ public class RiskUI {
 			mapDomination.placeAllArmies();
 
 			mapDomination.showMap();
+//			mapDomination.saveGame("mysave1");
+			
+//			System.exit(0);
 			Player[] players = mapDomination.getPlayers();
 			Player player1 = players[0];
 			Player player2 = players[1];
@@ -220,7 +214,7 @@ public class RiskUI {
 			System.out.println("Player 1=" + player1.getPlayerName() + " Player2=" + player2.getPlayerName());
 
 			player1.attackAllout();
-			System.exit(0);
+			
 			int attackerCountryId = player1.getCountryIDs().get(0);
 			int fortifyCountryId = player1.getCountryIDs().get(1);
 			int attackingCountryId = player2.getCountryIDs().get(0);
@@ -414,6 +408,18 @@ public class RiskUI {
 						}
 					}
 
+					// savegame filename
+					regex = "savegame ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						mapFileName = matcher.group(1);
+						isValidCommand = true;
+
+						mapDomination.saveGame(mapFileName);
+					}
+					
+					
 					// added multiple time editcontinent -add aa 1 -add bb 2
 					// add continent done
 					regex = "(?<=editcontinent)(.*)";
@@ -645,6 +651,25 @@ public class RiskUI {
 						}
 
 					}
+					
+					
+					// savegame filename
+					regex = "savegame ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						mapFileName = matcher.group(1);
+						isValidCommand = true;
+
+						mapDomination.saveGame(mapFileName);
+					}
+					
+					
+					
+					
+					
+					
+					
 					// gameplayer -add
 					regex = "(?<=gameplayer)(.*)";
 					setPattern(regex);

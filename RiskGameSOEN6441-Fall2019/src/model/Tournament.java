@@ -1,13 +1,18 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import view.MapView;
 
-public class Tournament {
+
 /**
  * private listlistOfMapFiles 
  */
+
+public class Tournament implements Serializable {
+
+
 	private ArrayList<String> listOfMapFiles;
 	/**
 	 * private listOfPlayerStrategies

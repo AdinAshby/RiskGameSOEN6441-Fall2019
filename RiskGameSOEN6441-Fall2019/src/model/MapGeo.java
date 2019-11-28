@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,7 +21,7 @@ import view.MapView;
  * @author s_shehna
  * @author AdinAshby
  */
-public class MapGeo {
+public class MapGeo implements Serializable {
 
 	/**
 	 * file map
@@ -1084,9 +1085,6 @@ public class MapGeo {
 
 		return totalArmies;
 	}
-
-
-
 
 
 }

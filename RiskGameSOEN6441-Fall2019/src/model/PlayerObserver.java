@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import view.MapView;
@@ -8,7 +9,7 @@ import view.MapView;
  * @author s_shehna
  *
  */
-public class PlayerObserver implements Observer {
+public class PlayerObserver implements Observer, Serializable {
 	
 	MapView theMapView = new MapView();
 	

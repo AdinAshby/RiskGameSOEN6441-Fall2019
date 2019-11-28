@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Random;
 /**
  * This function is is a constructor for initializing cardType.
@@ -10,7 +11,7 @@ import java.util.Random;
  * @author AdinAshby
  *
  */
-public class Card {
+public class Card implements Serializable {
 	/**
 	 * String card Type
 	 */
