@@ -6,7 +6,7 @@ public class CheaterPlayer extends Player implements Strategy {
 
 	public CheaterPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
 		super(playerName, countriesIDs, mapBuild);
-		
+		setStrategy(this);
 	}
 	
 	@Override

@@ -6,6 +6,7 @@ public class BenevolentPlayer extends Player implements Strategy {
 
 	public BenevolentPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
 		super(playerName, countriesIDs, mapBuild);
+		setStrategy(this);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ public class RandomPlayer extends Player implements Strategy {
 
 	public RandomPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
 		super(playerName, countriesIDs, mapBuild);
-		
+		setStrategy(this);
 	}
 	
 	@Override

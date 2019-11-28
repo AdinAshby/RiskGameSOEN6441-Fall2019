@@ -386,7 +386,7 @@ public class MapGeo {
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * This method returns continent by countryName
 	 * 
@@ -512,7 +512,7 @@ public class MapGeo {
 		return getCountryAdjacency().showListEdges();
 	}
 
-	
+
 
 	/**
 	 * This method add country to corresponding continent
@@ -560,7 +560,7 @@ public class MapGeo {
 	 */
 
 	public boolean validateMap() {
-		
+
 		boolean isValid = true;
 		if (getContinentListSize() < 2) {
 			isValid = false;
@@ -685,30 +685,31 @@ public class MapGeo {
 				int randomCountryID = random.nextInt(temporaryCountries.size());
 				//countriesIDs.add(j, temporaryCountries.get(randomCountryID).getCountryId());
 				countriesIDs.add(temporaryCountries.get(randomCountryID).getCountryId());
-//				System.out.println("Rand="+randomCountryID+" Country="+temporaryCountries.get(randomCountryID).getCountryId());
+				//				System.out.println("Rand="+randomCountryID+" Country="+temporaryCountries.get(randomCountryID).getCountryId());
 				temporaryCountries.remove(randomCountryID);
 				// updateCountryById(i, countriesIds[j]);
 			}
 
-			players[i] = new Player(playerNames.get(i), countriesIDs, this);
-			
+			//players[i] = new Player(playerNames.get(i), countriesIDs, this);
+
 
 			if (playerStrategies.get(i).equalsIgnoreCase("human")) {
-				players[i].setStrategy(new HumanPlayer(playerNames.get(i), countriesIDs, this));
+				players[i] = new HumanPlayer(playerNames.get(i), countriesIDs, this);
+				//players[i].setStrategy(new HumanPlayer(playerNames.get(i), countriesIDs, this));
 			}
 
 			if (playerStrategies.get(i).equalsIgnoreCase("aggressive"))
-				players[i].setStrategy(new AggressivePlayer(playerNames.get(i), countriesIDs, this));
+				players[i] = new AggressivePlayer(playerNames.get(i), countriesIDs, this);
 
 			if (playerStrategies.get(i).equalsIgnoreCase("benevolent"))
-				players[i].setStrategy(new BenevolentPlayer(playerNames.get(i), countriesIDs, this));
-
+				players[i] = new BenevolentPlayer(playerNames.get(i), countriesIDs, this);
+			
 			if (playerStrategies.get(i).equalsIgnoreCase("random"))
-				players[i].setStrategy(new RandomPlayer(playerNames.get(i), countriesIDs, this));
+				players[i] = new RandomPlayer(playerNames.get(i), countriesIDs, this);
 
 			if (playerStrategies.get(i).equalsIgnoreCase("cheater"))
-				players[i].setStrategy(new CheaterPlayer(playerNames.get(i), countriesIDs, this));
-
+				players[i] = new CheaterPlayer(playerNames.get(i), countriesIDs, this);
+			
 			for (int m = 0; m < countriesIDs.size(); m++) {
 				updateCountryIDs(playerNames.get(i), countriesIDs.get(m));
 			}
@@ -729,7 +730,7 @@ public class MapGeo {
 				int newCountryIDForPlayer = temporaryCountries.get(randomCountryID).getCountryId();
 				receivedMoreCountriesPlayerCountriesList.add(newCountryIDForPlayer); //playerCountryCount - 1, 
 				giveMoreCountriesToPlayer.setCountryIDs(receivedMoreCountriesPlayerCountriesList);
-
+				
 				updateCountryIDs(giveMoreCountriesToPlayer.getPlayerName(), newCountryIDForPlayer);
 
 				temporaryCountries.remove(randomCountryID);
@@ -820,7 +821,7 @@ public class MapGeo {
 				int randomID = p.get(randomPlayerCountryID);
 				int oldArmies = getCountryById(randomID).getArmies();
 				getCountryById(randomID).setArmies(oldArmies + armiesForEach);// Check if atleast 25 army should be
-																				// assigned
+				// assigned
 
 			}
 
@@ -831,13 +832,11 @@ public class MapGeo {
 		}
 
 	}
-public ArrayList<Integer> getCountriesByPlayerName(String playerName){
 	
-	return this.getPlayerByName(playerName).countryIDs;
+	public ArrayList<Integer> getCountriesByPlayerName(String playerName){
 
-	
-}
-	
+		return this.getPlayerByName(playerName).countryIDs;
+	}
 
 	/**
 	 * This method is for setContinentNamesOfPlayer
@@ -1086,8 +1085,8 @@ public ArrayList<Integer> getCountriesByPlayerName(String playerName){
 		return totalArmies;
 	}
 
-	
 
-		
+
+
 
 }

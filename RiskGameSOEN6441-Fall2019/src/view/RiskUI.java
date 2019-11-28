@@ -187,7 +187,7 @@ public class RiskUI {
 		 */
 
 
-		boolean debug = false;
+		boolean debug = true;
 		if (debug == true) {
 			mapFileName="test"; //Aden Africa
 

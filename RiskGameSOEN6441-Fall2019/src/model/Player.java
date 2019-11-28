@@ -138,6 +138,10 @@ public class Player implements Subject {
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
+	
+	public Strategy getStrategy() {
+		return strategy;
+	}
 	/**
 	 * protected add One To Card Counter
 	 */
