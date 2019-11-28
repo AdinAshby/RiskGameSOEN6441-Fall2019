@@ -201,7 +201,9 @@ public class MapConquest extends MapGeo {
 		return true;
 	}
 
-	/**
+	/** 
+	 * This is  constructor for initializing MapConquest
+	 * 
 	 * @param mapDomination
 	 */
 	public MapConquest(MapDomination mapDomination) {
