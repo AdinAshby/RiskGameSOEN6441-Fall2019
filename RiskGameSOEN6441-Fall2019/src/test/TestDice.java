@@ -2,7 +2,9 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.omg.CORBA.INITIALIZE;
 
 import model.Dice;
 
@@ -12,10 +14,12 @@ import model.Dice;
  *
  */
 public class TestDice {
+	
 
-	int diceNumber= 3;
+	int diceNumber=3;
 	boolean check;
 	Dice dice= new Dice(diceNumber);
+	
 	/**
 	 * This test case tests dice numbers generated when rolled 3 times are always less than  6
 	 */
