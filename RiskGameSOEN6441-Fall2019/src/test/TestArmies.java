@@ -76,43 +76,24 @@ public class TestArmies {
 //	@Test
 //	public void testArmiesOwnedByPlayer3() throws Exception {
 //		mapConquest.readConquest("ameroki");
-//		players.add("Shehnaz");
-//		players.add("Golnoosh");
-//		players.add("Aiden");
-//		mapBuild.assigningPlayersToCountries(players);
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets("Shehnaz");
-//		int armies_owned_by_player1 = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets("Golnoosh");
-//		int armies_owned_by_player2 = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets("Aiden");
-//		int armies_owned_by_player3 = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		Assert.assertEquals(4, armies_owned_by_player1);	
-//		Assert.assertEquals(4, armies_owned_by_player2);	
-//		Assert.assertEquals(4, armies_owned_by_player3);	
+//		players.add("a");
+//		players.add("b");
+//		players.add("c");
+//      strategy.add("human");
+//	    strategy.add("human");
+//      strategy.add("human");
+	
+//		mapBuild.assigningPlayersToCountries(players, strategy);
+//		mapBuild.calculateNumberOfArmiesEachPlayerGets();
+//		int armiesOwnedByPlayerOne = mapBuild.getNumberOfArmiesEachPlayerGets();
+//		mapBuild.calculateNumberOfArmiesEachPlayerGets();
+//		int armiesOwnedByPlayerTwo = mapBuild.getNumberOfArmiesEachPlayerGets();
+//		mapBuild.calculateNumberOfArmiesEachPlayerGets();
+//		int armiesOwnedByPlayerThree = mapBuild.getNumberOfArmiesEachPlayerGets();
+//		Assert.assertEquals(4, armiesOwnedByPlayerOne);	
+//		Assert.assertEquals(4, armiesOwnedByPlayerTwo);	
+//		Assert.assertEquals(4, armiesOwnedByPlayerThree);	
 //	}
-//	/**
-//	 * This testcase tests the calculation for number of armies when there are 4 players
-//	 * 
-//	 */
-//	@Test
-//	public void testArmiesOwnedByPlayer4() throws Exception {
-//		mapConquest.readConquest("ameroki");
-//		players.add("Shehnaz");
-//		players.add("Golnoosh");
-//		players.add("Aiden");
-//		players.add("Babita");
-//		mapBuild.assigningPlayersToCountries(players);
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets("Shehnaz");
-//		int armies_owned_by_player1 = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets("Golnoosh");
-//		int armies_owned_by_player2 = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets("Aiden");
-//		int armies_owned_by_player3 = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets("Babita");
-//		int armies_owned_by_player4 = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		Assert.assertEquals(3, armies_owned_by_player1);	
-//		Assert.assertEquals(3, armies_owned_by_player2);	
-//		Assert.assertEquals(3, armies_owned_by_player3);
-//		Assert.assertEquals(3, armies_owned_by_player4);
-//	}
+
 }
+
