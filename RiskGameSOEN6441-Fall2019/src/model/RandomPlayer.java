@@ -108,6 +108,15 @@ public class RandomPlayer extends Player implements Strategy {
 		
 		return true;
 	}
+	/**
+	 * This is fortify method for RandomPlayer
+	 * 
+	 * @param fromCountry
+	 * @param toCountry
+	 * @param armiesToMove
+	 * @param mapBuild
+	 
+	 */
 
 	@Override
 	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapBuild) {
