@@ -5,14 +5,38 @@ import java.util.ArrayList;
 import view.MapView;
 
 public class Tournament {
-
+/**
+ * private listlistOfMapFiles 
+ */
 	private ArrayList<String> listOfMapFiles;
+	/**
+	 * private listOfPlayerStrategies
+	 */
 	private ArrayList<String> listOfPlayerStrategies;
+	/**
+	 * private numberOfGames
+	 */
 	private int numberOfGames;
+	/**
+	 * private maxNumberOfTurns
+	 */
 	private int maxNumberOfTurns;
-
+	/**
+	 * private mapView
+	 */
 	private MapView mapView = new MapView();
+	/**
+	 * private MapDomination
+	 */
 	private MapDomination mapDomination = new MapDomination();
+	/**
+	 * This is  constructor for initializing Tournament mode
+	 * 
+	 * @param listOfMapFiles
+	 * @param listOfPlayerStrategies
+	 * @param numberOfGames
+	 * @param maxNumberOfTurns
+	 */
 
 	public Tournament(ArrayList<String> listOfMapFiles, ArrayList<String> listOfPlayerStrategies, int numberOfGames, int maxNumberOfTurns) {
 		this.listOfMapFiles = listOfMapFiles;
@@ -20,7 +44,10 @@ public class Tournament {
 		this.numberOfGames = numberOfGames;
 		this.maxNumberOfTurns = maxNumberOfTurns;
 	}
-
+	/**
+	 * This method for starting the game in tournament mode
+	 * 
+	 */
 	public void startTheTournament() {
 		ArrayList<String> results = new ArrayList<String>();
 		boolean somebodyWon = false;
