@@ -9,7 +9,11 @@ import controller.*;
 import java.util.ArrayList;
 
 import org.junit.Test;
-
+/**
+ * This testcase class tests start up phase 
+ * @author s_shehna
+ *
+ */
    public class TestStartUp {
 
 	MapGeo mapBuild = MapGeo.getInstance();
@@ -147,7 +151,7 @@ import org.junit.Test;
 		playerNames.add("b");
 
 		// mapDomination.isDominationMap("test");
-		mapConquest.readConquest("test");
+		mapDomination.read("valid_map");
 		strategy.add("human");
 		strategy.add("human");
 
@@ -161,7 +165,7 @@ import org.junit.Test;
 				String countryName = mapBuild.getCountryNameById(c);
 				Country country = new Country(countryName);
 
-				Assert.assertNull(country.getArmies());
+				Assert.assertNotEquals(0, country.getArmies());
 			}
 		}
 
