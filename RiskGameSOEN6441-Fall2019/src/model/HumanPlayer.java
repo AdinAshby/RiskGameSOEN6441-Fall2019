@@ -25,7 +25,15 @@ public class HumanPlayer extends Player implements Strategy {
 		super(playerName, countriesIDs, mapGeo);
 		setStrategy(this);
 	} 
-	
+	/**
+	 * This is attack method for HumanPlayer
+	 * 
+	 * @param attackerCountry
+	 * @param attackingCountry
+	 * @param attackerNumDice
+	 * @param defendNumDice
+	 * @param attackAllout
+	 */
 	@Override
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
 
