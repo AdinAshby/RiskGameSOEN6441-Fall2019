@@ -23,6 +23,15 @@ public class RandomPlayer extends Player implements Strategy {
 		super(playerName, countriesIDs, mapBuild);
 		setStrategy(this);
 	}
+	/**
+	 * This is attack method for RandomPlayer
+	 * 
+	 * @param attackerCountry
+	 * @param attackingCountry
+	 * @param attackerNumDice
+	 * @param defendNumDice
+	 * @param attackAllout
+	 */
 	
 	@Override
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
@@ -80,7 +89,15 @@ public class RandomPlayer extends Player implements Strategy {
 
 		}
 	}
-
+	/**
+	 * This is reinforce method for RandomPlayer
+	 * 
+	 * @param mapBuild
+	 * @param countryName
+	 * @param num
+	 * @param finished
+	 
+	 */
 	@Override
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
 		int oldArmies = mapBuild.getCountryByName(countryName).getArmies();
