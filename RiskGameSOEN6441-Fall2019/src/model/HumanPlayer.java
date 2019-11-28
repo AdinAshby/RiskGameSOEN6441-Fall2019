@@ -2,9 +2,24 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * This class is made to implement Human Player  Strategy
+ * 
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ * @author Babita kaur
+ * 
+ */
 public class HumanPlayer extends Player implements Strategy {
-
+	/**
+	 * This is  constructor for initializing HumanPlayer
+	 * 
+	 * @param playerName
+	 * @param countriesIDs
+	 * @param mapBuild
+	
+	 */
 	public HumanPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapGeo) {
 		
 		super(playerName, countriesIDs, mapGeo);
