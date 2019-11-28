@@ -48,6 +48,15 @@ public class CheaterPlayer extends Player implements Strategy {
 		}
 		mapGeo.showMap();
 	}
+	/**
+	 * This is reinforce method for CheaterPlayer
+	 * 
+	 * @param mapBuild
+	 * @param countryName
+	 * @param num
+	 * @param finished
+	 
+	 */
 
 	@Override
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
