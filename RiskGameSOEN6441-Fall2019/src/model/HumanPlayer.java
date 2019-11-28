@@ -94,7 +94,15 @@ public class HumanPlayer extends Player implements Strategy {
 		}
 	}
 
-
+	/**
+	 * This is reinforce method for HumanPlayer
+	 * 
+	 * @param mapBuild
+	 * @param countryName
+	 * @param num
+	 * @param finished
+	 
+	 */
 
 	@Override
 	public boolean reinforce(MapGeo mapGeo, String countryName, int num, boolean finished) {
@@ -118,6 +126,15 @@ public class HumanPlayer extends Player implements Strategy {
 		return finished;
 		
 	}
+	/**
+	 * This is fortify method for HumanPlayer
+	 * 
+	 * @param fromCountry
+	 * @param toCountry
+	 * @param armiesToMove
+	 * @param mapBuild
+	 
+	 */
 
 	@Override
 	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapGeo) {
