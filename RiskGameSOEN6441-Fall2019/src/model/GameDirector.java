@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import controller.Game;
+import controller.Game.Phase;
 
 public class GameDirector {
 
@@ -25,10 +26,10 @@ public class GameDirector {
 		gameBuilder.buildTurnPlayer();
 		gameBuilder.buildPhase();
 		try {
-	
+	System.out.println("Save Game by Game Director");
             FileOutputStream fileOut = new FileOutputStream(mapFolder + "/" + mapFileName + ".ser");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(gameBuilder);
+            objectOut.writeObject(gameBuilder.getGame());
             objectOut.close();
             objectOut.flush();
             System.out.println("The game  was succesfully written to "+mapFileName+" file");
@@ -45,8 +46,8 @@ public class GameDirector {
 		try {
 		FileInputStream fileIn = new FileInputStream(mapFolder + "/" + mapFileName + ".ser");
         objectIn = new ObjectInputStream(fileIn);
-        gameBuilder = (GameBuilder) objectIn.readObject();
-        game=gameBuilder.getGame();
+        game = (Game) objectIn.readObject();
+      //  game=gameBuilder.getGame();
         objectIn.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -59,7 +60,7 @@ public class GameDirector {
 	return game;
 	}
 	
-	public Game getMapGeo() {
+	public Game getGame() {
 	    return gameBuilder.getGame();
 	  }
 

@@ -183,10 +183,10 @@ public class RiskUI {
 		boolean debug = true;
 		if (debug == true) {
 			mapFileName="test"; //Aden Africa
-			game.loadGame("mysave1");
-			mapDomination=(MapDomination) game.getMapGeo();
-			mapDomination.showMap();
-			System.exit(0);
+//			game.loadGame("AGameSave");
+//			mapDomination=(MapDomination) game.getMapGeo();
+//			mapDomination.showMap();
+//			System.exit(0);
 			mapDomination.isDominationMap(mapFileName);
 			game.setMapGeo(mapDomination);
 
@@ -218,8 +218,8 @@ public class RiskUI {
 			player2.getNumberOfArmiesEachPlayerGets();
 			System.out.println("Player 1=" + player1.getPlayerName() + " Player2=" + player2.getPlayerName());
 
-			game.saveGame("mysave1", mapDomination, player1, Phase.REINFORCEMENT);
-			game.loadGame("mysave1");
+			game.saveGame("AGameSave", mapDomination, player1, Phase.REINFORCEMENT);
+			game.loadGame("AGameSave");
 			
 			player1.attackAllout();
 			

@@ -34,5 +34,6 @@ public abstract class GameBuilder {
 		  public abstract void setTurnPlayer(Player turnPlayer) ;
 		  public abstract Phase getPhase() ;
 		  public abstract void setPhase(Phase phase) ;
+
 		}
  

@@ -11,39 +11,50 @@ public class GameRiskBuilder extends GameBuilder implements Serializable{
 	private Player turnPlayer;
 	private Phase phase;
 
+    
+	public GameRiskBuilder() {
+		
+	}
+	
+	public GameRiskBuilder(MapGeo mapGeo, Player turnPlayer, Phase phase) {
+		game.setMapGeo(mapGeo);
+		game.setTurnPlayer(turnPlayer);
+		game.setPhase(phase);
+	}
+
 	public MapGeo getMapGeo() {
-		return mapGeo;
+		return this.mapGeo;
 	}
 
 	public void setMapGeo(MapGeo mapGeo) {
-		this.mapGeo = mapGeo;
+		this.mapGeo=mapGeo;
 	}
 
 	public Player getTurnPlayer() {
-		return turnPlayer;
+		return this.turnPlayer;
 	}
 
 	public void setTurnPlayer(Player turnPlayer) {
-		this.turnPlayer = turnPlayer;
+		this.turnPlayer=turnPlayer;
 	}
 
 	public Phase getPhase() {
-		return phase;
+		return this.phase;
 	}
 
 	public void setPhase(Phase phase) {
-		this.phase = phase;
+		this.phase=phase;
 	}
 
 	@Override
 	void buildTurnPlayer() {
-		// TODO Auto-generated method stub
+		game.setTurnPlayer(turnPlayer);
 		
 	}
 
 	@Override
 	void buildPhase() {
-		// TODO Auto-generated method stub
+		game.setPhase(phase);
 		
 	}
 
