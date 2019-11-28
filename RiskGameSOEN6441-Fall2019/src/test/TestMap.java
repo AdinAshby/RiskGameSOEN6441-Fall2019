@@ -50,8 +50,8 @@ public class TestMap {
 	@Test
 	public void testvalidateMapForValidMap() throws Exception {
 
-		Assert.assertEquals(true, mapAdapter.read(VALID_MAP));
-		Assert.assertEquals(true, mapBuild.validateMap());
+		Assert.assertEquals(true, mapDomination.read(VALID_MAP));
+		Assert.assertTrue( mapDomination.validateMap());
 		
 	}
 	/**
@@ -63,8 +63,8 @@ public class TestMap {
 	public void testvalidateMap() throws Exception {
 
 
-		Assert.assertEquals(true, mapConquest.readConquest(INVALID_MAP));
-		Assert.assertEquals(false, mapBuild.validateMap());
+		Assert.assertEquals(false, mapDomination.read(INVALID_MAP));
+		Assert.assertEquals(false, mapDomination.validateMap());
 	}
 
 	/**
@@ -81,9 +81,9 @@ public class TestMap {
 		ad.addEdge(555, 8686);
 		ad.addEdge(622, 8686);
 		ad.addEdge(45, 555);
-		Assert.assertEquals(true, mapConquest.readConquest(VALID_MAP));
+		Assert.assertEquals(true, mapDomination.read(VALID_MAP));
 		Assert.assertEquals(true, ad.isConnected());
-		Assert.assertEquals(true, mapConquest.readConquest("UnconnectedContinent"));
+		Assert.assertEquals(false, mapDomination.read("UnconnectedContinent"));
 		Assert.assertEquals(false, adEmpty.isConnected());
 	}
 
@@ -94,8 +94,8 @@ public class TestMap {
 	 */
 	@Test
 	public void testIsMapSubGraphValid() throws Exception {
-		Assert.assertEquals(true, mapConquest.readConquest("VALID_MAP"));
-		Assert.assertEquals(true, mapBuild.isMapSubGraph());
+		Assert.assertEquals(true, mapDomination.read(VALID_MAP));
+		Assert.assertEquals(true, mapDomination.isMapSubGraph());
 		
 	}
 	/**
@@ -106,19 +106,19 @@ public class TestMap {
 	@Test
 	public void testIsMapSubGraphInValid() throws Exception {
 		
-		Assert.assertEquals(false, mapConquest.readConquest(INVALID_MAP));
-		Assert.assertEquals(false, mapBuild.isMapSubGraph());
+		Assert.assertEquals(false, mapDomination.read(INVALID_MAP));
+		Assert.assertEquals(false, mapDomination.isMapSubGraph());
 	}
 	@Test
 	public void testNoCountries() throws Exception {
 		
-		Assert.assertEquals(true, mapConquest.readConquest("no_countries"));
-		Assert.assertEquals(false, mapBuild.validateMap());
+		Assert.assertEquals(false, mapDomination.read("no_countries"));
+		Assert.assertEquals(false, mapDomination.validateMap());
 	}
 	@Test
 	public void testNoContinents() throws Exception {
 		
-		Assert.assertEquals(true, mapConquest.readConquest("no_continents"));
-		Assert.assertEquals(false, mapBuild.validateMap());
+		Assert.assertEquals(false, mapDomination.read("no_continents"));
+		Assert.assertEquals(false, mapDomination.validateMap());
 	}
 }
