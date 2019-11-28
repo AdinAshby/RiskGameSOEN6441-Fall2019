@@ -36,7 +36,7 @@ public class TestMapFiles {
 	 * @throws Exception
 	 */
 	@Test
-	public void testValidMapFiles() throws Exception {
+      public void testValidMapFiles() throws Exception {
 		Assert.assertEquals(true, mapConquest.readConquest(VALID_FILE));
 	}
 
@@ -47,7 +47,7 @@ public class TestMapFiles {
 	 */
 	@Test
 	public void testInvalidMapFiles() throws Exception {
-		Assert.assertEquals(false, mapConquest.readConquest(INVALID_FILE));
+		Assert.assertEquals(false, mapDomination.read(INVALID_FILE));
 	}
 
 }
