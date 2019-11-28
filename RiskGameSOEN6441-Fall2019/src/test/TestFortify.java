@@ -32,6 +32,8 @@ public class TestFortify {
 		mapConquest.readConquest("ameroki");
 		Players.add("Shehnaz");
 		Players.add("Golnoosh");
+		strategy.add("human");
+		strategy.add("human");
 		mapBuild.assigningPlayersToCountries(Players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();
@@ -67,6 +69,8 @@ public class TestFortify {
 		mapConquest.readConquest("Test");
 		Players.add("Shehnaz");
 		Players.add("Golnoosh");
+		strategy.add("human");
+		strategy.add("human");
 		mapBuild.assigningPlayersToCountries(Players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();
