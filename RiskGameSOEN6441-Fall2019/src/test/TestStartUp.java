@@ -39,7 +39,11 @@ import org.junit.Test;
 	Player playerFive = new Player("e", countryListFive, mapBuild);
 	Player playerSix = new Player("f", countryListSix, mapBuild);
 	Player playerSeven = new Player("g", countryListSeven, mapBuild);
-
+	/**
+	 * This testcase tests number of initial armies assigned when there are 2 players
+	 * @author s_shehna
+	 *
+	 */
 	@Test
 	public void initialArmiesForTwoPlayers() {
 
@@ -54,7 +58,11 @@ import org.junit.Test;
 		Assert.assertEquals(40, armiesGot);
 
 	}
-
+	/**
+	 * This testcase tests number of initial armies assigned when there are 3 players
+	 * @author s_shehna
+	 *
+	 */
 	@Test
 	public void initialArmiesForThreePlayers() {
 
@@ -69,7 +77,11 @@ import org.junit.Test;
 		Assert.assertEquals(35, armiesGot);
 
 	}
-
+	/**
+	 * This testcase tests number of initial armies assigned when there are 4 players
+	 * @author s_shehna
+	 *
+	 */
 	@Test
 	public void initialArmiesForFourPlayers() {
 
@@ -84,7 +96,11 @@ import org.junit.Test;
 		Assert.assertEquals(30, armiesGot);
 
 	}
-
+	/**
+	 * This testcase tests number of initial armies assigned when there are 5 players
+	 * @author s_shehna
+	 *
+	 */
 	@Test
 	public void initialArmiesForFivePlayers() {
 
@@ -99,7 +115,11 @@ import org.junit.Test;
 		Assert.assertEquals(25, armiesGot);
 
 	}
-
+	/**
+	 * This testcase tests number of initial armies assigned when there are 6 players
+	 * @author s_shehna
+	 *
+	 */
 	@Test
 	public void initialArmiesForSixPlayers() {
 
@@ -114,7 +134,11 @@ import org.junit.Test;
 		Assert.assertEquals(20, armiesGot);
 
 	}
-
+	/**
+	 * This testcase tests number of initial armies assigned when there are more than 6 players
+	 * @author s_shehna
+	 *
+	 */
 	@Test
 	public void initialArmiesForSevenPlayers() {
 
@@ -129,7 +153,11 @@ import org.junit.Test;
 		Assert.assertEquals(20, armiesGot);
 
 	}
-
+	/**
+	 * This testcase tests coorect assignment of initial armies with invalid values
+	 * @author s_shehna
+	 *
+	 */
 	@Test
 	public void InvalidInitialArmies() {
 
@@ -144,7 +172,11 @@ import org.junit.Test;
 		Assert.assertNotEquals(0, armiesGot);
 
 	}
-
+	/**
+	 * This testcase tests random assignment of armies
+	 * @author s_shehna
+	 *
+	 */
 	@Test
 	public void randomArmyAssignment() {
 		playerNames.add("a");
