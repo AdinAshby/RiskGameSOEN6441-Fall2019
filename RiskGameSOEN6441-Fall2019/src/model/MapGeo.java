@@ -831,14 +831,18 @@ public class MapGeo {
 		}
 
 	}
+public ArrayList<Integer> getCountriesByPlayerName(String playerName){
+	
+	return this.getPlayerByName(playerName).countryIDs;
 
+	
+}
 	
 
 	/**
-	 * This method is for getContinentNamesOfPlayer
+	 * This method is for setContinentNamesOfPlayer
 	 * 
-	 * @param playerName
-	 * @return getContinentNamesOfPlayer
+	 * @param player
 	 */
 
 	public void setContinentNamesOfPlayer(Player player) {
