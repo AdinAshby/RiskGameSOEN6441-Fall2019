@@ -1,5 +1,13 @@
 package model;
-
+/**
+ * 
+ * This is MapAdapter class which extends MapDomination
+ * 
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ * @author Babita kaur
+ */
 public class MapAdapter extends MapDomination {
 	/**
 	 * private mapConquest
@@ -7,7 +15,7 @@ public class MapAdapter extends MapDomination {
 	private MapConquest mapConquest;
 
 	/**
-	 * 
+	 * This is constructor for initialising Maptype
 	 * @param mapType
 	 */
 	public MapAdapter(MapConquest mapConquest) {
@@ -41,7 +49,7 @@ public class MapAdapter extends MapDomination {
 	}
 
 	/**
-	 * 
+	 * This method makes copy of mapconquest
 	 * @param mapConquest
 	 */
 	public void mapAdapterCopy(MapConquest mapConquest) {
