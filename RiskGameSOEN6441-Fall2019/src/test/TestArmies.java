@@ -35,15 +35,6 @@ public class TestArmies {
 		mapDomination.read("test");
 		players.add("a");
 		strategy.add("human");
-//		countryListOne.add(1);
-//		countryListOne.add(2);
-//		countryListOne.add(3);
-//		countryListOne.add(4);
-//		countryListOne.add(5);
-//		countryListOne.add(6);
-		//Player player = new Player("a", countryListOne , mapBuild);
-		//Player onePlayer[] = {player};
-		//mapBuild.setPlayers(onePlayer);
 		mapBuild.assigningPlayersToCountries(players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 			
@@ -63,12 +54,6 @@ public class TestArmies {
 		players.add("b");
 		strategy.add("human");
 		strategy.add("human");
-//		countryListOne.add(1);
-//		countryListOne.add(2);
-//		countryListOne.add(3);
-//		countryListOne.add(4);
-//		countryListOne.add(5);
-//		countryListOne.add(6);
 		mapBuild.assigningPlayersToCountries(players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		ArrayList<Integer> countryOne = myPlayers[0].getCountryIDs();
