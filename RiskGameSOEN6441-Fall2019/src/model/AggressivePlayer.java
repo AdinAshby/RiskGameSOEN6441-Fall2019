@@ -21,6 +21,7 @@ public class AggressivePlayer extends Player implements Strategy {
 	 */
 	public AggressivePlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
 		super(playerName, countriesIDs, mapBuild);
+		setStrategy(this);
 	}
 	/**
 	 * This is attack method for AggressivePlayer
