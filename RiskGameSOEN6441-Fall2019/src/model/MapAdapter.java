@@ -15,7 +15,7 @@ public class MapAdapter extends MapDomination {
 	private MapConquest mapConquest;
 
 	/**
-	 * 
+	 * This is constructor for initialising Maptype
 	 * @param mapType
 	 */
 	public MapAdapter(MapConquest mapConquest) {
