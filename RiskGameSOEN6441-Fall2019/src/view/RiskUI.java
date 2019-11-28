@@ -696,6 +696,7 @@ public class RiskUI {
 
 						playerNames.add(playerName);
 						playerStrategies.add(playerStrategy);
+						System.out.println("Player "+playerName+" by "+playerStrategy+" behaviour is added");						
 						isValidCommand = true;
 					}
 
