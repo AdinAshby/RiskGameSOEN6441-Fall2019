@@ -178,10 +178,11 @@ public class RiskUI {
 		 */
 
 
-		boolean debug = true;
+		boolean debug = false;
 		if (debug == true) {
 			mapFileName="test"; //Aden Africa
-
+	//		mapDomination.loadGame("mysave1");
+	//		System.exit(0);
 			mapDomination.isDominationMap(mapFileName);
 
 
@@ -200,9 +201,9 @@ public class RiskUI {
 			mapDomination.placeAllArmies();
 
 			mapDomination.showMap();
-//			mapDomination.saveGame("mysave1");
+			mapDomination.saveGame("mysave1");
+			mapDomination.loadGame("mysave1");
 			
-//			System.exit(0);
 			Player[] players = mapDomination.getPlayers();
 			Player player1 = players[0];
 			Player player2 = players[1];

@@ -287,6 +287,14 @@ public class MapDomination extends MapGeo implements Serializable {
 				e.printStackTrace();
 			}
 			
+		}
+
+		public void loadGame(String mapFileName) {
+			MapBuilder mapBuilder=new MapDominationBuilder(this);
+			MapDirector mapDirector= new MapDirector();
+			mapDirector.setBuilder(mapBuilder);
+			mapDirector.loadGame(mapFileName);
+			
 		}		
 	
 }
