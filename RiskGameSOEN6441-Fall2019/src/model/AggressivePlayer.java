@@ -1,14 +1,36 @@
 package model;
 
 import java.util.ArrayList;
-
+/**
+ * This class is made to implement Aggressive Player Strategy
+ * 
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ * @author Babita kaur
+ * 
+ */
 public class AggressivePlayer extends Player implements Strategy {
-
+	/**
+	 * This is  constructor for initializing AggressivePlayer
+	 * 
+	 * @param playerName
+	 * @param countriesIDs
+	 * @param mapBuild
+	
+	 */
 	public AggressivePlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
 		super(playerName, countriesIDs, mapBuild);
-		setStrategy(this);
 	}
-
+	/**
+	 * This is attack method for AggressivePlayer
+	 * 
+	 * @param attackerCountry
+	 * @param attackingCountry
+	 * @param attackerNumDice
+	 * @param defendNumDice
+	 * @param attackAllout
+	 */
 	@Override
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
 		Dice attackDice = new Dice(attackerNumDice);
@@ -63,7 +85,15 @@ public class AggressivePlayer extends Player implements Strategy {
 			}
 		}
 	}
-
+	/**
+	 * This is reinforce method for AggressivePlayer
+	 * 
+	 * @param mapBuild
+	 * @param attackingCountry
+	 * @param attackerNumDice
+	 * @param defendNumDice
+	 * @param attackAllout
+	 */
 	@Override
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
 
