@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import controller.Game;
+import controller.Game.Phase;
 import model.Country;
 import model.MapAdapter;
 import model.GameBuilder;
@@ -182,9 +183,10 @@ public class RiskUI {
 		boolean debug = true;
 		if (debug == true) {
 			mapFileName="test"; //Aden Africa
-//			mapDomination.loadGame("mysave1");
-//			mapDomination.showMap();
-//			System.exit(0);
+			game.loadGame("mysave1");
+			mapDomination=(MapDomination) game.getMapGeo();
+			mapDomination.showMap();
+			System.exit(0);
 			mapDomination.isDominationMap(mapFileName);
 			game.setMapGeo(mapDomination);
 
@@ -204,8 +206,7 @@ public class RiskUI {
 			mapDomination.placeAllArmies();
 
 			mapDomination.showMap();
-			game.saveGame("mysave1");
-			game.loadGame("mysave1");
+			
 			
 			Player[] players = mapDomination.getPlayers();
 			Player player1 = players[0];
@@ -217,6 +218,9 @@ public class RiskUI {
 			player2.getNumberOfArmiesEachPlayerGets();
 			System.out.println("Player 1=" + player1.getPlayerName() + " Player2=" + player2.getPlayerName());
 
+			game.saveGame("mysave1", mapDomination, player1, Phase.REINFORCEMENT);
+			game.loadGame("mysave1");
+			
 			player1.attackAllout();
 			
 			int attackerCountryId = player1.getCountryIDs().get(0);
@@ -420,7 +424,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						game.saveGame(mapFileName);
+						game.saveGame(mapFileName, mapDomination, null, Phase.GAME_START);
 					}
 					
 					
@@ -665,7 +669,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						game.saveGame(mapFileName);
+						game.saveGame(mapFileName, mapDomination, null, Phase.ADD_PLAYERS);
 					}
 					
 					

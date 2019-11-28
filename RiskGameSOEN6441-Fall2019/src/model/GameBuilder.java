@@ -1,6 +1,7 @@
 package model;
 
 import controller.Game;
+import controller.Game.Phase;
 
 public abstract class GameBuilder {
 
@@ -27,5 +28,11 @@ public abstract class GameBuilder {
 		  abstract void buildTurnPlayer();
 		  abstract void buildPhase();
 		  abstract void buildMapGeo();
+		  public abstract MapGeo getMapGeo() ;
+		  public abstract void setMapGeo(MapGeo mapGeo);
+		  public abstract Player getTurnPlayer();
+		  public abstract void setTurnPlayer(Player turnPlayer) ;
+		  public abstract Phase getPhase() ;
+		  public abstract void setPhase(Phase phase) ;
 		}
  
