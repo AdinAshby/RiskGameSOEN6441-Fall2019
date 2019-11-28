@@ -774,7 +774,7 @@ public class Player implements Subject {
 					System.out.println(
 							"Attack From " + attackerCountry.getCountryName() + "=" + attackerCountry.getArmies() + " ("
 									+ getPlayerName() + ") To: " + attackingCountry.getCountryName() + "="
-									+ attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName() + ")");
+									+ attackingCountry.getArmies() + " (" + attackingCountry.getPlayerName() + ")"+this.countryIDs);
 
 					boolean thisCountryCanAttack = true;
 					while (thisCountryCanAttack) {
