@@ -183,7 +183,7 @@ import org.junit.Test;
 		playerNames.add("b");
 
 		// mapDomination.isDominationMap("test");
-		mapDomination.read("valid_map");
+		mapDomination.read("test");
 		strategy.add("human");
 		strategy.add("human");
 

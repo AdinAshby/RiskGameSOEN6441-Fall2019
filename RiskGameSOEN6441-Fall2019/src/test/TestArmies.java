@@ -32,22 +32,23 @@ public class TestArmies {
 	
 	@Test
 	public void testArmiesOwnedByPlayerOne() throws Exception {
-		//mapConquest.readConquest("test");
+		mapDomination.read("test");
 		players.add("a");
 		strategy.add("human");
-		countryListOne.add(1);
-		countryListOne.add(2);
-		countryListOne.add(3);
-		countryListOne.add(4);
-		countryListOne.add(5);
-		countryListOne.add(6);
-		Player player = new Player("Shehnaz", countryListOne , mapBuild);
-		Player onePlayer[] = {player};
-		mapBuild.setPlayers(onePlayer);
-		Player[] myPlayers = mapDomination.getPlayers();
-		mapBuild.assigningPlayersToCountries(players, strategy );	
-		player.calculateNumberOfArmiesEachPlayerGets();
-		int armies_owned_by_playerOne = player.getNumberOfArmiesEachPlayerGets();
+//		countryListOne.add(1);
+//		countryListOne.add(2);
+//		countryListOne.add(3);
+//		countryListOne.add(4);
+//		countryListOne.add(5);
+//		countryListOne.add(6);
+		//Player player = new Player("a", countryListOne , mapBuild);
+		//Player onePlayer[] = {player};
+		//mapBuild.setPlayers(onePlayer);
+		mapBuild.assigningPlayersToCountries(players, strategy);
+		Player[] myPlayers = mapBuild.getPlayers();
+			
+		myPlayers[0].calculateNumberOfArmiesEachPlayerGets();
+		int armies_owned_by_playerOne = myPlayers[0].getNumberOfArmiesEachPlayerGets();
 	
 		Assert.assertEquals(3, armies_owned_by_playerOne);	 
 }
@@ -57,7 +58,7 @@ public class TestArmies {
 	 */
 	@Test
 	public void testArmiesOwnedByPlayer2() throws Exception {
-		mapAdapter.read("valid_map"); // total 42 countries in map
+		mapDomination.read("ameroki"); // total 42 countries in map
 		players.add("a");
 		players.add("b");
 		strategy.add("human");
