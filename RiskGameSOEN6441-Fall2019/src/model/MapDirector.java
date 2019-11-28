@@ -14,6 +14,8 @@ public class MapDirector {
 	public void setBuilder(MapBuilder newMapBuilder) {
 		mapBuilder=newMapBuilder;
 	}
+	 
+	
 	
 	public void saveGame(String mapFileName) {
 		mapBuilder.createNewMapGeo();

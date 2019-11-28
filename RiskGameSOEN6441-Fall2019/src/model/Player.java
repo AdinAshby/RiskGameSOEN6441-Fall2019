@@ -90,7 +90,8 @@ public class Player implements Subject, Serializable {
 	/**
 	 * protected scanner
 	 */
-	protected transient Scanner scanner = new Scanner(System.in);
+	protected transient Scanner scanner = new Scanner(System.in); 
+	
 	/**
 	 * protected input
 	 */

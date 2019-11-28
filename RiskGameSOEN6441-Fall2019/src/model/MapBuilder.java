@@ -12,6 +12,7 @@ public abstract class MapBuilder {
 		  public MapGeo getMapGeo(){
 		    return mapGeo;
 		  }
+		  
 		  /**
 		   * Create a new unspecified Map that 
 		   * will be eventually build by calling the 
@@ -25,3 +26,4 @@ public abstract class MapBuilder {
 		  abstract void buildPlayers();
 		  abstract void buildGamePhase();
 		}
+ 

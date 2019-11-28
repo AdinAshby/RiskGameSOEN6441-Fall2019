@@ -176,7 +176,7 @@ public class RiskUI {
 		 * This part is hard code to test the project defined by the boolean debug
 		 * attribute
 		 */
-
+ 
 
 		boolean debug = false;
 		if (debug == true) {

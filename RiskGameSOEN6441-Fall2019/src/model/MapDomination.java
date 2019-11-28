@@ -259,8 +259,7 @@ public class MapDomination extends MapGeo implements Serializable {
 			return isLoaded;
 
 		}
-	
-		
+	 		
 		
 		public void mapDominationCopy(MapDomination mapAdapter) {
 			this.continentList = mapAdapter.continentList;
