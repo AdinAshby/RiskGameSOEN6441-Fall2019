@@ -94,8 +94,8 @@ public class TestPlayer {
 		counrtyIdInCorrect.add(42);
 		counrtyIdInCorrect.add(32);
 		
-		Player playerOne = new Player("shehnaz", counrtyIdInCorrect, mapBuild);
-		Assert.assertEquals("Country Ids not same", counrtyIdInCorrect, playerOne.getCountryIDs());
+		Player playerOne = new Player("shehnaz", countryIdCorrect, mapBuild);
+		Assert.assertNotEquals(counrtyIdInCorrect, playerOne.getCountryIDs());
 	}
 
 
