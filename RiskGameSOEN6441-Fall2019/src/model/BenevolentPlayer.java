@@ -1,14 +1,37 @@
 package model;
 
 import java.util.ArrayList;
-
+/**
+ * This class is made to implement Benevolent Player Strategy
+ * 
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ * @author Babita kaur
+ * 
+ */
 public class BenevolentPlayer extends Player implements Strategy {
-
+	/**
+	 * This is  constructor for initializing Benevolent Player
+	 * 
+	 * @param playerName
+	 * @param countriesIDs
+	 * @param mapBuild
+	
+	 */
 	public BenevolentPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
 		super(playerName, countriesIDs, mapBuild);
 		setStrategy(this);
 	}
-
+	/**
+	 * This is attack method for BenevolentPlayer
+	 * 
+	 * @param attackerCountry
+	 * @param attackingCountry
+	 * @param attackerNumDice
+	 * @param defendNumDice
+	 * @param attackAllout
+	 */
 	@Override
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
 		
