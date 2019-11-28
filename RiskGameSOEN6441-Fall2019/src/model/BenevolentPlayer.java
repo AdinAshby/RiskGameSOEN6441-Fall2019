@@ -36,6 +36,15 @@ public class BenevolentPlayer extends Player implements Strategy {
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
 		
 	}
+	/**
+	 * This is reinforce method for BenevolentPlayer
+	 * 
+	 * @param mapBuild
+	 * @param countryName
+	 * @param num
+	 * @param finished
+	 
+	 */
 
 	@Override
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
@@ -47,7 +56,15 @@ public class BenevolentPlayer extends Player implements Strategy {
 		
 		return true;
 	}
-
+	/**
+	 * This is fortify method for BenevolentPlayer
+	 * 
+	 * @param fromCountry
+	 * @param toCountry
+	 * @param armiesToMove
+	 * @param mapBuild
+	 
+	 */
 	@Override
 	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapBuild) {
 		int oldArmiesFromCountry = mapBuild.getCountryByName(fromCountry).getArmies();
