@@ -19,6 +19,7 @@ public class TestArmies {
 	MapGeo mapBuild = MapGeo.getInstance();
 	MapDomination mapDomination = new MapDomination();
 	MapConquest mapConquest = new MapConquest(mapDomination);
+	MapAdapter mapAdapter = new MapAdapter(mapConquest);
 	ArrayList<Integer> countryListOne = new ArrayList<>();
 	ArrayList<Integer> countryListTwo = new ArrayList<>();
 	ArrayList<Integer> countryListThree = new ArrayList<>();
@@ -56,7 +57,7 @@ public class TestArmies {
 	 */
 	@Test
 	public void testArmiesOwnedByPlayer2() throws Exception {
-		mapConquest.readConquest("valid_map"); // total 42 countries in map
+		mapAdapter.read("valid_map"); // total 42 countries in map
 		players.add("a");
 		players.add("b");
 		strategy.add("human");
@@ -68,11 +69,11 @@ public class TestArmies {
 //		countryListOne.add(5);
 //		countryListOne.add(6);
 		mapBuild.assigningPlayersToCountries(players, strategy);
-		Player[] myPlayers = mapDomination.getPlayers();
-		ArrayList<Integer> country1 = myPlayers[0].getCountryIDs();
-		ArrayList<Integer> country2 = myPlayers[1].getCountryIDs();
-		Player playerOne = new Player("a", country1 , mapBuild);
-		Player playerTwo = new Player("b", country2 , mapBuild);
+		Player[] myPlayers = mapBuild.getPlayers();
+		ArrayList<Integer> countryOne = myPlayers[0].getCountryIDs();
+		ArrayList<Integer> countryTwo = myPlayers[1].getCountryIDs();
+		Player playerOne = new Player("a", countryOne , mapBuild);
+		Player playerTwo = new Player("b", countryTwo , mapBuild);
 		
 	    playerOne.calculateNumberOfArmiesEachPlayerGets();
 		playerTwo.calculateNumberOfArmiesEachPlayerGets();
