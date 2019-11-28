@@ -89,10 +89,10 @@ public class AggressivePlayer extends Player implements Strategy {
 	 * This is reinforce method for AggressivePlayer
 	 * 
 	 * @param mapBuild
-	 * @param attackingCountry
-	 * @param attackerNumDice
-	 * @param defendNumDice
-	 * @param attackAllout
+	 * @param countryName
+	 * @param num
+	 * @param finished
+	 
 	 */
 	@Override
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
@@ -105,6 +105,15 @@ public class AggressivePlayer extends Player implements Strategy {
 
 		return true;
 	}
+	/**
+	 * This is fortify method for AggressivePlayer
+	 * 
+	 * @param fromCountry
+	 * @param toCountry
+	 * @param armiesToMove
+	 * @param mapBuild
+	 
+	 */
 
 	@Override
 	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapBuild) {
