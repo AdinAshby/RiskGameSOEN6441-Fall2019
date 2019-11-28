@@ -67,7 +67,15 @@ public class CheaterPlayer extends Player implements Strategy {
 		
 		return true;
 	}
-
+	/**
+	 * This is fortify method for CheaterPlayer
+	 * 
+	 * @param fromCountry
+	 * @param toCountry
+	 * @param armiesToMove
+	 * @param mapBuild
+	 
+	 */
 	@Override
 	public void fortify(String fromCountry, String toCountry, int armiesToMove, MapGeo mapBuild) {
 		
