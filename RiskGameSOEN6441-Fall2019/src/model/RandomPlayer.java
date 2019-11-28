@@ -1,9 +1,24 @@
 package model;
 
 import java.util.ArrayList;
-
+/**
+ * This class is made to implement Random Player  Strategy
+ * 
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ * @author Babita kaur
+ * 
+ */
 public class RandomPlayer extends Player implements Strategy {
-
+	/**
+	 * This is  constructor for initializing RandomPlayer
+	 * 
+	 * @param playerName
+	 * @param countriesIDs
+	 * @param mapBuild
+	
+	 */
 	public RandomPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
 		super(playerName, countriesIDs, mapBuild);
 		setStrategy(this);
