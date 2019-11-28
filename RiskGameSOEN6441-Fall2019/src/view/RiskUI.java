@@ -181,8 +181,9 @@ public class RiskUI {
 		boolean debug = false;
 		if (debug == true) {
 			mapFileName="test"; //Aden Africa
-	//		mapDomination.loadGame("mysave1");
-	//		System.exit(0);
+//			mapDomination.loadGame("mysave1");
+//			mapDomination.showMap();
+//			System.exit(0);
 			mapDomination.isDominationMap(mapFileName);
 
 

@@ -261,12 +261,12 @@ public class MapDomination extends MapGeo implements Serializable {
 		}
 	 		
 		
-		public void mapDominationCopy(MapDomination mapAdapter) {
-			this.continentList = mapAdapter.continentList;
-			this.theMapView = mapAdapter.theMapView;
-			this.countryAdjacency = mapAdapter.countryAdjacency;
-			this.players = mapAdapter.players;
-			this.random = mapAdapter.random;
+		public void mapDominationCopy(MapGeo mapGeo) {
+			this.continentList = mapGeo.getContinentList();
+			this.theMapView = mapGeo.theMapView;
+			this.countryAdjacency = mapGeo.countryAdjacency;
+			this.players = mapGeo.players;
+			this.random = mapGeo.random;
 		}
 
 		
@@ -292,7 +292,8 @@ public class MapDomination extends MapGeo implements Serializable {
 			MapBuilder mapBuilder=new MapDominationBuilder(this);
 			MapDirector mapDirector= new MapDirector();
 			mapDirector.setBuilder(mapBuilder);
-			mapDirector.loadGame(mapFileName);
+			MapGeo mapGeo=mapDirector.loadGame(mapFileName);
+			mapDominationCopy(mapGeo);
 			
 		}		
 	

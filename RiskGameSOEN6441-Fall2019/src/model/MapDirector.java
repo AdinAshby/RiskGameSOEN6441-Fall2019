@@ -36,7 +36,8 @@ public class MapDirector {
         }
 	}
 	
-	public void loadGame(String mapFileName) {
+	public MapGeo loadGame(String mapFileName) {
+		 MapGeo mapGeo = null;
 		mapBuilder.createNewMapGeo();
 		final File mapFolder = mapBuilder.getMapGeo().mapFolder;
 		ObjectInputStream objectIn = null;
@@ -44,6 +45,7 @@ public class MapDirector {
 		FileInputStream fileIn = new FileInputStream(mapFolder + "/" + mapFileName + ".ser");
         objectIn = new ObjectInputStream(fileIn);
         mapBuilder = (MapBuilder) objectIn.readObject();
+        mapGeo=mapBuilder.getMapGeo();
         objectIn.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -53,7 +55,7 @@ public class MapDirector {
 			e.printStackTrace();
 		}
         
-	
+	return mapGeo;
 	}
 	
 	public MapGeo getMapGeo() {
