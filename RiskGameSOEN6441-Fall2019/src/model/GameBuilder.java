@@ -1,16 +1,18 @@
 package model;
 
-public abstract class MapBuilder {
+import controller.Game;
+
+public abstract class GameBuilder {
 
 		  /**
 		   * Map to be constructed by the builder
 		   */
-		  protected MapGeo mapGeo;
+		  protected Game game;
 		  /**
 		   * Get the constructed Map from the Builder
 		   */
-		  public MapGeo getMapGeo(){
-		    return mapGeo;
+		  public Game getGame(){
+		    return game;
 		  }
 		  
 		  /**
@@ -19,11 +21,11 @@ public abstract class MapBuilder {
 		   * following abstract methods in a concrete 
 		   * class derived from the MapGeo class
 		   */
-		  public void createNewMapGeo(){
-			  mapGeo = new MapGeo();
+		  public void createNewGame(){
+			  game = new Game();
 		  }
-		  abstract void buildContinents();
-		  abstract void buildPlayers();
-		  abstract void buildGamePhase();
+		  abstract void buildTurnPlayer();
+		  abstract void buildPhase();
+		  abstract void buildMapGeo();
 		}
  

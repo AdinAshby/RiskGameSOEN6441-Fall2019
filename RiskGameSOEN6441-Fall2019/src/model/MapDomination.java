@@ -270,31 +270,8 @@ public class MapDomination extends MapGeo implements Serializable {
 		}
 
 		
-		public void saveGame(String mapFileName) {
-			try {
-				/**
-				 * Map Builder Pattern
-				 */
-						MapBuilder mapBuilder=new MapDominationBuilder(this);
-						MapDirector mapDirector= new MapDirector();
-						mapDirector.setBuilder(mapBuilder);
-						mapDirector.saveGame(mapFileName);
-						//mapDomination2=mapDirector.getMapGeo();
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
+		
 
-		public void loadGame(String mapFileName) {
-			MapBuilder mapBuilder=new MapDominationBuilder(this);
-			MapDirector mapDirector= new MapDirector();
-			mapDirector.setBuilder(mapBuilder);
-			MapGeo mapGeo=mapDirector.loadGame(mapFileName);
-			mapDominationCopy(mapGeo);
 			
-		}		
 	
 }

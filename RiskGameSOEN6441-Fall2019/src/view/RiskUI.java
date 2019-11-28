@@ -6,13 +6,14 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import controller.Game;
 import model.Country;
 import model.MapAdapter;
-import model.MapBuilder;
+import model.GameBuilder;
 import model.MapConquest;
-import model.MapDirector;
+import model.GameDirector;
 import model.MapDomination;
-import model.MapDominationBuilder;
+import model.GameBuilder;
 import model.MapGeo;
 import model.Player;
 import model.Tournament;
@@ -168,7 +169,7 @@ public class RiskUI {
 		String addText = "";
 
 
-
+		Game game=new Game();
 
 
 
@@ -178,13 +179,14 @@ public class RiskUI {
 		 */
  
 
-		boolean debug = false;
+		boolean debug = true;
 		if (debug == true) {
 			mapFileName="test"; //Aden Africa
 //			mapDomination.loadGame("mysave1");
 //			mapDomination.showMap();
 //			System.exit(0);
 			mapDomination.isDominationMap(mapFileName);
+			game.setMapGeo(mapDomination);
 
 
 
@@ -202,8 +204,8 @@ public class RiskUI {
 			mapDomination.placeAllArmies();
 
 			mapDomination.showMap();
-			mapDomination.saveGame("mysave1");
-			mapDomination.loadGame("mysave1");
+			game.saveGame("mysave1");
+			game.loadGame("mysave1");
 			
 			Player[] players = mapDomination.getPlayers();
 			Player player1 = players[0];
@@ -418,7 +420,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						mapDomination.saveGame(mapFileName);
+						game.saveGame(mapFileName);
 					}
 					
 					
@@ -663,7 +665,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						mapDomination.saveGame(mapFileName);
+						game.saveGame(mapFileName);
 					}
 					
 					
