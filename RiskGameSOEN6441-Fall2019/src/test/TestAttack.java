@@ -49,27 +49,27 @@ public class TestAttack {
 
 		mapDomination.showMap();
 		Player[] players = mapDomination.getPlayers();
-		Player player1 = players[0];
-		Player player2 = players[1];
-		player1.calculateNumberOfArmiesEachPlayerGets();
-		player2.calculateNumberOfArmiesEachPlayerGets();
-		player1.getNumberOfArmiesEachPlayerGets();
-		player2.getNumberOfArmiesEachPlayerGets();
-		int attackerCountryId = player1.getCountryIDs().get(0);
-		int fortifyCountryId = player1.getCountryIDs().get(1);
-		int attackingCountryId = player2.getCountryIDs().get(0);
+		Player playerOne = players[0];
+		Player playerTwo = players[1];
+		playerOne.calculateNumberOfArmiesEachPlayerGets();
+		playerTwo.calculateNumberOfArmiesEachPlayerGets();
+		playerOne.getNumberOfArmiesEachPlayerGets();
+		playerTwo.getNumberOfArmiesEachPlayerGets();
+		int attackerCountryId = playerOne.getCountryIDs().get(0);
+		int fortifyCountryId = playerOne.getCountryIDs().get(1);
+		int attackingCountryId = playerTwo.getCountryIDs().get(0);
 		String attackerCountryName = mapDomination.getCountryNameById(attackerCountryId);
 		String fortifyCountryName = mapDomination.getCountryNameById(fortifyCountryId);
 		String attackingCountryName = mapDomination.getCountryNameById(attackingCountryId);
 		Country attackerCountry = mapDomination.getCountryById(attackerCountryId);
 		Country fortifyCountry = mapDomination.getCountryById(fortifyCountryId);
 		Country attackingCountry = mapDomination.getCountryById(attackingCountryId);
-		player1.reinforce(mapDomination, attackerCountryName, 3, false);
-		//player1.attack(attackerCountry, attackingCountry, 3, 2, 0);
+		playerOne.reinforce(mapDomination, attackerCountryName, 3, false);
+		
 		if(attackerCountry.getArmies()>1 && mapDomination.isAdjacentCountry(attackerCountry.getCountryId(), attackingCountry.getCountryId())) {
-		Assert.assertTrue(player1.isAttackValid(1, attackerCountry, attackingCountry, true));
+		Assert.assertTrue(playerOne.isAttackValid(1, attackerCountry, attackingCountry, true));
 		}else {
-			Assert.assertFalse(player1.isAttackValid(1, attackerCountry, attackingCountry, true));	
+			Assert.assertFalse(playerOne.isAttackValid(1, attackerCountry, attackingCountry, true));	
 		}
 	}
 }

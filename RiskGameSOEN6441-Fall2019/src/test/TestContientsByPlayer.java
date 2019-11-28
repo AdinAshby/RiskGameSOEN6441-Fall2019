@@ -1,10 +1,12 @@
 package test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import org.junit.Test;
 
-import junit.framework.Assert;
+import org.junit.*;
 import model.MapConquest;
 import model.MapDomination;
 import model.MapGeo;

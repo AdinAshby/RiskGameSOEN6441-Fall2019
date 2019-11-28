@@ -56,7 +56,7 @@ public class TestArmies {
 	 */
 	@Test
 	public void testArmiesOwnedByPlayer2() throws Exception {
-		mapConquest.readConquest("valid_map");
+		mapConquest.readConquest("valid_map"); // total 42 countries in map
 		players.add("a");
 		players.add("b");
 		strategy.add("human");
@@ -71,20 +71,16 @@ public class TestArmies {
 		Player[] myPlayers = mapDomination.getPlayers();
 		ArrayList<Integer> country1 = myPlayers[0].getCountryIDs();
 		ArrayList<Integer> country2 = myPlayers[1].getCountryIDs();
-		Player player1 = new Player("a", country1 , mapBuild);
-		Player player2 = new Player("b", country2 , mapBuild);
-		//Player onePlayer[] = {player1, player2};
-		//mapBuild.setPlayers(onePlayer);
+		Player playerOne = new Player("a", country1 , mapBuild);
+		Player playerTwo = new Player("b", country2 , mapBuild);
 		
+	    playerOne.calculateNumberOfArmiesEachPlayerGets();
+		playerTwo.calculateNumberOfArmiesEachPlayerGets();
+		int armiesOwnedByPlayerOne = playerOne.getNumberOfArmiesEachPlayerGets();
+		int armiesOwnedByPlayerTwo = playerTwo.getNumberOfArmiesEachPlayerGets();
 		
-		
-		player1.calculateNumberOfArmiesEachPlayerGets();
-		player2.calculateNumberOfArmiesEachPlayerGets();
-		int armies_owned_by_player1 = player1.getNumberOfArmiesEachPlayerGets();
-		int armies_owned_by_player2 = player2.getNumberOfArmiesEachPlayerGets();
-		
-		Assert.assertEquals(7, armies_owned_by_player1);	
-		Assert.assertEquals(7, armies_owned_by_player2);	
+		Assert.assertEquals(7, armiesOwnedByPlayerOne);	
+		Assert.assertEquals(7, armiesOwnedByPlayerTwo);	
 	}
 //	/**
 //	 * This testcase tests the calculation for number of armies when there are 3 players

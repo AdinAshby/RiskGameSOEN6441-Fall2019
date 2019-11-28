@@ -33,6 +33,8 @@ public class TestReinforcement {
 		mapConquest.readConquest("ameroki");
 		players.add("Shehnaz");
 		players.add("Golnoosh");
+		strategy.add("human");
+		strategy.add("human");
 		mapBuild.assigningPlayersToCountries(players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();

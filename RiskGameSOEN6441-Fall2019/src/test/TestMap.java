@@ -50,7 +50,7 @@ public class TestMap {
 	@Test
 	public void testvalidateMapForValidMap() throws Exception {
 
-		Assert.assertEquals(true, mapAdapter.read("valid_map"));
+		Assert.assertEquals(true, mapAdapter.read(VALID_MAP));
 		Assert.assertEquals(true, mapBuild.validateMap());
 		
 	}
