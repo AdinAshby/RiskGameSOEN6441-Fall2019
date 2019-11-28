@@ -1,14 +1,37 @@
 package model;
 
 import java.util.ArrayList;
-
+/**
+ * This class is made to implement Cheater Player Strategy
+ * 
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ * @author Babita kaur
+ * 
+ */
 public class CheaterPlayer extends Player implements Strategy {
-
+	/**
+	 * This is  constructor for initializing Cheater Player
+	 * 
+	 * @param playerName
+	 * @param countriesIDs
+	 * @param mapBuild
+	
+	 */
 	public CheaterPlayer(String playerName, ArrayList<Integer> countriesIDs, MapGeo mapBuild) {
 		super(playerName, countriesIDs, mapBuild);
 		setStrategy(this);
 	}
-	
+	/**
+	 * This is attack method for CheaterPlayer
+	 * 
+	 * @param attackerCountry
+	 * @param attackingCountry
+	 * @param attackerNumDice
+	 * @param defendNumDice
+	 * @param attackAllout
+	 */
 	@Override
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
 		
