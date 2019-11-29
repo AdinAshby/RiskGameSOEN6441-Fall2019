@@ -30,7 +30,7 @@ public class TestReinforcement {
  */
 	@Test
 	public void testReinforceArmiesValid() throws Exception {
-		mapConquest.readConquest("ameroki");
+		mapDomination.read("test");
 		players.add("Shehnaz");
 		players.add("Golnoosh");
 		strategy.add("human");
@@ -55,7 +55,7 @@ public class TestReinforcement {
 	 */
 	@Test
 	public void testReinforceArmiesInvalid() throws Exception {
-		mapConquest.readConquest("ameroki");
+		mapDomination.read("test");
 		players.add("Shehnaz");
 		players.add("Golnoosh");
 		mapBuild.assigningPlayersToCountries(players, strategy);

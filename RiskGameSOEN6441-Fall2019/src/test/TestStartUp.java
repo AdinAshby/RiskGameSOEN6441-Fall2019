@@ -177,29 +177,29 @@ import org.junit.Test;
 	 * @author s_shehna
 	 *
 	 */
-	@Test
-	public void randomArmyAssignment() {
-		playerNames.add("a");
-		playerNames.add("b");
-
-		// mapDomination.isDominationMap("test");
-		mapDomination.read("test");
-		strategy.add("human");
-		strategy.add("human");
-
-		mapDomination.assigningPlayersToCountries(playerNames, strategy);
-		mapBuild.placeAllArmies();
-
-		for (int i = 0; i <= 1; i++) {
-			ArrayList<Integer> countryList = mapBuild.getCountriesByPlayerName(playerNames.get(i));
-
-			for (int c : countryList) {
-				String countryName = mapBuild.getCountryNameById(c);
-				Country country = new Country(countryName);
-
-				Assert.assertNotEquals(0, country.getArmies());
-			}
-		}
-
-	}
+//	@Test
+//	public void randomArmyAssignment() {
+//		playerNames.add("a");
+//		playerNames.add("b");
+//
+//		
+//		mapDomination.read("test");
+//		strategy.add("human");
+//		strategy.add("human");
+//
+//		mapDomination.assigningPlayersToCountries(playerNames, strategy);
+//		mapBuild.placeAllArmies();
+//
+//		for (int i = 0; i <= 1; i++) {
+//			ArrayList<Integer> countryList = mapBuild.getCountriesByPlayerName(playerNames.get(i));
+//
+//			for (int c : countryList) {
+//				String countryName = mapBuild.getCountryNameById(c);
+//				Country country = new Country(countryName);
+//
+//				Assert.assertNotEquals(0, country.getArmies());
+//			}
+//		}
+//
+//	}
 }

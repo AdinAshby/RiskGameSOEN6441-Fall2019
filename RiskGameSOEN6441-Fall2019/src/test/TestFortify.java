@@ -29,7 +29,7 @@ public class TestFortify {
  */
 	@Test
 	public void testfortificationValid() throws Exception {
-		mapConquest.readConquest("ameroki");
+		mapDomination.read("ameroki");
 		Players.add("Shehnaz");
 		Players.add("Golnoosh");
 		strategy.add("human");
@@ -66,7 +66,7 @@ public class TestFortify {
 
 	@Test
 	public void testfortificationInValid() throws Exception {
-		mapConquest.readConquest("Test");
+		mapDomination.read("ameroki");
 		Players.add("Shehnaz");
 		Players.add("Golnoosh");
 		strategy.add("human");
