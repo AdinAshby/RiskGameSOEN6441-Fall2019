@@ -28,11 +28,11 @@ public class TestDefend {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<String> strategy = new ArrayList<String>();
        /**
-        * This testcase tests if defend is possible for two players with ameroki map
+        * This testcase tests if defend is possible for two players with test map
         * @throws Exception
         */
         @Test
-        public void testAttackValid() throws Exception {
+        public void testDefendValid() throws Exception {
 
         	mapDomination.isDominationMap("test");
 
