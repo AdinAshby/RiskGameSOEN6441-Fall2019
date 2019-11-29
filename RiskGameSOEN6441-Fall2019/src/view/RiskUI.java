@@ -819,14 +819,10 @@ public class RiskUI {
 					if (placeAllFlag == true) {
 						break;
 					}
-					// player.setCounterForPhases(1);
-					// /*********************************************/
-					// counterForPhases = 1;
-					// mapView.showPhaseView(counterForPhases, player.getPlayerName());
+				
 
 					player.calculateNumberOfArmiesEachPlayerGets();
-					// System.out.println(player.getPlayerName() + " is your turn to reinforce");
-				//	finishedPLACE_ARMIES = false;
+			
 
 				
 					

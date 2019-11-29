@@ -8,7 +8,6 @@ import model.GameRiskBuilder;
 import model.MapGeo;
 import model.Player;
 
-This class implements the serializable 
 /**
  * This class implements the serializable 
  * @author s_shehna
