@@ -1007,7 +1007,7 @@ public class Player implements Subject, Serializable {
 				}
 			}
 			
-			if (isAttackValid(attackerNumDice > defendNumDice ? defendNumDice : attackerNumDice, attackerCountry, attackingCountry, true) == true) {
+			while (isAttackValid(attackerNumDice > defendNumDice ? defendNumDice : attackerNumDice, attackerCountry, attackingCountry, true) == true) {
 				attack(attackerCountry, attackingCountry, attackerNumDice > defendNumDice ? defendNumDice : attackerNumDice, defendNumDice, 0);
 			}
 		}
@@ -1036,7 +1036,9 @@ public class Player implements Subject, Serializable {
 			int numberOfArmiesToAttack = random.nextInt(attackerCountry.getArmies());
 			int numberOfArmiesToDefend = random.nextInt(attackingCountry.getArmies());
 
-			attack(attackerCountry, attackingCountry, numberOfArmiesToAttack, numberOfArmiesToDefend, 0);	
+			while (isAttackValid(numberOfArmiesToAttack > numberOfArmiesToDefend ? numberOfArmiesToDefend : numberOfArmiesToAttack, attackerCountry, attackingCountry, true) == true) {
+				attack(attackerCountry, attackingCountry, numberOfArmiesToAttack > numberOfArmiesToDefend ? numberOfArmiesToDefend : numberOfArmiesToAttack, numberOfArmiesToDefend, 0);
+			}	
 		}
 
 		if(this.strategy instanceof CheaterPlayer) {
@@ -1225,13 +1227,14 @@ public class Player implements Subject, Serializable {
 			Random random = new Random();
 			ArrayList<Integer> playerCountries = countryIDs;
 
-			int randomFromCountryID = random.nextInt(playerCountries.size());
+			int randomFromCountryID = playerCountries.get(random.nextInt(playerCountries.size() - 1));
 			String fromCountry = mapGeo.getCountryById(randomFromCountryID).getCountryName();
-
-			int randomToCountryID = random.nextInt(mapGeo.getCountryAdjacency(randomFromCountryID).size());
-
+			
+			ArrayList<Integer> randomAdjacentCountriesList = mapGeo.getCountryAdjacency(randomFromCountryID);
+			int randomToCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size() - 1));
+					
 			while (!(mapGeo.getCountryById(randomToCountryID).getArmies() > 1)) {
-				randomToCountryID = random.nextInt(mapGeo.getCountryAdjacency(randomFromCountryID).size());
+				randomToCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size() - 1));
 			}
 
 			String toCountry = mapGeo.getCountryById(randomToCountryID).getCountryName();
