@@ -39,8 +39,8 @@ public class CheaterPlayer extends Player implements Strategy {
 		addCountryIdToPlayer(attackingCountry.getCountryId());
 		int NoOfContinentsControlled = getContinentsControlled().size();
 		
-		if (NoOfContinentsControlled == mapGeo
-				.getNoOfContinentsControlled()) {
+		
+		if(mapGeo.getAllCountries().size() == mapGeo.getPlayerByName(attackerCountry.getPlayerName()).getCountryIDs().size()) {
 			System.out.println(attackerCountry.getPlayerName()
 					+ " is winner. Game over!");
 			this.setWon(true);

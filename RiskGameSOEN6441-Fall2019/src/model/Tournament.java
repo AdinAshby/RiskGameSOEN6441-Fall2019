@@ -70,7 +70,8 @@ public class Tournament implements Serializable {
 				game.setMapGeo(mapDomination);
 				
 				mapDomination.assigningPlayersToCountries(listOfPlayerStrategies, listOfPlayerStrategies);
-
+				
+				outerLoop:
 				for (int turnCounter = 0; turnCounter < maxNumberOfTurns; turnCounter++) {
 
 					for(Player player : mapDomination.getPlayers()) {
@@ -90,6 +91,9 @@ public class Tournament implements Serializable {
 						player.fortifyCommand(game, mapDomination, mapView);
 						
 						mapDomination.showMap();
+						
+						if(player.getWon())
+							break outerLoop;
 					}
 
 				}
