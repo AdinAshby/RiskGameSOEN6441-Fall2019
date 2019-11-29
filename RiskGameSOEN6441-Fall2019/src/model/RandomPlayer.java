@@ -72,7 +72,7 @@ public class RandomPlayer extends Player implements Strategy {
 					}
 					mapGeo.showMap();
 					
-					attackMoveCommand(attackerCountry, attackingCountry, attackAllout);
+					attackMoveCommand(attackerCountry, attackingCountry, attackerCountry.getArmies() / 2);
 
 				}
 
