@@ -26,13 +26,14 @@ public class TestAttack {
 	MapDomination mapDomination = new MapDomination();
 	MapConquest mapConquest = new MapConquest(mapDomination);
 	ArrayList<String> playerStrategies = new ArrayList<String>();
-       /**
-        * This testcase tests if attack is possible for two players with ameroki map
-        * @throws Exception
-        */
+      
 	
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<String> strategy = new ArrayList<String>();
+	 /**
+        * intializes the data for tests
+        * @throws Exception
+        */
 		@Before
 		public void setup()
 		{
@@ -42,7 +43,10 @@ public class TestAttack {
 			playerStrategies.add("human");
 			playerStrategies.add("human");
 		}
-		
+		 /**
+        * This testcase tests if attack is possible for two players 
+        * @throws Exception
+        */
 	@Test
 	public void testAttackValid() throws Exception {
 		mapDomination.isDominationMap("test");

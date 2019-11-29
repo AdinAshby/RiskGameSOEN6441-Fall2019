@@ -8,6 +8,13 @@ import model.GameRiskBuilder;
 import model.MapGeo;
 import model.Player;
 
+This class implements the serializable 
+/**
+ * This class implements the serializable 
+ * @author s_shehna
+ * @author f_yazdan
+ */
+
 public class Game implements Serializable {
 
 	public enum Phase {
@@ -54,7 +61,11 @@ public class Game implements Serializable {
 	public void setPhase(Phase phase) {
 		this.phase = phase;
 	}
-
+/**
+ * This method saves a  game
+ * @author s_shehna
+ * @author f_yazdan
+ */
 	public void saveGame(String mapFileName, MapGeo mapGeo, Player player, Phase phase) {
 		try {
 
@@ -74,7 +85,11 @@ public class Game implements Serializable {
 		}
 
 	}
-
+/**
+ * This method loads a saved game
+ * @author s_shehna
+ *
+ */
 	public boolean loadGame(String mapFileName) {
 		boolean isvalid = false;
 		GameBuilder gameBuilder = new GameRiskBuilder();
