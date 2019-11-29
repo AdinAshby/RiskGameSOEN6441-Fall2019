@@ -517,7 +517,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						game.saveGame(mapFileName, mapDomination, null, Phase.MAP_LOAD);
+						game.saveGame(mapFileName, mapDomination, null, Phase.GAME_START);
 					}
 
 					// loadgame filename
@@ -531,7 +531,10 @@ public class RiskUI {
 						boolean isLoaded=game.loadGame(mapFileName);
 						if(isLoaded) {
 						mapDomination=(MapDomination) game.getMapGeo();
-						System.out.println("Game Loaded, Let's countinue Player"+game.getTurnPlayer().getPlayerName()+" at the stage of "+game.getPhase());
+						Player loadPlayer=game.getTurnPlayer();
+						String playerName;
+						if (loadPlayer!=null) {playerName=loadPlayer.getPlayerName();}else {playerName="-";}
+						System.out.println("Game Loaded, Let's countinue Player "+playerName+" at the stage of "+game.getPhase());
 						mapDomination.showMap();
 						}
 					}
@@ -697,7 +700,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						game.saveGame(mapFileName, mapDomination, null, Phase.ADD_PLAYERS);
+						game.saveGame(mapFileName, mapDomination, null, Phase.MAP_LOAD);
 					}
 					
 					
