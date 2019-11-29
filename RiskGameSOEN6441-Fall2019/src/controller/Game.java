@@ -18,8 +18,7 @@ public class Game implements Serializable {
 	private Player turnPlayer;
 	private MapGeo mapGeo;
 	private Player winner;
-	
-	
+
 	public Player getWinner() {
 		return winner;
 	}
@@ -58,7 +57,7 @@ public class Game implements Serializable {
 
 	public void saveGame(String mapFileName, MapGeo mapGeo, Player player, Phase phase) {
 		try {
-			System.out.println("Save Game in Game Class");
+
 			GameBuilder gameBuilder = new GameRiskBuilder();
 			gameBuilder.setMapGeo(mapGeo);
 			gameBuilder.setTurnPlayer(player);
@@ -76,15 +75,23 @@ public class Game implements Serializable {
 
 	}
 
-	public void loadGame(String mapFileName) {
+	public boolean loadGame(String mapFileName) {
+		boolean isvalid = false;
 		GameBuilder gameBuilder = new GameRiskBuilder();
 		GameDirector gameDirector = new GameDirector();
 		gameDirector.setBuilder(gameBuilder);
 		Game game = gameDirector.loadGame(mapFileName);
-		this.setMapGeo(game.getMapGeo());
-		this.setPhase(game.getPhase());
-		this.setTurnPlayer(game.getTurnPlayer());
+		if (game != null) {
+			this.setMapGeo(game.getMapGeo());
+			this.setPhase(game.getPhase());
+			this.setTurnPlayer(game.getTurnPlayer());
+			isvalid = true;
+		} else {
+			System.out.println("File could not be loaded");
+			isvalid = false;
+		}
 
+		return isvalid;
 	}
 
 }

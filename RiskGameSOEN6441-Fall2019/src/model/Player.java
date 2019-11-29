@@ -1137,6 +1137,17 @@ public class Player implements Subject, Serializable {
 					mapView.showMap(mapGeo);
 				}
 
+				
+				// savegame filename
+				regex = "savegame ([\\w*\\_\\-]*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+				String	mapFileName = matcher.group(1);
+					isValidCommand = true;
+					game.saveGame(mapFileName, this.mapGeo, this, Phase.FORTIFICATION);
+				}
+				
 				// fortify -none
 				regex = "fortify -none";
 
