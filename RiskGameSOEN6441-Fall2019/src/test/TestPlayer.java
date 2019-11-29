@@ -20,18 +20,18 @@ public class TestPlayer {
 	/**
 	 * int CountryId with correct initialization
 	 */
-	ArrayList<Integer> countryIdCorrect = new ArrayList<Integer>();
+	ArrayList<Integer> countryIdCorrect ;
 	
 	/**
 	 * int CountryId_incorrect with incorrect initialization
 	 */
 
-	ArrayList<Integer> counrtyIdInCorrect = new ArrayList<Integer>();
+	ArrayList<Integer> counrtyIdInCorrect;
 	
 	/**
 	 * object of the player
 	 */
-	MapGeo mapBuild = MapGeo.getInstance();
+	MapGeo mapBuild;
 	
 	/**
 	 * initializes the data for player class testcases
@@ -40,6 +40,9 @@ public class TestPlayer {
 	@Before
 	public void setup()
 	{
+		mapBuild = MapGeo.getInstance();
+		countryIdCorrect = new ArrayList<Integer>();
+		counrtyIdInCorrect = new ArrayList<Integer>();
 		countryIdCorrect.add(1);
 		countryIdCorrect.add(2);
 		countryIdCorrect.add(3);

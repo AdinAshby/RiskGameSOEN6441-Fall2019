@@ -2,6 +2,7 @@ package test;
 
 import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Before;
 
 import model.MapConquest;
 import model.MapDomination;
@@ -16,20 +17,26 @@ import model.MapGeo;
  *
  */
 public class TestMapFiles {
+	
+	MapGeo mapBuild;
+	
+	String VALID_FILE;
+	
+	String INVALID_FILE;
+	MapDomination mapDomination;
+	MapConquest mapConquest;
 	/**
-	 * Object of the MapBuilder
+	 * intializes data before testcases
 	 */
-	MapGeo mapBuild = MapGeo.getInstance();
-	/**
-	 * String valid_file
-	 */
-	String VALID_FILE = "valid_map";
-	/**
-	 * String inValid_file
-	 */
-	String INVALID_FILE = "test2";
-	MapDomination mapDomination = new MapDomination();
-	MapConquest mapConquest = new MapConquest(mapDomination);
+	@Before
+	public void setup()
+	{
+		mapDomination = new MapDomination();
+		 mapConquest = new MapConquest(mapDomination);
+		 VALID_FILE = "valid_map";
+		 INVALID_FILE = "test2";
+		 mapBuild = MapGeo.getInstance();
+	}
 	/**
 	 * This is the test method for checking whether the map file is valid
 	 * 

@@ -3,9 +3,10 @@ package test;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.activation.MailcapCommandMap;
 
 import org.junit.Assert;
-
+import org.junit.Before;
 import org.junit.Test;
 
 import model.MapConquest;
@@ -19,22 +20,32 @@ import model.Player;
  */
 public class TestReinforcement {
 	
-	ArrayList<String> players = new ArrayList<String>();
-	ArrayList<String> strategy = new ArrayList<String>();
-	MapGeo mapBuild = MapGeo.getInstance();
-	MapDomination mapDomination = new MapDomination();
-	MapConquest mapConquest = new MapConquest(mapDomination);
+	ArrayList<String> players;
+	ArrayList<String> strategy;
+	MapGeo mapBuild;
+	MapDomination mapDomination;
+	MapConquest mapConquest;
+	@Before
+	public void setup()
+	{
+		players = new ArrayList<String>();
+		strategy = new ArrayList<String>();
+		mapBuild = MapGeo.getInstance();
+		mapDomination = new MapDomination();
+		mapConquest = new MapConquest(mapDomination);
+		players.add("Shehnaz");
+		players.add("Golnoosh");
+		strategy.add("human");
+		strategy.add("human");
+	}
 	/**
  * This testcase tests valid number of armies owned by players for reinforcement 
  *
  */
 	@Test
 	public void testReinforceArmiesValid() throws Exception {
-		mapDomination.read("test");
-		players.add("Shehnaz");
-		players.add("Golnoosh");
-		strategy.add("human");
-		strategy.add("human");
+		mapDomination.read("ameroki");
+	
 		mapBuild.assigningPlayersToCountries(players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();
@@ -55,9 +66,7 @@ public class TestReinforcement {
 	 */
 	@Test
 	public void testReinforceArmiesInvalid() throws Exception {
-		mapDomination.read("test");
-		players.add("Shehnaz");
-		players.add("Golnoosh");
+		mapDomination.read("ameroki");
 		mapBuild.assigningPlayersToCountries(players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();
