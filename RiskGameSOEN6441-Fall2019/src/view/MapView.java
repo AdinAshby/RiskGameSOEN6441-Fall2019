@@ -103,15 +103,7 @@ public class MapView implements Serializable {
 		}
 		
 	}
-	/**
-	 * This method is for showing the Tournament Result
-	 * @param results
-	 * @param numberOfGames
-	 * @param games
-	 * @param listOfMapFiles
-	 * @param listOfPlayerStrategies
-	 * @param maxNumberOfTurns
-	 */
+	
 	public void showTournamentResult(ArrayList<String> results, int numberOfGames, Game[] games, ArrayList<String> listOfMapFiles,ArrayList<String> listOfPlayerStrategies, int maxNumberOfTurns ) {
 		
 		System.out.println("\n\n---------------\n\nResults:");
@@ -170,10 +162,7 @@ public class MapView implements Serializable {
 		}
 		*/
 	}
-/**
- * 
- * @param players
- */
+
 	public void showPlayersWorldDomination(Player[] players) {
 
 		String table = "|%-15s|%-23f|%-30s|%-21d|%n";
