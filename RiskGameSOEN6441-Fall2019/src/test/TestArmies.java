@@ -83,31 +83,6 @@ public class TestArmies {
 		Assert.assertEquals(3, armiesOwnedByPlayerOne);	
 		Assert.assertEquals(3, armiesOwnedByPlayerTwo);	
 	}
-//	/**
-//	 * This testcase tests the calculation for number of armies when there are 3 players
-//	 * 
-//	 */
-//	@Test
-//	public void testArmiesOwnedByPlayer3() throws Exception {
-//		mapConquest.readConquest("ameroki");
-//		players.add("a");
-//		players.add("b");
-//		players.add("c");
-//      strategy.add("human");
-//	    strategy.add("human");
-//      strategy.add("human");
-	
-//		mapBuild.assigningPlayersToCountries(players, strategy);
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets();
-//		int armiesOwnedByPlayerOne = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets();
-//		int armiesOwnedByPlayerTwo = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		mapBuild.calculateNumberOfArmiesEachPlayerGets();
-//		int armiesOwnedByPlayerThree = mapBuild.getNumberOfArmiesEachPlayerGets();
-//		Assert.assertEquals(4, armiesOwnedByPlayerOne);	
-//		Assert.assertEquals(4, armiesOwnedByPlayerTwo);	
-//		Assert.assertEquals(4, armiesOwnedByPlayerThree);	
-//	}
 
 }
 
