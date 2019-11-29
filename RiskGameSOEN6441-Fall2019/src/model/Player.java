@@ -1041,17 +1041,18 @@ public class Player implements Subject, Serializable {
 		if(this.strategy instanceof CheaterPlayer) {
 
 			ArrayList<Integer> playerCountries = countryIDs;
-
+			
+			outerLoop:
 			for (int countryID : playerCountries) {
 				for (int neighborCountryID : mapGeo.getCountryAdjacency(countryID)) {
 					if (mapGeo.getCountryById(neighborCountryID).getPlayerName() != mapGeo.getCountryById(countryID)
 							.getPlayerName()) {
 						attack(mapGeo.getCountryById(countryID), mapGeo.getCountryById(neighborCountryID), 0, 0, 0);
-						break;
+						break outerLoop;
 					}
 				}
 			}
-
+			
 		}
 
 		return isValidCommand;
