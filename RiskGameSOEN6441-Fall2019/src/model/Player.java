@@ -1091,6 +1091,7 @@ public class Player implements Subject, Serializable {
 	 */
 
 	public boolean fortifyCommand(Game game, MapGeo mapGeo, MapView mapView) {
+		
 		System.out.println(fortifyRequestingMessage);
 
 		boolean finished = false;

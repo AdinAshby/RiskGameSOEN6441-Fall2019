@@ -19,6 +19,7 @@ public class Game implements Serializable {
 	private MapGeo mapGeo;
 	private Player winner;
 	
+	
 	public Player getWinner() {
 		return winner;
 	}

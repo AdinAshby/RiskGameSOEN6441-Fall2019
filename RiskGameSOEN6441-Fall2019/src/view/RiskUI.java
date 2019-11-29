@@ -879,7 +879,7 @@ public class RiskUI {
 							}
 
 							player.setCounterForPhases(3);
-							isValidCommand = player.fortifyCommand(game, mapDomination, mapView);
+							isValidCommand = player.fortifyCommand( game, mapDomination, mapView);
 
 							if (!isValidCommand) {
 								System.out.println("Please follow the correct command rules");

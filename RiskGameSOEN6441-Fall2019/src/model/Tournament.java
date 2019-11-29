@@ -68,6 +68,7 @@ public class Tournament implements Serializable {
 				Game game=new Game();
 				games[gameCounter]=game;
 				game.setMapGeo(mapDomination);
+				
 				mapDomination.assigningPlayersToCountries(listOfPlayerStrategies, listOfPlayerStrategies);
 
 				for (int turnCounter = 0; turnCounter < maxNumberOfTurns; turnCounter++) {
