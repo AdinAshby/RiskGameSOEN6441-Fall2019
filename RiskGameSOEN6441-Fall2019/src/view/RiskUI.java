@@ -872,14 +872,14 @@ public class RiskUI {
 							isValidCommand = player.reinforceCommand(game, mapDomination, mapView);
 
 							player.setCounterForPhases(2);
-							isValidCommand = player.attackCommand(mapView);
+							isValidCommand = player.attackCommand(game, mapView);
 
 							if(player.getWon()) {
 								break whileLoop;
 							}
 
 							player.setCounterForPhases(3);
-							isValidCommand = player.fortifyCommand( game, mapDomination, mapView);
+							isValidCommand = player.fortifyCommand(game, mapDomination, mapView);
 
 							if (!isValidCommand) {
 								System.out.println("Please follow the correct command rules");

@@ -823,7 +823,7 @@ public class Player implements Subject, Serializable {
 				"\n------------------------------\nNo More attack is possible\n------------------------------\n");
 	}
 
-	public boolean attackCommand(MapView mapView) {
+	public boolean attackCommand(Game game, MapView mapView) {
 		boolean finished = false;
 		boolean isValidCommand = false;
 		String addText = "";
@@ -859,6 +859,17 @@ public class Player implements Subject, Serializable {
 					mapView.showMap(mapGeo);
 				}
 
+				// savegame filename
+				regex = "savegame ([\\w*\\_\\-]*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+				String	mapFileName = matcher.group(1);
+					isValidCommand = true;
+					game.saveGame(mapFileName, this.mapGeo, this, Phase.ATTACK);
+				}
+				
+				
 				regex = "(?<=attack)(.*)";
 				setPattern(regex);
 				setMatcher(input);

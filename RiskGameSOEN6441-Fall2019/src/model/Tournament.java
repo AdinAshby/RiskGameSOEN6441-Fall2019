@@ -83,7 +83,7 @@ public class Tournament implements Serializable {
 						
 						player.setCounterForPhases(2);
 						game.setPhase(Phase.ATTACK);
-						player.attackCommand(mapView);
+						player.attackCommand(game, mapView);
 						
 						player.setCounterForPhases(3);
 						game.setPhase(Phase.FORTIFICATION);
