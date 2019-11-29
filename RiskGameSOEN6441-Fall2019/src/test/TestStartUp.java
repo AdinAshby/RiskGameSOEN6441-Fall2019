@@ -16,29 +16,54 @@ import org.junit.Test;
  */
    public class TestStartUp {
 
-	MapGeo mapBuild = MapGeo.getInstance();
-	MapDomination mapDomination = new MapDomination();
-	MapConquest mapConquest = new MapConquest(mapDomination);
+	MapGeo mapBuild;
+	MapDomination mapDomination;
+	MapConquest mapConquest;
 
-	ArrayList<String> playerNames = new ArrayList<String>();
-	ArrayList<String> strategy = new ArrayList<String>();
-	ArrayList<ArrayList<Integer>> countryList = new ArrayList<>();
+	ArrayList<String> playerNames ;
+	ArrayList<String> strategy;
+	ArrayList<ArrayList<Integer>> countryList;
 
-	ArrayList<Integer> countryListOne = new ArrayList<>();
-	ArrayList<Integer> countryListTwo = new ArrayList<>();
-	ArrayList<Integer> countryListThree = new ArrayList<>();
-	ArrayList<Integer> countryListFour = new ArrayList<>();
-	ArrayList<Integer> countryListFive = new ArrayList<>();
-	ArrayList<Integer> countryListSix = new ArrayList<>();
-	ArrayList<Integer> countryListSeven = new ArrayList<>();
+	ArrayList<Integer> countryListOne;
+	ArrayList<Integer> countryListTwo ;
+	ArrayList<Integer> countryListThree;
+	ArrayList<Integer> countryListFour;
+	ArrayList<Integer> countryListFive ;
+	ArrayList<Integer> countryListSix ;
+	ArrayList<Integer> countryListSeven;
 
-	Player playerOne = new Player("a", countryListOne, mapBuild);
-	Player playerTwo = new Player("b", countryListTwo, mapBuild);
-	Player playerThree = new Player("c", countryListThree, mapBuild);
-	Player playerFour = new Player("d", countryListThree, mapBuild);
-	Player playerFive = new Player("e", countryListFive, mapBuild);
-	Player playerSix = new Player("f", countryListSix, mapBuild);
-	Player playerSeven = new Player("g", countryListSeven, mapBuild);
+	Player playerOne;
+	Player playerTwo ;
+	Player playerThree;
+	Player playerFour;
+	Player playerFive ;
+	Player playerSix;
+	Player playerSeven;
+	@Before
+	public void setup()
+	{
+		mapBuild = MapGeo.getInstance();
+		mapDomination = new MapDomination();
+		mapConquest = new MapConquest(mapDomination);
+		playerNames = new ArrayList<String>();
+		strategy = new ArrayList<String>();
+		 countryList = new ArrayList<>();
+		 countryListOne = new ArrayList<>();
+		 countryListTwo = new ArrayList<>();
+			countryListThree = new ArrayList<>();
+			countryListFour = new ArrayList<>();
+			countryListFive = new ArrayList<>();
+			 countryListSix = new ArrayList<>();
+		 countryListSeven = new ArrayList<>();
+		 playerOne = new Player("a", countryListOne, mapBuild);
+			 playerTwo = new Player("b", countryListTwo, mapBuild);
+			playerThree = new Player("c", countryListThree, mapBuild);
+		 playerFour = new Player("d", countryListThree, mapBuild);
+			 playerFive = new Player("e", countryListFive, mapBuild);
+			 playerSix = new Player("f", countryListSix, mapBuild);
+			 playerSeven = new Player("g", countryListSeven, mapBuild);
+
+	}
 	/**
 	 * This testcase tests number of initial armies assigned when there are 2 players
 	 * @author s_shehna

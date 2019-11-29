@@ -163,11 +163,25 @@ public class RiskUI {
 
 		String addText = "";
 
-
+/**
+ * object of game class
+ */
 		Game game=new Game();
+		/**
+		 * boolean finishedADD_PLAYERS
+		 */
 		boolean finishedADD_PLAYERS=false;
+		/**
+		 * boolean finishedMAP_LOAD
+		 */
 		boolean finishedMAP_LOAD = false;
+		/**
+		 * boolean finishedPLACE_ARMIES
+		 */
 		boolean finishedPLACE_ARMIES = false;
+		/**
+		 * intializes turnPlayer 
+		 */
 		Player turnPlayer = null;
 		/**
 		 * This part is hard code to test the project defined by the boolean debug
@@ -806,7 +820,7 @@ public class RiskUI {
 
 				/******** START GAME PHASE **********************/
 
-				// System.out.println(reinforceRequestingMessage);
+				
 
 				for (Player player : mapDomination.getPlayers()) {
 					

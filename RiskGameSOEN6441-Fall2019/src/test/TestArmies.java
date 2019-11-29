@@ -24,6 +24,9 @@ public class TestArmies {
 	ArrayList<Integer> countryListTwo;
 	ArrayList<Integer> countryListThree;
 	ArrayList<Integer> countryListfour;
+	/**
+	 * initializes data before testcases
+	 */
 	@Before
 	public void setup()
 	{

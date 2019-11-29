@@ -25,6 +25,9 @@ public class TestReinforcement {
 	MapGeo mapBuild;
 	MapDomination mapDomination;
 	MapConquest mapConquest;
+	/**
+	 * initializes data before testcases
+	 */
 	@Before
 	public void setup()
 	{

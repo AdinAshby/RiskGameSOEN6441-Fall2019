@@ -24,39 +24,65 @@ public class Game implements Serializable {
 	private Player turnPlayer;
 	private MapGeo mapGeo;
 	private Player winner;
-
+/**
+ * This method returns the winner of game
+ * @return player object
+ */
 	public Player getWinner() {
 		return winner;
 	}
-
+/**
+ * This method sets the winner 
+ * @param winner
+ */
 	public void setWinner(Player winner) {
 		this.winner = winner;
 	}
-
+/**
+ * This method gets the turn of player
+ * @return player object
+ */
 	public Player getTurnPlayer() {
 		return turnPlayer;
 	}
-
+/**
+ * This method sets the turn of player
+ * @param turnPlayer 
+ */
 	public void setTurnPlayer(Player turnPlayer) {
 		this.turnPlayer = turnPlayer;
 	}
-
+/**
+ * This method gets the mapGeo 
+ * @return mapGeo object
+ */
 	public MapGeo getMapGeo() {
 		return mapGeo;
 	}
-
+/**
+ * This method sets the mapGeo object
+ * @param mapGeo
+ */
 	public void setMapGeo(MapGeo mapGeo) {
 		this.mapGeo = mapGeo;
 	}
-
+/**
+ * constructor of game class
+ */
 	public Game() {
 		this.phase = Phase.GAME_START;
 	}
-
+/**
+ * This method gets the phase of game
+ * @return
+ */
 	public Phase getPhase() {
 		return phase;
 	}
-
+/**
+ * This method sets the phase of game
+ * @param phase
+ */
 	public void setPhase(Phase phase) {
 		this.phase = phase;
 	}
@@ -92,9 +118,19 @@ public class Game implements Serializable {
  *
  */
 	public boolean loadGame(String mapFileName) {
+		/**
+		 * boolean isvalid
+		 */
 		boolean isvalid = false;
+		/**
+		 * gamebuilder object
+		 */
 		GameBuilder gameBuilder = new GameRiskBuilder();
+		/**
+		 * gamedirectore object
+		 */
 		GameDirector gameDirector = new GameDirector();
+		
 		gameDirector.setBuilder(gameBuilder);
 		Game game = gameDirector.loadGame(mapFileName);
 		if (game != null) {
