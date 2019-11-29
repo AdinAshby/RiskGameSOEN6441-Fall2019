@@ -155,7 +155,8 @@ public class MapDomination extends MapGeo implements Serializable {
 		} catch (Exception e) {
 			System.out.println("Map is invalid");
 		}
-		return validateMap();
+		boolean vM= validateMap();
+		return vM;
 	}
 
 	/**
