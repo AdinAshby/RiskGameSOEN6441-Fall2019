@@ -2,7 +2,12 @@ package model;
 
 import controller.Game;
 import controller.Game.Phase;
-
+/**
+ * This class is a abstract builder class
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ */
 public abstract class GameBuilder {
 
 		  /**

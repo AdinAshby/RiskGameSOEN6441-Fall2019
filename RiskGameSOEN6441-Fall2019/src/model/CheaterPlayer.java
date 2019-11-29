@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author f_yazdan
  * @author s_shehna
  * @author AdinAshby
- * @author Babita kaur
+ 
  * 
  */
 public class CheaterPlayer extends Player implements Strategy {

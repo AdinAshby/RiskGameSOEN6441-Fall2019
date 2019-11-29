@@ -86,7 +86,9 @@ public class Game implements Serializable {
 	}
 /**
  * This method loads a saved game
+ * @author f_yazdan
  * @author s_shehna
+ * @author AdinAshby
  *
  */
 	public boolean loadGame(String mapFileName) {

@@ -8,7 +8,6 @@ import java.util.Arrays;
  * @author f_yazdan
  * @author s_shehna
  * @author AdinAshby
- * @author Babita kaur
  * 
  */
 public class HumanPlayer extends Player implements Strategy {

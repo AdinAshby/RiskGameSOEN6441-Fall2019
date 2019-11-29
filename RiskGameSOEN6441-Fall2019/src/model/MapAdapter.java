@@ -6,7 +6,6 @@ package model;
  * @author f_yazdan
  * @author s_shehna
  * @author AdinAshby
- * @author Babita kaur
  */
 public class MapAdapter extends MapDomination {
 	/**

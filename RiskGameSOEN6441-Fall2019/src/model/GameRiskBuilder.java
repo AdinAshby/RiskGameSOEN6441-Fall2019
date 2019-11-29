@@ -3,7 +3,13 @@ package model;
 import java.io.Serializable;
 
 import controller.Game.Phase;
-
+/**
+ * This class is a concrete builder class extending GameBuilder class
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ *
+ */
 public class GameRiskBuilder extends GameBuilder implements Serializable {
 	// default serialVersion id
 	private static final long serialVersionUID = 1L;

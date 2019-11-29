@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * @author f_yazdan
  * @author s_shehna
  * @author AdinAshby
- * @author Babita kaur
  * 
  */
 public class RandomPlayer extends Player implements Strategy {

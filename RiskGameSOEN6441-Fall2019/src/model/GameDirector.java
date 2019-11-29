@@ -12,6 +12,13 @@ import java.io.ObjectOutputStream;
 import controller.Game;
 import controller.Game.Phase;
 
+/**
+ * This class is director class in builder pattern
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ *
+ */
 public class GameDirector {
 	/**
 	 * private gameBuilder
