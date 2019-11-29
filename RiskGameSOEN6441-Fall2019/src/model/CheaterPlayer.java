@@ -37,6 +37,7 @@ public class CheaterPlayer extends Player implements Strategy {
 		
 		attackingCountry.setPlayer(attackerCountry.getPlayerName());
 		addCountryIdToPlayer(attackingCountry.getCountryId());
+		removeCountryIdFromPlayer(attackerCountry.getCountryId());
 		int NoOfContinentsControlled = getContinentsControlled().size();
 		
 		

@@ -60,6 +60,7 @@ public class AggressivePlayer extends Player implements Strategy {
 					System.out.println(getCardNames());
 					attackingCountry.setPlayer(attackerCountry.getPlayerName());
 					addCountryIdToPlayer(attackingCountry.getCountryId());
+					removeCountryIdFromPlayer(attackerCountry.getCountryId());
 					int NoOfContinentsControlled = getContinentsControlled().size();
 				
 					if(mapGeo.getAllCountries().size() == mapGeo.getPlayerByName(attackerCountry.getPlayerName()).getCountryIDs().size()) {

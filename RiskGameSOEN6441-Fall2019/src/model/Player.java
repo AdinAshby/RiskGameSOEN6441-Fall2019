@@ -1278,6 +1278,11 @@ public class Player implements Subject, Serializable {
 		countryIDs.add(countryId);
 		
 	}
+	
+	protected void removeCountryIdFromPlayer(int countryId) {
+		countryIDs.remove(Integer.valueOf(countryId));
+	}
+	
 	/**
 	 * 
 	 * @return temporaryArmies
