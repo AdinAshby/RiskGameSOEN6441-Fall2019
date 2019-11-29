@@ -118,7 +118,7 @@ public class Player implements Subject, Serializable {
 	/**
 	 * protected fortifyRequestingMessage
 	 */
-	protected String fortifyRequestingMessage = "Let's fortify! or type in \"fortify none\" if you don't want to.\n";
+	protected String fortifyRequestingMessage = "Let's fortify! or type in \"fortify -none\" if you don't want to.\n";
 
 	protected String attackRequestingMessage = "Let's Attack\n";
 
