@@ -34,26 +34,26 @@ public class TestFortify {
 		Players.add("Golnoosh");
 		strategy.add("human");
 		strategy.add("human");
-		mapBuild.assigningPlayersToCountries(Players, strategy);
-		Player[] myPlayers = mapBuild.getPlayers();
-		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();
-		ArrayList<Integer> countryListPlayerTwo = myPlayers[1].getCountryIDs();
-		Player playerOne = new Player("Shehnaz", countryListPlayerOne, mapBuild);
-		Player playerTwo = new Player("Golnoosh", countryListPlayerTwo, mapBuild);
+		mapDomination.assigningPlayersToCountries(Players, strategy);
+		Player[] myPlayers = mapDomination.getPlayers();
+		ArrayList<Integer> countryListPlayerOne = mapDomination.getCountriesByPlayerName(myPlayers[0].getPlayerName());
+		ArrayList<Integer> countryListPlayerTwo = mapDomination.getCountriesByPlayerName(myPlayers[1].getPlayerName());
+		//Player playerOne = new Player("Shehnaz", countryListPlayerOne, mapDomination);
+		//Player playerTwo = new Player("Golnoosh", countryListPlayerTwo, mapDomination);
         ArrayList<String> countryList = new ArrayList<>();
         for(int i=0;i<countryListPlayerOne.size();i++)
         {
-        	countryList.add(mapBuild.getCountryNameById(countryListPlayerOne.get(i)));
+        	countryList.add(mapDomination.getCountryNameById(countryListPlayerOne.get(i)));
         }
 		if(countryList.contains("western_ulstrailia") && countryList.contains("eastern_ulstarilia")  )
 		{
-			playerOne.reinforce(mapBuild, "western_ulstrailia" , 10, true);
-			Assert.assertEquals(true, playerOne.fortifyIsValid("western_ulstrailia" , "eastern_ulstarilia", 4, mapBuild));
+			myPlayers[0].reinforce(mapDomination, "western_ulstrailia" , 2, true);
+			Assert.assertEquals(true, myPlayers[0].fortifyIsValid("western_ulstrailia" , "eastern_ulstarilia", 2, mapDomination));
 		}
 		else
 		{
-			playerTwo.reinforce(mapBuild, "western_ulstrailia" , 10, true);
-			Assert.assertEquals(true, playerTwo.fortifyIsValid( "western_ulstrailia" , "eastern_ulstarilia", 4, mapBuild));
+			myPlayers[1].reinforce(mapDomination, "western_ulstrailia" , 2, true);
+			Assert.assertEquals(true, myPlayers[1].fortifyIsValid( "western_ulstrailia" , "eastern_ulstarilia", 2, mapDomination));
 		}
 		
 	
@@ -71,21 +71,21 @@ public class TestFortify {
 		Players.add("Golnoosh");
 		strategy.add("human");
 		strategy.add("human");
-		mapBuild.assigningPlayersToCountries(Players, strategy);
-		Player[] myPlayers = mapBuild.getPlayers();
-		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();
-		ArrayList<Integer> countryListPlayerTwo = myPlayers[1].getCountryIDs();
-		Player playerOne = new Player("Shehnaz", countryListPlayerOne, mapBuild);
-		Player playerTwo = new Player("Golnoosh", countryListPlayerTwo, mapBuild);
+		mapDomination.assigningPlayersToCountries(Players, strategy);
+		Player[] myPlayers = mapDomination.getPlayers();
+		ArrayList<Integer> countryListPlayerOne = mapDomination.getCountriesByPlayerName(myPlayers[0].getPlayerName());
+		ArrayList<Integer> countryListPlayerTwo = mapDomination.getCountriesByPlayerName(myPlayers[1].getPlayerName());
+		//Player playerOne = new Player("Shehnaz", countryListPlayerOne, mapBuild);
+		//Player playerTwo = new Player("Golnoosh", countryListPlayerTwo, mapBuild);
 
 		Random random = new Random();
 
 		
-		int randomIdPlayerTwoFromCountry = random.nextInt(myPlayers[1].getCountryIDs().size());
-		int randomIdPlayerTwoToCountry = random.nextInt(myPlayers[1].getCountryIDs().size());
-		String FromCountryPlayerTwo = mapBuild.getCountryNameById(myPlayers[1].getCountryIDs().get(randomIdPlayerTwoToCountry));
-		String ToCountryPlayerTwo = mapBuild.getCountryNameById(myPlayers[1].getCountryIDs().get(randomIdPlayerTwoFromCountry)); 
-		Assert.assertEquals(false,playerTwo.fortifyIsValid( FromCountryPlayerTwo,ToCountryPlayerTwo, 4, mapBuild));
+		int randomIdPlayerTwoFromCountry = countryListPlayerTwo.get(random.nextInt(countryListPlayerTwo.size()));
+		int randomIdPlayerTwoToCountry = countryListPlayerTwo.get(random.nextInt(countryListPlayerTwo.size()));
+		String FromCountryPlayerTwo = mapDomination.getCountryNameById(countryListPlayerTwo.get(randomIdPlayerTwoToCountry));
+		String ToCountryPlayerTwo = mapDomination.getCountryNameById(countryListPlayerTwo.get(randomIdPlayerTwoFromCountry)); 
+		Assert.assertEquals(false,myPlayers[1].fortifyIsValid( FromCountryPlayerTwo,ToCountryPlayerTwo, 2, mapDomination));
 	}
 
 
