@@ -68,9 +68,9 @@ public class Game implements Serializable {
 			gameDirector.saveGame(mapFileName);
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-			// System.out.println("Error="+e);
+			
 		}
 
 	}
