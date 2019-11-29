@@ -520,6 +520,23 @@ public class RiskUI {
 						game.saveGame(mapFileName, mapDomination, null, Phase.MAP_LOAD);
 					}
 
+					// loadgame filename
+					regex = "loadgame ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						mapFileName = matcher.group(1);
+						isValidCommand = true;
+
+						boolean isLoaded=game.loadGame(mapFileName);
+						if(isLoaded) {
+						mapDomination=(MapDomination) game.getMapGeo();
+						System.out.println("Game Loaded, Let's countinue Player"+game.getTurnPlayer().getPlayerName()+" at the stage of "+game.getPhase());
+						mapDomination.showMap();
+						}
+					}
+					
+					
 					// tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
 
 					ArrayList<String> listOfMapFiles = new ArrayList<String>();
@@ -727,6 +744,7 @@ public class RiskUI {
 						int indexOfPlayerName = playerNames.indexOf(playerName);
 						playerNames.remove(playerName);
 						playerStrategies.remove(indexOfPlayerName);
+						System.out.println(playerName+" is removed");
 						isValidCommand = true;
 					}
 
