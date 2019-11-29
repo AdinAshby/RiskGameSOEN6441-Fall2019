@@ -41,11 +41,10 @@ public class HumanPlayer extends Player implements Strategy {
 
 		Dice attackDice = new Dice(attackerNumDice);
 		int[] attackDiceArray = attackDice.getDiceArray();
-		//attackDice.showDice();
-
+	
 		Dice defendDice = new Dice(defendNumDice);
 		int[] defendDiceArray = defendDice.getDiceArray();
-		//defendDice.showDice();
+		
 
 		boolean[] winner = attackDice.isWinner(defendDice);
 		
@@ -72,7 +71,7 @@ public class HumanPlayer extends Player implements Strategy {
 						System.out.println(attackerCountry.getPlayerName()
 								+ " is winner. Game over!");
 						this.setWon(true);
-						//System.exit(0);
+						
 					}
 					mapGeo.showMap();
 					
@@ -111,9 +110,9 @@ public class HumanPlayer extends Player implements Strategy {
 			int oldArmies = mapGeo.getCountryByName(countryName).getArmies();
 			mapGeo.getCountryByName(countryName)
 			.setArmies(oldArmies + mapGeo.playerContinentValuesOwnership(super.getPlayerName()) + num);
-			// mapGeo.reinforce(getPlayerName(), countryName, num);
+		
 			calculateWorldDominationView();
-			//temporaryArmies -= num;
+			
 			super.setTemporaryArmies(super.getTemporaryArmies() - num);
 
 			if (super.getTemporaryArmies() <= 0) {

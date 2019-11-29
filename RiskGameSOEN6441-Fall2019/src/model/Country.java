@@ -39,13 +39,7 @@ public class Country implements Serializable{
 	 */
 	private int[] adjacentCountriesID;
 
-	// public Set<String> getAdjacentCountries() {
-	// return countryAdjacency;
-	// }
-	//
-	// public void setAdjacentCountries(Set<String> adjacentCountries) {
-	// this.countryAdjacency = adjacentCountries;
-	// }
+	
 	/**
 	 *This is  constructor for initializing Country name
 	 * 
@@ -185,14 +179,6 @@ public class Country implements Serializable{
 		this.adjacentCountriesID = listOfAdjacencyLists;
 	}
 
-	// public void addCountryLink(String countryName) {
-	// countryAdjacency.add(countryName);
-	// }
-	//
-	// public List<String> getLinkedCountries() {
-	// List<String> linkedCountriesList = new ArrayList<>(countryAdjacency);
-	//
-	// return linkedCountriesList;
-	// }
+	
 
 }

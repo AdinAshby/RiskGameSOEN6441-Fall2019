@@ -44,7 +44,7 @@ public class CheaterPlayer extends Player implements Strategy {
 			System.out.println(attackerCountry.getPlayerName()
 					+ " is winner. Game over!");
 			this.setWon(true);
-			//System.exit(0);
+			
 		}
 		mapGeo.showMap();
 	}
@@ -62,7 +62,7 @@ public class CheaterPlayer extends Player implements Strategy {
 	public boolean reinforce(MapGeo mapBuild, String countryName, int num, boolean finished) {
 		mapBuild.getCountryByName(countryName)
 		.setArmies(mapBuild.playerContinentValuesOwnership(this.getPlayerName()) + num * 2);
-		// mapBuild.reinforce(getPlayerName(), countryName, num);
+		
 		calculateWorldDominationView();
 		
 		return true;
