@@ -37,7 +37,7 @@ public class Card implements Serializable {
 
 		public Card() {
 			cardType=CardType.getRandomCard();
-			//		System.out.println(cardType);
+		
 		}
 
 

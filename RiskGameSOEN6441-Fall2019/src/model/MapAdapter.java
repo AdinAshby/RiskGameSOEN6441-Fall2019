@@ -30,7 +30,7 @@ public class MapAdapter extends MapDomination {
 	 */
 	public boolean read(String mapName) {
 		mapConquest.readConquest(mapName);
-		// this.continentList=mapConquest.continentList;
+		
 		this.mapAdapterCopy(mapConquest);
 		return true;
 
@@ -60,16 +60,7 @@ public class MapAdapter extends MapDomination {
 		this.random = mapConquest.random;
 	}
 
-	/**
-	 * 
-	 * mapConquestCopy
-	 */
-//	public void mapConquestCopy() {
-//		mapConquest.continentList = this.continentList;
-//		mapConquest.theMapView = this.theMapView;
-//		mapConquest.countryAdjacency = this.countryAdjacency;
-//		mapConquest.players = this.players;
-//		mapConquest.random = this.random;
-//	}
+	
+
 
 }

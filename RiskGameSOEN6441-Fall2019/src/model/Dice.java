@@ -106,8 +106,7 @@ public class Dice implements Serializable {
 			}
 
 		}
-		//		showDice();
-		//		System.out.println("Two largest dice are " + first + " " + second);
+		
 		maxArr = new int[2];
 		maxArr[0] = first;
 		maxArr[1] = second;

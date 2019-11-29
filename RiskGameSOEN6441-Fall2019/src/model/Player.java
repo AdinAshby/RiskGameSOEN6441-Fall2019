@@ -355,11 +355,9 @@ public class Player implements Subject, Serializable {
 	public boolean isAttackPossible() {
 		boolean isAttackPossible = false;
 		for (int countyId : countryIDs) {
-			// Country country=mapGeo.getCountryById(countyId);
-			// System.out.println("Checking " + countyId);
+			
 			ArrayList<Integer> CountryAdjList = mapGeo.getCountryAdjacency().getVertexAdjacency(countyId);
-			// System.out.println(CountryAdjList); //Arrays.toString(
-
+			
 			for (int adjCountry : CountryAdjList) {
 				if (!countryIDs.contains(adjCountry)) {
 					for (int i = 1; i < 4; i++) {
@@ -454,7 +452,7 @@ public class Player implements Subject, Serializable {
 
 	@Override
 	public void notifyObserverForWorldDomination() {
-		// System.out.println("Ob No.="+observersForWorldDomination.size());
+		
 		for (Observer observer : observersForWorldDomination) {
 			observer.update(percentageControlled, totalNumberOfArmies, continentsControlled, mapGeo);
 		}
@@ -578,8 +576,7 @@ public class Player implements Subject, Serializable {
 				if (temporaryArmies != 0) {
 					System.out.println("You have -" + temporaryArmies + "- armies left for reinforcement.");
 				}
-				// Card card=new Card();
-				// player.addCard(card);
+				
 				System.out.println("You have following cards: ");
 				System.out.println(getCardNames());
 				readInput();
@@ -780,7 +777,7 @@ public class Player implements Subject, Serializable {
 		boolean isConqueredNewCountry;
 		do {
 			isConqueredNewCountry = false;
-			//ArrayList<Integer> playerCountries = getCountryIDs();
+		
 			int attackerNumDice = 1;
 			int defendNumDice = 1;
 
@@ -880,11 +877,7 @@ public class Player implements Subject, Serializable {
 					setMatcher(addText);
 					if (matcher.find()) {
 
-						// for (int j = 0; j <= matcher.groupCount(); j++) {
-						// System.out.println("------------------------------------");
-						// System.out.println("Group " + j + ": ***" + matcher.group(j)+"***");
-						//
-						// }
+						
 
 						if (matcher.group(7) != null && matcher.group(7).equals("-noattack")) {
 							System.out.println("No attack selected");
@@ -904,11 +897,10 @@ public class Player implements Subject, Serializable {
 								attackerNumDice = Integer.parseInt(matcher.group(4));
 							}
 
-							// Country attacker=;
+							
 							Country attackerCountry = mapGeo.getCountryByName(attackerCountryName);
 							Country attackingCountry = mapGeo.getCountryByName(attackingCountryName);
-							// System.out.println("Armies in Attacking " + attackingCountryName + " is "+
-							// attackingCountry.getArmies());
+							
 
 							System.out.println("Attack from " + attackerCountryName + " To " + attackingCountryName + " by "
 									+ attackerNumDice + " dice");
@@ -934,17 +926,10 @@ public class Player implements Subject, Serializable {
 											attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice,
 													0);
 
-											// if(numDice>attackingCountry.getArmies() || numDice>3) {
-											// System.out.println("defending dice should not be more than the number of
-											// armies contained in the attacking country or more than 3");
-											// isValidCommand = false;
-											// }else {
-											// isValidCommand = true;
-											// System.out.println("Defend by: " + numDice);
-											// }
+											
 											isValidCommand = true;
 										} catch (NumberFormatException e) {
-											// TODO Auto-generated catch block
+											
 											System.out.println("NumDice should be integer");
 										}
 										finishedDefend = true;
@@ -953,13 +938,11 @@ public class Player implements Subject, Serializable {
 										isValidCommand = false;
 										System.out.println("Please enter the defence command");
 									}
-								} // while(!finishedDefend) {
+								} 
 
 							}
 
-							/*
-							 * String allOut = matcher.group(5); String noAttack = matcher.group(6);
-							 */
+							
 						}
 					} else {
 						isValidCommand = false;
@@ -1285,11 +1268,9 @@ public class Player implements Subject, Serializable {
 	 * @param countryId
 	 */
 	protected void addCountryIdToPlayer(int countryId) {
-		//		System.out.println("Adding "+countryId+" to the list of "+Arrays.toString(countryIDs.toArray()));
-
+		
 		countryIDs.add(countryId);
-		//		System.out.println("New Array="+Arrays.toString(countryIDs.toArray()));
-
+		
 	}
 	/**
 	 * 

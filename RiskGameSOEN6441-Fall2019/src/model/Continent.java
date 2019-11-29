@@ -68,7 +68,7 @@ public class Continent implements Serializable {
 		continentsCounter++;
 		this.continentId = continentsCounter;
 
-		// continentAdjacency.addVertex(continentId);
+		
 	}
 
 	/**

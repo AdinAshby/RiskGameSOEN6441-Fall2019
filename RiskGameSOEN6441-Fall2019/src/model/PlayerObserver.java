@@ -16,9 +16,7 @@ public class PlayerObserver implements Observer, Serializable {
 	private Subject player;
 	
 	public PlayerObserver(Subject player) {
-		//this.player = player;
-		//this.player.registerPhaseObserver(this);
-		//this.player.registerWorldDominationObserver(this);
+		
 	}
 /** 
  * This method is the update method for world domination view
@@ -26,7 +24,7 @@ public class PlayerObserver implements Observer, Serializable {
 	@Override
 	public void update(double percentageControlled, int totalNumberOfArmies,
 			ArrayList<String> continentsControlled, MapGeo mapBuild) {
-		//System.out.println(mapBuild.getPlayers());
+	
 		theMapView.showPlayersWorldDomination(mapBuild.getPlayers());
 		
 	}

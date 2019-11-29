@@ -37,11 +37,11 @@ public class RandomPlayer extends Player implements Strategy {
 	public void attack(Country attackerCountry, Country attackingCountry, int attackerNumDice, int defendNumDice, int attackAllout){
 		Dice attackDice = new Dice(attackerNumDice);
 		int[] attackDiceArray = attackDice.getDiceArray();
-		//attackDice.showDice();
+	
 
 		Dice defendDice = new Dice(defendNumDice);
 		int[] defendDiceArray = defendDice.getDiceArray();
-		//defendDice.showDice();
+		
 
 		boolean[] winner = attackDice.isWinner(defendDice);
 		
@@ -51,7 +51,7 @@ public class RandomPlayer extends Player implements Strategy {
 			if (winner[i]) {
 				System.out.println("Attacker win dice " + diceNo );
 				attackingCountry.setArmies(attackingCountry.getArmies() - 1);
-				//calculateWorldDominationView();
+				
 				if (attackingCountry.getArmies() == 0) {
 					System.out.println("\n*****"+
 							attackingCountry.getCountryName() + " is conquered"+"*****\n");
@@ -68,7 +68,7 @@ public class RandomPlayer extends Player implements Strategy {
 						System.out.println(attackerCountry.getPlayerName()
 								+ " is winner. Game over!");
 						this.setWon(true);
-						//System.exit(0);
+						
 					}
 					mapGeo.showMap();
 					
@@ -103,7 +103,7 @@ public class RandomPlayer extends Player implements Strategy {
 		int oldArmies = mapBuild.getCountryByName(countryName).getArmies();
 		mapBuild.getCountryByName(countryName)
 		.setArmies(oldArmies + mapBuild.playerContinentValuesOwnership(this.getPlayerName()) + num);
-		// mapBuild.reinforce(getPlayerName(), countryName, num);
+
 		calculateWorldDominationView();
 		
 		return true;

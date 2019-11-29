@@ -127,22 +127,20 @@ public class MapDomination extends MapGeo implements Serializable {
 			if (matcher.find()) {
 				borders = matcher.group(0);
 			}
-			// System.out.println("\n--"+borders+"--\n");
+			
 			patternString = "((\\d+) (([\\d ])+))";
 			pattern = Pattern.compile(patternString);
 			matcher = pattern.matcher(borders);
 			count = 0;
 			countryId = 0;
 			String adjCountries = "";
-			// System.out.println("Found "+matcher.groupCount()+" group for
-			// countries\n-------------\n");
+			
 			while (matcher.find()) {
 				count++;
 				countryDetail = matcher.group();
 				countryId = Integer.parseInt(matcher.group(2));
 				String adjCountriesContent = matcher.group(3);
-				// System.out.println("\nFound countryId=" + countryId + " Adj=" +
-				// adjCountriesContent);
+				
 				Country c = getCountryById(countryId);
 				System.out.println("Add Adj for " + c.getCountryName() + " Adj=" + adjCountriesContent);
 				String[] arrOfAdj = adjCountriesContent.split(" ");
@@ -225,7 +223,7 @@ public class MapDomination extends MapGeo implements Serializable {
 				System.out.println(mapFileName + " map file not found. Please try again");
 				return false;
 			}else {
-//				System.out.println("Read File: "+mapFolder + "/" + mapFileName + ".map");
+
 			}
 
 			BufferedReader bufferedReader = null;
@@ -240,7 +238,7 @@ public class MapDomination extends MapGeo implements Serializable {
 				line = bufferedReader.readLine();
 				if(!line.equals("[Map]")) {
 					isLoaded=read(mapFileName);
-					//mapAdapter=mapDomination;
+					
 				}else {
 					MapConquest mapConquest;
 					mapConquest = new MapConquest(this);

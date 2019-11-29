@@ -51,7 +51,7 @@ public class BenevolentPlayer extends Player implements Strategy {
 		int oldArmies = mapBuild.getCountryByName(countryName).getArmies();
 		mapBuild.getCountryByName(countryName)
 		.setArmies(oldArmies + mapBuild.playerContinentValuesOwnership(this.getPlayerName()) + num);
-		// mapBuild.reinforce(getPlayerName(), countryName, num);
+		
 		calculateWorldDominationView();
 		
 		return true;

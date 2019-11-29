@@ -28,12 +28,6 @@ import model.Tournament;
  */
 
 public class RiskUI {
-	/**
-	 * private mapAdapter
-	 */
-
-	//	private MapGeo mapGeo = MapGeo.getInstance();
-
 
 
 	/**
@@ -103,7 +97,7 @@ public class RiskUI {
 	private Tournament theTournament;
 
 	private int counterForPhases;
-	//	private MapDomination mapDomination;
+	
 	private MapDomination mapDomination = new MapDomination();
 	private MapConquest mapConquest;
 
@@ -183,17 +177,11 @@ public class RiskUI {
 		boolean debug = false;
 		if (debug == true) {
 			mapFileName="test"; //Aden Africa
-//			game.loadGame("AGameSave");
-//			mapDomination=(MapDomination) game.getMapGeo();
-//			mapDomination.showMap();
-//			System.exit(0);
+			
 			mapDomination.isDominationMap(mapFileName);
 			game.setMapGeo(mapDomination);
 
 
-
-			// mapAdapter mapAdapter=new MapAdapter(mapAdapter);
-			//mapAdapter.read("test");
 
 			playerNames.add("Aval");
 			playerNames.add("Dovom");
@@ -243,7 +231,7 @@ public class RiskUI {
 					+ fortifyCountryName);
 			player1.fortify(attackerCountryName, fortifyCountryName, 5, mapDomination);
 			mapDomination.showMap();
-			// System.out.println("NCC="+mapAdapter.getNoOfContinentsControlled());
+		
 			editMapAnswer = "N";
 		}
 
@@ -255,7 +243,7 @@ public class RiskUI {
 				System.out.println(editMapRequestingMessage);
 				editMapWhile = true;
 				while (!finished) {
-					// System.out.println(editMapRequestingMessage);
+				
 					isValidCommand = false;
 					readInput();
 
@@ -411,7 +399,7 @@ public class RiskUI {
 							MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
 							mapAdapterFromDomination.write(mapFileName+"Conquest");
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 					}
@@ -468,7 +456,7 @@ public class RiskUI {
 
 					if (!isValidCommand) {
 						System.out.println("Please follow the correct command rules");
-						// System.out.println(editMapRequestingMessage);
+					
 					}
 				}
 
@@ -498,9 +486,9 @@ public class RiskUI {
 						boolean isLoaded = false;
 						try {
 							isLoaded = mapDomination.isDominationMap(mapFileName);
-							//							isLoaded = mapDomination.read(mapFileName);
+						
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
+							
 							e.printStackTrace();
 						}
 						if (isLoaded == true) {
@@ -517,7 +505,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						game.saveGame(mapFileName, mapDomination, null, Phase.MAP_LOAD);
+						game.saveGame(mapFileName, mapDomination, null, Phase.GAME_START);
 					}
 
 					// loadgame filename
@@ -531,7 +519,10 @@ public class RiskUI {
 						boolean isLoaded=game.loadGame(mapFileName);
 						if(isLoaded) {
 						mapDomination=(MapDomination) game.getMapGeo();
-						System.out.println("Game Loaded, Let's countinue Player"+game.getTurnPlayer().getPlayerName()+" at the stage of "+game.getPhase());
+						Player loadPlayer=game.getTurnPlayer();
+						String playerName;
+						if (loadPlayer!=null) {playerName=loadPlayer.getPlayerName();}else {playerName="-";}
+						System.out.println("Game Loaded, Let's countinue Player "+playerName+" at the stage of "+game.getPhase());
 						mapDomination.showMap();
 						}
 					}
@@ -697,7 +688,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						game.saveGame(mapFileName, mapDomination, null, Phase.ADD_PLAYERS);
+						game.saveGame(mapFileName, mapDomination, null, Phase.MAP_LOAD);
 					}
 					
 					
@@ -797,8 +788,7 @@ public class RiskUI {
 					// System.out.println(player.getPlayerName() + " is your turn to reinforce");
 					finished = false;
 
-					// for (Player player : mapAdapter.getPlayers()) {
-
+				
 					finished = false;
 
 					while (!finished && debug == false) {
@@ -867,7 +857,7 @@ public class RiskUI {
 						if (!isValidCommand) {
 							System.out.println("Please follow the correct command rules");
 						}
-						// }
+					
 
 						if (placeAllFlag == true) {
 							break;
