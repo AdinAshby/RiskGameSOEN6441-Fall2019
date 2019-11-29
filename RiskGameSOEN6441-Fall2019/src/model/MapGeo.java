@@ -178,7 +178,7 @@ public class MapGeo implements Serializable {
 	 * @return size of the Country Adjacency
 	 */
 	public int getCountryListSize() {
-		// System.out.println("Size:" + countryAdjacency.getSize());
+		
 		return getCountryAdjacency().getSize();
 
 	}
@@ -400,7 +400,7 @@ public class MapGeo implements Serializable {
 			Map.Entry<Integer, Continent> continentMap = (Map.Entry<Integer, Continent>) it.next();
 			int continentId = (int) continentMap.getKey();
 			Continent continent = continentList.get(continentId);
-			// System.out.println("Searching in " + continent.getContinentName());
+			
 			Country country = continent.getCountry(countryName);
 
 			if (country != null) {
@@ -435,16 +435,16 @@ public class MapGeo implements Serializable {
 
 			for (Country c : countriesList) {
 				int countryId = c.getCountryId();
-				// System.out.println("Check Country "+countryId+" from countries List");
+				
 				ArrayList<Integer> listAdj = getCountryAdjacency().getVertexAdjacency(countryId);
 				for (int neighbor : listAdj) {
-					// System.out.println("Check Neighber="+neighbor);
+					
 					if (!countriesIdList.contains(neighbor)) {
 						isThisContinentConnected = true;
-						// System.out.println("Connected "+continentId);
+						
 					}
 				}
-				// System.out.println("------------");
+			
 
 			}
 			if (!isThisContinentConnected) {
@@ -684,19 +684,19 @@ public class MapGeo implements Serializable {
 
 			for (int j = 0; j < numberOfCountriesEachPlayerGet; j++) {
 				int randomCountryID = random.nextInt(temporaryCountries.size());
-				//countriesIDs.add(j, temporaryCountries.get(randomCountryID).getCountryId());
+				
 				countriesIDs.add(temporaryCountries.get(randomCountryID).getCountryId());
-				//				System.out.println("Rand="+randomCountryID+" Country="+temporaryCountries.get(randomCountryID).getCountryId());
+			
 				temporaryCountries.remove(randomCountryID);
-				// updateCountryById(i, countriesIds[j]);
+				
 			}
 
-			//players[i] = new Player(playerNames.get(i), countriesIDs, this);
+			
 
 
 			if (playerStrategies.get(i).equalsIgnoreCase("human")) {
 				players[i] = new HumanPlayer(playerNames.get(i), countriesIDs, this);
-				//players[i].setStrategy(new HumanPlayer(playerNames.get(i), countriesIDs, this));
+				
 			}
 
 			if (playerStrategies.get(i).equalsIgnoreCase("aggressive"))
@@ -998,15 +998,6 @@ public class MapGeo implements Serializable {
 		else
 			return 20;
 	}
-
-	/**
-	 * This method get the number of Armies Each Player Gets
-	 * 
-	 * @return numberOfArmiesEachPlayerGets
-	 */
-	// public int getNumberOfArmiesEachPlayerGets() {
-	// return numberOfArmiesEachPlayerGets;
-	// }
 
 	/**
 	 * This method return all the players
