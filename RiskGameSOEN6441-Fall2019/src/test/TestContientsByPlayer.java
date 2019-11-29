@@ -34,7 +34,7 @@ public class TestContientsByPlayer {
 		
 		
 		mapConquest.readConquest("ameroki");
-		players.add("Shehnaz");
+		players.add("a");
 		playerStrategies.add("human");
 		mapBuild.assigningPlayersToCountries(players, playerStrategies);
 		Player[] myPlayers = mapBuild.getPlayers();

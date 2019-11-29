@@ -1,6 +1,7 @@
 package test;
 
 import org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.BeforeClass;
 
 import model.Country;
@@ -32,16 +33,19 @@ public class TestAttack {
 	
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<String> strategy = new ArrayList<String>();
+		@Before
+		public void setup()
+		{
+			playerNames.add("a");
+			playerNames.add("b");
+
+			playerStrategies.add("human");
+			playerStrategies.add("human");
+		}
 		
 	@Test
 	public void testAttackValid() throws Exception {
 		mapDomination.isDominationMap("test");
-
-		playerNames.add("Shehnaz");
-		playerNames.add("Golnoosh");
-
-		playerStrategies.add("human");
-		playerStrategies.add("human");
 
 		mapDomination.assigningPlayersToCountries(playerNames, playerStrategies);
 		mapDomination.showMap();
