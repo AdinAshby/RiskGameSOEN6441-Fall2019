@@ -48,8 +48,8 @@ public class TestArmies {
 	 * 
 	 */
 	@Test
-	public void testArmiesOwnedByPlayer2() throws Exception {
-		mapDomination.read("ameroki"); // total 42 countries in map
+	public void testArmiesOwnedByPlayerTwo() throws Exception {
+		mapDomination.read("ameroki"); 
 		players.add("a");
 		players.add("b");
 		strategy.add("human");
@@ -66,8 +66,8 @@ public class TestArmies {
 		int armiesOwnedByPlayerOne = playerOne.getNumberOfArmiesEachPlayerGets();
 		int armiesOwnedByPlayerTwo = playerTwo.getNumberOfArmiesEachPlayerGets();
 		
-		Assert.assertEquals(7, armiesOwnedByPlayerOne);	
-		Assert.assertEquals(7, armiesOwnedByPlayerTwo);	
+		Assert.assertEquals(3, armiesOwnedByPlayerOne);	
+		Assert.assertEquals(3, armiesOwnedByPlayerTwo);	
 	}
 //	/**
 //	 * This testcase tests the calculation for number of armies when there are 3 players

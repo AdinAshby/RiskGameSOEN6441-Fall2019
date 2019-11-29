@@ -30,7 +30,7 @@ public class TestDice {
 			
 		for(int i=0;i<3;i++) {
 	
-		check = results[i] >6 ? false : true;
+		check = results[i] > 6 ? false : true;
 
 			assertTrue(check);
 		
