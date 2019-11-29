@@ -11,6 +11,7 @@ import model.MapGeo;
 import model.Player;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 /**
  * This testcase class tests the fortification phase
@@ -23,6 +24,17 @@ public class TestFortify {
 	ArrayList<String> strategy = new ArrayList<>();
 	MapDomination mapDomination = new MapDomination();
 	MapConquest mapConquest = new MapConquest(mapDomination);
+	/**
+	 * intializes data before testcases
+	 */
+	@Before
+	public void setup()
+	{
+		Players.add("a");
+		Players.add("b");
+		strategy.add("human");
+		strategy.add("human");
+	}
 /**
  * This testcase test the fortify method for valid input
  * @throws Exception
@@ -30,16 +42,12 @@ public class TestFortify {
 	@Test
 	public void testfortificationValid() throws Exception {
 		mapDomination.read("ameroki");
-		Players.add("Shehnaz");
-		Players.add("Golnoosh");
-		strategy.add("human");
-		strategy.add("human");
+		
 		mapDomination.assigningPlayersToCountries(Players, strategy);
 		Player[] myPlayers = mapDomination.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = mapDomination.getCountriesByPlayerName(myPlayers[0].getPlayerName());
 		ArrayList<Integer> countryListPlayerTwo = mapDomination.getCountriesByPlayerName(myPlayers[1].getPlayerName());
-		//Player playerOne = new Player("Shehnaz", countryListPlayerOne, mapDomination);
-		//Player playerTwo = new Player("Golnoosh", countryListPlayerTwo, mapDomination);
+	
         ArrayList<String> countryList = new ArrayList<>();
         for(int i=0;i<countryListPlayerOne.size();i++)
         {
@@ -67,17 +75,11 @@ public class TestFortify {
 	@Test
 	public void testfortificationInValid() throws Exception {
 		mapDomination.read("ameroki");
-		Players.add("Shehnaz");
-		Players.add("Golnoosh");
-		strategy.add("human");
-		strategy.add("human");
 		mapDomination.assigningPlayersToCountries(Players, strategy);
 		Player[] myPlayers = mapDomination.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = mapDomination.getCountriesByPlayerName(myPlayers[0].getPlayerName());
 		ArrayList<Integer> countryListPlayerTwo = mapDomination.getCountriesByPlayerName(myPlayers[1].getPlayerName());
-		//Player playerOne = new Player("Shehnaz", countryListPlayerOne, mapBuild);
-		//Player playerTwo = new Player("Golnoosh", countryListPlayerTwo, mapBuild);
-
+		
 		Random random = new Random();
 
 		

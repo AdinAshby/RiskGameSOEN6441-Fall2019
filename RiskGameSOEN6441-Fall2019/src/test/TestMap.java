@@ -34,13 +34,21 @@ public class TestMap {
 	 */
 	AdjacencyList ad = new AdjacencyList();
 	/**
-	 * String valid map with initialization
+	 * String with map initialization
 	 */
-	String VALID_MAP = "test";
+	String VALID_MAP;
+	String INVALID_MAP;
 	/**
-	 * String inValid map with initialization
+	 * initializes data before testcases
 	 */
-	String INVALID_MAP = "test7";
+	@Before
+	public void setup()
+	{
+		VALID_MAP = "test";
+		INVALID_MAP = "test7";
+	}
+	
+
 
 	/**
 	 *  This is the test method  for checking the map validation for valid map file
