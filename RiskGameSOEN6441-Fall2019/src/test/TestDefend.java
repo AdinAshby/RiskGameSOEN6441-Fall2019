@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Before;
 /**
  * This testcase class tests the attack phase
  * @author s_shehna
@@ -27,20 +28,29 @@ public class TestDefend {
     	ArrayList<String> playerStrategies = new ArrayList<String>();
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<String> strategy = new ArrayList<String>();
-       /**
-        * This testcase tests if defend is possible for two players with test map
-        * @throws Exception
-        */
+      
+		/**
+		 * initializes data before testcases
+		 */
+		@Before
+		public void setup()
+		{
+			playerNames.add("Shehnaz");
+    		playerNames.add("Golnoosh");
+
+    		playerStrategies.add("human");
+    		playerStrategies.add("human");
+		}
+		 /**
+	        * This testcase tests if defend is possible for two players with test map
+	        * @throws Exception
+	        */
         @Test
         public void testDefendValid() throws Exception {
 
         	mapDomination.isDominationMap("test");
 
-    		playerNames.add("Shehnaz");
-    		playerNames.add("Golnoosh");
-
-    		playerStrategies.add("human");
-    		playerStrategies.add("human");
+    		
 
     		mapDomination.assigningPlayersToCountries(playerNames, playerStrategies);
     		mapDomination.showMap();

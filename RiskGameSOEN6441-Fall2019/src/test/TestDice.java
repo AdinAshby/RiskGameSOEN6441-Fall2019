@@ -16,10 +16,18 @@ import model.Dice;
 public class TestDice {
 	
 
-	int diceNumber=3;
+	int diceNumber;
 	boolean check;
-	Dice dice= new Dice(diceNumber);
-	
+	Dice dice;
+	/**
+	 * initializes data before testcases
+	 */
+	@Before
+	public void setup()
+	{
+		diceNumber=3;
+		dice= new Dice(diceNumber);
+	}
 	/**
 	 * This test case tests dice numbers generated when rolled 3 times are always less than  6
 	 */
