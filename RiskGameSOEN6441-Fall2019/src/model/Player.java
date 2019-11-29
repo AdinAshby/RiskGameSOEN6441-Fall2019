@@ -86,14 +86,14 @@ public class Player implements Subject, Serializable {
 	 */
 
 	protected Strategy strategy;
-	
+
 	protected boolean won = false;
 
 	/**
 	 * protected scanner
 	 */
 	protected transient Scanner scanner = new Scanner(System.in); 
-	
+
 	/**
 	 * protected input
 	 */
@@ -142,7 +142,7 @@ public class Player implements Subject, Serializable {
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
-	
+
 	public Strategy getStrategy() {
 		return strategy;
 	}
@@ -307,9 +307,9 @@ public class Player implements Subject, Serializable {
 	 */
 	public boolean isAttackValid(int attackerNumDice, Country attackerCountry,
 			Country attackingCountry, boolean enablePrint) {
-		
+
 		boolean isValid = true;
-		
+
 		if (attackingCountry==null) {
 			if (enablePrint)
 				System.out.println("There is no attacking country");
@@ -508,15 +508,15 @@ public class Player implements Subject, Serializable {
 	public void calculateNumberOfArmiesEachPlayerGets() {
 		numberOfArmiesEachPlayerGets = (countryIDs.size() / 3 > 3) ? countryIDs.size() / 3 : 3;
 	}
-	
+
 	public void setWon(boolean won) {
 		this.won = won;
 	}
-	
+
 	public boolean getWon() {
 		return won;
 	}
-	
+
 	/**
 	 * 
 	 * @param mapGeo
@@ -592,13 +592,13 @@ public class Player implements Subject, Serializable {
 					isValidCommand = true;
 					mapView.showMap(mapGeo);
 				}
-				
+
 				// savegame filename
 				regex = "savegame ([\\w*\\_\\-]*)";
 				setPattern(regex);
 				setMatcher(input);
 				if (matcher.find()) {
-				String	mapFileName = matcher.group(1);
+					String	mapFileName = matcher.group(1);
 					isValidCommand = true;
 					game.saveGame(mapFileName, this.mapGeo, this, Phase.REINFORCEMENT);
 				}
@@ -701,7 +701,7 @@ public class Player implements Subject, Serializable {
 			Random random = new Random();
 			ArrayList<Integer> playerCountries = countryIDs;
 
-			int randomCountryID = random.nextInt(playerCountries.size());
+			int randomCountryID = playerCountries.get(random.nextInt(playerCountries.size()));
 			String countryName = mapGeo.getCountryById(randomCountryID).getCountryName();
 
 			finished = reinforce(mapGeo, countryName, numberOfArmiesEachPlayerGets, true);
@@ -864,12 +864,12 @@ public class Player implements Subject, Serializable {
 				setPattern(regex);
 				setMatcher(input);
 				if (matcher.find()) {
-				String	mapFileName = matcher.group(1);
+					String	mapFileName = matcher.group(1);
 					isValidCommand = true;
 					game.saveGame(mapFileName, this.mapGeo, this, Phase.ATTACK);
 				}
-				
-				
+
+
 				regex = "(?<=attack)(.*)";
 				setPattern(regex);
 				setMatcher(input);
@@ -967,7 +967,7 @@ public class Player implements Subject, Serializable {
 
 				}
 			}
-				
+
 			if (!isValidCommand) {
 				System.out.println("Correct command not found");
 			}
@@ -975,16 +975,16 @@ public class Player implements Subject, Serializable {
 			/// end of the attack phase
 
 		} // End of While(!finished)
-		
+
 		if(this.strategy instanceof AggressivePlayer) {		
-			
+
 			ArrayList<Integer> playerCountries = getCountryIDs();
 			int maxArmies = 0;
 			Country attackerCountry = null;
 			int attackerCountryID = 0;
-			
+
 			Country attackingCountry = null;
-			
+
 			int attackerNumDice = 0;
 			int defendNumDice = 0;
 
@@ -996,9 +996,9 @@ public class Player implements Subject, Serializable {
 					attackerNumDice = attackerCountry.getArmies();
 				}
 			}
-			
-			
-			
+
+
+
 			for (int countryID : mapGeo.getCountryAdjacency(attackerCountryID)) {
 				if (!mapGeo.getCountryById(countryID).getPlayerName().equalsIgnoreCase(mapGeo.getCountryById(attackerCountryID).getPlayerName()) ) {
 					attackingCountry = mapGeo.getCountryById(countryID);
@@ -1006,39 +1006,41 @@ public class Player implements Subject, Serializable {
 					break;
 				}
 			}
-			if (isAttackValid(attackerNumDice, attackerCountry, attackingCountry, true) == true) {
-			attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, 0);
+			
+			if (isAttackValid(attackerNumDice > defendNumDice ? defendNumDice : attackerNumDice, attackerCountry, attackingCountry, true) == true) {
+				attack(attackerCountry, attackingCountry, attackerNumDice > defendNumDice ? defendNumDice : attackerNumDice, defendNumDice, 0);
 			}
 		}
-		
+
 		if(this.strategy instanceof BenevolentPlayer) {
 
 		}
-		
+
 		if(this.strategy instanceof RandomPlayer) {
-			
+
 			Random random = new Random();
 			ArrayList<Integer> playerCountries = countryIDs;
 
-			int randomAttackerCountryID = random.nextInt(playerCountries.size());
+			int randomAttackerCountryID = playerCountries.get(random.nextInt(playerCountries.size() - 1));
 			Country attackerCountry = mapGeo.getCountryById(randomAttackerCountryID);
 
-			int randomAttackingCountryID = random.nextInt(mapGeo.getCountryAdjacency(randomAttackerCountryID).size());
+			ArrayList<Integer> randomAdjacentCountriesList = mapGeo.getCountryAdjacency(randomAttackerCountryID);
+			int randomAttackingCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size() - 1));
 
 			while (mapGeo.getCountryById(randomAttackingCountryID).getPlayerName().equalsIgnoreCase(mapGeo.getCountryById(randomAttackerCountryID).getPlayerName())) {
-				randomAttackingCountryID = random.nextInt(mapGeo.getCountryAdjacency(randomAttackerCountryID).size());
+				randomAttackingCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size() - 1));
 			}
 
 			Country attackingCountry = mapGeo.getCountryById(randomAttackingCountryID);
 
 			int numberOfArmiesToAttack = random.nextInt(attackerCountry.getArmies());
 			int numberOfArmiesToDefend = random.nextInt(attackingCountry.getArmies());
-			
+
 			attack(attackerCountry, attackingCountry, numberOfArmiesToAttack, numberOfArmiesToDefend, 0);	
 		}
-		
+
 		if(this.strategy instanceof CheaterPlayer) {
-			
+
 			ArrayList<Integer> playerCountries = countryIDs;
 
 			for (int countryID : playerCountries) {
@@ -1050,9 +1052,9 @@ public class Player implements Subject, Serializable {
 					}
 				}
 			}
-			
+
 		}
-		
+
 		return isValidCommand;
 	}
 
@@ -1102,7 +1104,7 @@ public class Player implements Subject, Serializable {
 	 */
 
 	public boolean fortifyCommand(Game game, MapGeo mapGeo, MapView mapView) {
-		
+
 		System.out.println(fortifyRequestingMessage);
 
 		boolean finished = false;
