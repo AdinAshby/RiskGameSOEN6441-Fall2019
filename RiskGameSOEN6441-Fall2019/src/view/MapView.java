@@ -10,6 +10,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import controller.Game;
 import controller.RiskController;
 import model.Continent;
 import model.Country;
@@ -103,12 +104,49 @@ public class MapView implements Serializable {
 		
 	}
 	
-	public void showTournamentResult(ArrayList<String> results, int numberOfGames) {
+	public void showTournamentResult(ArrayList<String> results, int numberOfGames, Game[] games, ArrayList<String> listOfMapFiles,ArrayList<String> listOfPlayerStrategies, int maxNumberOfTurns ) {
 		
+		System.out.println("\n\n---------------\n\nResults:");
+		
+		System.out.print("M:");
+		for(String mapFile:listOfMapFiles) {
+			System.out.print(mapFile+", ");
+		}
+		
+		System.out.print("\nP:");
+		for(String playerStrategies:listOfPlayerStrategies) {
+			System.out.print(playerStrategies+", ");
+		}
+		System.out.println("\nG:"+numberOfGames);
+		System.out.println("D:"+maxNumberOfTurns+"\n");
+		
+		System.out.println("----------------------------------------------------------------------------------------");
+		System.out.print("     |");
+		for(int i=0;i<games.length;i++) {
+			System.out.print("  Game"+i+"  |");
+		}
+		System.out.println();
+		for(String mapFile:listOfMapFiles) {
+			System.out.print(mapFile+" | ");
+			
+		
+		
+		
+		for(Game game:games) {
+			String winner=" Draw  "; 
+		
+			if(game.getWinner()!=null) {winner=game.getWinner().getPlayerName();}
+			System.out.print(winner+" | ");			
+		}
+		System.out.println("\n----------------------------------------------------------------------------------------");
+		}
+		//System.out.println();
+		System.out.println("----------------------------------------------------------------------------------------");
+		/*
 		int counter = 0;
 		boolean firstTime = false;
 		
-		System.out.println("Results:");
+		
 		System.out.println("The columns are for Games and the rows are for Maps");
 		System.out.println("----------------------------------------------------------------------------------------");
 		
@@ -122,6 +160,7 @@ public class MapView implements Serializable {
 			
 			++counter;
 		}
+		*/
 	}
 
 	public void showPlayersWorldDomination(Player[] players) {

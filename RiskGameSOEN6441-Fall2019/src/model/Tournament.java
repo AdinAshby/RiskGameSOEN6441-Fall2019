@@ -109,7 +109,8 @@ public class Tournament implements Serializable {
 			}
 		}
 
-		mapView.showTournamentResult(results, numberOfGames);
+		mapView.showTournamentResult(results, numberOfGames, games, listOfMapFiles, listOfPlayerStrategies, maxNumberOfTurns);
+		
 	}
 
 }
