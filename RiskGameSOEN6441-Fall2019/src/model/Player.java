@@ -1021,22 +1021,27 @@ public class Player implements Subject, Serializable {
 			Random random = new Random();
 			ArrayList<Integer> playerCountries = countryIDs;
 
-			int randomAttackerCountryID = playerCountries.get(random.nextInt(playerCountries.size() - 1));
+			int randomAttackerCountryID = playerCountries.get(random.nextInt(playerCountries.size()));
 			Country attackerCountry = mapGeo.getCountryById(randomAttackerCountryID);
 
 			ArrayList<Integer> randomAdjacentCountriesList = mapGeo.getCountryAdjacency(randomAttackerCountryID);
-			int randomAttackingCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size() - 1));
+			int randomAttackingCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size()));
 
 			while (mapGeo.getCountryById(randomAttackingCountryID).getPlayerName().equalsIgnoreCase(mapGeo.getCountryById(randomAttackerCountryID).getPlayerName())) {
-				randomAttackingCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size() - 1));
+				randomAttackingCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size()));
 			}
 
 			Country attackingCountry = mapGeo.getCountryById(randomAttackingCountryID);
+			
+			int numberOfArmiesToAttack = random.nextInt(attackerCountry.getArmies() + 1);
+			int numberOfArmiesToDefend = random.nextInt(attackingCountry.getArmies() + 1);
+			
+			while(numberOfArmiesToAttack == 0 || numberOfArmiesToDefend == 0) {
+				numberOfArmiesToAttack = random.nextInt(attackerCountry.getArmies() + 1);
+				numberOfArmiesToDefend = random.nextInt(attackingCountry.getArmies() + 1);
+			}
 
-			int numberOfArmiesToAttack = random.nextInt(attackerCountry.getArmies());
-			int numberOfArmiesToDefend = random.nextInt(attackingCountry.getArmies());
-
-			while (isAttackValid(numberOfArmiesToAttack > numberOfArmiesToDefend ? numberOfArmiesToDefend : numberOfArmiesToAttack, attackerCountry, attackingCountry, true) == true) {
+			if (isAttackValid(numberOfArmiesToAttack > numberOfArmiesToDefend ? numberOfArmiesToDefend : numberOfArmiesToAttack, attackerCountry, attackingCountry, true) == true) {
 				attack(attackerCountry, attackingCountry, numberOfArmiesToAttack > numberOfArmiesToDefend ? numberOfArmiesToDefend : numberOfArmiesToAttack, numberOfArmiesToDefend, 0);
 			}	
 		}
@@ -1227,19 +1232,19 @@ public class Player implements Subject, Serializable {
 			Random random = new Random();
 			ArrayList<Integer> playerCountries = countryIDs;
 
-			int randomFromCountryID = playerCountries.get(random.nextInt(playerCountries.size() - 1));
+			int randomFromCountryID = playerCountries.get(random.nextInt(playerCountries.size()));
 			String fromCountry = mapGeo.getCountryById(randomFromCountryID).getCountryName();
 			
 			ArrayList<Integer> randomAdjacentCountriesList = mapGeo.getCountryAdjacency(randomFromCountryID);
-			int randomToCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size() - 1));
+			int randomToCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size()));
 					
 			while (!(mapGeo.getCountryById(randomToCountryID).getArmies() > 1)) {
-				randomToCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size() - 1));
+				randomToCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size()));
 			}
 
 			String toCountry = mapGeo.getCountryById(randomToCountryID).getCountryName();
 
-			int numberOfArmiesToMove = random.nextInt(mapGeo.getCountryByName(fromCountry).getArmies());
+			int numberOfArmiesToMove = random.nextInt(mapGeo.getCountryByName(fromCountry).getArmies() + 1);
 
 			fortify(fromCountry, toCountry, numberOfArmiesToMove, mapGeo);
 		}
