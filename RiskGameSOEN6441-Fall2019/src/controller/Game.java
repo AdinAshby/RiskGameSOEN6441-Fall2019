@@ -12,7 +12,7 @@ This class implements the serializable
 /**
  * This class implements the serializable 
  * @author s_shehna
- *
+ * @author f_yazdan
  */
 
 public class Game implements Serializable {
@@ -64,7 +64,7 @@ public class Game implements Serializable {
 /**
  * This method saves a  game
  * @author s_shehna
- *
+ * @author f_yazdan
  */
 	public void saveGame(String mapFileName, MapGeo mapGeo, Player player, Phase phase) {
 		try {
