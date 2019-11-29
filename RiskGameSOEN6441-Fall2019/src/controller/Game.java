@@ -17,6 +17,15 @@ public class Game implements Serializable {
 	private Phase phase;
 	private Player turnPlayer;
 	private MapGeo mapGeo;
+	private Player winner;
+	
+	public Player getWinner() {
+		return winner;
+	}
+
+	public void setWinner(Player winner) {
+		this.winner = winner;
+	}
 
 	public Player getTurnPlayer() {
 		return turnPlayer;

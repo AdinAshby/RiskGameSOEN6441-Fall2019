@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import controller.Game;
+import controller.Game.Phase;
 import view.MapView;
 
 /**
@@ -558,7 +560,7 @@ public class Player implements Subject, Serializable {
 	 * @param mapView
 	 * @return
 	 */
-	public boolean reinforceCommand(MapGeo mapGeo, MapView mapView) {
+	public boolean reinforceCommand(Game game, MapGeo mapGeo, MapView mapView) {
 		calculateNumberOfArmiesEachPlayerGets();
 
 		boolean finished = false;
@@ -589,6 +591,16 @@ public class Player implements Subject, Serializable {
 				if (getMatcher().find()) {
 					isValidCommand = true;
 					mapView.showMap(mapGeo);
+				}
+				
+				// savegame filename
+				regex = "savegame ([\\w*\\_\\-]*)";
+				setPattern(regex);
+				setMatcher(input);
+				if (matcher.find()) {
+				String	mapFileName = matcher.group(1);
+					isValidCommand = true;
+					game.saveGame(mapFileName, this.mapGeo, this, Phase.REINFORCEMENT);
 				}
 
 				// reinforce
@@ -1078,7 +1090,7 @@ public class Player implements Subject, Serializable {
 	 * @return isValidCommand
 	 */
 
-	public boolean fortifyCommand(MapGeo mapGeo, MapView mapView) {
+	public boolean fortifyCommand(Game game, MapGeo mapGeo, MapView mapView) {
 		System.out.println(fortifyRequestingMessage);
 
 		boolean finished = false;

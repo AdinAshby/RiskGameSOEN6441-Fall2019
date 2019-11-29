@@ -508,6 +508,17 @@ public class RiskUI {
 						}
 
 					}
+					
+					// savegame filename
+					regex = "savegame ([\\w*\\_\\-]*)";
+					setPattern(regex);
+					setMatcher(input);
+					if (matcher.find()) {
+						mapFileName = matcher.group(1);
+						isValidCommand = true;
+
+						game.saveGame(mapFileName, mapDomination, null, Phase.MAP_LOAD);
+					}
 
 					// tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
 
@@ -780,6 +791,18 @@ public class RiskUI {
 						System.out.println("You get -" + mapDomination.calculateNumberOfInitialArmies() + "- armies.");
 						readInput();
 
+						// savegame filename
+						regex = "savegame ([\\w*\\_\\-]*)";
+						setPattern(regex);
+						setMatcher(input);
+						if (matcher.find()) {
+							mapFileName = matcher.group(1);
+							isValidCommand = true;
+
+							game.saveGame(mapFileName, mapDomination, player, Phase.PLACE_ARMIES);
+						}
+						
+						
 						// placeall
 						regex = "placeall";
 						setPattern(regex);
@@ -846,7 +869,7 @@ public class RiskUI {
 							System.out.println(player.getPlayerName() + " is your turn to reinforce");
 							finished = false;
 
-							isValidCommand = player.reinforceCommand(mapDomination, mapView);
+							isValidCommand = player.reinforceCommand(game, mapDomination, mapView);
 
 							player.setCounterForPhases(2);
 							isValidCommand = player.attackCommand(mapView);
@@ -856,7 +879,7 @@ public class RiskUI {
 							}
 
 							player.setCounterForPhases(3);
-							isValidCommand = player.fortifyCommand(mapDomination, mapView);
+							isValidCommand = player.fortifyCommand(game, mapDomination, mapView);
 
 							if (!isValidCommand) {
 								System.out.println("Please follow the correct command rules");

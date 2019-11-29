@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import controller.Game;
+import controller.Game.Phase;
 import view.MapView;
 
  
@@ -55,6 +57,7 @@ public class Tournament implements Serializable {
 	 */
 	public void startTheTournament() {
 		ArrayList<String> results = new ArrayList<String>();
+		Game[] games=new Game[numberOfGames]; 
 		boolean somebodyWon = false;
 
 
@@ -62,22 +65,28 @@ public class Tournament implements Serializable {
 			mapDomination.isDominationMap(listOfMapFiles.get(mapCounter));
 
 			for (int gameCounter = 0; gameCounter < numberOfGames; gameCounter++) {
+				Game game=new Game();
+				games[gameCounter]=game;
+				game.setMapGeo(mapDomination);
 				mapDomination.assigningPlayersToCountries(listOfPlayerStrategies, listOfPlayerStrategies);
 
 				for (int turnCounter = 0; turnCounter < maxNumberOfTurns; turnCounter++) {
 
 					for(Player player : mapDomination.getPlayers()) {
-						
+						game.setTurnPlayer(player);
 						player.calculateWorldDominationView();
 						
 						player.setCounterForPhases(1);
-						player.reinforceCommand(mapDomination, mapView);
+						game.setPhase(Phase.REINFORCEMENT);
+						player.reinforceCommand(game, mapDomination, mapView);
 						
 						player.setCounterForPhases(2);
+						game.setPhase(Phase.ATTACK);
 						player.attackCommand(mapView);
 						
 						player.setCounterForPhases(3);
-						player.fortifyCommand(mapDomination, mapView);
+						game.setPhase(Phase.FORTIFICATION);
+						player.fortifyCommand(game, mapDomination, mapView);
 						
 						mapDomination.showMap();
 					}
@@ -88,6 +97,7 @@ public class Tournament implements Serializable {
 					if(player.getWon()) {
 						somebodyWon = true;
 						results.add(player.getPlayerName());
+						game.setWinner(player);
 					}
 				}
 				
