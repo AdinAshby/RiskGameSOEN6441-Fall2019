@@ -75,7 +75,7 @@ public class TestReinforcement {
 		int RandomIdPlayerTwo = random.nextInt(myPlayers[1].getCountryIDs().size());
 		String CountryOwnedByPlayerOne = mapBuild.getCountryNameById(myPlayers[0].getCountryIDs().get(RandomIdPlayerOne));
 		String CountryOwnedByPlayerTwo = mapBuild.getCountryNameById(myPlayers[1].getCountryIDs().get(RandomIdPlayerTwo));
-		Assert.assertEquals(true, playerOne.reinforceIsValid(mapBuild, CountryOwnedByPlayerOne, 40));
-		Assert.assertEquals(true, playerTwo.reinforceIsValid(mapBuild, CountryOwnedByPlayerTwo, 20));	 
+		Assert.assertEquals(true, myPlayers[0].reinforceIsValid(mapBuild, CountryOwnedByPlayerOne, 40));
+		Assert.assertEquals(true, myPlayers[1].reinforceIsValid(mapBuild, CountryOwnedByPlayerTwo, 20));	 
 	}
 }
