@@ -667,15 +667,15 @@ public class RiskUI {
 
 							for(String each : listOfMapFiles) {
 								if( mapDomination.isDominationMap(each) == false) {
-									isValidCommand = false;
-									break;
+						//			isValidCommand = false;
+						//			break;
 								}
 							}
 
 							for(String each : listOfPlayerStrategies) {
 								if(!(each.equalsIgnoreCase("aggressive") || each.equalsIgnoreCase("benevolent") || each.equalsIgnoreCase("random") || each.equalsIgnoreCase("cheater"))) {
-									isValidCommand = false;
-									break;
+						//			isValidCommand = false;
+						//			break;
 								}
 							}
 
