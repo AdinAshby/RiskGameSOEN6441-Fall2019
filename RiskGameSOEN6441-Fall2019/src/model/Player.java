@@ -305,19 +305,22 @@ public class Player implements Subject, Serializable {
 	 */
 	public boolean isAttackValid(int attackerNumDice, Country attackerCountry,
 			Country attackingCountry, boolean enablePrint) {
+		
 		boolean isValid = true;
-		if (attackingCountry.getPlayerName().equals(getPlayerName())) {
+		
+		if (attackingCountry==null) {
+			if (enablePrint)
+				System.out.println("There is no attacking country");
+			isValid = false;
+		}else if (attackingCountry.getPlayerName().equals(getPlayerName())) {
 			if (enablePrint)
 				System.out.println("You can not attack to your own country");
 			isValid = false;
-		}
-
-		if (attackerCountry.getArmies() <= 1) {
+		}else if (attackerCountry.getArmies() <= 1) {
 			if (enablePrint)
 				System.out.println("Attacker Country should have more than 1 army");
 			isValid = false;
-		}
-		if (attackerCountry == null || attackingCountry == null) {
+		}else if (attackerCountry == null || attackingCountry == null) {
 			if (enablePrint)
 				System.out.println("Enter Attacker and Attacking Country");
 			isValid = false;
@@ -980,8 +983,9 @@ public class Player implements Subject, Serializable {
 					break;
 				}
 			}
-			
+			if (isAttackValid(attackerNumDice, attackerCountry, attackingCountry, true) == true) {
 			attack(attackerCountry, attackingCountry, attackerNumDice, defendNumDice, 0);
+			}
 		}
 		
 		if(this.strategy instanceof BenevolentPlayer) {
