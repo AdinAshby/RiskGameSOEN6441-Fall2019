@@ -1,4 +1,5 @@
 package model;
+
 /**
  * 
  * This is MapAdapter class which extends MapDomination
@@ -6,7 +7,6 @@ package model;
  * @author f_yazdan
  * @author s_shehna
  * @author AdinAshby
- * @author Babita kaur
  */
 public class MapAdapter extends MapDomination {
 	/**
@@ -16,6 +16,7 @@ public class MapAdapter extends MapDomination {
 
 	/**
 	 * This is constructor for initialising Maptype
+	 * 
 	 * @param mapType
 	 */
 	public MapAdapter(MapConquest mapConquest) {
@@ -30,7 +31,7 @@ public class MapAdapter extends MapDomination {
 	 */
 	public boolean read(String mapName) {
 		mapConquest.readConquest(mapName);
-		
+
 		this.mapAdapterCopy(mapConquest);
 		return true;
 
@@ -50,6 +51,7 @@ public class MapAdapter extends MapDomination {
 
 	/**
 	 * This method makes copy of mapconquest
+	 * 
 	 * @param mapConquest
 	 */
 	public void mapAdapterCopy(MapConquest mapConquest) {
@@ -59,8 +61,5 @@ public class MapAdapter extends MapDomination {
 		this.players = mapConquest.players;
 		this.random = mapConquest.random;
 	}
-
-	
-
 
 }

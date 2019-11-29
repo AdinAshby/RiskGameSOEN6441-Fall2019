@@ -14,20 +14,22 @@ import model.MapDomination;
 import model.MapGeo;
 
 import model.Player;
+
 /**
  * This testcase class test the reinforcement phase
+ * 
  * @s_shehna
  */
 public class TestReinforcement {
-	
+
 	ArrayList<String> players;
 	ArrayList<String> strategy;
 	MapGeo mapBuild;
 	MapDomination mapDomination;
 	MapConquest mapConquest;
+
 	@Before
-	public void setup()
-	{
+	public void setup() {
 		players = new ArrayList<String>();
 		strategy = new ArrayList<String>();
 		mapBuild = MapGeo.getInstance();
@@ -38,29 +40,36 @@ public class TestReinforcement {
 		strategy.add("human");
 		strategy.add("human");
 	}
+
 	/**
- * This testcase tests valid number of armies owned by players for reinforcement 
- *
- */
+	 * This testcase tests valid number of armies owned by players for reinforcement
+	 *
+	 */
 	@Test
 	public void testReinforceArmiesValid() throws Exception {
 		mapDomination.read("ameroki");
-	
+
 		mapBuild.assigningPlayersToCountries(players, strategy);
 		Player[] myPlayers = mapBuild.getPlayers();
 		ArrayList<Integer> countryListPlayerOne = myPlayers[0].getCountryIDs();
 		ArrayList<Integer> countryListPlayerTwo = myPlayers[1].getCountryIDs();
 		Random random = new Random();
 		int RandomIdPlayerOne = random.nextInt(myPlayers[0].getCountryIDs().size());
-		//System.out.print("**********************"+myPlayers[0].getCountryIDs().size()+" ****"+myPlayers[0].getPlayerName());
+		// System.out.print("**********************"+myPlayers[0].getCountryIDs().size()+"
+		// ****"+myPlayers[0].getPlayerName());
 		int RandomIdPlayerTwo = random.nextInt(myPlayers[1].getCountryIDs().size());
-		String CountryOwnedByPlayerOne = mapBuild.getCountryNameById(myPlayers[0].getCountryIDs().get(RandomIdPlayerOne));
-		String CountryOwnedByPlayerTwo = mapBuild.getCountryNameById(myPlayers[1].getCountryIDs().get(RandomIdPlayerTwo));
+		String CountryOwnedByPlayerOne = mapBuild
+				.getCountryNameById(myPlayers[0].getCountryIDs().get(RandomIdPlayerOne));
+		String CountryOwnedByPlayerTwo = mapBuild
+				.getCountryNameById(myPlayers[1].getCountryIDs().get(RandomIdPlayerTwo));
 		Assert.assertEquals(true, myPlayers[0].reinforceIsValid(mapBuild, CountryOwnedByPlayerOne, 6));
-		Assert.assertEquals(true, myPlayers[1].reinforceIsValid(mapBuild, CountryOwnedByPlayerTwo, 6));	 
+		Assert.assertEquals(true, myPlayers[1].reinforceIsValid(mapBuild, CountryOwnedByPlayerTwo, 6));
 	}
+
 	/**
-	 * This testcase tests the reinforcement method for invalid number of armies owned by players
+	 * This testcase tests the reinforcement method for invalid number of armies
+	 * owned by players
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -73,9 +82,11 @@ public class TestReinforcement {
 		Random random = new Random();
 		int RandomIdPlayerOne = random.nextInt(myPlayers[0].getCountryIDs().size());
 		int RandomIdPlayerTwo = random.nextInt(myPlayers[1].getCountryIDs().size());
-		String CountryOwnedByPlayerOne = mapBuild.getCountryNameById(myPlayers[0].getCountryIDs().get(RandomIdPlayerOne));
-		String CountryOwnedByPlayerTwo = mapBuild.getCountryNameById(myPlayers[1].getCountryIDs().get(RandomIdPlayerTwo));
+		String CountryOwnedByPlayerOne = mapBuild
+				.getCountryNameById(myPlayers[0].getCountryIDs().get(RandomIdPlayerOne));
+		String CountryOwnedByPlayerTwo = mapBuild
+				.getCountryNameById(myPlayers[1].getCountryIDs().get(RandomIdPlayerTwo));
 		Assert.assertEquals(true, playerOne.reinforceIsValid(mapBuild, CountryOwnedByPlayerOne, 40));
-		Assert.assertEquals(true, playerTwo.reinforceIsValid(mapBuild, CountryOwnedByPlayerTwo, 20));	 
+		Assert.assertEquals(true, playerTwo.reinforceIsValid(mapBuild, CountryOwnedByPlayerTwo, 20));
 	}
 }

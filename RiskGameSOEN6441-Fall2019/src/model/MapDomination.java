@@ -15,6 +15,14 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 
+ * This is MapDomination class which extends MapGeo
+ * 
+ * @author f_yazdan
+ * @author s_shehna
+ * @author AdinAshby
+ */
 public class MapDomination extends MapGeo implements Serializable {
 
 	/**
@@ -26,8 +34,8 @@ public class MapDomination extends MapGeo implements Serializable {
 		if (!file.exists()) {
 			System.out.println(mapFileName + " domination map file not found. Please try again");
 			return false;
-		}else {
-			System.out.println("Read Domination File: "+mapFolder + "/" + mapFileName + ".map");
+		} else {
+			System.out.println("Read Domination File: " + mapFolder + "/" + mapFileName + ".map");
 		}
 
 		continentList = new HashMap<Integer, Continent>();
@@ -127,20 +135,20 @@ public class MapDomination extends MapGeo implements Serializable {
 			if (matcher.find()) {
 				borders = matcher.group(0);
 			}
-			
+
 			patternString = "((\\d+) (([\\d ])+))";
 			pattern = Pattern.compile(patternString);
 			matcher = pattern.matcher(borders);
 			count = 0;
 			countryId = 0;
 			String adjCountries = "";
-			
+
 			while (matcher.find()) {
 				count++;
 				countryDetail = matcher.group();
 				countryId = Integer.parseInt(matcher.group(2));
 				String adjCountriesContent = matcher.group(3);
-				
+
 				Country c = getCountryById(countryId);
 				System.out.println("Add Adj for " + c.getCountryName() + " Adj=" + adjCountriesContent);
 				String[] arrOfAdj = adjCountriesContent.split(" ");
@@ -191,7 +199,7 @@ public class MapDomination extends MapGeo implements Serializable {
 	 * This method write the map with a string file name
 	 * 
 	 * @param fileName
-	 * @return 
+	 * @return
 	 * @throws Exception
 	 */
 	public boolean write(String fileName) throws Exception {
@@ -212,64 +220,58 @@ public class MapDomination extends MapGeo implements Serializable {
 
 	/**
 	 * This method is to check whether the map is domination
+	 * 
 	 * @param mapFileName
 	 * @return isLoaded
 	 */
-		public boolean isDominationMap(String mapFileName) {
-			boolean isLoaded=false;
-			File mapFolder=getMapFolder();
-			File file = new File(mapFolder + "/" + mapFileName + ".map");
-			if (!file.exists()) {
-				System.out.println(mapFileName + " map file not found. Please try again");
-				return false;
-			}else {
-
-			}
-
-			BufferedReader bufferedReader = null;
-			try {
-
-				bufferedReader = new BufferedReader(new FileReader(file));
-
-				StringBuffer stringBuffer = new StringBuffer();
-				String fileContent = "";
-				String line = null;
-
-				line = bufferedReader.readLine();
-				if(!line.equals("[Map]")) {
-					isLoaded=read(mapFileName);
-					
-				}else {
-					MapConquest mapConquest;
-					mapConquest = new MapConquest(this);
-					MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
-					isLoaded=mapAdapterFromDomination.read(mapFileName);
-					mapDominationCopy(mapAdapterFromDomination);
-
-				}
-			}catch (FileNotFoundException e) {
-				System.out.println("File Not Found");
-			} catch (Exception e) {
-				System.out.println("Error in reading Map"+e);
-			}
-
-
-			return isLoaded;
+	public boolean isDominationMap(String mapFileName) {
+		boolean isLoaded = false;
+		File mapFolder = getMapFolder();
+		File file = new File(mapFolder + "/" + mapFileName + ".map");
+		if (!file.exists()) {
+			System.out.println(mapFileName + " map file not found. Please try again");
+			return false;
+		} else {
 
 		}
-	 		
-		
-		public void mapDominationCopy(MapGeo mapGeo) {
-			this.continentList = mapGeo.getContinentList();
-			this.theMapView = mapGeo.theMapView;
-			this.countryAdjacency = mapGeo.countryAdjacency;
-			this.players = mapGeo.players;
-			this.random = mapGeo.random;
+
+		BufferedReader bufferedReader = null;
+		try {
+
+			bufferedReader = new BufferedReader(new FileReader(file));
+
+			StringBuffer stringBuffer = new StringBuffer();
+			String fileContent = "";
+			String line = null;
+
+			line = bufferedReader.readLine();
+			if (!line.equals("[Map]")) {
+				isLoaded = read(mapFileName);
+
+			} else {
+				MapConquest mapConquest;
+				mapConquest = new MapConquest(this);
+				MapDomination mapAdapterFromDomination = new MapAdapter(mapConquest);
+				isLoaded = mapAdapterFromDomination.read(mapFileName);
+				mapDominationCopy(mapAdapterFromDomination);
+
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File Not Found");
+		} catch (Exception e) {
+			System.out.println("Error in reading Map" + e);
 		}
 
-		
-		
+		return isLoaded;
 
-			
-	
+	}
+
+	public void mapDominationCopy(MapGeo mapGeo) {
+		this.continentList = mapGeo.getContinentList();
+		this.theMapView = mapGeo.theMapView;
+		this.countryAdjacency = mapGeo.countryAdjacency;
+		this.players = mapGeo.players;
+		this.random = mapGeo.random;
+	}
+
 }
