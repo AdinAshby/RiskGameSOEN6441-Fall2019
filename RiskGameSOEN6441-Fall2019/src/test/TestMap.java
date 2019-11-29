@@ -21,18 +21,18 @@ public class TestMap {
 	/**
 	 * Object of the MapBuilder
 	 */
-	MapGeo mapBuild = MapGeo.getInstance();
+	MapGeo mapBuild;
 	/**
 	 * Object of the Empty AdjacencyList
 	 */
-	MapDomination mapDomination = new MapDomination();
-	MapConquest mapConquest = new MapConquest(mapDomination);
-	MapAdapter mapAdapter = new MapAdapter(mapConquest);
-	AdjacencyList adEmpty = new AdjacencyList();
+	MapDomination mapDomination;
+	MapConquest mapConquest;
+	MapAdapter mapAdapter;
+	AdjacencyList adEmpty;
 	/**
 	 * Object of the AdjacencyList
 	 */
-	AdjacencyList ad = new AdjacencyList();
+	AdjacencyList ad;
 	/**
 	 * String with map initialization
 	 */
@@ -44,8 +44,14 @@ public class TestMap {
 	@Before
 	public void setup()
 	{
+		mapBuild = MapGeo.getInstance();
+		mapDomination = new MapDomination();
+		mapConquest = new MapConquest(mapDomination);
+		mapAdapter = new MapAdapter(mapConquest);
+		adEmpty = new AdjacencyList();
 		VALID_MAP = "test";
 		INVALID_MAP = "test7";
+		ad = new AdjacencyList();
 	}
 	
 

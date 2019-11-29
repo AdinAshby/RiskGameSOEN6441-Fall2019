@@ -19,17 +19,22 @@ import org.junit.Test;
  *
  */
 public class TestFortify {
-	MapGeo mapBuild = MapGeo.getInstance();
-	ArrayList<String> Players = new ArrayList<>();
-	ArrayList<String> strategy = new ArrayList<>();
-	MapDomination mapDomination = new MapDomination();
-	MapConquest mapConquest = new MapConquest(mapDomination);
+	MapGeo mapBuild;
+	ArrayList<String> Players;
+	ArrayList<String> strategy;
+	MapDomination mapDomination;
+	MapConquest mapConquest;
 	/**
 	 * intializes data before testcases
 	 */
 	@Before
 	public void setup()
 	{
+		mapBuild = MapGeo.getInstance();
+		Players = new ArrayList<>();
+		strategy = new ArrayList<>();
+		mapDomination = new MapDomination();
+		mapConquest = new MapConquest(mapDomination);
 		Players.add("a");
 		Players.add("b");
 		strategy.add("human");

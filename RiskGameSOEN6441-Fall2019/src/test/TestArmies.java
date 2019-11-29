@@ -14,16 +14,30 @@ import org.junit.Test;
  */
 public class TestArmies {
 
-	ArrayList<String> players = new ArrayList<String>();
-	ArrayList<String> strategy = new ArrayList<String>();
-	MapGeo mapBuild = MapGeo.getInstance();
-	MapDomination mapDomination = new MapDomination();
-	MapConquest mapConquest = new MapConquest(mapDomination);
-	MapAdapter mapAdapter = new MapAdapter(mapConquest);
-	ArrayList<Integer> countryListOne = new ArrayList<>();
-	ArrayList<Integer> countryListTwo = new ArrayList<>();
-	ArrayList<Integer> countryListThree = new ArrayList<>();
-	ArrayList<Integer> countryListfour = new ArrayList<>();
+	ArrayList<String> players;
+	ArrayList<String> strategy;
+	MapGeo mapBuild;
+	MapDomination mapDomination;
+	MapConquest mapConquest;
+	MapAdapter mapAdapter;
+	ArrayList<Integer> countryListOne;
+	ArrayList<Integer> countryListTwo;
+	ArrayList<Integer> countryListThree;
+	ArrayList<Integer> countryListfour;
+	@Before
+	public void setup()
+	{
+		mapBuild = MapGeo.getInstance();
+		mapDomination = new MapDomination();
+		mapConquest = new MapConquest(mapDomination);
+		mapAdapter = new MapAdapter(mapConquest);
+		players = new ArrayList<String>();
+		strategy = new ArrayList<String>();
+		countryListOne = new ArrayList<>();
+		countryListTwo = new ArrayList<>();
+		countryListThree = new ArrayList<>();
+		countryListfour = new ArrayList<>();
+	}
 /**
  * This testcase tests the number of armies given to only player in game
  *
