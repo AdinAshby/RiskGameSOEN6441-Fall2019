@@ -21,7 +21,7 @@ public class RiskMain {
 		try { 
 			rui.RiskUIStartTheGame();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 
