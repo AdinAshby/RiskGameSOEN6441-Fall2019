@@ -522,16 +522,12 @@ public class MapGeo implements Serializable {
 	 * @param continentName
 	 */
 	public void addCountry(String countryName, String continentName) {
-		System.out.println(countryName + " " + continentName);
 		Continent continent = getContinent(continentName);
 		Country country = new Country(countryName);
-		if (continent == null) {
+		 if (continent == null)
 			System.out.println("continent not found");
-		} else if (country == null) {
-			System.out.println("country not found");
-		} else {
+		else {
 			continent.addCountry(country);
-
 			System.out.println(countryName.toLowerCase() + " with Id=" + country.getCountryId() + " added to  "
 					+ continentName.toUpperCase());
 		}

@@ -55,7 +55,7 @@ public class RiskUI {
 	 * private loadMapRequestingMessage
 	 */
 
-	private String loadMapRequestingMessage = "Load the map you with to play by using \"loadmap\" command or start the tournament command \n";
+	private String loadMapRequestingMessage = "Load the map you with to play by using \"loadmap\" command or start the tournament command or load a game\n";
 	/**
 	 * private addOrRemovePlayersRequestingMessage
 	 */
@@ -165,9 +165,10 @@ public class RiskUI {
 
 
 		Game game=new Game();
-
-
-
+		boolean finishedADD_PLAYERS=false;
+		boolean finishedMAP_LOAD = false;
+		boolean finishedPLACE_ARMIES = false;
+		Player turnPlayer = null;
 		/**
 		 * This part is hard code to test the project defined by the boolean debug
 		 * attribute
@@ -315,6 +316,7 @@ public class RiskUI {
 						String countryName = matcher.group(2);
 						String continentName = matcher.group(3);
 						mapDomination.addCountry(countryName, continentName);
+						mapDomination.getCountryAdjacency().addVertex(mapDomination.getCountryIdByName(countryName));
 						isValidCommand = true;
 
 					}
@@ -352,6 +354,7 @@ public class RiskUI {
 						String countryName = matcher.group(2);
 						String neighborCountryName = matcher.group(3);
 						mapDomination.addCountryAdjacency(countryName, neighborCountryName);
+						
 						isValidCommand = true;
 
 					}
@@ -462,15 +465,16 @@ public class RiskUI {
 
 			}
 
+			
 			if (editMapAnswer.equalsIgnoreCase("N") || finishedEditing == true) {
 				editMapWhile = true;
 
 				counterForPhases = 0;
 				mapView.showPhaseView(counterForPhases, "");
 
-				finished = false;
+				
 
-				while (!finished && finishedEditing == false && debug == false) {
+				while (!finishedMAP_LOAD && finishedEditing == false && debug == false) {
 					System.out.println(loadMapRequestingMessage);
 					isValidCommand = false;
 					readInput();
@@ -492,7 +496,7 @@ public class RiskUI {
 							e.printStackTrace();
 						}
 						if (isLoaded == true) {
-							finished = true;
+							finishedMAP_LOAD = true;
 						}
 
 					}
@@ -505,7 +509,7 @@ public class RiskUI {
 						mapFileName = matcher.group(1);
 						isValidCommand = true;
 
-						game.saveGame(mapFileName, mapDomination, null, Phase.GAME_START);
+						game.saveGame(mapFileName, mapDomination, null, Phase.MAP_LOAD);
 					}
 
 					// loadgame filename
@@ -519,11 +523,33 @@ public class RiskUI {
 						boolean isLoaded=game.loadGame(mapFileName);
 						if(isLoaded) {
 						mapDomination=(MapDomination) game.getMapGeo();
-						Player loadPlayer=game.getTurnPlayer();
+						turnPlayer=game.getTurnPlayer();
 						String playerName;
-						if (loadPlayer!=null) {playerName=loadPlayer.getPlayerName();}else {playerName="-";}
-						System.out.println("Game Loaded, Let's countinue Player "+playerName+" at the stage of "+game.getPhase());
+						Phase phase = game.getPhase();
+						if (turnPlayer!=null) {playerName=turnPlayer.getPlayerName();}else {playerName="-";}
+						System.out.println("Game Loaded, Let's countinue Player "+playerName+" at the stage of "+phase);
 						mapDomination.showMap();
+
+							switch (phase) {
+//GAME_START, MAP_LOAD, ADD_PLAYERS, PLACE_ARMIES, REINFORCEMENT, ATTACK, FORTIFICATION, GAME_OVER, TOURNAMENT
+							case ADD_PLAYERS:
+								finishedMAP_LOAD = true;
+								break;
+
+							case PLACE_ARMIES:
+								finishedMAP_LOAD = true;
+								finishedADD_PLAYERS = true;
+								break;
+							case REINFORCEMENT:
+								finishedMAP_LOAD = true;
+								finishedADD_PLAYERS = true;
+								finishedPLACE_ARMIES = true;
+								break;
+
+							}
+						
+						
+						finishedMAP_LOAD = true;
 						}
 					}
 					
@@ -652,11 +678,13 @@ public class RiskUI {
 					}
 				}
 
-				System.out.println(addOrRemovePlayersRequestingMessage);
-				finished = false;
+				
+				
+				
+				
 
-				while (!finished && debug == false) {
-
+				while (!finishedADD_PLAYERS && debug == false) {
+					System.out.println(addOrRemovePlayersRequestingMessage);
 					isValidCommand = false;
 					readInput();
 					// savemap filename done
@@ -745,7 +773,7 @@ public class RiskUI {
 					setMatcher(input);
 					if (getMatcher().find()) {
 						isValidCommand = true;
-						finished = true;
+						finishedADD_PLAYERS = true;
 						mapDomination.assigningPlayersToCountries(playerNames, playerStrategies);
 
 					}
@@ -764,8 +792,13 @@ public class RiskUI {
 						System.out.println("Please follow the correct command rules");
 					}
 				}
-
-				System.out.println(startupRequestingMessage);
+				
+				
+//				finishedPLACE_ARMIES = false;
+				
+				
+				
+				
 
 				if (placeAllFlag == true) {
 					break;
@@ -776,6 +809,13 @@ public class RiskUI {
 				// System.out.println(reinforceRequestingMessage);
 
 				for (Player player : mapDomination.getPlayers()) {
+					
+					
+					if(turnPlayer!=null && turnPlayer!=player) {
+						break;
+					}
+					
+					
 					if (placeAllFlag == true) {
 						break;
 					}
@@ -786,13 +826,13 @@ public class RiskUI {
 
 					player.calculateNumberOfArmiesEachPlayerGets();
 					// System.out.println(player.getPlayerName() + " is your turn to reinforce");
-					finished = false;
+				//	finishedPLACE_ARMIES = false;
 
 				
-					finished = false;
+					
 
-					while (!finished && debug == false) {
-
+					while (!finishedPLACE_ARMIES && debug == false) {
+						System.out.println(startupRequestingMessage);
 						isValidCommand = false;
 
 						System.out.println("Player " + player.getPlayerName() + ":");
@@ -818,7 +858,7 @@ public class RiskUI {
 						if (matcher.find()) {
 							isValidCommand = true;
 							mapDomination.placeAllArmies();
-							finished = true;
+							finishedPLACE_ARMIES = true;
 							placeAllFlag = true;
 							break;
 
@@ -846,7 +886,7 @@ public class RiskUI {
 							if (mapDomination.placearmyIsValid(player, countryName) == true) {
 								mapDomination.assignInitialsArmiesToSpecificCountry(countryName,
 										mapDomination.calculateNumberOfInitialArmies());
-								finished = true;
+								finishedPLACE_ARMIES = true;
 							} else {
 								System.out.println("placearmy is not valid");
 							}
@@ -864,6 +904,8 @@ public class RiskUI {
 						}
 					}
 				}
+				
+				
 
 				/******** START GAME PHASE **********************/
 
@@ -871,13 +913,20 @@ public class RiskUI {
 					while(true) {
 
 						for (Player player : mapDomination.getPlayers()) {
-
+							if(turnPlayer!=null && turnPlayer!=player) {
+								break;
+							}
 							player.setCounterForPhases(1);
 
-							System.out.println(player.getPlayerName() + " is your turn to reinforce");
+							
 							finished = false;
 
+							boolean finishedReinforce=false;
+							if(finishedPLACE_ARMIES==true) {
+							System.out.println(player.getPlayerName() + " is your turn to reinforce");
 							isValidCommand = player.reinforceCommand(game, mapDomination, mapView);
+							if(isValidCommand==true) {finishedReinforce=true;}
+							}
 
 							player.setCounterForPhases(2);
 							isValidCommand = player.attackCommand(game, mapView);

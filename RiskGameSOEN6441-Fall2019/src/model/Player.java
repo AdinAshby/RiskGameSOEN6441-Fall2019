@@ -20,7 +20,8 @@ import view.MapView;
  * @author AdinAshby
  */
 public class Player implements Subject, Serializable {
-
+	private static final long serialversionUID = 
+            129348938L; 
 	/**
 	 * PlayerName is name of the player corresponding to the ID.
 	 */
@@ -105,11 +106,11 @@ public class Player implements Subject, Serializable {
 	/**
 	 * protected pattern
 	 */
-	protected Pattern pattern;
+	protected transient Pattern pattern;
 	/**
 	 * protected matcher
 	 */
-	protected Matcher matcher;
+	protected transient Matcher matcher;
 	/**
 	 * protected reinforceRequestingMessage
 	 */
@@ -561,14 +562,14 @@ public class Player implements Subject, Serializable {
 	public boolean reinforceCommand(Game game, MapGeo mapGeo, MapView mapView) {
 		calculateNumberOfArmiesEachPlayerGets();
 
-		boolean finished = false;
+		boolean finishedPlaceAll = false;
 		boolean isValidCommand = false;
 
 		if (this.strategy instanceof HumanPlayer) {
 			temporaryArmies = numberOfArmiesEachPlayerGets;
 			String addText = "";
 
-			while (!finished) {// && debug == false
+			while (!finishedPlaceAll) {// && debug == false
 
 				isValidCommand = false;
 
@@ -579,7 +580,9 @@ public class Player implements Subject, Serializable {
 				
 				System.out.println("You have following cards: ");
 				System.out.println(getCardNames());
-				readInput();
+				try {
+				Scanner scanner=new Scanner(System.in);
+				input = scanner.nextLine();
 
 				// showmap
 				regex = "showmap";
@@ -597,9 +600,11 @@ public class Player implements Subject, Serializable {
 				if (matcher.find()) {
 					String	mapFileName = matcher.group(1);
 					isValidCommand = true;
-					game.saveGame(mapFileName, this.mapGeo, this, Phase.REINFORCEMENT);
+					game.saveGame(mapFileName, mapGeo, this, Phase.REINFORCEMENT);
 				}
-
+				}catch(Exception e) {
+					System.out.println("Error"+e);
+				}
 				// reinforce
 				regex = "(?<=reinforce)(.*)";
 				setPattern(regex);
@@ -616,7 +621,7 @@ public class Player implements Subject, Serializable {
 						try {
 							num = Integer.parseInt(matcher.group(3));
 
-							finished = reinforce(mapGeo, countryName, num, finished);
+							finishedPlaceAll = reinforce(mapGeo, countryName, num, finishedPlaceAll);
 
 							isValidCommand = true;
 
@@ -646,7 +651,7 @@ public class Player implements Subject, Serializable {
 						if (mapGeo.exchangeCardsIsValid(this, num1, num2, num3) == true) {
 
 							int cardarmies = mapGeo.exchangeCards(this, num1, num2, num3);
-							finished = true;
+							finishedPlaceAll = true;
 						} else {
 							System.out.println("exchangecards is not valid");
 						}
@@ -673,7 +678,7 @@ public class Player implements Subject, Serializable {
 				}
 			}
 
-			finished = reinforce(mapGeo, countryName, numberOfArmiesEachPlayerGets, true);
+			finishedPlaceAll = reinforce(mapGeo, countryName, numberOfArmiesEachPlayerGets, true);
 			isValidCommand = true;
 		}
 
@@ -690,7 +695,7 @@ public class Player implements Subject, Serializable {
 				}
 			}
 
-			finished = reinforce(mapGeo, countryName, numberOfArmiesEachPlayerGets, true);
+			finishedPlaceAll = reinforce(mapGeo, countryName, numberOfArmiesEachPlayerGets, true);
 			isValidCommand = true;
 		}
 
@@ -701,7 +706,7 @@ public class Player implements Subject, Serializable {
 			int randomCountryID = playerCountries.get(random.nextInt(playerCountries.size()));
 			String countryName = mapGeo.getCountryById(randomCountryID).getCountryName();
 
-			finished = reinforce(mapGeo, countryName, numberOfArmiesEachPlayerGets, true);
+			finishedPlaceAll = reinforce(mapGeo, countryName, numberOfArmiesEachPlayerGets, true);
 			isValidCommand = true;
 		}
 
@@ -712,7 +717,7 @@ public class Player implements Subject, Serializable {
 			for (int countryID : playerCountries) {
 				String countryName = mapGeo.getCountryById(countryID).getCountryName();
 				int oldArmies = mapGeo.getCountryById(countryID).getArmies();
-				finished = reinforce(mapGeo, countryName, oldArmies, true);
+				finishedPlaceAll = reinforce(mapGeo, countryName, oldArmies, true);
 			}
 
 			isValidCommand = true;
@@ -1291,7 +1296,8 @@ public class Player implements Subject, Serializable {
 	 * This method is for reading the input from console
 	 */
 	public void readInput() {
-		this.input = scanner.nextLine();
+		if(scanner==null) {Scanner scanner=new Scanner(System.in);}
+		input = scanner.nextLine();
 	}
 
 	/**

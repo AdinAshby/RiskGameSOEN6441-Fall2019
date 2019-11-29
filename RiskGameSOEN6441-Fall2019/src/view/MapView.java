@@ -91,6 +91,16 @@ public class MapView implements Serializable {
 
 		System.out.format(
 				"+--------------+-----------------------+------------------+----------------------------+---------------+---------------+%n");
+		Player[] players=theMapBuilder.getPlayers();
+		System.out.println("Players: ");
+		if(players!=null) {
+			
+		for(Player p: players) {
+			System.out.print(p.getPlayerName()+" ");
+		}
+		System.out.println();
+		}
+		
 	}
 	
 	public void showTournamentResult(ArrayList<String> results, int numberOfGames) {
