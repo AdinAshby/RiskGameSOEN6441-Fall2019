@@ -1028,6 +1028,10 @@ public class Player implements Subject, Serializable {
 			int randomAttackingCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size()));
 
 			while (mapGeo.getCountryById(randomAttackingCountryID).getPlayerName().equalsIgnoreCase(mapGeo.getCountryById(randomAttackerCountryID).getPlayerName())) {
+				if(randomAdjacentCountriesList.size() == 1) {
+					randomAttackerCountryID = playerCountries.get(random.nextInt(playerCountries.size()));
+					attackerCountry = mapGeo.getCountryById(randomAttackerCountryID);
+				}
 				randomAttackingCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size()));
 			}
 
@@ -1238,7 +1242,7 @@ public class Player implements Subject, Serializable {
 			ArrayList<Integer> randomAdjacentCountriesList = mapGeo.getCountryAdjacency(randomFromCountryID);
 			int randomToCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size()));
 					
-			while (!(mapGeo.getCountryById(randomToCountryID).getArmies() > 1)) {
+			if (!(mapGeo.getCountryById(randomToCountryID).getArmies() > 1)) {
 				randomToCountryID = randomAdjacentCountriesList.get(random.nextInt(randomAdjacentCountriesList.size()));
 			}
 
