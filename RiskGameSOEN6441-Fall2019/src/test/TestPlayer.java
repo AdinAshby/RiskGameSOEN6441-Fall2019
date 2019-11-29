@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import java.util.*;
 import org.junit.Assert;
-
+import org.junit.Before;
 
 import model.MapGeo;
 import model.Player;
@@ -18,12 +18,9 @@ import model.Player;
  */
 public class TestPlayer {
 	/**
-	 * int CountryId
+	 * int CountryId with correct initialization
 	 */
 	ArrayList<Integer> countryIdCorrect = new ArrayList<Integer>();
-	
-	
-	
 	
 	/**
 	 * int CountryId_incorrect with incorrect initialization
@@ -35,6 +32,23 @@ public class TestPlayer {
 	 * object of the player
 	 */
 	MapGeo mapBuild = MapGeo.getInstance();
+	
+	/**
+	 * initializes the data for player class testcases
+	 */
+	
+	@Before
+	public void setup()
+	{
+		countryIdCorrect.add(1);
+		countryIdCorrect.add(2);
+		countryIdCorrect.add(3);
+		countryIdCorrect.add(4);
+		counrtyIdInCorrect.add(12);
+		counrtyIdInCorrect.add(42);
+		counrtyIdInCorrect.add(32);
+	}
+
 
 	/**
 	 * This is the test method for checking the valid playerName
@@ -43,10 +57,6 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetPlayerNameValid() {
-	countryIdCorrect.add(1);
-	countryIdCorrect.add(2);
-	countryIdCorrect.add(3);
-	countryIdCorrect.add(4);
 	Player playerOne = new Player("shehnaz", counrtyIdInCorrect, mapBuild);
 	Assert.assertEquals("shehnaz", playerOne.getPlayerName());
 		
@@ -58,10 +68,7 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetPlayerNameInvalid() {
-		countryIdCorrect.add(1);
-		countryIdCorrect.add(2);
-		countryIdCorrect.add(3);
-		countryIdCorrect.add(4);
+
 		Player playerOne = new Player("shehnaz", counrtyIdInCorrect, mapBuild);
 	      Assert.assertNotEquals("golnoosh", playerOne.getPlayerName());
 	}
@@ -71,10 +78,7 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetCountryIdValid() {
-		countryIdCorrect.add(1);
-		countryIdCorrect.add(2);
-		countryIdCorrect.add(3);
-		countryIdCorrect.add(4);
+		
 		Player playerOne = new Player("shehnaz", counrtyIdInCorrect, mapBuild);
 	     
 	Assert.assertEquals("country Ids", counrtyIdInCorrect, playerOne.getCountryIDs());
@@ -86,13 +90,7 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testgetCountryIdInValid() {
-		countryIdCorrect.add(1);
-		countryIdCorrect.add(2);
-		countryIdCorrect.add(3);
-		countryIdCorrect.add(4);
-		counrtyIdInCorrect.add(12);
-		counrtyIdInCorrect.add(42);
-		counrtyIdInCorrect.add(32);
+	
 		
 		Player playerOne = new Player("shehnaz", countryIdCorrect, mapBuild);
 		Assert.assertNotEquals(counrtyIdInCorrect, playerOne.getCountryIDs());
